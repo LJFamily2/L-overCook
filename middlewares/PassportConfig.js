@@ -2,7 +2,7 @@ const bcrypt = require("bcrypt");
 const LocalStrategy = require("passport-local").Strategy;
 const UserModel = require("../models/User.js");
 
-export function initialize(passport) {
+function initialize(passport) {
   const authenticater = async (username, password, done) => {
     const user = await UserModel.findOne({ username: username });
     if (!user) {
@@ -23,3 +23,5 @@ export function initialize(passport) {
     return done(null, await UserModel.findById(id));
   });
 }
+
+module.exports = initialize;

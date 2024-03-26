@@ -3,24 +3,27 @@ const app = express();
 const path = require("path");
 const expressLayouts = require("express-ejs-layouts");
 const flash = require("connect-flash");
-require('dotenv').config()
+require("dotenv").config();
 
 // Setup passport
-// const session = require("express-session");
+const SessionMongoDB = require("./session");
+const session = require("express-session");
 const passport = require("passport");
 const initializePassport = require("./middlewares/PassportConfig");
 initializePassport(passport);
 app.use(passport.initialize());
 app.use(passport.session());
-// app.use(session({
-//     secret: process.env.SESSION_SECRET,
-//     resave: false,
-//     saveUninitialized: false,
-//     cookie:{
-//         expires: false,
-//     },
-//     // store: 
-// }))
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      expires: false,
+    },
+    store: SessionMongoDB,
+  })
+);
 
 // Setup Template
 app.set("view engine", "ejs");
@@ -35,12 +38,12 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: true }));
 
 // Setup mongoose connection and handling connection errors
-mongoose.connect(process.env.MONGODB_URI)
-.then(() => console.log('Connected to MongoDB Atlas'))
-.catch((error) => console.log('Error connecting to MongoDB:', error.message));
-
-
+const mongoose = require("mongoose");
+mongoose
+  .connect(process.env.MONGODB_URI)
+  .then(() => console.log("Connected to MongoDB Atlas"))
+  .catch((error) => console.log("Error connecting to MongoDB:", error.message));
 
 app.listen(3000, () => {
-  console.log("Server is running on port 3000");
+  console.log("Server is running on localhost:3000");
 });
