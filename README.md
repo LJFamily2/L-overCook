@@ -3,6 +3,13 @@ Naming Convention ヾ(＠⌒ー⌒＠)ノ
 2. Class: Kebab Case (ex: 'my-class-name')
 
 
+Hướng dẫn chạy code lần đầu o(￣┰￣*)ゞ
+1. Clone project xuống IDE
+2. Mở terminal (cd đến đúng folder đó) gõ >>>> npm i <<<<
+3. Sau đó gõ >>>> npm test <<<< để chạy server
+4. Đăng nhập đúng port localhost ở browser.
+   -> Setup thành công !
+
 
 Hướng dẫn upload file cho Front-end（￣︶￣）↗
 
