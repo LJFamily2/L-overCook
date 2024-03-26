@@ -3,6 +3,7 @@ const app = express();
 const path = require("path");
 const expressLayouts = require("express-ejs-layouts");
 const flash = require("connect-flash");
+require('dotenv').config()
 
 // Setup passport
 // const session = require("express-session");
@@ -32,6 +33,12 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // Setup parse
 app.use(express.urlencoded({ extended: true }));
+
+// Setup mongoose connection and handling connection errors
+mongoose.connect(process.env.MONGODB_URI)
+.then(() => console.log('Connected to MongoDB Atlas'))
+.catch((error) => console.log('Error connecting to MongoDB:', error.message));
+
 
 app.listen(3000, () => {
   console.log("Server is running on port 3000");
