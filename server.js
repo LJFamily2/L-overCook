@@ -1,14 +1,38 @@
-const express = require('express');
+const express = require("express");
 const app = express();
-const path = require('path');
+const path = require("path");
+const expressLayouts = require("express-ejs-layouts");
+const flash = require("connect-flash");
 
-app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
+// Setup passport
+const session = require("express-session");
+const passport = require("passport");
+const initializePassport = require("./middlewares/PassportConfig");
+initializePassport(passport);
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    cookie:{
+        expires: false,
+    },
+    // store: 
+}))
 
-app.get('/', (req, res) => {
-    res.render('index');
-});
+// Setup Template
+app.set("view engine", "ejs");
+app.use(expressLayouts);
+app.use(flash());
+
+// Static files
+app.set("views", path.join(__dirname, "views"));
+app.use(express.static(path.join(__dirname, "public")));
+
+// Setup parse
+app.use(express.urlencoded({ extended: true }));
 
 app.listen(3000, () => {
-    console.log('Server is running on port 3000');
+  console.log("Server is running on port 3000");
 });
