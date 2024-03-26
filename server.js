@@ -5,21 +5,21 @@ const expressLayouts = require("express-ejs-layouts");
 const flash = require("connect-flash");
 
 // Setup passport
-const session = require("express-session");
+// const session = require("express-session");
 const passport = require("passport");
 const initializePassport = require("./middlewares/PassportConfig");
 initializePassport(passport);
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(session({
-    secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: false,
-    cookie:{
-        expires: false,
-    },
-    // store: 
-}))
+// app.use(session({
+//     secret: process.env.SESSION_SECRET,
+//     resave: false,
+//     saveUninitialized: false,
+//     cookie:{
+//         expires: false,
+//     },
+//     // store: 
+// }))
 
 // Setup Template
 app.set("view engine", "ejs");
