@@ -1,8 +1,9 @@
-
+const mongoose = require("mongoose");
 
 //Define schema
 const ingredientSchema = new mongoose.Schema({
-
+    name: String,
+    category: String,
 });
 
 //Define model based on schema
