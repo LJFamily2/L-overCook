@@ -1,4 +1,4 @@
-const SignInController = {
+const signInController = {
   // Signin page for user
   getSignIn: (req, res) => {
     res.send("User authenticated page");
@@ -13,4 +13,4 @@ const SignInController = {
   },
 };
 
-module.exports = SignInController;
+module.exports = signInController;

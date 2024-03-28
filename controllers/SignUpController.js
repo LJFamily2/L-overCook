@@ -1,7 +1,7 @@
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
 
-const SignUpController = {
+const signUpController = {
   // Signup page for user
   getSignUp: (req, res) => {
     res.send("Signup page for user")
@@ -67,4 +67,4 @@ const SignUpController = {
   },
 };
 
-module.exports = SignUpController;
+module.exports = signUpController;
