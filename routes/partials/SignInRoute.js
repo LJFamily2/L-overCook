@@ -1,10 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const SignInController = require("../../controllers/SigInController");
+const signInController = require("../../controllers/signInController");
 const passport = require("passport");
 
 // Sigin page for user
-router.get("/", SignInController.getSignIn);
+router.get("/", signInController.getSignIn);
 router.post(
   "/userAuth",
   passport.authenticate("local", {
@@ -17,7 +17,7 @@ router.post(
 );
 
 // Signin page for admin
-router.get("/admin", SignInController.getAdminSignIn);
+router.get("/admin", signInController.getAdminSignIn);
 router.post(
   "/adminAuth",
   passport.authenticate("local", {

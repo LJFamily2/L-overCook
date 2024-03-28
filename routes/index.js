@@ -1,10 +1,9 @@
-const SignUpRoute = require('./partials/SignUpRoute');
-const SignInRoute = require('./partials/SignInRoute');
-
+const signUp = require('./partials/signUpRoute');
+const signIn = require('./partials/signInRoute')
 
 const routes = [
-    {path: '/signup', route: SignUpRoute},
-    {path: '/signin', route: SignInRoute},
+    {path: '/signup', route: signUp},
+    {path: '/signin', route: signIn},
 ];
 
 module.exports = routes;
