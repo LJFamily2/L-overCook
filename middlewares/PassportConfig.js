@@ -2,16 +2,22 @@ const bcrypt = require("bcrypt");
 const LocalStrategy = require("passport-local").Strategy;
 const UserModel = require("../models/User.js");
 
-function initialize(passport) {
+async function initialize(passport) {
   const authenticater = async (username, password, done) => {
-    const user = await UserModel.findOne({ username: username });
-    if (!user) {
-      return done(null, false, { message: "User is not exist" });
-    }
-    if (await bcrypt.compare(password, user.password)) {
-      return done(null, user);
-    } else {
-      return done(null, false, { message: "Invalid username or password" });
+    try {
+      const user = await UserModel.findOne({ username: username });
+      if (!user) {
+        return done(null, false, { message: "User does not exist" });
+      }
+
+      const isPasswordValid = await bcrypt.compare(password, user.password);
+      if (isPasswordValid) {
+        return done(null, user);
+      } else {
+        return done(null, false, { message: "Invalid username or password" });
+      }
+    } catch (error) {
+      return done(error);
     }
   };
 
@@ -20,7 +26,12 @@ function initialize(passport) {
   // serialize and deserialize are used to store the user in the session
   passport.serializeUser((user, done) => done(null, user.id));
   passport.deserializeUser(async (id, done) => {
-    return done(null, await UserModel.findById(id));
+    try {
+      const user = await UserModel.findById(id);
+      return done(null, user);
+    } catch (error) {
+      return done(error);
+    }
   });
 }
 
