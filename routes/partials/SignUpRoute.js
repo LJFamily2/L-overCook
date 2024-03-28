@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const SignUpController = require("../controllers/SignUpController");
+const SignUpController = require("../../controllers/SignUpController");
 
 // Sigup page for user
 router.get('/', SignUpController.getSignUp);
