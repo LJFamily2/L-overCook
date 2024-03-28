@@ -1,11 +1,14 @@
 const express = require('express');
 const router = express.Router();
-const passport = require('passport');
-
+const SignInController = require('../../controllers/SigInController');
 
 // Sigin page for user
-router.get('/',);
+router.get('/', SignInController.getSignIn);
+router.post('/',SignInController.postSignIn);
 
 
 // Signin page for admin
-router.get('/admin',);
+router.get('/admin', SignInController.getAdminSignIn);
+router.post('/admin',SignInController.postAdminSignIn);
+
+module.exports = router;
