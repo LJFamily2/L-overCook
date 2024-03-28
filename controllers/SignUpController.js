@@ -5,8 +5,8 @@ const SignUpController = {
   // Signup page for user
   getSignUp: (req, res) => {
     console.log("Signup page for user");
-    
-    res.render("signup", { layout: null });
+
+    res.render("admins/signUp", { layout: './layouts/testing' });
   },
 
   postSignUp: async (req, res) => {

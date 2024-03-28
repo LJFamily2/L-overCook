@@ -4,7 +4,7 @@ require('dotenv').config();
 
 const SessionMongoDB = new MongoDBStore({
     uri: process.env.MONGODB_URI,
-    collection: "sessions"
+    collection: "sessions",
 });
 
 SessionMongoDB.on("error", function(error) {
