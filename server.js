@@ -44,6 +44,12 @@ mongoose
   .then(() => console.log("Connected to MongoDB Atlas"))
   .catch((error) => console.log("Error connecting to MongoDB:", error.message));
 
+// Routes
+const routes = require("./routes");
+routes.forEach((routeConfig) => {
+  app.use(routeConfig.path, routeConfig.route);
+});
+
 app.listen(3000, () => {
   console.log("Server is running on localhost:3000");
 });

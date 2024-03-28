@@ -5,7 +5,11 @@ const userSchema = new mongoose.Schema({
   password: String,
   email: String,
   role: Boolean,
-  createAt: Date,
+  createAt: {
+    type: Date,
+    default: Date.now,
+    immutable: true,
+  },
 });
 
 const UserModel = mongoose.model("Users", userSchema);
