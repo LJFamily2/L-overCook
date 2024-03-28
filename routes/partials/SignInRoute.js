@@ -1,29 +1,32 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const SignInController = require('../../controllers/SigInController');
+const SignInController = require("../../controllers/SigInController");
 const passport = require("passport");
 
 // Sigin page for user
-router.get('/', SignInController.getSignIn);
-router.post('/',passport.authenticate("local", {
+router.get("/", SignInController.getSignIn);
+router.post(
+  "/userAuth",
+  passport.authenticate("local", {
     failureRedirect: "/signin",
     failureFlash: true,
-}),
-(req, res) => {
-    console.log("User authenticated successfully");
-    res.redirect("/");
-},);
-
+  }),
+  (req, res) => {
+    res.send("User authenticated successfully");
+  }
+);
 
 // Signin page for admin
-router.get('/admin', SignInController.getAdminSignIn);
-router.post('/admin',passport.authenticate("local", {
-    failureRedirect: "/signin",
+router.get("/admin", SignInController.getAdminSignIn);
+router.post(
+  "/adminAuth",
+  passport.authenticate("local", {
+    failureRedirect: "/signin/admin",
     failureFlash: true,
-}),
-(req, res) => {
-    console.log("Admin authenticated successfully");
-    res.redirect("/admin");
-},);
+  }),
+  (req, res) => {
+    res.send("Admin authenticated successfully");
+  }
+);
 
 module.exports = router;
