@@ -40,13 +40,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // Setup parse
 app.use(express.urlencoded({ extended: true }));
-
-// Setup mongoose connection and handling connection errors
-const mongoose = require("mongoose");
-mongoose
-  .connect(process.env.MONGODB_URI)
-  .then(() => console.log("Connected to MongoDB Atlas"))
-  .catch((error) => console.log("Error connecting to MongoDB:", error.message));
+app.use(express.json());
 
 // Routes
 const routes = require("./routes");
@@ -54,6 +48,6 @@ routes.forEach((routeConfig) => {
   app.use(routeConfig.path, routeConfig.route);
 });
 
-app.listen(5000, () => {
+app.listen(3000, () => {
   console.log("Server is running on localhost:3000");
 });

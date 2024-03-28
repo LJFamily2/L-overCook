@@ -5,8 +5,14 @@ const mongoose = require('mongoose');
 const recipeSchema = new mongoose.Schema({
     name: String,
     ingredients:[{
-        quantity:double,
-        ingredient: String,
+        ingredient:{
+            type:String,
+            required: true
+        },
+        quantity:{
+            type: mongoose.Schema.Types.Mixed,
+            required: true
+        }
     }],
     description: String,
     cuisine: String,
