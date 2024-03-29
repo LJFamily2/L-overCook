@@ -1,13 +1,15 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
+const { Schema } = mongoose;
 
-//Define schema
-const ingredientSchema = new mongoose.Schema({
+const ingredientSchema = Schema({
+    _id: Schema.Types.ObjectId,
     name: String,
-    category: String,
-});
+    category: {
+        type: Schema.Types.ObjectId,
+        ref: 'Category'
+    }
+})
 
-//Define model based on schema
 const Ingredient = mongoose.model('Ingredient', ingredientSchema);
 
-//Export module for use in other parts
 module.exports = Ingredient;

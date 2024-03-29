@@ -1,12 +1,11 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
+const { Schema } = mongoose;
 
-//Define schema
-const cuisineSchema = new mongoose.Schema({
+const cuisineSchema = Schema({
+    _id: Schema.Types.ObjectId,
     name: String
-});
+})
 
-//Define model based on schema
 const Cuisine = mongoose.model('Cuisine', cuisineSchema);
 
-//Export module for use in other parts
 module.exports = Cuisine;
