@@ -1,14 +1,13 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const SignUpController = require("../../controllers/signUpController");
+const signUpController = require("../../controllers/signUpController");
 
 // Sigup page for user
-router.get('/', SignUpController.getSignUp);
-router.post('/addUser', SignUpController.postSignUp);
-
+router.get("/", signUpController.getSignUp);
+router.post("/addUser", signUpController.postSignUp);
 
 // Signup page for admin
-router.get('/admin',SignUpController.getAdminSignUp);
-router.post('/addAdmin',SignUpController.postAdminSignUp);
+router.get("/admin", signUpController.getAdminSignUp);
+router.post("/addAdmin", signUpController.postAdminSignUp);
 
 module.exports = router;
