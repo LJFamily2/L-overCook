@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const ingredientSchema = Schema({
-    _id: Schema.Types.ObjectId,
     name: {
         type: String,
         required: true
