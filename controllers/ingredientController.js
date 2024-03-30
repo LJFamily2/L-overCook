@@ -19,15 +19,18 @@ exports.getAllIngredients = async (req,res) => {
     }
 };
 
+// Helper function to check if ingredient exist
+exports.existingIngredient= async(name) => {
+    const existingIngredient = await Ingredient.findOne({ name });
+    if(existingIngredient){
+        return existingIngredient;
+    }
+    return false;
+}
+
 // Helper function to create ingredient without returning status
 exports.createIngredientLogic = async(name, categoryName) => {
     try {
-        // Check if ingredient already exists
-        const existingIngredient = await Ingredient.findOne({ name });
-        if (existingIngredient) {
-            throw new Error('Ingredient already exists');
-        }
-
         // Variable to hold category object
         let category; 
 
@@ -59,8 +62,14 @@ exports.createIngredientLogic = async(name, categoryName) => {
 exports.createIngredient = async (req, res) => {
     const { name, categoryName } = req.body;
     try{
-        const newIngredient = await this.createIngredientLogic(name, categoryName);
-        res.status(201).json(newIngredient);
+        // Check if ingredient already exists
+        const existingIngredient = await this.existingIngredient(name);
+        if(!existingIngredient){
+            const newIngredient = await this.createIngredientLogic(name, categoryName);
+            res.status(201).json(newIngredient);
+        }else{
+            return res.status(400).json({error: 'Ingredient already existed.'});
+        }
     }catch(error){
         res.status(500).json({error: error.message});
     }
