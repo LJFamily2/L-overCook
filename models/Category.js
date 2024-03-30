@@ -3,8 +3,11 @@ const { Schema } = mongoose;
 
 const categorySchema = Schema({
   _id: Schema.Types.ObjectId,
-  name: String
-})
+  name: {
+    type: String,
+    required: true
+  }
+});
 
 const Category = mongoose.model('Category', categorySchema);
 

@@ -3,7 +3,10 @@ const { Schema } = mongoose;
 
 const ingredientSchema = Schema({
     _id: Schema.Types.ObjectId,
-    name: String,
+    name: {
+        type: String,
+        required: true
+    },
     category: {
         type: Schema.Types.ObjectId,
         ref: 'Category'

@@ -2,15 +2,26 @@ const mongoose = require('../config/database');
 const Cuisine = require('../models/Cuisine');
 const Recipe = require('../models/Recipe');
 
+// // Get all cuisines
+// exports.getAllCuisines = async(req, res) => {
+//     try{
+//         const cuisines = await Cuisine.find();
+//         res.status(200).json(cuisines);
+//     }catch(error){
+//         res.status(500).json({error: error.message});
+//     }
+// }
+
 // Get all cuisines
 exports.getAllCuisines = async(req, res) => {
     try{
         const cuisines = await Cuisine.find();
-        res.status(200).json(cuisines);
+        return cuisines;
     }catch(error){
-        res.status(500).json({error: error.message});
+        throw new Error(error.message);
     }
 }
+
 
 // Create new cuisine
 exports.createCuisine = async (req, res) => {

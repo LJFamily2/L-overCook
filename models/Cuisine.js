@@ -3,7 +3,10 @@ const { Schema } = mongoose;
 
 const cuisineSchema = Schema({
     _id: Schema.Types.ObjectId,
-    name: String
+    name: {
+        type: String,
+        required:true
+    }
 })
 
 const Cuisine = mongoose.model('Cuisine', cuisineSchema);

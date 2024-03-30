@@ -2,16 +2,26 @@ const mongoose = require('../config/database');
 const Category = require('../models/Category');
 const Ingredient = require('../models/Ingredient');
 
+
+// // Get all categories - testing
+// exports.getAllCategories = async (req,res) => {
+//     try{
+//         const categories = await Category.find();
+//         res.status(200).json(categories);
+//     }catch(error){
+//         res.status(500).json({error: error.message});
+//     }
+// };
+
 // Get all categories
 exports.getAllCategories = async (req,res) => {
     try{
         const categories = await Category.find();
-        res.status(200).json(categories);
+        return categories;
     }catch(error){
-        res.status(500).json({error: error.message});
+        throw new Error(error.message);
     }
 };
-
 
 // Create new category
 exports.createCategory = async (req, res) => {

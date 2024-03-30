@@ -1,7 +1,22 @@
 const mongoose = require('../config/database');
 const Ingredient = require('../models/Ingredient');
 
-// Get all categories
+// // Get all ingredients
+// exports.getAllIngredients = async (req,res) => {
+//     try{
+//         const ingredients = await Ingredient.find()
+//         .populate({
+//             path: 'category',
+//             select: 'name -_id'
+//         })
+//         .exec();
+//         res.status(200).json(ingredients);
+//     }catch(error){
+//         res.status(500).json({error: error.message});
+//     }
+// };
+
+//Get all ingredients
 exports.getAllIngredients = async (req,res) => {
     try{
         const ingredients = await Ingredient.find()
@@ -10,11 +25,12 @@ exports.getAllIngredients = async (req,res) => {
             select: 'name -_id'
         })
         .exec();
-        res.status(200).json(ingredients);
+        return ingredients;
     }catch(error){
-        res.status(500).json({error: error.message});
+        throw new Error(error.message);
     }
 };
+
 
 // Create new ingredient
 exports.createIngredient = async (req, res) => {
