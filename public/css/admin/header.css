@@ -29,7 +29,7 @@ nav a {
 }
 
 nav div {
-  height: 45px;
+  height: 50px;
 }
 
 nav div div,
@@ -38,7 +38,7 @@ nav div div,
   align-items: center;
 }
 
-nav div:hover {
+nav div:hover, #log-out:hover {
   background-color: #75a26d;
 }
 
