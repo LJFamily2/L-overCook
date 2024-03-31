@@ -1,8 +1,9 @@
 const mongoose = require('../config/database');
 const Ingredient = require('../models/Ingredient');
+const Recipe = require('../models/Recipe');
 const categoryController = require('../controllers/categoryController');
 
-//Get all ingredients
+// Get all ingredients
 exports.getAllIngredients = async (req,res) => {
     try{
         const ingredients = await Ingredient.find()
@@ -11,10 +12,10 @@ exports.getAllIngredients = async (req,res) => {
             select: 'name -_id'
         })
         .exec();
-        res.status(200).json(ingredients);
+        //res.status(200).json(ingredients);
         return ingredients;
     }catch(error){
-        res.status(500).json({error: error.message});
+        //res.status(500).json({error: error.message});
         throw new Error(error.message);
     }
 };
@@ -31,10 +32,8 @@ exports.existingIngredient= async(name) => {
 // Helper function to create ingredient without returning status
 exports.createIngredientLogic = async(name, categoryName) => {
     try {
-        // Variable to hold category object
-        let category; 
-
         // Check if category existed
+        let category; 
         const existingCategory = await categoryController.existingCategory(categoryName);
         
         // Create new category if it doesn't exist, else use the existing category
@@ -62,7 +61,6 @@ exports.createIngredientLogic = async(name, categoryName) => {
 exports.createIngredient = async (req, res) => {
     const { name, categoryName } = req.body;
     try{
-        // Check if ingredient already exists
         const existingIngredient = await this.existingIngredient(name);
         if(!existingIngredient){
             const newIngredient = await this.createIngredientLogic(name, categoryName);
@@ -75,30 +73,31 @@ exports.createIngredient = async (req, res) => {
     }
 };
 
-// // Delete existing ingredient
-// exports.deleteIngredient = async (req,res) => {
-//     const ingredientId = req.params.id;
-//     console.log(ingredientId)
-//     try{
-//         // Check if ingredient exists
-//         const ingredient = await Ingredient.findById(ingredientId);
-//         if (!ingredient) {
-//             return res.status(404).json({ error: 'Ingredient not found' });
-//         }
-        
-//         // How should this be handle?
-//         // // Update recipes associated with the deleted ingredient
-//         // await Recipe.updateMany(
-//         //     {ingredient: ingredientId},
-//         //     { $unset: { ingredient: '' } }
-//         // );
-        
-//         // Delete ingredient
-//         await Ingredient.deleteOne({ _id: ingredientId });
-//         res.status(200).json({ message: 'Ingredient deleted successfully' });
-//     }catch(error){
-//         res.status(500).json({message:error.message});
-//     }
-// };
 
-// // Update ingredient - Do or no?
+
+// Delete existing ingredient
+exports.deleteIngredient = async (req,res) => {
+    const ingredientId = req.params.id;
+    console.log(ingredientId)
+    try{
+        // Check if ingredient exists
+        const ingredient = await Ingredient.findById(ingredientId);
+        if (!ingredient) {
+            return res.status(404).json({ error: 'Ingredient not found' });
+        }
+        
+        // Delete the ingredient in  the recipe's ingredient array
+        await Recipe.updateMany(
+            { "ingredients.ingredient": ingredientId },
+            { $pull: { ingredients: { ingredient: ingredientId } } }
+        );
+        
+        // Delete ingredient
+        await Ingredient.deleteOne({ _id: ingredientId });
+        res.status(200).json({ message: 'Ingredient deleted successfully' });
+    }catch(error){
+        res.status(500).json({message:error.message});
+    }
+};
+
+//Update ingredient
