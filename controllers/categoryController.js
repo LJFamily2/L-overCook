@@ -91,13 +91,13 @@ exports.updateCategory = async (req, res) => {
         // Check if name existed
         const updatedCategory = await Category.findOne({ name });
 
-        // Update the category
-        if(!updatedCategory){
-            await Category.findByIdAndUpdate(categoryId, { name }, { new: true });
-            res.status(200).json({ message: `Category updated successfully, changed ${category.name} to ${name}`});
-        }else{
+        // Throw error if category name already exist
+        if(updatedCategory){
             throw new Error(`Category ${name} already exists`);
         }
+
+        await Category.findByIdAndUpdate(categoryId, { name }, { new: true });
+        res.status(200).json({ message: `Category updated successfully, changed ${category.name} to ${name}`});
     }catch(error){
         res.status(500).json({ error: error.message });
     }

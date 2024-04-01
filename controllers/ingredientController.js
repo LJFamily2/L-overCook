@@ -22,6 +22,13 @@ exports.getAllIngredients = async (req,res) => {
 // Helper function to create ingredient without returning status
 exports.createIngredientLogic = async(name, categoryName) => {
     try {
+        // Check if ingredient exist
+        const existingIngredient = await Ingredient.findOne({ name });
+        if(existingIngredient){
+           throw new Error('Ingredient already existed.')
+        }
+        console.log(existingIngredient)
+        
         // Check if category exists
         let categoryId;
         const categoryMap = new Map((await Category.find()).map(cat => [cat.name, cat._id]));
@@ -53,12 +60,9 @@ exports.createIngredientLogic = async(name, categoryName) => {
 exports.createIngredient = async (req, res) => {
     const { name, categoryName } = req.body;
     try{
-        const existingIngredient = await Ingredient.findOne({ name });
-        if(!existingIngredient){
-            const newIngredient = await this.createIngredientLogic(name, categoryName);
-            res.status(201).json(newIngredient);
-        }else{
-            return res.status(400).json({error: 'Ingredient already existed.'});
+        const newIngredient = await this.createIngredientLogic(name, categoryName);
+        if(newIngredient){
+            res.status(201).json({message: 'Ingredient added successfully', newIngredient});
         }
     }catch(error){
         res.status(500).json({error: error.message});
@@ -93,7 +97,7 @@ exports.deleteIngredient = async (req,res) => {
 //Update ingredient
 exports.updateIngredient = async (req, res) => {
     const ingredientId = req.params.id;
-    const { name } = req.body;
+    const { name, categoryName } = req.body;
     try{
         // Check if id existed
         const ingredient = await Ingredient.findById(ingredientId);
@@ -101,16 +105,29 @@ exports.updateIngredient = async (req, res) => {
             return res.status(404).json({error: 'Ingredient not found'});
         }
 
-        // Check if name existed
-        const updatedIngredient= await Ingredient.findOne({ name });
-
-        // Update the category
-        if(!updatedIngredient){
-            await Ingredient.findByIdAndUpdate(ingredientId, { name }, { new: true });
-            res.status(200).json({ message: `Ingredient updated successfully, changed ${ingredient.name} to ${name}`});
-        }else{
-            throw new Error(`Ingredient ${name} already exists`);
+        // Check if name already exists for another ingredient
+        const existingIngredient = await Ingredient.findOne({ name });
+        if (existingIngredient && existingIngredient._id.toString() !== ingredientId) {
+            return res.status(400).json({ error: `Ingredient with name '${name}' already exists` });
         }
+
+        // Check if category existed
+        let categoryId;
+        const categoryMap = new Map((await Category.find()).map(cat => [cat.name, cat._id]));
+        if (categoryMap.has(categoryName)) {
+            // If the category exists, retrieve its ID from the map
+            categoryId = categoryMap.get(categoryName);
+        } else {
+            // If the category doesn't exist, create a new one
+            const newCategory = await categoryController.createCategoryLogic(categoryName);
+            categoryId = newCategory._id;
+        }
+        
+        // Update the ingredient
+        const resultIngredient = await Ingredient.findByIdAndUpdate(ingredientId, { name: name, category: categoryId}, { new: true });
+        console.log(resultIngredient)
+        res.status(200).json({ message: 'Ingredient updated successfully'});
+        
     }catch(error){
         res.status(500).json({ error: error.message });
     }

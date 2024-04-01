@@ -78,13 +78,13 @@ exports.updateCuisine = async (req, res) => {
         // Check if name existed
         const updatedCuisine = await Cuisine.findOne({ name });
 
-        // Update the category
-        if(!updatedCuisine){
-            await Cuisine.findByIdAndUpdate(cuisineId, { name }, { new: true });
-            res.status(200).json({ message: `Cuisine updated successfully, changed ${cuisine.name} to ${name}`});
-        }else{
+        // Throw error if cuisine name already existed
+        if(updatedCuisine){
             throw new Error('Cuisine name already exists');
         }
+        
+        await Cuisine.findByIdAndUpdate(cuisineId, { name }, { new: true });
+        res.status(200).json({ message: `Cuisine updated successfully, changed ${cuisine.name} to ${name}`});
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
