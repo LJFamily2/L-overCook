@@ -2,54 +2,63 @@ const mongoose = require('../config/database');
 const Category = require('../models/Category');
 const Ingredient = require('../models/Ingredient');
 
-
-// // Get all categories - testing
-// exports.getAllCategories = async (req,res) => {
-//     try{
-//         const categories = await Category.find();
-//         res.status(200).json(categories);
-//     }catch(error){
-//         res.status(500).json({error: error.message});
-//     }
-// };
-
-// Get all categories
-exports.getAllCategories = async (req,res) => {
+// Get all categories - Fix status bug
+exports.getAllCategories = async() => {
     try{
         const categories = await Category.find();
+        // res.status(200).json(categories);
         return categories;
     }catch(error){
+        // res.status(500).json({error: error.message});
         throw new Error(error.message);
     }
 };
 
-// Create new category
-exports.createCategory = async (req, res) => {
-    const { name } = req.body;
+// Helper function to check if category exist
+exports.existingCategory = async(name) => {
+    const existingCategory = await Category.findOne({ name });
+    if(existingCategory){
+        return existingCategory;
+    }
+    return false;
+}
 
+// Helper function to create category without returning status
+exports.createCategoryLogic = async(name) => {
     try {
-        // Check if category already exists
-        const existingCategory = await Category.findOne({ name });
-        if (existingCategory) {
-            return res.status(400).json({error: 'Category already exists' });
-        }
-
         // Create new category instance with a new ObjectId
         const category = new Category({
-            _id: new mongoose.Types.ObjectId(), // Generate a new ObjectId for _id
             name,
         });
 
         // Save the new category
         const newCategory = await category.save();
-
-        res.status(201).json({ category: newCategory, message: 'Category added to database' });
+        console.log("New category added successfully.")
+        return newCategory;          
     } catch (error) {
-        res.status(500).json({message: error.message});
+        throw new Error(error.message);
+    }
+}
+
+// Create new category by calling the helper function and return status
+exports.createCategory = async (req, res) => {
+    const { name } = req.body;
+
+    try{
+        const existingCategory = await this.existingCategory(name);
+        if(!existingCategory){
+            const newCategory = await this.createCategoryLogic(name);
+            res.status(201).json(newCategory);
+        }else{
+            return res.status(400).json({error: 'Category already existed.'});
+        }
+        
+    }catch(error){
+        res.status(500).json({error: error.message});
     }
 };
 
-// Delete existing category
+// Delete existing category 
 exports.deleteCategory = async (req,res) => {
     const categoryId = req.params.id;
     console.log(categoryId)
@@ -74,4 +83,4 @@ exports.deleteCategory = async (req,res) => {
     }
 };
 
-// Update category - Do or no?
+// Update category
