@@ -7,14 +7,11 @@ const Recipe = require('../models/Recipe');
 exports.getAllCuisines = async(req, res) => {
     try{
         const cuisines = await Cuisine.find();
-        // res.status(200).json(cuisines);
         return cuisines;
     }catch(error){
-        // res.status(500).json({error: error.message});
         throw new Error(error.message);
     }
 }
-
 
 // Create new cuisine
 exports.createCuisine = async (req, res) => {
@@ -72,17 +69,24 @@ exports.updateCuisine = async (req, res) => {
     const cuisineId = req.params.id;
     const { name } = req.body;
     try {
-        // Find and update the category
-        const updateCuisine = await Cuisine.findByIdAndUpdate(cuisineId, { name }, { new: true });
-
-        // Check if category exists
-        if (!updateCuisine) {
-            return res.status(404).json({ error: 'Cuisine not found' });
+        // Check if id existed
+        const cuisine = await Cuisine.findById(cuisineId);
+        if(!cuisine){
+            return res.status(404).json({error: 'Cuisine not found'});
         }
 
-        res.status(200).json({ message: 'Cuisine updated successfully', updateCuisine });
-        
+        // Check if name existed
+        const updatedCuisine = await Cuisine.findOne({ name });
+
+        // Update the category
+        if(!updatedCuisine){
+            await Cuisine.findByIdAndUpdate(cuisineId, { name }, { new: true });
+            res.status(200).json({ message: `Cuisine updated successfully, changed ${cuisine.name} to ${name}`});
+        }else{
+            throw new Error('Cuisine name already exists');
+        }
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
 }
+

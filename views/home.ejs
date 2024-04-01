@@ -25,15 +25,18 @@
         <% recipes.forEach(recipe => { %>
             <li>
                 <h2><%= recipe.name %></h2>
+                <img src="/images/<%= recipe.image %>" width="300">
+                <p>Description: <%= recipe.description %></p>
                 <% if (recipe.ingredients.length > 0) { %>
-                    <h3>Ingredients:</h3>
+                    <p>Ingredients:</p>
                     <ul>
                         <% recipe.ingredients.forEach(ingredient => { %>
                             <li><%= ingredient.ingredient.name %>: <%= ingredient.quantity %></li>
                         <% }) %>
                     </ul>
                 <% } %>
-                <p><%= recipe.description %></p>
+                <p>Cuisine: <%= recipe.cuisine.name %></p>
+                <p>Duration: <%= recipe.time %></p>
                 <!-- Add other recipe details here -->
             </li>
         <% }) %>
