@@ -14,10 +14,11 @@ exports.getAllRecipes = async (req, res) => {
                 select: 'name -_id'
             })
             .exec();
-        res.status(200).json(recipes);
+        // res.status(200).json(recipes);
         return recipes;
     } catch (error) {
-        res.status(500).json({ error: error.message });
+        // res.status(500).json({ error: error.message });
         throw new Error(error.message);
     }
 };
+

@@ -48,7 +48,7 @@ exports.createCategory = async (req, res) => {
         const existingCategory = await this.existingCategory(name);
         if(!existingCategory){
             const newCategory = await this.createCategoryLogic(name);
-            res.status(201).json(newCategory);
+            res.status(201).json({message: 'Category added successfully', newCategory});
         }else{
             return res.status(400).json({error: 'Category already existed.'});
         }
@@ -61,7 +61,6 @@ exports.createCategory = async (req, res) => {
 // Delete existing category 
 exports.deleteCategory = async (req,res) => {
     const categoryId = req.params.id;
-    console.log(categoryId)
     try{
         // Check if category exists
         const category = await Category.findById(categoryId);
@@ -84,3 +83,21 @@ exports.deleteCategory = async (req,res) => {
 };
 
 // Update category
+exports.updateCategory = async (req, res) => {
+    const categoryId = req.params.id;
+    const { name } = req.body;
+    try {
+        // Find and update the category
+        const updatedCategory = await Category.findByIdAndUpdate(categoryId, { name }, { new: true });
+
+        // Check if category exists
+        if (!updatedCategory) {
+            return res.status(404).json({ error: 'Category not found' });
+        }
+
+        res.status(200).json({ message: 'Category updated successfully', updatedCategory });
+        
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}

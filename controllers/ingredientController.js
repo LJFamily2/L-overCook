@@ -78,7 +78,6 @@ exports.createIngredient = async (req, res) => {
 // Delete existing ingredient
 exports.deleteIngredient = async (req,res) => {
     const ingredientId = req.params.id;
-    console.log(ingredientId)
     try{
         // Check if ingredient exists
         const ingredient = await Ingredient.findById(ingredientId);
@@ -101,3 +100,21 @@ exports.deleteIngredient = async (req,res) => {
 };
 
 //Update ingredient
+exports.updateIngredient = async (req, res) => {
+    const ingredientId = req.params.id;
+    const { name } = req.body;
+    try {
+        // Find and update the category
+        const updateIngredient = await Ingredient.findByIdAndUpdate(ingredientId, { name }, { new: true });
+
+        // Check if category exists
+        if (!updateIngredient) {
+            return res.status(404).json({ error: 'Ingredient not found' });
+        }
+
+        res.status(200).json({ message: 'Ingredient updated successfully', updateIngredient });
+        
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}
