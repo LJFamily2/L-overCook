@@ -67,4 +67,22 @@ exports.deleteCuisine = async (req,res) => {
     }
 };
 
-// Update cuisine - Do or no?
+// Update cuisine
+exports.updateCuisine = async (req, res) => {
+    const cuisineId = req.params.id;
+    const { name } = req.body;
+    try {
+        // Find and update the category
+        const updateCuisine = await Cuisine.findByIdAndUpdate(cuisineId, { name }, { new: true });
+
+        // Check if category exists
+        if (!updateCuisine) {
+            return res.status(404).json({ error: 'Cuisine not found' });
+        }
+
+        res.status(200).json({ message: 'Cuisine updated successfully', updateCuisine });
+        
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}
