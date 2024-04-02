@@ -13,7 +13,11 @@ const userSchema = new mongoose.Schema({
   searchHistory: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Recipe",
-  }
+  },
+  favoriteRecipe: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Recipe",
+  },
 });
 
 const UserModel = mongoose.model("Users", userSchema);

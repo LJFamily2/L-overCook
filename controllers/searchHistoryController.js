@@ -52,7 +52,7 @@ const searchHistoryController = {
     const userId = req.user.id;
     await User.findByIdAndUpdate(
         userId,
-        { $pull: { readingHistory: book._id } },
+        { $pull: { readingHistory: recipe._id } },
         { new: true }
       );
     //   res.redirect("");
