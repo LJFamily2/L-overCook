@@ -7,8 +7,8 @@ const category = require('./categoryRoute');
 const cuisine = require('./cuisineRoute');
 const ingredient = require('./ingredientRoute');
 const recipe = require('./recipeRoute');
-const searchHistory = require('./searchHistoryRoute');
-const favoriteRecipe = require('./favoriteRecipeRoute')
+const searchHistory = require('./clients/searchHistoryRoute');
+const favoriteRecipe = require('./clients/favoriteRecipeRoute')
 
 
 const routes = [
