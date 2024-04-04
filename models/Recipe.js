@@ -14,7 +14,7 @@ const reviewSchema = Schema({
         max: 5
     },
     review: String,
-    dateCreated: {
+    createdAt: {
         type: Date,
         default: Date.now
     }
@@ -42,6 +42,15 @@ const recipeSchema = Schema({
     time: String,
     url: String
 })
+
+recipeSchema.virtual("averageRating").get(function() {
+    if (this.reviews.length === 0) return 0;
+    const total = this.reviews.reduce((acc, { rating }) => acc + rating, 0);
+    return total / this.reviews.length;
+});
+
+
+
 
 const Recipe = mongoose.model('Recipe', recipeSchema);
 
