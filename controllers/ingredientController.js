@@ -1,6 +1,7 @@
 const mongoose = require('../config/database');
 const Ingredient = require('../models/Ingredient');
 const Recipe = require('../models/Recipe');
+const Category = require('../models/Category');
 const categoryController = require('../controllers/categoryController');
 
 // Get all ingredients
@@ -12,61 +13,56 @@ exports.getAllIngredients = async (req,res) => {
             select: 'name -_id'
         })
         .exec();
-        //res.status(200).json(ingredients);
         return ingredients;
     }catch(error){
-        //res.status(500).json({error: error.message});
         throw new Error(error.message);
     }
 };
 
-// Helper function to check if ingredient exist
-exports.existingIngredient= async(name) => {
-    const existingIngredient = await Ingredient.findOne({ name });
-    if(existingIngredient){
-        return existingIngredient;
-    }
-    return false;
-}
-
 // Helper function to create ingredient without returning status
 exports.createIngredientLogic = async(name, categoryName) => {
     try {
-        // Check if category existed
-        let category; 
-        const existingCategory = await categoryController.existingCategory(categoryName);
+        // Check if ingredient exist
+        const existingIngredient = await Ingredient.findOne({ name });
+        if(existingIngredient){
+           throw new Error('Ingredient already existed.')
+        }
+        console.log(existingIngredient)
         
-        // Create new category if it doesn't exist, else use the existing category
-        if(!existingCategory){
+        // Check if category exists
+        let categoryId;
+        const categoryMap = new Map((await Category.find()).map(cat => [cat.name, cat._id]));
+        if (categoryMap.has(categoryName)) {
+            // If the category exists, retrieve its ID from the map
+            categoryId = categoryMap.get(categoryName);
+        } else {
+            // If the category doesn't exist, create a new one
             const newCategory = await categoryController.createCategoryLogic(categoryName);
-            category = newCategory; // Assign the created category object to the category variable
-        }else {
-            category = existingCategory; 
+            categoryId = newCategory._id;
         }
 
-        // Create the new ingredient object with the category Id
-        const newIngredient = { name, category: category._id };
+        // Create a new ingredient object with name and category
+        const ingredient = new Ingredient({
+            name,
+            category: categoryId
+        });
 
-        // Create the ingredient in the database
-        const createdIngredient = await Ingredient.create(newIngredient);
-
-        console.log("New ingredient added successfully.")
-        return createdIngredient;
+        // Save the new ingredient to the database
+        const newIngredient = await ingredient.save();
+        return newIngredient;  
     } catch (error) {
         throw new Error(error.message);
     }
-}
+};
+
 
 // Create new ingredient by calling the helper function and return status
 exports.createIngredient = async (req, res) => {
     const { name, categoryName } = req.body;
     try{
-        const existingIngredient = await this.existingIngredient(name);
-        if(!existingIngredient){
-            const newIngredient = await this.createIngredientLogic(name, categoryName);
-            res.status(201).json(newIngredient);
-        }else{
-            return res.status(400).json({error: 'Ingredient already existed.'});
+        const newIngredient = await this.createIngredientLogic(name, categoryName);
+        if(newIngredient){
+            res.status(201).json({message: 'Ingredient added successfully', newIngredient});
         }
     }catch(error){
         res.status(500).json({error: error.message});
@@ -74,11 +70,9 @@ exports.createIngredient = async (req, res) => {
 };
 
 
-
 // Delete existing ingredient
 exports.deleteIngredient = async (req,res) => {
     const ingredientId = req.params.id;
-    console.log(ingredientId)
     try{
         // Check if ingredient exists
         const ingredient = await Ingredient.findById(ingredientId);
@@ -101,3 +95,43 @@ exports.deleteIngredient = async (req,res) => {
 };
 
 //Update ingredient
+exports.updateIngredient = async (req, res) => {
+    const ingredientId = req.params.id;
+    const { name, categoryName } = req.body;
+    try{
+        // Check if id existed
+        const ingredient = await Ingredient.findById(ingredientId);
+        if(!ingredient){
+            return res.status(404).json({error: 'Ingredient not found'});
+        }
+
+        // Check if name already exists for another ingredient
+        const existingIngredient = await Ingredient.findOne({ name });
+        if (existingIngredient && existingIngredient._id.toString() !== ingredientId) {
+            return res.status(400).json({ error: `Ingredient with name '${name}' already exists` });
+        }
+
+        // Check if category existed
+        let categoryId;
+        const categoryMap = new Map((await Category.find()).map(cat => [cat.name, cat._id]));
+        if (categoryMap.has(categoryName)) {
+            // If the category exists, retrieve its ID from the map
+            categoryId = categoryMap.get(categoryName);
+        } else {
+            // If the category doesn't exist, create a new one
+            const newCategory = await categoryController.createCategoryLogic(categoryName);
+            categoryId = newCategory._id;
+        }
+        
+        // Update the ingredient
+        const resultIngredient = await Ingredient.findByIdAndUpdate(ingredientId, { name: name, category: categoryId}, { new: true });
+        console.log(resultIngredient)
+        res.status(200).json({ message: 'Ingredient updated successfully'});
+        
+    }catch(error){
+        res.status(500).json({ error: error.message });
+    }
+}
+
+
+
