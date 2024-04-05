@@ -58,7 +58,7 @@ exports.deleteCuisine = async (req,res) => {
         
         // Delete cuisine
         await Cuisine.deleteOne({ _id: cuisineId });
-        res.status(200).json({ message: 'Cuisine deleted successfully' });
+        res.status(200).json({ message: `Cuisine '${cuisine.name}' deleted successfully` });
     }catch(error){
         res.status(500).json({message:error.message});
     }
@@ -80,11 +80,11 @@ exports.updateCuisine = async (req, res) => {
 
         // Throw error if cuisine name already existed
         if(updatedCuisine){
-            throw new Error('Cuisine name already exists');
+            throw new Error(`Cuisine name '${cuisine.name}' already exists`);
         }
         
         await Cuisine.findByIdAndUpdate(cuisineId, { name }, { new: true });
-        res.status(200).json({ message: `Cuisine updated successfully, changed ${cuisine.name} to ${name}`});
+        res.status(200).json({ message: `Cuisine updated successfully, changed '${cuisine.name}' to '${name}'`});
     } catch (error) {
         res.status(500).json({ message: error.message });
     }

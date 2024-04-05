@@ -4,7 +4,7 @@ const cuisineController = require('../controllers/cuisineController');
 
 // router.get('/', cuisineController.getAllCuisines);
 router.post('/new', cuisineController.createCuisine);
-router.delete('/delete/:id', cuisineController.deleteCuisine);
+router.post('/delete/:id', cuisineController.deleteCuisine);
 router.put('/update/:id', cuisineController.updateCuisine);
 
 module.exports = router

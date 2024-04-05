@@ -42,14 +42,14 @@ exports.createIngredientLogic = async(name, categoryName) => {
         }
 
         // Create a new ingredient object with name and category
-        const newIngredient = new Ingredient({
+        const ingredient = new Ingredient({
             name,
             category: categoryId
         });
 
         // Save the new ingredient to the database
-        await newIngredient.save();
-        return newIngredient;
+        const newIngredient = await ingredient.save();
+        return newIngredient;  
     } catch (error) {
         throw new Error(error.message);
     }
