@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Recipe</title>
+</head>
+<body>
+    <h1>Create Recipe</h1>
+    <button id="addRecipeBtn">Add Recipe</button>
+
+    <div id="recipeForm" style="display: none;">
+        <form id="recipeForm">
+            <label for="recipeName">Recipe Name:</label>
+            <input type="text" id="recipeName" name="recipeName">
+
+            <label for="cuisine">Cuisine:</label>
+            <input type="text" id="cuisine" name="cuisine">
+
+            <label for="image">Image URL:</label>
+            <input type="text" id="image" name="image">
+
+            <label for="time">Time:</label>
+            <input type="text" id="time" name="time">
+
+            <label for="url">URL:</label>
+            <input type="text" id="url" name="url">
+
+            <div id="ingredientFields">
+                <div class="ingredient">
+                    <label for="ingredientName">Ingredient Name:</label>
+                    <input type="text" class="ingredientName" name="ingredientName[]">
+
+                    <label for="quantity">Quantity:</label>
+                    <input type="text" class="quantity" name="quantity[]">
+                </div>
+            </div>
+
+            <button type="button" id="addIngredientBtn">Add Ingredient</button>
+            <button type="submit">Create Recipe</button>
+        </form>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
