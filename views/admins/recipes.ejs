@@ -1,46 +1,564 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Recipe</title>
-</head>
-<body>
-    <h1>Create Recipe</h1>
-    <button id="addRecipeBtn">Add Recipe</button>
+   <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <!-- CSS -->
+      <link rel="stylesheet" href="/css/admin/globalCSS.css" />
+      <link rel="stylesheet" href="/css/admin/contentManagement.css" />
+      <title>L'overCook</title>
 
-    <div id="recipeForm" style="display: none;">
-        <form id="recipeForm">
-            <label for="recipeName">Recipe Name:</label>
-            <input type="text" id="recipeName" name="recipeName">
+      <!-- Bootstrap -->
+      <link
+         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+         rel="stylesheet"
+         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+         crossorigin="anonymous"
+      />
+      <script
+         src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+         integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+         crossorigin="anonymous"
+         defer
+      ></script>
 
-            <label for="cuisine">Cuisine:</label>
-            <input type="text" id="cuisine" name="cuisine">
+      <!-- Remix -->
+      <link
+         rel="stylesheet"
+         href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css"
+      />
+   </head>
+   <body>
+      <div class="container">
+         <!-- Headline  -->
+         <div class="headline">
+            <nav style="--bs-breadcrumb-divider: '>'" aria-label="breadcrumb">
+               <ol class="breadcrumb bg-light m-0">
+                  <li class="breadcrumb-item"><a href="#">Home</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">
+                     Library
+                  </li>
+               </ol>
+            </nav>
+            <div class="searchBar">
+               <i class="ri-search-line"></i>
+               <input
+                  type="text"
+                  class="p-1"
+                  id="search"
+                  placeholder="Tìm kiếm"
+               />
+            </div>
+         </div>
 
-            <label for="image">Image URL:</label>
-            <input type="text" id="image" name="image">
-
-            <label for="time">Time:</label>
-            <input type="text" id="time" name="time">
-
-            <label for="url">URL:</label>
-            <input type="text" id="url" name="url">
-
-            <div id="ingredientFields">
-                <div class="ingredient">
-                    <label for="ingredientName">Ingredient Name:</label>
-                    <input type="text" class="ingredientName" name="ingredientName[]">
-
-                    <label for="quantity">Quantity:</label>
-                    <input type="text" class="quantity" name="quantity[]">
-                </div>
+         <!-- Table display information -->
+         <table class="table m-0 text-center">
+            <thead>
+               <tr>
+                  <th scope="col">Image</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Description</th>
+                  <th scope="col">Created</th>
+                  <th scope="col">Rating</th>
+                  <th scope="col"></th>
+               </tr>
+            </thead>
+            <tbody>
+               <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td>*</td>
+                  <td>
+                     <a
+                        href=""
+                        style="
+                           cursor: pointer;
+                           text-decoration: none;
+                           color: black;
+                        "
+                     >
+                        <i class="ri-edit-box-line"></i>
+                     </a>
+                  </td>
+               </tr>
+            </tbody>
+         </table>
+         <!-- Navigation of the table -->
+         <nav class="row pt-2 m-0">
+            <!--Add Content button-->
+            <div class="col-8 d-flex justify-content-start align-items-center">
+               <button type="button">Add Item</button>
             </div>
 
-            <button type="button" id="addIngredientBtn">Add Ingredient</button>
-            <button type="submit">Create Recipe</button>
-        </form>
-    </div>
+            <!--displayRowPerPage -->
+            <div class="col-2 d-flex justify-content-center align-items-center">
+               <label for="rows">Rows per page </label>
+               <select
+                  name="rows"
+                  id="rows"
+                  class="border-0"
+                  style="outline: none; margin-left: 5px"
+               >
+                  <option value="5" selected>4</option>
+                  <option value="5">5</option>
+                  <option value="5">8</option>
+               </select>
+            </div>
 
-    <script src="script.js"></script>
-</body>
+            <!-- Pages -->
+            <div class="col-2">
+               <p class="m-0 d-flex justify-content-center align-items-center">
+                  1-3 of 3
+                  <i
+                     class="ri-arrow-drop-left-line fs-4 mx-2"
+                     style="cursor: pointer"
+                  ></i>
+                  <i
+                     class="ri-arrow-drop-right-line fs-4 mx-2"
+                     style="cursor: pointer"
+                  ></i>
+               </p>
+            </div>
+         </nav>
+      </div>
+
+      <!-- Pop up add Recipe -->
+      <div class="fluid-container popUpAddContent">
+         <div class="container bg-light">
+            <div class="row">
+               <div class="col-12">
+                  <div class="popUp">
+                     <div class="popUpHeader pt-3">
+                        <h3>Add Recipe</h3>
+                     </div>
+                     <div class="popUpBody">
+                        <form
+                           action=""
+                           method="post"
+                           enctype="multipart/form-data"
+                        >
+                           <!-- Name -->
+                           <div class="mb-3">
+                              <label for="name" class="form-label">Name</label>
+                              <input
+                                 type="text"
+                                 class="form-control"
+                                 id="name"
+                                 name="name"
+                                 required
+                              />
+                           </div>
+
+                           <!-- Description -->
+                           <div class="mb-3">
+                              <label for="description" class="form-label"
+                                 >Description</label
+                              >
+                              <textarea
+                                 class="form-control"
+                                 id="description"
+                                 name="description"
+                                 rows="3"
+                                 required
+                              ></textarea>
+                           </div>
+
+                           <!-- Image -->
+                           <div class="mb-3">
+                              <label for="url" class="form-label">URL</label>
+                              <input
+                                 type="text"
+                                 class="form-control"
+                                 id="url"
+                                 name="url"
+                                 required
+                              />
+                           </div>
+
+                           <!-- Ingredients -->
+                           <div class="mb-3" id="ingredientsContainer">
+                              <label class="mb-1">Ingredients</label>
+                              <div class="row mb-3">
+                                 <div class="col">
+                                    <input
+                                       type="text"
+                                       name="quantity"
+                                       class="form-control"
+                                       placeholder="Quantity"
+                                       aria-label="Quantity"
+                                    />
+                                 </div>
+                                 <div class="col position-relative">
+                                    <input
+                                       type="text"
+                                       name="ingredient"
+                                       id="searchIngredient"
+                                       class="form-control"
+                                       placeholder="Ingredient name"
+                                       aria-label="Ingredient name"
+                                       onclick="displayDropdown('dropDownSelectIngredients')"
+                                       oninput="searchItems( 'searchIngredient')"
+                                    />
+                                    <div
+                                       class="position-absolute bg-light w-100"
+                                       id="dropDownSelectIngredients"
+                                       style="display: none; z-index: 1000"
+                                    >
+                                       <div>
+                                          <!-- Dropdown content -->
+                                          <% ingredients.forEach(ingredient => {
+                                          %>
+                                          <div
+                                             class="form-input"
+                                             style="display: none"
+                                          >
+                                             <label
+                                                class="w-100 p-2"
+                                                for="<%= ingredient.name %>"
+                                                ><%= ingredient.name %></label
+                                             >
+                                             <input
+                                                type="checkbox"
+                                                id="<%= ingredient.name %>"
+                                                value="<%= ingredient.name %>"
+                                                onchange="selectItem(this.value, 'searchIngredient')"
+                                                hidden
+                                             />
+                                          </div>
+                                          <% }) %>
+                                          <!-- Add new ingredient link -->
+                                          <div
+                                             class="form-input form-input-new"
+                                          >
+                                             <a
+                                                href="#"
+                                                class="link-dark p-2 text-decoration-none"
+                                                style="display: block"
+                                                >+ Add new ingredient</a
+                                             >
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div
+                                    class="col-1 fs-4 remove-ingredient"
+                                    style="cursor: pointer; display: none"
+                                    onclick="removeIngredient(this)"
+                                 >
+                                    <i
+                                       class="ri-close-line"
+                                       aria-label="Remove ingredient"
+                                    ></i>
+                                 </div>
+                              </div>
+                              <div class="row mb-3">
+                                 <div
+                                    class="col px-3 add-new-ingredient"
+                                    style="cursor: pointer; color: blue"
+                                    onclick="addNewIngredient()"
+                                 >
+                                    + Add new ingredient
+                                 </div>
+                              </div>
+                           </div>
+
+                           <script>
+                              let i = 0;
+                              function addNewIngredient() {
+                                  i++;
+                                  const ingredientsContainer =
+                                      document.getElementById('ingredientsContainer');
+                                  const newRow = document.createElement('div');
+                                  newRow.classList.add('row', 'mb-3');
+                                  newRow.innerHTML = `
+                                  <div class="col">
+                                      <input type="text" name="quantity" class="form-control" placeholder="Quantity" aria-label="Quantity" />
+                                  </div>
+                                  <div class="col position-relative">
+                                      <input type="text" id="searchIngredient${i}" name="ingredient" class="form-control" placeholder="Ingredient name" aria-label="Ingredient name" onclick="displayDropdown('dropDownSelectIngredients${i}' )" oninput="searchItems('searchIngredient${i}' )" />
+                                      <div class="position-absolute bg-light w-100" id="dropDownSelectIngredients${i}"  style="display: none; z-index: 1000">
+                                          <div>
+                                              <!-- Dropdown content -->
+                                              <% ingredients.forEach(ingredient => { %>
+                                              <div class="form-input" style="display: none">
+                                                  <label class="w-100 p-2" for="<%= ingredient.name %>${i}"><%= ingredient.name %></label>
+                                                  <input type="checkbox" id="<%= ingredient.name %>${i}" value="<%= ingredient.name %>" onchange="selectItem(this.value, 'searchIngredient${i}' )" hidden />
+                                              </div>
+                                              <% }) %>
+                                              <!-- Add new ingredient link -->
+                                              <div class="form-input form-input-new">
+                                                  <a href="#" class="link-dark p-2 text-decoration-none" style="display: block">+ Add new ingredient</a>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="col-1 fs-4 remove-ingredient" style="cursor: pointer;">
+                                      <i class="ri-close-line" aria-label="Remove ingredient" onclick="removeIngredient(this)"></i>
+                                  </div>
+                              `;
+                          
+                                  const addNewIngredientButton =
+                                      ingredientsContainer.querySelector('.add-new-ingredient');
+                                  ingredientsContainer.insertBefore(
+                                      newRow,
+                                      addNewIngredientButton.parentElement
+                                  );
+                          
+                                  const removeIngredients =
+                                      document.querySelectorAll('.remove-ingredient');
+                                  if (removeIngredients.length > 1) {
+                                      removeIngredients.forEach((element) => {
+                                          element.style.display = 'block';
+                                      });
+                                  } else {
+                                      removeIngredients[0].style.display = 'none';
+                                  }
+                              }
+                          
+                              function removeIngredient(element) {
+                                  const row = element.closest('.row');
+                                  row.parentNode.removeChild(row);
+                          
+                                  const removeIngredients =
+                                      document.querySelectorAll('.remove-ingredient');
+                                  if (removeIngredients.length <= 1) {
+                                      removeIngredients.forEach((element) => {
+                                          element.style.display = 'none';
+                                      });
+                                  }
+                              }
+                          </script>
+                          
+
+                           <!-- Cuisine -->
+                           <div class="position-relative mb-3">
+                              <label
+                                 class="position-relative w-100"
+                                 for="searchCuisine"
+                                 >Cuisine</label
+                              >
+                              <input
+                                 type="text"
+                                 class="form-control"
+                                 id="searchCuisine"
+                                 placeholder="Search for existing cuisine"
+                                 onclick="displayDropdown('dropDownSelectCuisine')"
+                                 oninput="searchItems('searchCuisine')"
+                              />
+                              <div
+                                 class="position-absolute bg-light w-100"
+                                 id="dropDownSelectCuisine"
+                                 style="display: none; z-index: 1000"
+                              >
+                                 <div class="bg-success">
+                                    <!-- Dropdown content -->
+                                    <% cuisines.forEach(cuisine => { %>
+                                    <div
+                                       class="form-input"
+                                       style="display: none"
+                                    >
+                                       <label
+                                          class="w-100 p-2"
+                                          for="<%= cuisine.name %>"
+                                          ><%= cuisine.name %></label
+                                       >
+                                       <input
+                                          type="checkbox"
+                                          id="<%= cuisine.name %>"
+                                          value="<%= cuisine.name %>"
+                                          onchange="selectItem(this.value, 'searchCuisine')"
+                                          hidden
+                                       />
+                                    </div>
+                                    <% }) %>
+                                    <!-- Add new cuisine link -->
+                                    <div class="form-input form-input-new">
+                                       <a
+                                          href="#"
+                                          class="link-dark p-2 text-decoration-none"
+                                          style="display: block"
+                                          >+ Add new cuisine</a
+                                       >
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+
+                           <script>
+                              function displayDropdown(dropdownId) {
+                                 var dropdown =
+                                    document.getElementById(dropdownId);
+                                 dropdown.style.display =
+                                    dropdown.style.display === 'none'
+                                       ? 'block'
+                                       : 'none';
+                              }
+                              function searchItems(inputId) {
+                                 var input = document
+                                    .getElementById(inputId)
+                                    .value.toLowerCase();
+                                 var parentDiv =
+                                    document.getElementById(inputId).parentNode;
+                                 var items =
+                                    parentDiv.querySelectorAll(
+                                       '.form-input label'
+                                    );
+
+                                 for (var i = 0; i < items.length; i++) {
+                                    var itemName =
+                                       items[i].innerText.toLowerCase();
+
+                                    if (
+                                       !items[i].parentNode.classList.contains(
+                                          'form-input-new'
+                                       )
+                                    ) {
+                                       items[i].parentNode.style.display =
+                                          itemName.includes(input)
+                                             ? 'block'
+                                             : 'none';
+                                    }
+                                 }
+                              }
+
+                              function selectItem(itemName, inputId) {
+                                 document.getElementById(inputId).value = itemName;
+                                 console.log(itemName);
+                                 console.log(inputId);
+                              }
+
+                           </script>
+
+                           <!-- Add image -->
+                           <div class="mb-3">
+                              <label for="image" class="form-label"
+                                 >Image</label
+                              >
+                              <input
+                                 type="file"
+                                 class="form-control"
+                                 id="image"
+                                 name="image"
+                                 required
+                              />
+                           </div>
+
+                           <button type="submit" class="btn btn-primary">
+                              Submit
+                           </button>
+                           <button type="button" class="btn btn-danger">
+                              Cancel
+                           </button>
+                        </form>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+
+      <!-- Pop up add ingredient -->
+      <div class="fluid-container popUpAddContent">
+         <div class="container bg-light">
+            <div class="row">
+               <div class="col-12">
+                  <div class="popUp">
+                     <div class="popUpHeader pt-3">
+                        <h3>Add Ingredient</h3>
+                     </div>
+                     <div class="popUpBody">
+                        <form
+                           action=""
+                           method="post"
+                           enctype="multipart/form-data"
+                        >
+                           <!-- Name -->
+                           <div class="mb-3">
+                              <label for="name" class="form-label">Name</label>
+                              <input
+                                 type="text"
+                                 class="form-control"
+                                 id="name"
+                                 name="name"
+                                 required
+                              />
+                           </div>
+
+                           <!-- Category -->
+                           <div class="mb-3">
+                              <label for="category" class="form-label"
+                                 >category</label
+                              >
+                              <input
+                                 type="text"
+                                 class="form-control"
+                                 id="category"
+                                 name="category"
+                                 required
+                              />
+                           </div>
+
+
+                           <button type="submit" class="btn btn-primary">
+                              Submit
+                           </button>
+                           <button type="button" class="btn btn-danger">
+                              Cancel
+                           </button>
+                        </form>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+
+
+      <!-- Pop up add Cuisine -->
+      <div class="fluid-container popUpAddContent">
+         <div class="container bg-light">
+            <div class="row">
+               <div class="col-12">
+                  <div class="popUp">
+                     <div class="popUpHeader pt-3">
+                        <h3>Add Cuisine</h3>
+                     </div>
+                     <div class="popUpBody">
+                        <form
+                           action=""
+                           method="post"
+                           enctype="multipart/form-data"
+                        >
+                           <!-- Name -->
+                           <div class="mb-3">
+                              <label for="name" class="form-label">Name</label>
+                              <input
+                                 type="text"
+                                 class="form-control"
+                                 id="name"
+                                 name="name"
+                                 required
+                              />
+                           </div>
+
+
+                           <button type="submit" class="btn btn-primary">
+                              Submit
+                           </button>
+                           <button type="button" class="btn btn-danger">
+                              Cancel
+                           </button>
+                        </form>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+
+
+
+   </body>
 </html>
