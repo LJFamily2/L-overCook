@@ -21,7 +21,7 @@ exports.getAllRecipes = async (req, res) => {
       const ingredients = await Ingredient.find();
 
       // res.status(200).json(recipes);
-      res.render('admins/recipes', { layout: false, recipes, cuisines, ingredients });
+      // res.render('admins/recipes', { layout: false, recipes, cuisines, ingredients });
       return recipes;
    } catch (error) {
       // res.status(500).json({ error: error.message });
