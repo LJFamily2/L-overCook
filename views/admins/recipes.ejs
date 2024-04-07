@@ -124,14 +124,14 @@
          </nav>
       </div>
 
-      <!-- Pop up add content -->
+      <!-- Pop up add Recipe -->
       <div class="fluid-container popUpAddContent">
          <div class="container bg-light">
             <div class="row">
                <div class="col-12">
                   <div class="popUp">
                      <div class="popUpHeader pt-3">
-                        <h3>Add Item</h3>
+                        <h3>Add Recipe</h3>
                      </div>
                      <div class="popUpBody">
                         <form
@@ -139,6 +139,7 @@
                            method="post"
                            enctype="multipart/form-data"
                         >
+                           <!-- Name -->
                            <div class="mb-3">
                               <label for="name" class="form-label">Name</label>
                               <input
@@ -150,6 +151,7 @@
                               />
                            </div>
 
+                           <!-- Description -->
                            <div class="mb-3">
                               <label for="description" class="form-label"
                                  >Description</label
@@ -162,6 +164,8 @@
                                  required
                               ></textarea>
                            </div>
+
+                           <!-- Image -->
                            <div class="mb-3">
                               <label for="url" class="form-label">URL</label>
                               <input
@@ -173,6 +177,7 @@
                               />
                            </div>
 
+                           <!-- Ingredients -->
                            <div class="mb-3" id="ingredientsContainer">
                               <label class="mb-1">Ingredients</label>
                               <div class="row mb-3">
@@ -185,14 +190,57 @@
                                        aria-label="Quantity"
                                     />
                                  </div>
-                                 <div class="col">
+                                 <div class="col position-relative">
                                     <input
                                        type="text"
                                        name="ingredient"
+                                       id="searchIngredient"
                                        class="form-control"
                                        placeholder="Ingredient name"
                                        aria-label="Ingredient name"
+                                       onclick="displayDropdown('dropDownSelectIngredients')"
+                                       oninput="searchItems( 'searchIngredient')"
                                     />
+                                    <div
+                                       class="position-absolute bg-light w-100"
+                                       id="dropDownSelectIngredients"
+                                       style="display: none; z-index: 1000"
+                                    >
+                                       <div>
+                                          <!-- Dropdown content -->
+                                          <% ingredients.forEach(ingredient => {
+                                          %>
+                                          <div
+                                             class="form-input"
+                                             style="display: none"
+                                          >
+                                             <label
+                                                class="w-100 p-2"
+                                                for="<%= ingredient.name %>"
+                                                ><%= ingredient.name %></label
+                                             >
+                                             <input
+                                                type="checkbox"
+                                                id="<%= ingredient.name %>"
+                                                value="<%= ingredient.name %>"
+                                                onchange="selectItem(this.value, 'searchIngredient')"
+                                                hidden
+                                             />
+                                          </div>
+                                          <% }) %>
+                                          <!-- Add new ingredient link -->
+                                          <div
+                                             class="form-input form-input-new"
+                                          >
+                                             <a
+                                                href="#"
+                                                class="link-dark p-2 text-decoration-none"
+                                                style="display: block"
+                                                >+ Add new ingredient</a
+                                             >
+                                          </div>
+                                       </div>
+                                    </div>
                                  </div>
                                  <div
                                     class="col-1 fs-4 remove-ingredient"
@@ -217,75 +265,74 @@
                            </div>
 
                            <script>
+                              let i = 0;
                               function addNewIngredient() {
-                                 // Get the ingredients container
-                                 const ingredientsContainer =
-                                    document.getElementById(
-                                       'ingredientsContainer'
-                                    );
-
-                                 // Create a new row for the ingredient
-                                 const newRow = document.createElement('div');
-                                 newRow.classList.add('row', 'mb-3');
-                                 newRow.innerHTML = `
-                                 <div class="col">
-                                    <input type="text" name="quantity" class="form-control" placeholder="Quantity" aria-label="Quantity" />
-                                 </div>
-                                 <div class="col">
-                                    <input type="text" name="ingredient" class="form-control" placeholder="Ingredient name" aria-label="Ingredient name" />
-                                 </div>
-                                 <div class="col-1 fs-4 remove-ingredient" style="cursor: pointer;">
-                                    <i class="ri-close-line" aria-label="Remove ingredient" onclick="removeIngredient(this)"></i>
-                                 </div>
-                           `;
-
-                                 // Find the last input field
-
-                                 // Insert the new row before the "Add new ingredient" button
-                                 const addNewIngredientButton =
-                                    ingredientsContainer.querySelector(
-                                       '.add-new-ingredient'
-                                    );
-                                 ingredientsContainer.insertBefore(
-                                    newRow,
-                                    addNewIngredientButton.parentElement
-                                 );
-
-                                 // Show the remove ingredient icon if there are more than one ingredient row
-                                 const removeIngredients =
-                                    document.querySelectorAll(
-                                       '.remove-ingredient'
-                                    );
-                                 if (removeIngredients.length > 1) {
-                                    removeIngredients.forEach((element) => {
-                                       element.style.display = 'block';
-                                    });
-                                 } else {
-                                    // If there's only one ingredient row, hide the remove icon
-                                    removeIngredients[0].style.display = 'none';
-                                 }
+                                  i++;
+                                  const ingredientsContainer =
+                                      document.getElementById('ingredientsContainer');
+                                  const newRow = document.createElement('div');
+                                  newRow.classList.add('row', 'mb-3');
+                                  newRow.innerHTML = `
+                                  <div class="col">
+                                      <input type="text" name="quantity" class="form-control" placeholder="Quantity" aria-label="Quantity" />
+                                  </div>
+                                  <div class="col position-relative">
+                                      <input type="text" id="searchIngredient${i}" name="ingredient" class="form-control" placeholder="Ingredient name" aria-label="Ingredient name" onclick="displayDropdown('dropDownSelectIngredients${i}' )" oninput="searchItems('searchIngredient${i}' )" />
+                                      <div class="position-absolute bg-light w-100" id="dropDownSelectIngredients${i}"  style="display: none; z-index: 1000">
+                                          <div>
+                                              <!-- Dropdown content -->
+                                              <% ingredients.forEach(ingredient => { %>
+                                              <div class="form-input" style="display: none">
+                                                  <label class="w-100 p-2" for="<%= ingredient.name %>${i}"><%= ingredient.name %></label>
+                                                  <input type="checkbox" id="<%= ingredient.name %>${i}" value="<%= ingredient.name %>" onchange="selectItem(this.value, 'searchIngredient${i}' )" hidden />
+                                              </div>
+                                              <% }) %>
+                                              <!-- Add new ingredient link -->
+                                              <div class="form-input form-input-new">
+                                                  <a href="#" class="link-dark p-2 text-decoration-none" style="display: block">+ Add new ingredient</a>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="col-1 fs-4 remove-ingredient" style="cursor: pointer;">
+                                      <i class="ri-close-line" aria-label="Remove ingredient" onclick="removeIngredient(this)"></i>
+                                  </div>
+                              `;
+                          
+                                  const addNewIngredientButton =
+                                      ingredientsContainer.querySelector('.add-new-ingredient');
+                                  ingredientsContainer.insertBefore(
+                                      newRow,
+                                      addNewIngredientButton.parentElement
+                                  );
+                          
+                                  const removeIngredients =
+                                      document.querySelectorAll('.remove-ingredient');
+                                  if (removeIngredients.length > 1) {
+                                      removeIngredients.forEach((element) => {
+                                          element.style.display = 'block';
+                                      });
+                                  } else {
+                                      removeIngredients[0].style.display = 'none';
+                                  }
                               }
-
+                          
                               function removeIngredient(element) {
-                                 // Get the parent row of the clicked remove ingredient icon
-                                 const row = element.closest('.row');
-
-                                 // Remove the row from the ingredients container
-                                 row.parentNode.removeChild(row);
-
-                                 // Show the remove ingredient icon if there are more than one ingredient row
-                                 const removeIngredients =
-                                    document.querySelectorAll(
-                                       '.remove-ingredient'
-                                    );
-                                 if (removeIngredients.length <= 1) {
-                                    removeIngredients.forEach((element) => {
-                                       element.style.display = 'none';
-                                    });
-                                 }
+                                  const row = element.closest('.row');
+                                  row.parentNode.removeChild(row);
+                          
+                                  const removeIngredients =
+                                      document.querySelectorAll('.remove-ingredient');
+                                  if (removeIngredients.length <= 1) {
+                                      removeIngredients.forEach((element) => {
+                                          element.style.display = 'none';
+                                      });
+                                  }
                               }
-                           </script>
+                          </script>
+                          
 
+                           <!-- Cuisine -->
                            <div class="position-relative mb-3">
                               <label
                                  class="position-relative w-100"
@@ -297,8 +344,8 @@
                                  class="form-control"
                                  id="searchCuisine"
                                  placeholder="Search for existing cuisine"
-                                 onclick="displayCuisineDropdown('dropDownSelectCuisine')"
-                                 oninput="searchItems()"
+                                 onclick="displayDropdown('dropDownSelectCuisine')"
+                                 oninput="searchItems('searchCuisine')"
                               />
                               <div
                                  class="position-absolute bg-light w-100"
@@ -308,7 +355,6 @@
                                  <div class="bg-success">
                                     <!-- Dropdown content -->
                                     <% cuisines.forEach(cuisine => { %>
-
                                     <div
                                        class="form-input"
                                        style="display: none"
@@ -322,11 +368,10 @@
                                           type="checkbox"
                                           id="<%= cuisine.name %>"
                                           value="<%= cuisine.name %>"
-                                          onchange="selectCuisine(this.value)"
+                                          onchange="selectItem(this.value, 'searchCuisine')"
                                           hidden
                                        />
                                     </div>
-
                                     <% }) %>
                                     <!-- Add new cuisine link -->
                                     <div class="form-input form-input-new">
@@ -340,54 +385,53 @@
                                  </div>
                               </div>
                            </div>
+
                            <script>
-                              function displayCuisineDropdown(id) {
-                                 var dropdown = document.getElementById(id);
+                              function displayDropdown(dropdownId) {
+                                 var dropdown =
+                                    document.getElementById(dropdownId);
                                  dropdown.style.display =
                                     dropdown.style.display === 'none'
                                        ? 'block'
                                        : 'none';
                               }
-
-                              function searchItems() {
+                              function searchItems(inputId) {
                                  var input = document
-                                    .getElementById('searchCuisine')
+                                    .getElementById(inputId)
                                     .value.toLowerCase();
-                                 var cuisines =
-                                    document.querySelectorAll(
+                                 var parentDiv =
+                                    document.getElementById(inputId).parentNode;
+                                 var items =
+                                    parentDiv.querySelectorAll(
                                        '.form-input label'
-                                    ); // Select only label elements inside form-input
+                                    );
 
-                                 for (var i = 0; i < cuisines.length; i++) {
-                                    var cuisineName =
-                                       cuisines[i].innerText.toLowerCase();
-                                    var parentDiv = cuisines[i].parentNode; // Get the parent div of the label
+                                 for (var i = 0; i < items.length; i++) {
+                                    var itemName =
+                                       items[i].innerText.toLowerCase();
 
-                                    // Check if the parent div is not the anchor tag for adding new cuisine
                                     if (
-                                       !parentDiv.classList.contains(
+                                       !items[i].parentNode.classList.contains(
                                           'form-input-new'
                                        )
                                     ) {
-                                       if (cuisineName.includes(input)) {
-                                          parentDiv.style.display = 'block';
-                                       } else {
-                                          parentDiv.style.display = 'none';
-                                       }
+                                       items[i].parentNode.style.display =
+                                          itemName.includes(input)
+                                             ? 'block'
+                                             : 'none';
                                     }
                                  }
                               }
 
-                              function selectCuisine(cuisineName) {
-                                 document.getElementById(
-                                    'searchCuisine'
-                                 ).value = cuisineName;
-                                 displayCuisineDropdown(
-                                    'dropDownSelectCuisine'
-                                 );
+                              function selectItem(itemName, inputId) {
+                                 document.getElementById(inputId).value = itemName;
+                                 console.log(itemName);
+                                 console.log(inputId);
                               }
+
                            </script>
 
+                           <!-- Add image -->
                            <div class="mb-3">
                               <label for="image" class="form-label"
                                  >Image</label
@@ -414,5 +458,107 @@
             </div>
          </div>
       </div>
+
+      <!-- Pop up add ingredient -->
+      <div class="fluid-container popUpAddContent">
+         <div class="container bg-light">
+            <div class="row">
+               <div class="col-12">
+                  <div class="popUp">
+                     <div class="popUpHeader pt-3">
+                        <h3>Add Ingredient</h3>
+                     </div>
+                     <div class="popUpBody">
+                        <form
+                           action=""
+                           method="post"
+                           enctype="multipart/form-data"
+                        >
+                           <!-- Name -->
+                           <div class="mb-3">
+                              <label for="name" class="form-label">Name</label>
+                              <input
+                                 type="text"
+                                 class="form-control"
+                                 id="name"
+                                 name="name"
+                                 required
+                              />
+                           </div>
+
+                           <!-- Category -->
+                           <div class="mb-3">
+                              <label for="category" class="form-label"
+                                 >category</label
+                              >
+                              <input
+                                 type="text"
+                                 class="form-control"
+                                 id="category"
+                                 name="category"
+                                 required
+                              />
+                           </div>
+
+
+                           <button type="submit" class="btn btn-primary">
+                              Submit
+                           </button>
+                           <button type="button" class="btn btn-danger">
+                              Cancel
+                           </button>
+                        </form>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+
+
+      <!-- Pop up add Cuisine -->
+      <div class="fluid-container popUpAddContent">
+         <div class="container bg-light">
+            <div class="row">
+               <div class="col-12">
+                  <div class="popUp">
+                     <div class="popUpHeader pt-3">
+                        <h3>Add Cuisine</h3>
+                     </div>
+                     <div class="popUpBody">
+                        <form
+                           action=""
+                           method="post"
+                           enctype="multipart/form-data"
+                        >
+                           <!-- Name -->
+                           <div class="mb-3">
+                              <label for="name" class="form-label">Name</label>
+                              <input
+                                 type="text"
+                                 class="form-control"
+                                 id="name"
+                                 name="name"
+                                 required
+                              />
+                           </div>
+
+
+                           <button type="submit" class="btn btn-primary">
+                              Submit
+                           </button>
+                           <button type="button" class="btn btn-danger">
+                              Cancel
+                           </button>
+                        </form>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+
+
+
    </body>
 </html>
