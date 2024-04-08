@@ -8,8 +8,8 @@ const cuisine = require('./cuisineRoute');
 const ingredient = require('./ingredientRoute');
 const recipe = require('./recipeRoute');
 const searchHistory = require('./clients/searchHistoryRoute');
-const favoriteRecipe = require('./clients/favoriteRecipeRoute')
-
+const favoriteRecipe = require('./clients/favoriteRecipeRoute');
+const userManagement = require('./admin/userManagementRoute');
 
 const routes = [
     {path: '/', route: home},
@@ -21,7 +21,8 @@ const routes = [
     {path: '/ingredient', route: ingredient},
     {path: '/recipe', route: recipe},
     {path: '/searchHistory', route: searchHistory},
-    {path: '/favoriteRecipe', route: favoriteRecipe}
+    {path: '/favoriteRecipe', route: favoriteRecipe},
+    {path: '/userManagement', route: userManagement}
 ];
 
 module.exports = routes;
