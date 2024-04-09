@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const cuisineController = require('../../controllers/cuisineController');
+const cuisineController = require('../../controllers/admin/cuisineController');
 
 // router.get('/', cuisineController.getAllCuisines);
 router.post('/new', cuisineController.createCuisine);

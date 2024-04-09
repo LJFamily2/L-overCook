@@ -1,8 +1,8 @@
-const mongoose = require('../config/database');
-const Recipe = require('../models/Recipe');
-const Ingredient = require('../models/Ingredient');
-const Cuisine = require('../models/Cuisine');
-const ingredientController = require('../controllers/ingredientController');
+const mongoose = require('../../middlewares/database');
+const Recipe = require('../../models/Recipe');
+const Ingredient = require('../../models/Ingredient');
+const Cuisine = require('../../models/Cuisine');
+const ingredientController = require('./ingredientController');
 
 // Get all recipes
 exports.getAllRecipes = async (req, res) => {
