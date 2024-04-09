@@ -4,7 +4,7 @@ const User = require("../../models/User");
 
 router.get("/", async(req,res) =>{
     const users = await User.find({});
-    res.render("admins/userManagementPage", {layout: false, users});
+    res.render("admin/userManagementPage", {layout: './layouts/admin/defaultLayout', users, heading: "User Management"});
 });
 
 module.exports = router;
