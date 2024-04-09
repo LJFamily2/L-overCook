@@ -28,10 +28,23 @@ exports.getAllRecipes = async (req, res) => {
 // Get all recipes
 exports.getRecipePage = async (req, res) => {
    try {
-      const recipes = this.getAllRecipes();
+      const recipes = await this.getAllRecipes();
       const cuisines = await Cuisine.find();
       const ingredients = await Ingredient.find();
-      res.render('admins/recipes', { layout: false, recipes, cuisines, ingredients });
+      res.render('admin/recipes', { layout: false, recipes, cuisines, ingredients });
+   } catch (error) {
+      res.status(500).json({ error: error.message });
+      throw new Error(error.message);
+   }
+};
+
+// Get all recipes
+exports.getCreateRecipePage = async (req, res) => {
+   try {
+      const recipes = await this.getAllRecipes();
+      const cuisines = await Cuisine.find();
+      const ingredients = await Ingredient.find();
+      res.render('admin/createRecipe', { layout: false, recipes, cuisines, ingredients });
    } catch (error) {
       res.status(500).json({ error: error.message });
       throw new Error(error.message);
