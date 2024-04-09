@@ -1,0 +1,26 @@
+<div class="container-fluid py-3 px-3">
+   <div class="row align-items-center">
+      <nav aria-label="breadcrumb" class="col-8">
+         <ol class="breadcrumb mb-0">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <% if(heading){ %>
+
+            <li class="breadcrumb-item active" aria-current="page">
+               <%= heading %>
+            </li>
+            <% } %>
+         </ol>
+      </nav>
+      <div class="col-4 searchBar w-25 px-1 border-2">
+         <div class="input-group">
+            <span class="input-group-text"><i class="ri-search-line"></i></span>
+            <input
+               type="text"
+               class="form-control"
+               id="search"
+               placeholder="Tìm kiếm"
+            />
+         </div>
+      </div>
+   </div>
+</div>
