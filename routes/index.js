@@ -18,7 +18,7 @@ const routes = [
     {path: '/account', route: profileRoute},
     {path: '/category', route: category},
     {path: '/cuisine', route: cuisine},
-    {path: '/ingredient', route: ingredient},
+    {path: '/ingredientManagement', route: ingredient},
     {path: '/recipe', route: recipe},
     {path: '/searchHistory', route: searchHistory},
     {path: '/favoriteRecipe', route: favoriteRecipe},

@@ -19,6 +19,17 @@ exports.getAllIngredients = async (req,res) => {
     }
 };
 
+// Get ingredient page
+exports.getIngredientPage = async (req,res) => {
+    try{
+        const ingredients = await this.getAllIngredients();
+        res.render('admin/ingredients', {ingredients, layout: "./layouts/admin/defaultLayout"})
+    }catch(error){
+        throw new Error(error.message);
+    }
+};
+
+
 // Helper function to create ingredient without returning status
 exports.createIngredientLogic = async(name, categoryName) => {
     try {
@@ -62,10 +73,10 @@ exports.createIngredient = async (req, res) => {
     try{
         const newIngredient = await this.createIngredientLogic(name, categoryName);
         if(newIngredient){
-            res.status(201).json({message: 'Ingredient added successfully', newIngredient});
+            res.redirect('/ingredientManagement?success=true'); // Replace '/list-ingredients' with the actual URL of the page where the ingredients are listed
         }
     }catch(error){
-        res.status(500).json({error: error.message});
+        res.redirect('/ingredientManagement?error=true&message=' + encodeURIComponent(error.message)); // Replace '/list-ingredients' with the actual URL of the page where the ingredients are listed
     }
 };
 

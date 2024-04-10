@@ -31,7 +31,7 @@ exports.getRecipePage = async (req, res) => {
       const recipes = await this.getAllRecipes();
       const cuisines = await Cuisine.find();
       const ingredients = await Ingredient.find();
-      res.render('admin/recipes', { layout: false, recipes, cuisines, ingredients });
+      res.render('admin/recipes', { layout: "./layouts/admin/defaultLayout", recipes, cuisines, ingredients });
    } catch (error) {
       res.status(500).json({ error: error.message });
       throw new Error(error.message);
@@ -44,7 +44,7 @@ exports.getCreateRecipePage = async (req, res) => {
       const recipes = await this.getAllRecipes();
       const cuisines = await Cuisine.find();
       const ingredients = await Ingredient.find();
-      res.render('admin/createRecipe', { layout: false, recipes, cuisines, ingredients });
+      res.render('admin/createRecipe', { layout: "./layouts/admin/defaultLayout", recipes, cuisines, ingredients });
    } catch (error) {
       res.status(500).json({ error: error.message });
       throw new Error(error.message);
