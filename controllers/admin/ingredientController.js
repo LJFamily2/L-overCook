@@ -1,8 +1,8 @@
-const mongoose = require('../config/database');
-const Ingredient = require('../models/Ingredient');
-const Recipe = require('../models/Recipe');
-const Category = require('../models/Category');
-const categoryController = require('../controllers/categoryController');
+const mongoose = require('../../middlewares/database');
+const Ingredient = require('../../models/Ingredient');
+const Recipe = require('../../models/Recipe');
+const Category = require('../../models/Category');
+const categoryController = require('./categoryController');
 
 // Get all ingredients
 exports.getAllIngredients = async (req,res) => {
@@ -18,6 +18,17 @@ exports.getAllIngredients = async (req,res) => {
         throw new Error(error.message);
     }
 };
+
+// Get ingredient page
+exports.getIngredientPage = async (req,res) => {
+    try{
+        const ingredients = await this.getAllIngredients();
+        res.render('admin/ingredients', {ingredients, layout: "./layouts/admin/defaultLayout"})
+    }catch(error){
+        throw new Error(error.message);
+    }
+};
+
 
 // Helper function to create ingredient without returning status
 exports.createIngredientLogic = async(name, categoryName) => {
@@ -62,10 +73,10 @@ exports.createIngredient = async (req, res) => {
     try{
         const newIngredient = await this.createIngredientLogic(name, categoryName);
         if(newIngredient){
-            res.status(201).json({message: 'Ingredient added successfully', newIngredient});
+            res.redirect('/ingredientManagement?success=true');
         }
     }catch(error){
-        res.status(500).json({error: error.message});
+        res.redirect('/ingredientManagement?error=true&message=' + encodeURIComponent(error.message));
     }
 };
 
