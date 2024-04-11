@@ -1,6 +1,6 @@
-const mongoose = require('../config/database');
-const Cuisine = require('../models/Cuisine');
-const Recipe = require('../models/Recipe');
+const mongoose = require('../../middlewares/database');
+const Cuisine = require('../../models/Cuisine');
+const Recipe = require('../../models/Recipe');
 
 
 // Get all cuisines

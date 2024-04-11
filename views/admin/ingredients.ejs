@@ -1,0 +1,119 @@
+<div class="container m-5">
+  <h2 class="mb-5">Ingredient Management</h2>
+  <hr />
+  <!-- breadcrumb -->
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="#">Home</a></li>
+      <li class="breadcrumb-item active" aria-current="page">
+        Ingredient Management
+      </li>
+    </ol>
+  </nav>
+  <!-- HTML for displaying alerts -->
+  <div id="alertContainer"></div>
+
+  <table class="table mt-3 text-center">
+    <thead>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Name</th>
+        <th scope="col">Category</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% ingredients.forEach(ingredient => { %>
+      <tr>
+        <td><%= ingredient.id %></td>
+        <td><%= ingredient.name %></td>
+        <td><%= ingredient.category.name %></td>
+        <td>
+          <a
+            href=""
+            style="cursor: pointer; text-decoration: none; color: black"
+          >
+            <i class="ri-edit-box-line"></i>
+          </a>
+        </td>
+      </tr>
+
+      <% }) %>
+    </tbody>
+  </table>
+
+  <!-- Button trigger modal -->
+  <button
+    type="button"
+    class="btn btn-primary"
+    data-bs-toggle="modal"
+    data-bs-target="#ingredientModal"
+  >
+    Add item
+  </button>
+
+  <!-- Modal -->
+  <div
+    class="modal fade"
+    id="ingredientModal"
+    tabindex="-1"
+    aria-labelledby="ingredientModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="ingredientModalLabel">
+            Add new ingredient
+          </h1>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <form
+          id="ingredientForm"
+          action="/ingredientManagement/new"
+          method="post"
+        >
+          <div class="modal-body">
+            <div class="mb-3">
+              <label for="ingredientName" class="form-label"
+                >Ingredient Name</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="ingredientName"
+                name="name"
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <label for="categoryName" class="form-label">Category Name</label>
+              <input
+                type="text"
+                class="form-control"
+                id="categoryName"
+                name="categoryName"
+                required
+              />
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">Save changes</button>
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
