@@ -8,9 +8,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const alertContainer = document.getElementById('alertContainer');
 
     if (successMessage === 'true') {
-          showAlert('success', 'Ingredient successfully added!');
+          showAlert('success', 'Item successfully added!');
     } else if (errorMessage === 'true' && message) {
-          showAlert('danger', 'Failed to add ingredient: ' + decodeURIComponent(message));
+          showAlert('danger', 'Failed to add item: ' + decodeURIComponent(message));
     }
 
     function showAlert(type, text) {

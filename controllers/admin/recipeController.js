@@ -53,7 +53,7 @@ exports.createRecipeLogic = async (
       // Check if recipe existed
       const existingRecipe = await Recipe.findOne({ name });
       if (existingRecipe) {
-         throw new Error('Ingredient already existed.');
+         throw new Error('Recipe already existed.');
       }
 
       // Map ingredient
