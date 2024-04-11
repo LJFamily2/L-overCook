@@ -1,0 +1,298 @@
+<div class="container-fluid m-5">
+  <!-- Headline -->
+  <h2 class="mb-5">Recipe Management</h2>
+  <hr />
+  <!-- breadcrumb -->
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="#">Home</a></li>
+      <li class="breadcrumb-item active" aria-current="page">
+        Recipe Management
+      </li>
+    </ol>
+  </nav>
+
+  <!-- Table display information -->
+  <div class="table-container">
+    <table class="table table-hover mt-3 text-center">
+      <thead>
+        <tr>
+          <th scope="col">Image</th>
+          <th scope="col">ID</th>
+          <th scope="col">Name</th>
+          <th scope="col">Description</th>
+          <th scope="col">Ingredients</th>
+          <th scope="col">Cuisine</th>
+          <th scope="col">Time</th>
+          <th scope="col">URL</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% recipes.forEach(recipe => { %>
+        <tr>
+          <td>
+            <img
+              src="/images/<%= recipe.image %>"
+              alt="<%= recipe.image %>"
+              width="100"
+            />
+          </td>
+          <td><%= recipe.id %></td>
+          <td><%= recipe.name %></td>
+          <td><%= recipe.description %></td>
+          <td>
+            <% recipe.ingredients.forEach(ingredient=> {%>
+            <p>
+              <%= ingredient.ingredient.name %> (<%= ingredient.quantity %>)
+            </p>
+            <% })%>
+          </td>
+          <td><%= recipe.cuisine.name %></td>
+          <td><%= recipe.time %></td>
+          <td><%= recipe.url %></td>
+          <td>
+            <a
+              href=""
+              style="cursor: pointer; text-decoration: none; color: black"
+            >
+              <i class="ri-edit-box-line"></i>
+            </a>
+          </td>
+        </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+  <!-- Button trigger modal -->
+  <button
+    type="button"
+    class="btn btn-primary"
+    data-bs-toggle="modal"
+    data-bs-target="#recipeModal"
+  >
+    Add item
+  </button>
+  <!-- Modal -->
+  <div
+    class="modal fade"
+    id="recipeModal"
+    tabindex="-1"
+    aria-labelledby="recipeModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered" style="max-width: 40%">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="recipeModalLabel">Add New Recipe</h1>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <form id="recipeForm" action="/recipeManagement/new" method="post">
+          <div class="modal-body">
+            <div class="mb-3">
+              <label for="recipeName" class="form-label">Recipe Name</label>
+              <input
+                type="text"
+                class="form-control"
+                id="recipeName"
+                name="name"
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <label for="recipeDescription" class="form-label"
+                >Description</label
+              >
+              <input
+                class="form-control"
+                id="recipeDescription"
+                name="description"
+              ></input>
+            </div>
+                        
+            <div class="mb-3" id="ingredientsContainer">
+              <label class="mb-1">Ingredients</label>
+              <div class="row mb-3">
+                <div class="col position-relative">
+                    <input type="text" name="ingredient" id="searchIngredient" class="form-control" placeholder="Ingredient name" aria-label="Ingredient name" onclick="displayDropdown('dropDownSelectIngredients')" oninput="searchItems('searchIngredient')"/>
+                    <div class="position-absolute bg-light w-100" id="dropDownSelectIngredients" style="display: none; z-index: 1000">
+                        <div>
+                            <!-- Dropdown content -->
+                            <% ingredients.forEach(ingredient => { %>
+                            <div class="form-input" style="display: none">
+                                <label class="w-100 p-2" for="<%= ingredient.name %>"><%= ingredient.name %></label>
+                                <input type="checkbox" id="<%= ingredient.name %>" value="<%= ingredient.name %>" onchange="selectItem(this.value, 'searchIngredient')" hidden />
+                            </div>
+                            <% }) %>
+                            <!-- Add new ingredient link -->
+                            <div class="form-input form-input-new">
+                                <a href="#" class="link-dark p-2 text-decoration-none" style="display: block">+ Add new ingredient</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <input type="text" name="quantity" class="form-control" placeholder="Quantity" aria-label="Quantity"/>
+                </div>
+                <div class="col-1 fs-4 remove-ingredient" style="cursor: pointer; display: none" onclick="removeIngredient(this)">
+                    <i class="ri-close-line" aria-label="Remove ingredient"></i>
+                </div>
+              </div>
+              <div class="row mb-3">
+                  <div class="col px-3 add-new-ingredient" style="cursor: pointer; color: blue" onclick="addNewIngredient()">+ Add ingredient</div>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="recipeCuisine" class="form-label">Cuisine</label>
+              <select class="form-select" id="cuisine" name="cuisine">
+                <% cuisines.forEach(function(cuisine) { %>
+                <option value="<%= cuisine._id%>"><%= cuisine.name %></option>
+                <% }) %>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="recipeImage" class="form-label">Image</label>
+              <input
+                type="text"
+                class="form-control"
+                id="recipeImage"
+                name="image"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="recipeTime" class="form-label">Time</label>
+              <input
+                type="text"
+                class="form-control"
+                id="recipeTime"
+                name="time"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="recipeUrl" class="form-label">URL</label>
+              <input
+                type="text"
+                class="form-control"
+                id="recipeUrl"
+                name="url"
+              />
+            </div>
+          </div>
+
+
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">Save Recipe</button>
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  let i = 0;
+  function addNewIngredient() {
+      i++;
+      const ingredientsContainer = document.getElementById('ingredientsContainer');
+      const newRow = document.createElement('div');
+      newRow.classList.add('row', 'mb-3');
+      newRow.innerHTML = `
+      <div class="col position-relative">
+          <input type="text" id="searchIngredient${i}" name="ingredient" class="form-control" placeholder="Ingredient name" aria-label="Ingredient name" onclick="displayDropdown('dropDownSelectIngredients${i}' )" oninput="searchItems('searchIngredient${i}' )" />
+          <div class="position-absolute bg-light w-100" id="dropDownSelectIngredients${i}"  style="display: none; z-index: 1000">
+              <div>
+                  <!-- Dropdown content -->
+                  <% ingredients.forEach(ingredient => { %>
+                  <div class="form-input" style="display: none">
+                      <label class="w-100 p-2" for="<%= ingredient.name %>${i}"><%= ingredient.name %></label>
+                      <input type="checkbox" id="<%= ingredient.name %>${i}" value="<%= ingredient.name %>" onchange="selectItem(this.value, 'searchIngredient${i}' )" hidden />
+                  </div>
+                  <% }) %>
+                  <!-- Add new ingredient link -->
+                  <div class="form-input form-input-new">
+                      <a href="#" class="link-dark p-2 text-decoration-none" style="display: block">+ Add new ingredient</a>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div class="col">
+          <input type="text" name="quantity" class="form-control" placeholder="Quantity" aria-label="Quantity" />
+      </div>
+      <div class="col-1 fs-4 remove-ingredient" style="cursor: pointer;">
+          <i class="ri-close-line" aria-label="Remove ingredient" onclick="removeIngredient(this)"></i>
+      </div>
+  `;
+
+      const addNewIngredientButton = ingredientsContainer.querySelector('.add-new-ingredient');
+      ingredientsContainer.insertBefore(
+          newRow,
+          addNewIngredientButton.parentElement
+      );
+
+      const removeIngredients = document.querySelectorAll('.remove-ingredient');
+      if (removeIngredients.length > 1) {
+          removeIngredients.forEach((element) => {
+              element.style.display = 'block';
+          });
+      } else {
+          removeIngredients[0].style.display = 'none';
+      }
+  }
+
+  function removeIngredient(element) {
+      const row = element.closest('.row');
+      row.parentNode.removeChild(row);
+
+      const removeIngredients = document.querySelectorAll('.remove-ingredient');
+      if (removeIngredients.length <= 1) {
+          removeIngredients.forEach((element) => {
+              element.style.display = 'none';
+          });
+      }
+  }
+
+  function displayDropdown(dropdownId) {
+      var dropdown = document.getElementById(dropdownId);
+      dropdown.style.display = dropdown.style.display === 'none'
+          ? 'block'
+          : 'none';
+  }
+
+  function searchItems(inputId) {
+      var input = document
+      .getElementById(inputId)
+      .value.toLowerCase();
+      var parentDiv = document.getElementById(inputId).parentNode;
+      var items = parentDiv.querySelectorAll('.form-input label');
+
+      for (var i = 0; i < items.length; i++) {
+          var itemName = items[i].innerText.toLowerCase();
+
+          if (!items[i].parentNode.classList.contains('form-input-new')) {
+              items[i].parentNode.style.display =
+                  itemName.includes(input)
+                      ? 'block'
+                      : 'none';
+              }
+          }
+      }
+
+  function selectItem(itemName, inputId) {
+      document.getElementById(inputId).value = itemName;
+      console.log(itemName);
+      console.log(inputId);
+  }
+</script>

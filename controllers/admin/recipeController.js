@@ -31,7 +31,7 @@ exports.getRecipePage = async (req, res) => {
       const recipes = await this.getAllRecipes();
       const ingredients = await ingredientController.getAllIngredients();
       const cuisines = await cuisineController.getAllCuisines();
-      res.render('admin/recipes', { recipes, ingredients, cuisines, layout: "./layouts/admin/defaultLayout"});
+      res.render('admin/recipeManagementPage', { recipes, ingredients, cuisines, layout: "./layouts/admin/defaultLayout"});
    } catch (error) {
       throw new Error(error.message);
    }
@@ -43,12 +43,13 @@ exports.createRecipeLogic = async (
    name,
    description,
    ingredients,
-   cuisineName,
+   cuisine,
    image,
    time,
    url
 ) => {
    try {
+      
       // Check if recipe existed
       const existingRecipe = await Recipe.findOne({ name });
       if (existingRecipe) {
@@ -60,11 +61,6 @@ exports.createRecipeLogic = async (
          (await Ingredient.find()).map((ing) => [ing.name, ing._id])
       );
 
-      // Map cuisine
-      const cuisineMap = new Map(
-         (await Cuisine.find()).map((cui) => [cui.name, cui._id])
-      );
-
       // Loop through ingredient list to map id with name
       for (const ingredient of ingredients) {
          let ingredientId = ingredientMap.get(ingredient.name);
@@ -73,13 +69,13 @@ exports.createRecipeLogic = async (
          }
          ingredient.ingredient = ingredientId;
       }
-
+      
       // Create a new Recipe instance
       const recipe = new Recipe({
          name,
          description,
          ingredients,
-         cuisineName,
+         cuisine,
          image,
          time,
          url,
@@ -95,14 +91,21 @@ exports.createRecipeLogic = async (
 
 // Create new ingredient by calling the helper function and return status
 exports.createRecipe = async (req, res) => {
-   const { name, description, ingredients, cuisineName, image, time, url } = req.body;
-   console.log( name, description, ingredients, cuisineName, image, time, url );
+   const { name, description, ingredient, quantity, cuisine, image, time, url } = req.body;
+   console.log(req.body);
+
+   // Ensure ingredient and quantity are arrays and map ingredient name with quantity
+   const ingredients = Array.isArray(ingredient) ? 
+       ingredient.map((name, index) => ({ name, quantity: quantity[index] })) :
+       [{ name: ingredient, quantity }];
+   
    try {
+      
       const newRecipe = await this.createRecipeLogic(
          name,
          description,
          ingredients,
-         cuisineName,
+         cuisine,
          image,
          time,
          url
