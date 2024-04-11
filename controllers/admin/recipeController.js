@@ -3,22 +3,22 @@ const Recipe = require('../../models/Recipe');
 const Ingredient = require('../../models/Ingredient');
 const Cuisine = require('../../models/Cuisine');
 const ingredientController = require('./ingredientController');
+const cuisineController = require('./cuisineController');
+
 
 // Get all recipes
 exports.getAllRecipes = async (req, res) => {
    try {
       const recipes = await Recipe.find()
-         .populate({
-            path: 'ingredients.ingredient',
-            select: 'name -_id',
-         })
-         .populate({
-            path: 'cuisine',
-            select: 'name -_id',
-         })
-         .exec();
-      
-
+      .populate({
+         path: 'ingredients.ingredient',
+         select: 'name -_id',
+      })
+      .populate({
+         path: 'cuisine',
+         select: 'name -_id', 
+      })
+      .exec();
       return recipes;
    } catch (error) {
       throw new Error(error.message);
@@ -29,24 +29,10 @@ exports.getAllRecipes = async (req, res) => {
 exports.getRecipePage = async (req, res) => {
    try {
       const recipes = await this.getAllRecipes();
-      const cuisines = await Cuisine.find();
-      const ingredients = await Ingredient.find();
-      res.render('admin/recipes', { layout: "./layouts/admin/defaultLayout", recipes, cuisines, ingredients });
+      const ingredients = await ingredientController.getAllIngredients();
+      const cuisines = await cuisineController.getAllCuisines();
+      res.render('admin/recipes', { recipes, ingredients, cuisines, layout: "./layouts/admin/defaultLayout"});
    } catch (error) {
-      res.status(500).json({ error: error.message });
-      throw new Error(error.message);
-   }
-};
-
-// Get all recipes
-exports.getCreateRecipePage = async (req, res) => {
-   try {
-      const recipes = await this.getAllRecipes();
-      const cuisines = await Cuisine.find();
-      const ingredients = await Ingredient.find();
-      res.render('admin/createRecipe', { layout: "./layouts/admin/defaultLayout", recipes, cuisines, ingredients });
-   } catch (error) {
-      res.status(500).json({ error: error.message });
       throw new Error(error.message);
    }
 };
@@ -73,19 +59,17 @@ exports.createRecipeLogic = async (
       const ingredientMap = new Map(
          (await Ingredient.find()).map((ing) => [ing.name, ing._id])
       );
-      console.log('Ingredient Map: ', ingredientMap);
 
       // Map cuisine
       const cuisineMap = new Map(
          (await Cuisine.find()).map((cui) => [cui.name, cui._id])
       );
-      console.log('Cuisine Map: ', cuisineMap);
 
       // Loop through ingredient list to map id with name
       for (const ingredient of ingredients) {
          let ingredientId = ingredientMap.get(ingredient.name);
          if (!ingredientId) {
-            throw new Error('Ingredient not found: ', error.message);
+            throw new Error('Ingredient not found: ' + ingredient.name);
          }
          ingredient.ingredient = ingredientId;
       }
@@ -112,6 +96,7 @@ exports.createRecipeLogic = async (
 // Create new ingredient by calling the helper function and return status
 exports.createRecipe = async (req, res) => {
    const { name, description, ingredients, cuisineName, image, time, url } = req.body;
+   console.log( name, description, ingredients, cuisineName, image, time, url );
    try {
       const newRecipe = await this.createRecipeLogic(
          name,
@@ -123,12 +108,9 @@ exports.createRecipe = async (req, res) => {
          url
       );
       if (newRecipe) {
-         res.status(201).json({
-            message: 'Recipe added successfully',
-            newRecipe,
-         });
+         res.redirect('/recipeManagement?success=true'); 
       }
    } catch (error) {
-      res.status(500).json({ error: error.message });
+      res.redirect('/recipeManagement?error=true&message=' + encodeURIComponent(error.message));
    }
 };

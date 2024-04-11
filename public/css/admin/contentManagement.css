@@ -28,24 +28,7 @@ table {
   height: 500px;
 } */
 
-
-#popup {
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: #f9f9f9;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-input[type="text"], select {
-    margin-bottom: 10px;
-}
-
-button {
-    margin-right: 10px;
+.container-fluid {
+  padding-right: 0; /* Remove right padding to allow the table to stretch */
+  padding-left: 0; /* Remove left padding for consistency */
 }

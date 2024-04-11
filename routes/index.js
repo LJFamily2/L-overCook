@@ -19,7 +19,7 @@ const routes = [
     {path: '/category', route: category},
     {path: '/cuisine', route: cuisine},
     {path: '/ingredientManagement', route: ingredient},
-    {path: '/recipe', route: recipe},
+    {path: '/recipeManagement', route: recipe},
     {path: '/searchHistory', route: searchHistory},
     {path: '/favoriteRecipe', route: favoriteRecipe},
     {path: '/userManagement', route: userManagement}

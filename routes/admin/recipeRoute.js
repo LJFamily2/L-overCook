@@ -5,7 +5,7 @@ const reviewController = require('../../controllers/reviewController');
 
 // Recipe Routes
 router.get('/', recipeController.getRecipePage);
-router.get('/new', recipeController.getCreateRecipePage);
+router.post('/new', recipeController.createRecipe);
 // router.get('/:name', recipeController.getRecipeByName); 
 // router.put('/:id', recipeController.updateRecipe); 
 // router.delete('/:id', recipeController.deleteRecipe); 

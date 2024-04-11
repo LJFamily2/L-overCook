@@ -73,10 +73,10 @@ exports.createIngredient = async (req, res) => {
     try{
         const newIngredient = await this.createIngredientLogic(name, categoryName);
         if(newIngredient){
-            res.redirect('/ingredientManagement?success=true'); // Replace '/list-ingredients' with the actual URL of the page where the ingredients are listed
+            res.redirect('/ingredientManagement?success=true');
         }
     }catch(error){
-        res.redirect('/ingredientManagement?error=true&message=' + encodeURIComponent(error.message)); // Replace '/list-ingredients' with the actual URL of the page where the ingredients are listed
+        res.redirect('/ingredientManagement?error=true&message=' + encodeURIComponent(error.message));
     }
 };
 

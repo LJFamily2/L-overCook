@@ -1,0 +1,32 @@
+<div
+  class="mb-3 ingredient-list"
+  style="max-height: 120px; overflow-y: auto; overflow-x: hidden; display: none"
+>
+  <% ingredients.forEach(function(ingredient) { %>
+  <div class="row mb-2">
+    <div class="col-4">
+      <div class="form-check">
+        <input
+          class="form-check-input ingredient-checkbox"
+          type="checkbox"
+          id="ingredient<%= ingredient._id %>"
+          name="ingredients[]"
+          value="<%= ingredient._id %>"
+        />
+        <label class="form-check-label" for="ingredient<%= ingredient._id %>"
+          ><%= ingredient.name %></label
+        >
+      </div>
+    </div>
+    <div class="col-6">
+      <input
+        type="text"
+        class="form-control"
+        id="quantity<%= ingredient._id %>"
+        name="quantities[]"
+        placeholder="Quantity"
+      />
+    </div>
+  </div>
+  <% }) %>
+</div>
