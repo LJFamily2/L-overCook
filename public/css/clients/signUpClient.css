@@ -17,30 +17,31 @@ header {
     justify-content: space-between;
     align-items: center;
 }
-  
+
 #logo-without-name {
     height: 90px;
 }
-  
+
 #logo-name {
     height: 30px;
 }
-  
+
 .nav-left {
     height: 100%;
     margin-left: 16px;
     display: flex;
     align-items: center;
 }
-  
+
 .nav-right {
     position: absolute;
     top: 30px;
-    right: 180px;
+    right: 60px;
     display: flex;
     align-items: center;
     color: #707070;
 }
+  
 
 .client-sign-up-form {
     width: 800px;
