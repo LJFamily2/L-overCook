@@ -1,0 +1,46 @@
+const mongoose = require("mongoose");
+
+const userSchema = new mongoose.Schema({
+  username: String,
+  password: String,
+  email: String,
+  role: Boolean,
+  createAt: {
+    type: Date,
+    default: Date.now,
+    immutable: true,
+  },
+  searchHistory: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Recipe",
+  },
+  favoriteRecipe: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Recipe",
+  },
+});
+
+userSchema.methods.getFormattedDateTime = function () {
+  const dateOptions = { day: "2-digit", month: "2-digit", year: "numeric" };
+  const timeOptions = { hour: "2-digit", minute: "2-digit", second: "2-digit" };
+
+  // Check if createdAt field is defined
+  if (this.createdAt) {
+    const formattedDate = this.createdAt.toLocaleDateString(
+      "en-GB",
+      dateOptions
+    );
+    const formattedTime = this.createdAt.toLocaleTimeString(
+      "en-US",
+      timeOptions
+    );
+    return `${formattedDate}\n ${formattedTime}`;
+  } else {
+    return "";
+  }
+};
+
+const UserModel = mongoose.model("Users", userSchema);
+
+
+module.exports = UserModel;
