@@ -7,7 +7,7 @@ const reviewController = {
             const { user, rating, review } = req.body;
             
             // Find the recipe by slug
-            const recipe = await Recipe.findOne({ slug });
+            const recipe = await Recipe.findOne({ slug });p
             if (!recipe) {
                 return res.status(404).send('Recipe not found');
             }

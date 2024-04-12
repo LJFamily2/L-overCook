@@ -32,7 +32,7 @@ const sendOtp = async (req, res) => {
       await sendMailResetPassword(email, otp);
 
       res
-         // .send('OTP page')
+         .send('OTP page')
          .redirect(`/account/resetPassword?token=${req.user.token}`);
       // .status(200);
    } catch (error) {
@@ -49,7 +49,7 @@ const checkOtp = (otpData, userEnteredOTP) => {
    const fiveMinutesInMs = 5 * 60 * 1000; // 5 minutes in milliseconds
 
    // Check if OTP is correct and timestamp is within 5 minutes
-   if (otp === userEnteredOTP && timeDifference <= fiveMinutesInMs) {
+   if (otp === userEnteredOTP && timeDifference < fiveMinutesInMs) {
       return true;
    } else {
       return false;
@@ -58,14 +58,17 @@ const checkOtp = (otpData, userEnteredOTP) => {
 
 const verifyOtp = async (req, res) => {
    const { userEnteredOTP } = req.body;
-   const email = req.user.email;
+   const token = req.params.token;
 
    try {
-      const user = await UserModel.findOne({ email });
+      const user = await UserModel.findOne({ token });
+      if (!user){
+         res.send('User not found').status(404);
+         return;
+      }
 
       // Check if user data exists and if OTP verification is successful
       if (
-         user &&
          checkOtp(
             { otp: user.otp, timestamp: user.otpTimestamp },
             userEnteredOTP
@@ -73,15 +76,16 @@ const verifyOtp = async (req, res) => {
       ) {
          // Generate new token and remove the OTP and its timestamp
          const newToken = uuidv4();
-         res.status(200).send('OTP verified successfully');
          await UserModel.findOneAndUpdate(
-            { email },
+            { _id: user._id },
             { token: newToken , $unset: { otp: 1, otpTimestamp: 1 } }
          );
+         res.send('OTP verified successfully').status(200);
+         
       } else {
-         res.redirect(`/account/resetPassword?token=${user.token}`).send(
+         res.send(
             'Invalid OTP'
-         );
+         ).redirect(`/account/resetPassword?token=${user.token}`);
       }
    } catch (err) {
       console.error(err);
