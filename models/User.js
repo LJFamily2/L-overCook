@@ -18,6 +18,15 @@ const userSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "Recipe",
   },
+  otp: {
+    type: String, 
+    default: null,
+  },
+  otpTimestamp: {
+    type: Date,
+    default: null,
+  },
+  token: String,
 });
 
 userSchema.methods.getFormattedDateTime = function () {

@@ -1,4 +1,5 @@
 const User = require("../models/User");
+const { v4: uuidv4 } = require("uuid");
 const bcrypt = require("bcrypt");
 
 const signUpController = {
@@ -18,6 +19,7 @@ const signUpController = {
         password: hashedPassword,
         email: email.trim(),
         role: false,
+        token: uuidv4(),
       });
 
       if (!user) {
@@ -50,6 +52,7 @@ const signUpController = {
         password: hashedPassword,
         email: email.trim(),
         role: true,
+        token: uuidv4(),
       });
 
       if (!adminUser) {

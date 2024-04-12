@@ -11,6 +11,7 @@ const searchHistory = require('./clients/searchHistoryRoute');
 const favoriteRecipe = require('./clients/favoriteRecipeRoute');
 const userManagement = require('./admin/userManagementRoute');
 
+
 const routes = [
     {path: '/', route: home},
     {path: '/signup', route: signUpRoute},
