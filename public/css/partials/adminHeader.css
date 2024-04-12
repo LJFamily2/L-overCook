@@ -61,3 +61,27 @@ nav i {
   background-color: #75a26d;
 }
 
+/* Language button */
+.nav-right {
+  position: absolute;
+  top: 30px;
+  right: 180px;
+  display: flex;
+  align-items: center;
+  color: #707070;
+}
+
+.nav-right a {
+  text-decoration: none;
+  font-size: 18px;
+  color: #707070;
+}
+
+.nav-right span:nth-child(2) {
+  font-size: 25px;
+  margin: 0 13px;
+}
+
+.nav-right a:hover {
+  color: #75a26d;
+}
