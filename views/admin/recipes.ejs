@@ -1,0 +1,213 @@
+<div class="container-fluid m-5">
+  <!-- Headline -->
+  <h2 class="mb-5">Recipe Management</h2>
+  <hr />
+  <!-- breadcrumb -->
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="#">Home</a></li>
+      <li class="breadcrumb-item active" aria-current="page">
+        Recipe Management
+      </li>
+    </ol>
+  </nav>
+
+  <!-- Table display information -->
+  <div class="table-container">
+    <table class="table table-hover mt-3 text-center">
+      <thead>
+        <tr>
+          <th scope="col">Image</th>
+          <th scope="col">ID</th>
+          <th scope="col">Name</th>
+          <th scope="col">Description</th>
+          <th scope="col">Ingredients</th>
+          <th scope="col">Cuisine</th>
+          <th scope="col">Time</th>
+          <th scope="col">URL</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% recipes.forEach(recipe => { %>
+        <tr>
+          <td>
+            <img
+              src="/images/<%= recipe.image %>"
+              alt="<%= recipe.image %>"
+              width="100"
+            />
+          </td>
+          <td><%= recipe.id %></td>
+          <td><%= recipe.name %></td>
+          <td><%= recipe.description %></td>
+          <td>
+            <% recipe.ingredients.forEach(ingredient=> {%>
+            <p>
+              <%= ingredient.ingredient.name %> (<%= ingredient.quantity %>)
+            </p>
+            <% })%>
+          </td>
+          <td><%= recipe.cuisine.name %></td>
+          <td><%= recipe.time %></td>
+          <td><%= recipe.url %></td>
+          <td>
+            <a
+              href=""
+              style="cursor: pointer; text-decoration: none; color: black"
+            >
+              <i class="ri-edit-box-line"></i>
+            </a>
+          </td>
+        </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+  <!-- Button trigger modal -->
+  <button
+    type="button"
+    class="btn btn-primary"
+    data-bs-toggle="modal"
+    data-bs-target="#recipeModal"
+  >
+    Add item
+  </button>
+  <!-- Modal -->
+  <div
+    class="modal fade"
+    id="recipeModal"
+    tabindex="-1"
+    aria-labelledby="recipeModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered" style="max-width: 40%">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="recipeModalLabel">Add New Recipe</h1>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <form id="recipeForm" action="/recipeManagement/new" method="post">
+          <div class="modal-body">
+            <div class="mb-3">
+              <label for="recipeName" class="form-label">Recipe Name</label>
+              <input
+                type="text"
+                class="form-control"
+                id="recipeName"
+                name="name"
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <label for="recipeDescription" class="form-label"
+                >Description</label
+              >
+              <input
+                class="form-control"
+                id="recipeDescription"
+                name="description"
+              ></input>
+            </div>
+                        
+            <div class="mb-3" id="ingredientsContainer">
+               <label for="recipeIngredient" class="mb-1">Ingredients</label>
+               <div class="row">
+                  <div class="col position-relative">
+                     <input type="text" name="ingredient" id="searchIngredient" class="form-control" placeholder="Ingredient name" aria-label="Ingredient name" onclick="displayDropdown('dropDownSelectIngredients')" oninput="searchItems('searchIngredient')">
+                     <div class="position-absolute bg-light w-100" id="dropDownSelectIngredients" style="display:none; z-index:1000"></div>
+                  </div>
+                  <div>
+                     <!-- Dropdown Content -->
+                     <% ingredients.forEach(function(ingredient) { %>
+                        <div class="form-input" style="display:none">
+                           <label class="w-100 p-2" for="<%= ingredient.name %>"><%= ingredient.name %></label>
+                        </div>
+                     <% }) %>
+                  </div>
+               </div>
+            </div>
+            <div class="mb-3">
+              <label for="recipeCuisine" class="form-label">Cuisine</label>
+              <select class="form-select" id="recipeCuisine" name="cuisineName">
+                <% cuisines.forEach(function(cuisine) { %>
+                <option value="<%= cuisine._id %>"><%= cuisine.name %></option>
+                <% }) %>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="recipeImage" class="form-label">Image</label>
+              <input
+                type="text"
+                class="form-control"
+                id="recipeImage"
+                name="image"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="recipeTime" class="form-label">Time</label>
+              <input
+                type="text"
+                class="form-control"
+                id="recipeTime"
+                name="time"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="recipeUrl" class="form-label">URL</label>
+              <input
+                type="text"
+                class="form-control"
+                id="recipeUrl"
+                name="url"
+              />
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">Save Recipe</button>
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+   // JavaScript code for ingredient search functionality
+   document.addEventListener("DOMContentLoaded", function() {
+     const ingredientSearchInput = document.getElementById("ingredientSearch");
+     const ingredientList = document.querySelector(".ingredient-list");
+     const ingredientCheckboxes = document.querySelectorAll(".ingredient-checkbox");
+ 
+     ingredientSearchInput.addEventListener("input", function() {
+       const searchText = this.value.trim().toLowerCase();
+ 
+       if (searchText.length > 0) {
+         ingredientList.style.display = "block";
+       } else {
+         ingredientList.style.display = "none";
+       }
+ 
+       ingredientCheckboxes.forEach(function(checkbox) {
+         const ingredientName = checkbox.nextElementSibling.textContent.toLowerCase();
+         if (ingredientName.includes(searchText)) {
+           checkbox.parentElement.style.display = "block";
+         } else {
+           checkbox.parentElement.style.display = "none";
+         }
+       });
+     });
+   });
+ </script>

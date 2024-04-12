@@ -1,4 +1,9 @@
-.headline {
+/* main{
+  padding-left: 230px;
+  margin-left: 230px;
+  overflow: hidden;
+} */
+/* .headline {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -17,9 +22,13 @@
     padding: 0.5rem;
     border-radius: 30px;
   }
-}
-
+} */
+/* 
 table {
   height: 500px;
-  background: blue !important;
+} */
+
+.container-fluid {
+  padding-right: 0; /* Remove right padding to allow the table to stretch */
+  padding-left: 0; /* Remove left padding for consistency */
 }

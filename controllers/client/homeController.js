@@ -1,7 +1,7 @@
-const mongoose = require("../config/database");
-const categoryController = require("../controllers/categoryController");
-const ingredientController = require("../controllers/ingredientController");
-const recipeController = require("../controllers/recipeController");
+const mongoose = require("../../middlewares/database");
+const categoryController = require("../admin/categoryController");
+const ingredientController = require("../admin/ingredientController");
+const recipeController = require("../admin/recipeController");
 
 exports.getHomePage = async (req, res) => {
   try {
@@ -19,3 +19,6 @@ exports.getHomePage = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+
+

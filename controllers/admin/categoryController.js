@@ -1,6 +1,6 @@
-const mongoose = require('../config/database');
-const Category = require('../models/Category');
-const Ingredient = require('../models/Ingredient');
+const mongoose = require('../../middlewares/database');
+const Category = require('../../models/Category');
+const Ingredient = require('../../models/Ingredient');
 
 // Get all categories - Fix status bug
 exports.getAllCategories = async() => {

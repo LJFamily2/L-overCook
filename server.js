@@ -24,7 +24,7 @@ app.use(
 
 // Setup passport
 const passport = require("passport");
-const initializePassport = require("./middlewares/passportConfig");
+const initializePassport = require("./middlewares/PassportConfig");
 initializePassport(passport);
 app.use(passport.initialize());
 app.use(passport.session());
