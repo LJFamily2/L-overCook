@@ -14,6 +14,12 @@ const signUpController = {
       const { username, password, email } = req.body;
       const hashedPassword = await bcrypt.hash(password, 10);
       
+      // Check for existed email
+      const existedUser = await User.findOne({email});
+      if(existedUser){
+        return res.status(400).send("Can't create account with this email!");
+      };
+
       const user = await User.create({
         username: username.trim(),
         password: hashedPassword,
@@ -44,8 +50,15 @@ const signUpController = {
 
   postAdminSignUp: async (req, res) => {
     try {
+      console.log(req.body);
       const { username, password,email } = req.body;
       const hashedPassword = await bcrypt.hash(password, 10);
+
+      // Check for existed email
+      const existedUser = await User.findOne({email});
+      if(existedUser){
+        return res.status(400).send("Can't create account with this email!");
+      };
 
       const adminUser = await User.create({
         username: username.trim(),

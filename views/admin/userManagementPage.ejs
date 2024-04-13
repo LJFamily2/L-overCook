@@ -11,10 +11,14 @@
    <!-- Headline  -->
    <%- include('../partials/headline') %>
 
-   <!-- Table display information -->
+   <!-- Table display information user account-->
+   <h3 class="mx-3">User account</h3>
+   
    <table class="table text-center" style="height: 500px">
       <thead>
          <tr>
+
+            <th class="w-25" scope="col">No.</th>
             <th class="w-25" scope="col">Created</th>
             <th class="w-25" scope="col">Username</th>
             <th class="w-25" scope="col">Email</th>
@@ -22,24 +26,266 @@
          </tr>
       </thead>
       <tbody>
-         <% users.forEach( user => { %>
+         <% users.forEach( (user,index) => { %>
          <tr>
+            <td class="w-25"><%= index + 1  %></td>
             <td class="w-25"><%= user.getFormattedDateTime() %></td>
             <td class="w-25"><%= user.username %></td>
             <td class="w-25"><%= user.email %></td>
             <td class="w-25">
-               <a
-                  href=""
-                  style="cursor: pointer; text-decoration: none; color: black"
-               >
-                  <i class="ri-edit-box-line"></i>
-               </a>
+               <i
+                  class="ri-edit-box-line"
+                  data-bs-toggle="modal"
+                  data-bs-target="#staticBackdrop<%= index %>"
+                  style="cursor: pointer;"
+               ></i>
+
             </td>
          </tr>
+
+
+               <!-- Modal for updating -->
+               <div
+                  class="modal fade"
+                  id="staticBackdrop<%= index %>"
+                  data-bs-backdrop="static"
+                  data-bs-keyboard="false"
+                  tabindex="-1"
+                  aria-labelledby="staticBackdropLabel"
+                  aria-hidden="true"
+               >
+                  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                     <div class="modal-content">
+
+                        <div class="modal-header">
+                           <h1
+                              class="modal-title fs-5"
+                              id="staticBackdropLabel"
+                           >
+                              Update <%= user.username %> information
+                           </h1>
+                           <button
+                              type="button"
+                              class="btn-close"
+                              data-bs-dismiss="modal"
+                              aria-label="Close"
+                           ></button>
+                        </div>
+
+                        <div class="modal-body">
+                           <form action="/userManagement/update/<%= user._id %>" method="post">
+                              <div class="mb-3">
+                                 <label for="username<%= index %>" class="form-label" style="float: left;">Username</label>
+                                 <input
+                                    type="text"
+                                    class="form-control"
+                                    id="username<%= index %>"
+                                    name="username"
+                                    value="<%= user.username %>"
+                                 />
+                              </div>
+                              <div class="mb-3">
+                                 <label for="email<%= index %>" class="form-label" style="float: left;">Email</label>
+                                 <input
+                                    type="email"
+                                    class="form-control"
+                                    id="email<%= index %>"
+                                    name="email"
+                                    value="<%= user.email %>"
+                                 />
+                              </div>
+                              <div class="mb-3">
+                                 <label for="password<%= index %>" class="form-label" style="float: left;">Password</label>
+                                 <input
+                                    type="password"
+                                    class="form-control"
+                                    id="password<%= index %>"
+                                    name="password"
+                                 />
+                              </div>
+                              <div class="mb-3">
+                                 <label for="role<%= index %>" class="form-label" style="float: left;">Role</label>
+                                 <select class="form-select" id="role<%= index %>" name="role" aria-label="Default select example">
+                                    <option value="true" <%= (user.role === true) ? 'selected' : '' %>>Admin</option>
+                                    <option value="false" <%= (user.role === false) ? 'selected' : '' %>>User</option>
+                                  </select>
+                              </div>
+                           </div>
+                           
+                           <div class="modal-footer">
+                              <button type="button" class="btn btn-danger" data-bs-target="#exampleModalToggle2<%= index %>" data-bs-toggle="modal">Delete user</button>
+                              <button type="submit" class="btn btn-success">
+                                 Update
+                              </button>
+
+
+                           </div>
+                        </form>
+                        </div>
+                     </div>
+               </div>
+
+            <!-- Delete confirming modal  -->
+            <div class="modal fade" id="exampleModalToggle2<%= index %>" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2<%= index %>" tabindex="-1">
+               <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content">
+                     <div class="modal-header">
+                     <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Deleting <%= user.username %></h1>
+                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                     </div>
+                     <form action="/userManagement/delete/<%=  user._id %>" method="post">
+                        
+                        <div class="modal-body">
+                           Do you want to delete <strong><%= user.username %></strong> ? This action cannot be undone.
+                        </div>
+                        <div class="modal-footer">
+                           <button type="submit" class="btn btn-success">Confirm</button>
+                        </div>
+                     </form>
+                  </div>
+               </div>
+            </div>
          <% }) %>
       </tbody>
    </table>
-
-   <!-- Navigation of the table -->
    <%- include('../partials/navigationOfTable') %>
+   <!-- Table display information admin account -->
+   <h3 class="mx-3">Admin account</h3>
+   <table class="table text-center" style="height: 500px">
+      <thead>
+         <tr>
+
+            <th class="w-25" scope="col">No.</th>
+            <th class="w-25" scope="col">Created</th>
+            <th class="w-25" scope="col">Username</th>
+            <th class="w-25" scope="col">Email</th>
+            <th class="w-25" scope="col"></th>
+         </tr>
+      </thead>
+      <tbody>
+         <% admins.forEach( (admin,index) => { %>
+         <tr>
+            <td class="w-25"><%= index + 1  %></td>
+            <td class="w-25"><%= admin.getFormattedDateTime() %></td>
+            <td class="w-25"><%= admin.username %></td>
+            <td class="w-25"><%= admin.email %></td>
+            <td class="w-25">
+               <i
+                  class="ri-edit-box-line"
+                  data-bs-toggle="modal"
+                  data-bs-target="#adminstaticBackdrop<%= index %>"
+                  style="cursor: pointer;"
+               ></i>
+
+            </td>
+         </tr>  
+                      <!-- Modal for updating -->
+               <div
+                  class="modal fade"
+                  id="adminstaticBackdrop<%= index %>"
+                  data-bs-backdrop="static"
+                  data-bs-keyboard="false"
+                  tabindex="-1"
+                  aria-labelledby="staticBackdropLabel"
+                  aria-hidden="true"
+               >
+                  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                     <div class="modal-content">
+
+                        <div class="modal-header">
+                           <h1
+                              class="modal-title fs-5"
+                              id="staticBackdropLabel"
+                           >
+                              Update <%= admin.username %> information
+                           </h1>
+                           <button
+                              type="button"
+                              class="btn-close"
+                              data-bs-dismiss="modal"
+                              aria-label="Close"
+                           ></button>
+                        </div>
+
+                        <div class="modal-body">
+                           <form action="/userManagement/update/<%= admin._id %>" method="post">
+                              <div class="mb-3">
+                                 <label for="username<%= index %>" class="form-label" style="float: left;">Username</label>
+                                 <input
+                                    type="text"
+                                    class="form-control"
+                                    id="username<%= index %>"
+                                    name="username"
+                                    value="<%= admin.username %>"
+                                 />
+                              </div>
+                              <div class="mb-3">
+                                 <label for="email<%= index %>" class="form-label" style="float: left;">Email</label>
+                                 <input
+                                    type="email"
+                                    class="form-control"
+                                    id="email<%= index %>"
+                                    name="email"
+                                    value="<%= admin.email %>"
+                                 />
+                              </div>
+                              <div class="mb-3">
+                                 <label for="password<%= index %>" class="form-label" style="float: left;">Password</label>
+                                 <input
+                                    type="password"
+                                    class="form-control"
+                                    id="password<%= index %>"
+                                    name="password"
+                                 />
+                              </div>
+                              <div class="mb-3">
+                                 <label for="role<%= index %>" class="form-label" style="float: left;">Role</label>
+                                 <select class="form-select" id="role<%= index %>" name="role" aria-label="Default select example">
+                                    <option value="true" <%= (admin.role === true) ? 'selected' : '' %>>Admin</option>
+                                    <option value="false" <%= (admin.role === false) ? 'selected' : '' %>>User</option>
+                                  </select>
+                              </div>
+                           </div>
+                           
+                           <div class="modal-footer">
+                              <button type="button" class="btn btn-danger" data-bs-target="#exampleModalToggle<%= index %>" data-bs-toggle="modal">Delete user</button>
+
+                              <button type="submit" class="btn btn-success">
+                                 Update
+                              </button>
+                           </div>
+                        </form>
+                        </div>
+                     </div>
+               </div>
+
+                           <!-- Delete confirming modal  -->
+            <div class="modal fade" id="exampleModalToggle<%= index %>" aria-hidden="true" aria-labelledby="exampleModalToggleLabel<%= index %>" tabindex="-1">
+               <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content">
+                     <div class="modal-header">
+                     <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Deleting <%= admin.username %></h1>
+                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                     </div>
+                     <form action="/userManagement/delete/<%=  admin._id %>" method="post">
+                        
+                        <div class="modal-body">
+                           Do you want to delete <strong><%= admin.username %></strong> account? This action cannot be undone.
+                        </div>
+                        <div class="modal-footer">
+                           <button type="submit" class="btn btn-success">Confirm</button>
+                        </div>
+                     </form>
+                  </div>
+               </div>
+            </div>
+         <% }) %>
+      </tbody>
+   </table>
+   <!-- Navigation of the table -->                            
+   <%- include('../partials/navigationOfTable') %>
+   
+   
+   
+
 </div>
