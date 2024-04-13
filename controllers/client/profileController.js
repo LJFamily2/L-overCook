@@ -23,12 +23,20 @@ const generateOTP = () => {
 // Function to generate and send OTP email
 const generateAndSendOtpEmail = async (user) => {
    try {
+      const lastOtpRequest = user.otpRequestTimestamp;
+      const currentTime = Date.now();
+
+      // Check if the last OTP request was less than 60 seconds ago
+      if (lastOtpRequest && currentTime - lastOtpRequest < 60000) {
+         return res.status(429).send('Too many OTP requests. Please wait a moment and try again.');
+      }
+
       const { otp, timestamp } = generateOTP();
-      
-      // Update user model with OTP and its timestamp
+
+      // Update user model with OTP, its timestamp, and the OTP request timestamp
       await UserModel.findOneAndUpdate(
          { _id: user._id },
-         { otp, otpTimestamp: timestamp }
+         { otp, otpTimestamp: timestamp, otpRequestTimestamp: currentTime }
       );
 
       // Send email with OTP
@@ -101,7 +109,7 @@ const verifyOtp = async (req, res) => {
          const newToken = uuidv4();
          await UserModel.findOneAndUpdate(
             { _id: user._id },
-            { token: newToken, $unset: { otp: 1, otpTimestamp: 1 } }
+            { token: newToken, $unset: { otp: 1, otpTimestamp: 1, otpRequestTimestamp: 1 } }
          );
          res.send('OTP verified successfully').status(200);
       } else {

@@ -26,6 +26,10 @@ const userSchema = new mongoose.Schema({
     type: Date,
     default: null,
   },
+  otpRequestTimestamp:{
+    type: Date,
+    default: null,
+  },
   token: String,
 });
 
