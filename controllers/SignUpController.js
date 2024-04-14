@@ -4,9 +4,9 @@ const bcrypt = require("bcrypt");
 
 const signUpController = {
   // Signup page for user
-  getSignUp: (req, res) => {
-    res.send("Signup page for user")
-    // res.render("admins/signUp", { layout: './layouts/testing' });
+  getSignUp: async (req, res) => {
+    // res.send("Signup page for user")
+    res.render("partials/signUp", { layout: './layouts/client/defaultLayout', userAuthentication: true });
   },
 
   postSignUp: async (req, res) => {
