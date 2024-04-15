@@ -4,8 +4,9 @@ const User = require("../../models/User");
 const userManagementController = require("../../controllers/userManagementController");
 
 router.get("/", async(req,res) =>{
-    const users = await User.find({});
-    res.render("admin/userManagementPage", {layout: './layouts/admin/defaultLayout', users, heading: "User Management"});
+    const users = await User.find({role: false});
+    const admins = await User.find({role: true});
+    res.render("admin/userManagementPage", {layout: './layouts/admin/defaultLayout', users, heading: "User Management", admins});
 });
 router.post("/update/:id", userManagementController.updateUser);
 router.post("/delete/:id", userManagementController.deleteUser);

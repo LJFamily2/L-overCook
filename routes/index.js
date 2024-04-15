@@ -10,6 +10,7 @@ const recipe = require('./admin/recipeRoute');
 const searchHistory = require('./clients/searchHistoryRoute');
 const favoriteRecipe = require('./clients/favoriteRecipeRoute');
 const userManagement = require('./admin/userManagementRoute');
+const adminDashboard = require('./admin/dashboardRoute');
 
 const routes = [
     {path: '/', route: home},
@@ -22,7 +23,8 @@ const routes = [
     {path: '/recipeManagement', route: recipe},
     {path: '/searchHistory', route: searchHistory},
     {path: '/favoriteRecipe', route: favoriteRecipe},
-    {path: '/userManagement', route: userManagement}
+    {path: '/userManagement', route: userManagement},
+    {path: '/dashboard', route: adminDashboard}
 ];
 
 module.exports = routes;

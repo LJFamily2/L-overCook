@@ -13,7 +13,7 @@ exports.getHomePage = async (req, res) => {
       categories,
       ingredients,
       recipes,
-      layout: "./layouts/defaultLayout",
+      layout: "./layouts/client/defaultLayout",
     });
   } catch (error) {
     res.status(500).json({ error: error.message });

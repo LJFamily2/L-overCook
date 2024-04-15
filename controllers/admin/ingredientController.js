@@ -23,7 +23,7 @@ exports.getAllIngredients = async (req,res) => {
 exports.getIngredientPage = async (req,res) => {
     try{
         const ingredients = await this.getAllIngredients();
-        res.render('admin/ingredients', {ingredients, layout: "./layouts/admin/defaultLayout"})
+        res.render('admin/ingredientManagementPage', {ingredients, layout: "./layouts/admin/defaultLayout"})
     }catch(error){
         throw new Error(error.message);
     }

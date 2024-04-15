@@ -27,8 +27,10 @@
 table {
   height: 500px;
 } */
+/* Remove right padding to allow the table to stretch */
 
-.container-fluid {
-  padding-right: 0; /* Remove right padding to allow the table to stretch */
-  padding-left: 0; /* Remove left padding for consistency */
+@media (min-width: 1601px) {
+  .container {
+      min-width: 1600px;
+  }
 }

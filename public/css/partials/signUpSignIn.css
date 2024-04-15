@@ -1,18 +1,18 @@
 body {
-    background-image: url('/public/images/bgSignupSignin.jpeg');
+    background-image: url('/images/bgSignupSignin.jpeg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
-    display: flex;
-    flex-direction: column;
+    /* display: flex;
+    flex-direction: column; */
 }
 
-header {
+/* header {
     height: 100px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-}
+} */
 
 #logo-without-name {
     height: 90px;
@@ -41,8 +41,8 @@ header {
 
 .client-sign-up-form {
     width: 800px;
-    margin-left: 50px;
-    margin-right: 50px;
+    height: calc(100dvh - 100px) ;
+    margin: auto 50px;
     display: flex;
     flex-direction: column;
     justify-content: center;
