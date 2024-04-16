@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home - LoverCook</title>
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="/public/images/logoWithoutName.png"
+    />
+
+    <!-- for the magnifier glass icon -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inika:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="/public/css/globalCSS.css" />
+    <link rel="stylesheet" href="/public/css/clients/home.css" />
+  </head>
+
+  <body>
+
+    <div class="ingredient-filter">
+      <h3>Ingredient Filter</h3>
+      <div class="ingredients vegetables">
+        <div class="ingredient-header">
+          <img src="/public/images/vegetableIcon.png" alt="vegetable icon" />
+          <span> Vegetables and Green </span>
+        </div>
+        <button type="button">Carrot</button>
+        <button type="button">Celery</button>
+        <button type="button">Onion</button>
+        <button type="button">Avocado</button>
+        <button type="button">+ 90 more</button>
+      </div>
+
+      <div class="ingredients fruits">
+        <div class="ingredient-header">
+          <img src="/public/images/fruitsIcon.png" alt="fruit icon" />
+          <span> Fruits </span>
+        </div>
+        <button type="button">Lemon</button>
+        <button type="button">Apple</button>
+        <button type="button">Peach</button>
+        <button type="button">Banana</button>
+        <button type="button">+ 90 more</button>
+      </div>
+
+      <div class="ingredients meats">
+        <div class="ingredient-header">
+          <img src="/public/images/meatIcon.png" alt="meat icon" />
+          <span> Meats </span>
+        </div>
+        <button type="button">Beef</button>
+        <button type="button">Pork</button>
+        <button type="button">Ham</button>
+        <button type="button">Chicken</button>
+        <button type="button">+ 90 more</button>
+      </div>
+    </div>
+
+    <!-- Icon to show the ingredient filter when the screen is small -->
+    <div class="expand-icon-container">
+      <img src="/public/images/expandShrink.png" class="expand-icon" />
+    </div>
+
+    <div id="main-content-container">
+      <div id="main-content">
+        <div id="search">
+          <h2>Recipe Search</h2>
+          <div id="search-bar">
+            <button type="button">
+              <i class="fa fa-search" aria-hidden="true"></i>
+            </button>
+            <input
+              type="text"
+              placeholder="Enter recipe name or ingredients you have..."
+            />
+          </div>
+        </div>
+
+        <div id="filter-row">
+          <p>You can make <span id="num-of-recipes">25</span> recipes</p>
+          <div class="filter-icon-container">
+            <img
+              class="filter-icon"
+              src="/public/images/filterIcon.png"
+              alt="filter-icon"
+            />
+          </div>
+        </div>
+
+        <div class="filter-criteria">
+          <h3>Cuisine:</h3>
+          <div>
+            <div>
+              <input type="checkbox" id="thailand" name="thailand" />
+              <label for="thailand"> Thailand </label>
+            </div>
+            <div>
+              <input type="checkbox" id="vietnam" name="vietnam" />
+              <label for="vietnam"> Vietnam </label>
+            </div>
+            <div>
+              <input type="checkbox" id="laos" name="laos" />
+              <label for="laos"> Laos </label>
+            </div>
+            <div>
+              <input type="checkbox" id="singapore" name="singapore" />
+              <label for="singapore"> Singapore </label>
+            </div>
+            <div>
+              <input type="checkbox" id="philippine" name="philippine" />
+              <label for="philippine"> Philippine </label>
+            </div>
+            <div>
+              <input type="checkbox" id="malaysia" name="malaysia" />
+              <label for="malaysia"> Malaysia </label>
+            </div>
+            <div>
+              <input type="checkbox" id="cambodia" name="cambodia" />
+              <label for="cambodia"> Cambodia </label>
+            </div>
+            <div>
+              <input type="checkbox" id="myanmar" name="myanmar" />
+              <label for="myanmar"> Myanmar </label>
+            </div>
+            <div>
+              <input type="checkbox" id="brunei" name="brunei" />
+              <label for="brunei"> Brunei </label>
+            </div>
+            <div>
+              <input type="checkbox" id="timor-leste" name="timor-leste" />
+              <label for="timor-leste"> Timor-Leste </label>
+            </div>
+            <div>
+              <input type="checkbox" id="indonesia" name="indonesia" />
+              <label for="indonesia"> Indonesia </label>
+            </div>
+          </div>
+
+          <h3>Cook time:</h3>
+          <div>
+            <div>
+              <input type="checkbox" id="under-15" name="under-15" />
+              <label for="under-15"> Under 15 mins </label>
+            </div>
+            <div>
+              <input type="checkbox" id="15-30" name="15-30" />
+              <label for="15-30"> 15 - 30 mins </label>
+            </div>
+            <div>
+              <input type="checkbox" id="over-30" name="over-30" />
+              <label for="over-30"> Over 30 mins </label>
+            </div>
+          </div>
+        </div>
+
+        <div id="results">
+          <div id="recipes">
+            <div class="recipe">
+              <div class="recipe-img-container">
+                <img class="recipe-img" src="/public/images/tomYumSoup.jpeg" />
+              </div>
+
+              <div class="first-row">
+                <div class="recipe-name" title="Tom Yum Soup">Tom Yum Soup</div>
+                <img src="/public/images/emptyHeart.png" />
+              </div>
+
+              <div class="second-row">
+                <div class="cook-time">
+                  <img src="/public/images/clock.png" />
+                  <span> 30 mins</span>
+                </div>
+                <div class="rating">
+                  <span class="fa fa-star"></span>
+                  <span class="fa fa-star"></span>
+                  <span class="fa fa-star"></span>
+                  <span class="fa fa-star"></span>
+                  <span class="fa fa-star"></span>
+                </div>
+              </div>
+            </div>
+
+            <div class="recipe">
+              <div class="recipe-img-container">
+                <img
+                  class="recipe-img"
+                  src="/public/images/freshSpringRolls.jpeg"
+                />
+              </div>
+
+              <div class="first-row">
+                <div class="recipe-name" title="Vietnamese Fresh Spring Rolls">
+                  Vietnamese Fresh Spring Rolls
+                </div>
+                <img src="/public/images/emptyHeart.png" />
+              </div>
+
+              <div class="second-row">
+                <div class="cook-time">
+                  <img src="/public/images/clock.png" />
+                  <span> 25 mins</span>
+                </div>
+                <div class="rating">
+                  <span class="fa fa-star"></span>
+                  <span class="fa fa-star"></span>
+                  <span class="fa fa-star"></span>
+                  <span class="fa fa-star"></span>
+                  <span class="fa fa-star"></span>
+                </div>
+              </div>
+            </div>
+
+            <div class="recipe">
+              <div class="recipe-img-container">
+                <img
+                  class="recipe-img"
+                  src="/public/images/vegeterianPadThai.jpeg"
+                />
+              </div>
+
+              <div class="first-row">
+                <div class="recipe-name" title="Vegetarian Pad Thai">
+                  Vegetarian Pad Thai
+                </div>
+                <img src="/public/images/emptyHeart.png" />
+              </div>
+
+              <div class="second-row">
+                <div class="cook-time">
+                  <img src="/public/images/clock.png" />
+                  <span> 30 mins</span>
+                </div>
+                <div class="rating">
+                  <span class="fa fa-star"></span>
+                  <span class="fa fa-star"></span>
+                  <span class="fa fa-star"></span>
+                  <span class="fa fa-star"></span>
+                  <span class="fa fa-star"></span>
+                </div>
+              </div>
+            </div>
+
+            <div class="recipe">
+              <div class="recipe-img-container">
+                <img
+                  class="recipe-img"
+                  src="/public/images/mangoChickenCurry.jpeg"
+                />
+              </div>
+
+              <div class="first-row">
+                <div class="recipe-name" title="Mango Chicken Curry">
+                  Mango Chicken Curry
+                </div>
+                <img src="/public/images/emptyHeart.png" />
+              </div>
+
+              <div class="second-row">
+                <div class="cook-time">
+                  <img src="/public/images/clock.png" />
+                  <span> 30 mins</span>
+                </div>
+                <div class="rating">
+                  <span class="fa fa-star"></span>
+                  <span class="fa fa-star"></span>
+                  <span class="fa fa-star"></span>
+                  <span class="fa fa-star"></span>
+                  <span class="fa fa-star"></span>
+                </div>
+              </div>
+            </div>
+
+            <div class="recipe">
+              <div class="recipe-img-container">
+                <img class="recipe-img" src="/public/images/beefPho.jpeg" />
+              </div>
+
+              <div class="first-row">
+                <div class="recipe-name" title="Beef Pho">Beef Pho</div>
+                <img src="/public/images/emptyHeart.png" />
+              </div>
+
+              <div class="second-row">
+                <div class="cook-time">
+                  <img src="/public/images/clock.png" />
+                  <span> 30 mins</span>
+                </div>
+                <div class="rating">
+                  <span class="fa fa-star"></span>
+                  <span class="fa fa-star"></span>
+                  <span class="fa fa-star"></span>
+                  <span class="fa fa-star"></span>
+                  <span class="fa fa-star"></span>
+                </div>
+              </div>
+            </div>
+
+            <div class="recipe">
+              <div class="recipe-img-container">
+                <img class="recipe-img" src="/public/images/nemRan.jpeg" />
+              </div>
+
+              <div class="first-row">
+                <div class="recipe-name" title="Nem Ran">Nem Ran</div>
+                <img class="emptyHeart" src="/public/images/emptyHeart.png" />
+              </div>
+
+              <div class="second-row">
+                <div class="cook-time">
+                  <img src="/public/images/clock.png" />
+                  <span> 30 mins</span>
+                </div>
+                <div class="rating">
+                  <span class="fa fa-star"></span>
+                  <span class="fa fa-star"></span>
+                  <span class="fa fa-star"></span>
+                  <span class="fa fa-star"></span>
+                  <span class="fa fa-star"></span>
+                </div>
+              </div>
+            </div>
+
+            <div class="recipe">
+              <div class="recipe-img-container">
+                <img class="recipe-img" src="/public/images/champorado.jpeg" />
+              </div>
+
+              <div class="first-row">
+                <div class="recipe-name" title="Champorado">Champorado</div>
+                <img src="/public/images/emptyHeart.png" />
+              </div>
+
+              <div class="second-row">
+                <div class="cook-time">
+                  <img src="/public/images/clock.png" />
+                  <span> 30 mins</span>
+                </div>
+                <div class="rating">
+                  <span class="fa fa-star"></span>
+                  <span class="fa fa-star"></span>
+                  <span class="fa fa-star"></span>
+                  <span class="fa fa-star"></span>
+                  <span class="fa fa-star"></span>
+                </div>
+              </div>
+            </div>
+
+            <div class="recipe">
+              <div class="recipe-img-container">
+                <img
+                  class="recipe-img"
+                  src="/public/images/phnomPenhNoodle.jpeg"
+                />
+              </div>
+
+              <div class="first-row">
+                <div class="recipe-name" title="Phnom Penh Noodle Soup">
+                  Phnom Penh Noodle Soup
+                </div>
+                <img src="/public/images/emptyHeart.png" />
+              </div>
+
+              <div class="second-row">
+                <div class="cook-time">
+                  <img src="/public/images/clock.png" />
+                  <span> 30 mins</span>
+                </div>
+                <div class="rating">
+                  <span class="fa fa-star"></span>
+                  <span class="fa fa-star"></span>
+                  <span class="fa fa-star"></span>
+                  <span class="fa fa-star"></span>
+                  <span class="fa fa-star"></span>
+                </div>
+              </div>
+            </div>
+
+            <div class="recipe">
+              <div class="recipe-img-container">
+                <img
+                  class="recipe-img"
+                  src="/public/images/ayamPenyetPedas.jpeg"
+                />
+              </div>
+
+              <div class="first-row">
+                <div class="recipe-name" title="Ayam Penyet Pedas">
+                  Ayam Penyet Pedas
+                </div>
+                <img src="/public/images/emptyHeart.png" />
+              </div>
+
+              <div class="second-row">
+                <div class="cook-time">
+                  <img src="/public/images/clock.png" />
+                  <span> 30 mins</span>
+                </div>
+                <div class="rating">
+                  <span class="fa fa-star"></span>
+                  <span class="fa fa-star"></span>
+                  <span class="fa fa-star"></span>
+                  <span class="fa fa-star"></span>
+                  <span class="fa fa-star"></span>
+                </div>
+              </div>
+            </div>
+
+            <div class="recipe">
+              <div class="recipe-img-container">
+                <img class="recipe-img" src="/public/images/capCai.jpeg" />
+              </div>
+
+              <div class="first-row">
+                <div class="recipe-name" title="Cap Cai">Cap Cai</div>
+                <img src="/public/images/emptyHeart.png" />
+              </div>
+
+              <div class="second-row">
+                <div class="cook-time">
+                  <img src="/public/images/clock.png" />
+                  <span> 30 mins</span>
+                </div>
+                <div class="rating">
+                  <span class="fa fa-star"></span>
+                  <span class="fa fa-star"></span>
+                  <span class="fa fa-star"></span>
+                  <span class="fa fa-star"></span>
+                  <span class="fa fa-star"></span>
+                </div>
+              </div>
+            </div>
+
+            <div class="recipe">
+              <div class="recipe-img-container">
+                <img
+                  class="recipe-img"
+                  src="/public/images/indoChickenSkewer.jpeg"
+                />
+              </div>
+
+              <div class="first-row">
+                <div
+                  class="recipe-name"
+                  title="Indonesian Chicken Skewers with Peanut Sauce"
+                >
+                  Indonesian Chicken Skewers with Peanut Sauce
+                </div>
+                <img src="/public/images/emptyHeart.png" />
+              </div>
+
+              <div class="second-row">
+                <div class="cook-time">
+                  <img src="/public/images/clock.png" />
+                  <span> 30 mins</span>
+                </div>
+                <div class="rating">
+                  <span class="fa fa-star"></span>
+                  <span class="fa fa-star"></span>
+                  <span class="fa fa-star"></span>
+                  <span class="fa fa-star"></span>
+                  <span class="fa fa-star"></span>
+                </div>
+              </div>
+            </div>
+
+            <div class="recipe">
+              <div class="recipe-img-container">
+                <img class="recipe-img" src="/public/images/indoSatay.jpeg" />
+              </div>
+
+              <div class="first-row">
+                <div class="recipe-name" title="Indonesian Satay">
+                  Indonesian Satay
+                </div>
+                <img src="/public/images/emptyHeart.png" />
+              </div>
+
+              <div class="second-row">
+                <div class="cook-time">
+                  <img src="/public/images/clock.png" />
+                  <span> 30 mins</span>
+                </div>
+                <div class="rating">
+                  <span class="fa fa-star"></span>
+                  <span class="fa fa-star"></span>
+                  <span class="fa fa-star"></span>
+                  <span class="fa fa-star"></span>
+                  <span class="fa fa-star"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pantry-icon">
+        <img src="/public/images/basket.png" />
+        <span id="num-of-ingredients"> 10 </span>
+      </div>
+
+      <div class="pantry-contents">
+        <div class="pantry-title">
+            <img src="/public/images/basket.png" />
+            <span> My pantry </span>
+        </div>
+
+        <div class="pantry-list">
+            <!-- Chỗ này đang hardcode, các cậu cho nó generate dynamic nha -->
+            <div class="pantry-item">
+                1. Egg
+            </div>
+            <div class="pantry-item">
+                2. Milk
+            </div>
+            <div class="pantry-item">
+                3. Tomato
+            </div>
+            <div class="pantry-item">
+                4. Banana
+            </div>
+            <div class="pantry-item">
+                5. Watermelon
+            </div>
+            <div class="pantry-item">
+                6. Carrot
+            </div>
+            <div class="pantry-item">
+                7. Onion
+            </div>
+            <div class="pantry-item">
+                8. Potato
+            </div>
+            <div class="pantry-item">
+                9. Pepper
+            </div>
+            <div class="pantry-item">
+                10. Cucumber
+            </div>
+            <div class="pantry-item">
+                11. Mushroom
+            </div>
+        </div>
+      </div>
+
+    </div>
+
+    <script src="/public/js/clients/home.js"></script>
+  </body>
+</html>
