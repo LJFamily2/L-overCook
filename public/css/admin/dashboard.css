@@ -95,12 +95,24 @@ a {
     background-color: #239ebc;
 }
 
+.frame-1 a,
+.frame-2 a {
+    text-decoration: none;
+}
+
 .more-info-1 span,
 .more-info-2 span {
     font-family: var(--font-poppins);
-    font-weight: 600;
+    font-weight: 400;
     font-size: 18px;
+    color: black;
 }
+
+.more-info-1 span:hover,
+.more-info-2 span:hover {
+    color: white;
+}
+
 
 
 

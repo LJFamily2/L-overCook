@@ -6,23 +6,7 @@
       </div>
 
       <div class="nav-right">
-         <div class="drop-down">
-            <div class="wrapper">
-               <img src="/images/engFlag.png" class="selected-img" />
-            </div>
-            <i class="ri-arrow-drop-down-fill arrow"></i>
-
-            <div class="list">
-               <div class="item">
-                  <img src="/images/vietFlag.png" />
-               </div>
-
-               <div class="item">
-                  <img src="/images/engFlag.png" />
-               </div>
-            </div>
-         </div>
-         <script src="/js/clients/header.js"></script>
+         <%- include('../partials/langButton') %>
       </div>
    </div>
 
@@ -37,8 +21,8 @@
 
             <img src="/images/users.png" />
          </div>
-         <a href="#">
-            <div class="more-info-1">
+         <a href="/userManagement">
+            <div class="more-info-1 <%= currentPage === 'user-management' ? 'nav-active' : '' %>">
                <span>More <i class="far fa-arrow-alt-circle-right"></i></span>
             </div>
          </a>
@@ -53,8 +37,8 @@
 
             <img src="/images/recipes.png" />
          </div>
-         <a href="#">
-            <div class="more-info-2">
+         <a href="/recipeManagement">
+            <div class="more-info-2 <%= currentPage === 'user-management' ? 'nav-active' : '' %>">
                <span>More <i class="far fa-arrow-alt-circle-right"></i></span>
             </div>
          </a>

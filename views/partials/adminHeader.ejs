@@ -9,26 +9,26 @@
   <!-- Main navigation -->
   <nav>
     <div class="top-links">
-      <a href="#"
-        ><div class="home-btn">
+      <a href="/dashboard" >
+        <div class="<%= currentPage === 'dashboard' ? 'nav-active' : '' %>">
           <i class="bx bx-home"></i>
           <span>Home</span>
-        </div></a
-      >
+        </div>
+      </a>
 
-      <a href="#"
-        ><div>
+      <a href="/userManagement" >
+        <div class="<%= currentPage === 'user-management' ? 'nav-active' : '' %>">
           <i class="bx bx-user"></i>
           <span>User Management</span>
-        </div></a
-      >
+        </div>
+        </a>
 
-      <a href="#"
-        ><div>
+      <a href="/recipeManagement" >
+        <div class="<%= currentPage === 'recipe-management' ? 'nav-active' : '' %>">
           <i class="bx bx-bowl-hot"></i>
           <span>Recipe Management</span>
-        </div></a
-      >
+        </div>
+      </a>
     </div>
 
     <a href="#"

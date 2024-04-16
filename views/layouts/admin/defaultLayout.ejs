@@ -29,10 +29,13 @@
       rel="stylesheet"
       />
       <!-- font awesome -->
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-Px1rB1YPCesUmaIlyAcsBzIENywQ5LkgBrUIsEawbPO8UT88RcoY12wtUnvsyYhksuST2s3XwSPl7rPlJyYf1w==" crossorigin="anonymous" />
+      <link 
+      rel="stylesheet" 
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" crossorigin="anonymous" 
+      />
    </head>
    <body>
-      <%- include('../../partials/adminHeader') %>
+      <%- include('../../partials/adminHeader', {currentPage: currentPage}) %>
       <main style="margin-left: 230px; overflow: hidden"><%- body %></main>
    </body>
 </html>
