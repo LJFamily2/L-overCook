@@ -27,6 +27,7 @@ body {
   align-items: center;
   border-radius: 15px;
   margin-left: 20px;
+  z-index: 100;
 }
 
 .ingredient-filter h3 {
@@ -98,6 +99,7 @@ body {
   justify-content: center;
   position: absolute;
   right: 0;
+  z-index: 90;
 }
 
 #main-content {
@@ -378,6 +380,7 @@ input[type="checkbox"] {
   top: 40%;
   left: 16px;
   display: none;
+  z-index: 100;
 }
 
 .moveRight {
