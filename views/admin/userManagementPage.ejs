@@ -1,12 +1,25 @@
 <div class="fluid-container">
    <!-- Title-->
-   <div class="row d-flex align-items-center">
+   <!-- <div class="row d-flex align-items-center">
       <% if(heading){ %>
       <h1 class="py-3 px-5 col-10"><%= heading %></h1>
       <% } %>
       <div class="col-2"><%- include('../partials/langButton') %></div>
    </div>
-   <hr />
+   <hr /> -->
+
+   <!-- Header at the top of page -->
+   <div class="head-page">
+      <div class="nav-left">
+         <% if(heading){ %>
+            <span class="welcome"><%= heading %></span>
+         <% } %> 
+      </div>
+
+      <div class="nav-right">
+         <%- include('../partials/langButton') %>
+      </div>
+   </div>
 
    <!-- Headline  -->
    <%- include('../partials/headline') %>
@@ -14,7 +27,7 @@
    <!-- Table display information user account-->
    <h3 class="mx-3">User account</h3>
    
-   <table class="table text-center" style="height: 500px">
+   <table  class="table text-center" style="height: 500px">
       <thead>
          <tr>
 
