@@ -1,0 +1,548 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Inika", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+body {
+  background-color: #f5f5f5;
+}
+
+/* Ingredient filter section */
+.ingredient-filter {
+  background-color: rgba(226, 209, 167, 0.8);
+  position: fixed;
+  top: 15vh;
+  width: 20%;
+  min-width: 300px;
+  height: max-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 15px;
+  margin-left: 20px;
+}
+
+.ingredient-filter h3 {
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 17px;
+  color: #597e52;
+  text-align: center;
+  margin: 20px 0 20px 0;
+}
+
+.ingredient-filter > div {
+  background-color: #fff;
+  width: 85%;
+  height: max-content;
+  min-height: 150px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.ingredient-filter img {
+  width: 30px;
+}
+
+.ingredient-header {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+  border-bottom: #000 1px solid;
+  margin-bottom: 20px;
+}
+
+.ingredient-header span {
+  margin-left: 10px;
+  font-weight: 600;
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+.ingredients {
+  padding: 4px 10px;
+}
+
+.ingredients button {
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  background-color: #fff;
+  padding: 5px 15px;
+  border-radius: 15px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  border: none;
+  margin: 0 7px 15px 5px;
+  cursor: pointer;
+}
+
+.ingredients button:hover {
+  background-color: #a7c957;
+  color: #fff;
+}
+
+#main-content-container {
+  width: 78%;
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  right: 0;
+}
+
+#main-content {
+  width: 80%;
+}
+
+/* Search section */
+#search {
+  height: 180px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#search-bar {
+  height: 35px;
+  width: 500px;
+  border: #75a26d 0.5px solid;
+  border-radius: 7px;
+  background-color: #fff;
+}
+
+#search-bar button,
+#search-bar input {
+  border-radius: 7px;
+  border: none;
+  padding: 0 10px;
+}
+
+#search-bar button {
+  height: 33px;
+  width: 70px;
+  margin-left: 1px;
+  background-color: rgba(207, 192, 155, 0.8);
+  cursor: pointer;
+}
+
+#search-bar button:hover {
+  background-color: #c6ac69;
+}
+
+#search-bar input {
+  height: 100%;
+  width: calc(100% - 70px - 26px);
+}
+
+#search h2 {
+  margin-bottom: 20px;
+  color: #597e52;
+}
+
+/* Filter section */
+.filter-icon {
+  width: 30px;
+  margin-left: 25px;
+  cursor: pointer;
+}
+
+#filter-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: larger;
+  margin-bottom: 20px;
+}
+
+.filter-criteria {
+  background-color: #fff;
+  padding: 15px 20px;
+  border: #d0d0d0 solid 1px;
+  border-radius: 7px;
+  margin-bottom: 30px;
+  /* Not displayed by default */
+  display: none;
+}
+
+.show {
+  display: block;
+}
+
+.filter-criteria > div {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+  margin-top: 10px;
+}
+
+.filter-criteria > div:last-child {
+  margin-bottom: 7px;
+}
+
+.filter-criteria > div > div {
+  min-width: 150px;
+  margin: 7px 0;
+}
+
+.filter-criteria h3 {
+  color: #597e52;
+}
+
+input[type="checkbox"] {
+  width: 20px;
+}
+
+/* Recipe results section */
+#recipes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 50px;
+}
+
+#num-of-recipes {
+  color: #e9304e;
+  font-weight: 600;
+}
+
+.recipe {
+  width: calc(100% / 3 - 40px);
+  min-width: 220px;
+  height: max-content;
+  min-height: 303px;
+  background-color: #fff;
+  border-radius: 15px;
+  border: #7c5532 solid 0.25px;
+  margin-bottom: 30px;
+}
+
+.recipe-img-container {
+  width: 100%;
+  min-width: 220px;
+  height: 212px;
+  background-color: #f5f5f5;
+  overflow: hidden;
+  border-radius: 15px 15px 0 0;
+}
+
+.recipe-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.first-row img {
+  width: 25px;
+
+  /* Not displayed for guest users */
+  /* display: none; */
+}
+
+.first-row,
+.second-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 0 13px;
+}
+
+.first-row {
+  padding-top: 10px;
+}
+
+.second-row {
+  position: relative;
+  top: 9px;
+  font-size: 14px;
+}
+
+.recipe-name {
+  font-size: 20px;
+  width: 100%;
+  height: 50px;
+  white-space: nowrap;
+  height: 50px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.second-row img {
+  width: 10px;
+}
+
+.cook-time span {
+  color: #9a9999;
+}
+
+.fa-star {
+  color: #d9d9d9;
+}
+
+/* Ingredient basket (Pantry) */
+.pantry-icon {
+  width: 85px;
+  height: 85px;
+  border-radius: 50%;
+  position: fixed;
+  bottom: 30px;
+  right: 60px;
+  background-color: #f1e4c3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: #597e52 0.5px solid;
+  box-shadow: 2px 2px 10px #fff;
+  animation: wiggle 3s infinite;
+  cursor: pointer;
+}
+
+.moveUp {
+  animation: moveUp 0.5s forwards;
+}
+
+.pantry-icon img {
+  width: 30px;
+}
+
+#num-of-ingredients {
+  padding-left: 4px;
+  margin-top: 5px;
+  font-size: 24px;
+  font-family: "Inter", sans-serif;
+}
+
+.pantry-contents {
+  background-color: #fff;
+  border: #9a9999 1px solid;
+  width: 300px;
+  height: 330px;
+  overflow-y: scroll;
+  position: fixed;
+  bottom: 0;
+  right: 60px;
+  border-radius: 10px 10px 0 0;
+
+  /* Not displayed by default - only show if user clicks pantry icon */
+  display: none;
+}
+
+.pantry-title img {
+  width: 28px;
+  margin-right: 5px;
+}
+
+.pantry-title span {
+  font-size: 20px;
+}
+
+.pantry-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 15px;
+}
+
+.pantry-list {
+  margin-top: 10px;
+  padding: 10px 30px;
+  border-top: #000 0.5px solid;
+}
+
+.pantry-item {
+  margin-bottom: 8px;
+}
+
+/* Expand - shrink icon */
+.expand-icon {
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  rotate: 180deg;
+  cursor: pointer;
+}
+
+.expand-icon-container {
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  position: fixed;
+  top: 40%;
+  left: 16px;
+  display: none;
+}
+
+.moveRight {
+  animation: moveRight 0.5s forwards;
+}
+
+/* Responsive */
+@media screen and (max-width: 1271px) {
+  #main-content-container {
+    width: 75%;
+  }
+
+  #recipes {
+    gap: 30px;
+  }
+}
+
+@media screen and (max-width: 1210px) {
+  #main-content-container {
+    width: 70%;
+  }
+
+  .recipe {
+    width: calc(100% / 2 - 40px);
+    max-width: none;
+  }
+
+  #search-bar {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 1073px) {
+  #main-content-container {
+    width: 67%;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  #main-content-container {
+    width: 65%;
+  }
+}
+
+@media screen and (max-width: 953px) {
+  #main-content-container {
+    width: 63%;
+  }
+
+  #main-content {
+    width: 82%;
+  }
+}
+
+@media screen and (max-width: 914px) {
+  .ingredient-filter {
+    left: -310px;
+  }
+
+  .expand-icon-container {
+    display: block;
+  }
+
+  #main-content-container {
+    width: 100%;
+  }
+
+  .recipe {
+    width: calc(100% / 3 - 40px);
+  }
+
+  #search-bar {
+    width: 60%;
+  }
+}
+
+@media screen and (max-width: 882px) {
+  #main-content {
+    width: 78%;
+  }
+
+  .recipe {
+    width: calc(100% / 2 - 40px);
+  }
+
+  #search-bar {
+    width: 80%;
+  }
+}
+
+@media screen and (max-width: 608px) {
+  #main-content {
+    width: 60%;
+  }
+
+  .recipe {
+    width: 100%;
+  }
+
+  #search-bar {
+    width: 100%;
+  }
+
+  #search-bar input {
+    width: calc(100% - 40px - 26px);
+  }
+
+  #search-bar button {
+    width: 40px;
+    cursor: pointer;
+  }
+}
+
+@media screen and (max-width: 455px) {
+  .filter-icon {
+    /* Avoid losing the ratio of the image */
+    object-fit: contain;
+
+    /* After the above statement, the image becomes shorter than the "you can make.." line, so we add margin to push it up*/
+    margin-bottom: 5px;
+  }
+}
+
+@keyframes wiggle {
+  0% {
+    transform: rotate(0deg);
+  }
+  5% {
+    transform: rotate(5deg);
+  }
+  10% {
+    transform: rotate(0deg);
+  }
+  15% {
+    transform: rotate(-5deg);
+  }
+  20% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(5deg);
+  }
+  30% {
+    transform: rotate(0deg);
+  }
+  35% {
+    transform: rotate(-5deg);
+  }
+  40% {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes moveUp {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-340px);
+  }
+}
+
+/* Move the element by 30px to the right*/
+@keyframes moveRight {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(310px);
+  }
+}
