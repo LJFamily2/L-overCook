@@ -1,17 +1,23 @@
-<div class="container m-5">
-  <!-- Headline -->
-  <h2 class="mb-5">Recipe Management</h2>
-  <hr/>
-  <!-- breadcrumb -->
-  <nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="#">Home</a></li>
-      <li class="breadcrumb-item active" aria-current="page">
-        Recipe Management
-      </li>
-    </ol>
-  </nav>
-
+<div class="fluid-container">
+   <!-- Title-->
+   <div class="row d-flex align-items-center m-0">
+    <% if(heading){ %>
+    <h1 class="py-3 px-5 col-10 "><%= heading %></h1>
+    <% } %>
+    <div class="col-2"><%- include('../partials/langButton') %></div>
+ </div>
+ <hr />
+   <!-- Headline  -->
+   <%- include('../partials/headline') %>
+  <!-- Button trigger modal -->
+  <button
+    type="button"
+    class="btn btn-primary mx-3"
+    data-bs-toggle="modal"
+    data-bs-target="#recipeModal"
+  >
+    Add item
+  </button>
   <!-- HTML for displaying alerts -->
   <div id="alertContainer"></div>
   
@@ -67,15 +73,8 @@
       </tbody>
     </table>
   </div>
-  <!-- Button trigger modal -->
-  <button
-    type="button"
-    class="btn btn-primary"
-    data-bs-toggle="modal"
-    data-bs-target="#recipeModal"
-  >
-    Add item
-  </button>
+  <%- include('../partials/navigationOfTable') %>
+
   <!-- Modal -->
   <div
     class="modal fade"
