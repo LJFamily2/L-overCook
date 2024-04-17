@@ -48,6 +48,7 @@ exports.getIngredientPage = async (req, res) => {
       res.render('admin/ingredientManagementPage', {
          ingredients,
          layout: './layouts/admin/defaultLayout',
+         heading: 'Ingredient Management',
       });
    } catch (error) {
       throw new Error(error.message);
