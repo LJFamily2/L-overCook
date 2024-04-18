@@ -4,7 +4,8 @@ const router = express.Router();
 router.get('/', (req, res) => {
     res.render('admin/dashboard', {
         layout: 'layouts/admin/defaultLayout',
-    });
-})
+        currentPage: 'dashboard'
+    });    
+});
 
 module.exports = router

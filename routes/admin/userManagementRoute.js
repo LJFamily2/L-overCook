@@ -6,7 +6,13 @@ const userManagementController = require("../../controllers/userManagementContro
 router.get("/", async(req,res) =>{
     const users = await User.find({role: false});
     const admins = await User.find({role: true});
-    res.render("admin/userManagementPage", {layout: './layouts/admin/defaultLayout', users, heading: "User Management", admins});
+    res.render('admin/userManagementPage', {
+        layout: 'layouts/admin/defaultLayout',
+        users,
+        heading: "User Management", 
+        admins,
+        currentPage: 'user-management'
+    });
 });
 router.post("/update/:id", userManagementController.updateUser);
 router.post("/delete/:id", userManagementController.deleteUser);

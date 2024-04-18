@@ -9,7 +9,7 @@
       <link rel="stylesheet" href="/css/partials/globalCSS.css" />
       <link rel="stylesheet" href="/css/admin/contentManagement.css" />
       <link rel="stylesheet" href="/css/partials/langButton.css" />
-      <link rel="stylesheet" href="/css/admin/homeAdmin.css">
+      <link rel="stylesheet" href="/css/admin/dashboard.css">  
 
       <!-- Js -->
       <script src="/js/admin/index.js"></script>
@@ -26,10 +26,15 @@
       <link
       href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
       rel="stylesheet"
-    />
+      />
+      <!-- font awesome -->
+      <link 
+      rel="stylesheet" 
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" crossorigin="anonymous" 
+      />
    </head>
    <body>
-      <%- include('../../partials/adminHeader') %>
+      <%- include('../../partials/adminHeader', {currentPage: currentPage}) %>
       <main style="margin-left: 230px; overflow: hidden"><%- body %></main>
    </body>
 </html>
