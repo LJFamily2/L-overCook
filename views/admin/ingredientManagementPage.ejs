@@ -1,19 +1,28 @@
-<div class="container m-5">
-  <h2 class="mb-5">Ingredient Management</h2>
-  <hr />
-  <!-- breadcrumb -->
-  <nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="#">Home</a></li>
-      <li class="breadcrumb-item active" aria-current="page">
-        Ingredient Management
-      </li>
-    </ol>
-  </nav>
+<div class="fluid-container">
+   <!-- Title-->
+   <div class="row d-flex align-items-center m-0">
+    <% if(heading){ %>
+    <h1 class="py-3 px-5 col-10 "><%= heading %></h1>
+    <% } %>
+    <div class="col-2"><%- include('../partials/langButton') %></div>
+ </div>
+ <hr />
+
+   <!-- Headline  -->
+   <%- include('../partials/headline') %>
+     <!-- Button trigger modal -->
+  <button
+    type="button"
+    class="btn btn-primary mx-5"
+    data-bs-toggle="modal"
+    data-bs-target="#ingredientModal"
+  >
+    Add item
+  </button>
   <!-- HTML for displaying alerts -->
   <div id="alertContainer"></div>
 
-  <table class="table mt-3 text-center">
+  <table class="table table-hover mt-3 text-center">
     <thead>
       <tr>
         <th scope="col">Id</th>
@@ -41,16 +50,9 @@
       <% }) %>
     </tbody>
   </table>
+  <%- include('../partials/navigationOfTable') %>
 
-  <!-- Button trigger modal -->
-  <button
-    type="button"
-    class="btn btn-primary"
-    data-bs-toggle="modal"
-    data-bs-target="#ingredientModal"
-  >
-    Add item
-  </button>
+
 
   <!-- Modal -->
   <div
