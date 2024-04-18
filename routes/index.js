@@ -1,5 +1,5 @@
 // Page
-const home = require('./clients/homeRoute');
+const home = require('./client/homeRoute');
 const signUpRoute = require('./partials/signUpRoute');
 const signInRoute = require('./partials/signInRoute');
 const profileRoute = require('./partials/profileRoute');
@@ -7,8 +7,8 @@ const category = require('./admin/categoryRoute');
 const cuisine = require('./admin/cuisineRoute');
 const ingredient = require('./admin/ingredientRoute');
 const recipe = require('./admin/recipeRoute');
-const searchHistory = require('./clients/searchHistoryRoute');
-const favoriteRecipe = require('./clients/favoriteRecipeRoute');
+const searchHistory = require('./client/searchHistoryRoute');
+const favoriteRecipe = require('./client/favoriteRecipeRoute');
 const userManagement = require('./admin/userManagementRoute');
 const adminDashboard = require('./admin/dashboardRoute');
 

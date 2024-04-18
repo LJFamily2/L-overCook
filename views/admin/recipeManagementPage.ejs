@@ -47,7 +47,6 @@
   <div id="alertContainer"></div>
   
   <!-- Table display information -->
-  <div class="table-container">
     <table class="table table-hover mt-3 text-center">
       <thead>
         <tr>
@@ -97,16 +96,8 @@
         <% }) %>
       </tbody>
     </table>
-  </div>
-  <!-- Button trigger modal -->
-  <button
-    type="button"
-    class="btn btn-primary"
-    data-bs-toggle="modal"
-    data-bs-target="#recipeModal"
-  >
-    Add item
-  </button>
+  <%- include('../partials/navigationOfTable') %>
+
   <!-- Modal -->
   <div
     class="modal fade"
