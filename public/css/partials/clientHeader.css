@@ -34,11 +34,12 @@ header {
 
 .nav-right a {
   text-decoration: none;
-  font-size: 22px;
+  font-size: 20px;
   color: #707070;
+  font-family: var(--font-inika);
 }
 
-.nav-right span:nth-child(1) {
+.nav-right a:nth-child(2) {
   margin: 0 40px;
 }
 
@@ -50,7 +51,7 @@ header {
   font-size: 25px;
 }
 
-.nav-right a:nth-child(2) {
+.nav-right a:nth-child(3) {
   display: flex;
   gap: 2px;
 }
