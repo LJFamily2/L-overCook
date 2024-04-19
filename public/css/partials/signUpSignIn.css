@@ -4,7 +4,11 @@ header {
 }
 
 .drop-down {
-  background-color: #f1e4c3;
+  background-color: rgba(241, 228, 195, 0.8);
+}
+
+.list {
+    background-color: rgba(241, 228, 195, 0.8);
 }
 
 
