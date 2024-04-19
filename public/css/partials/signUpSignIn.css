@@ -1,6 +1,12 @@
+/* Overwriting values*/
 header {
     background-color: transparent;
 }
+
+.drop-down {
+  background-color: #f1e4c3;
+}
+
 
 .background {
     background-image: url('/images/bgSignupSignin.jpeg');
