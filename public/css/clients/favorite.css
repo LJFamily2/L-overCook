@@ -61,7 +61,7 @@
     position: absolute;
     bottom: 4px;
     padding: 15px 20px;
-    /* display: none; */
+    display: none;
 }
 
 /* Only display when the item is hovered */
