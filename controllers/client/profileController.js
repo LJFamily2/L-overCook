@@ -5,12 +5,13 @@ const { v4: uuidv4 } = require('uuid');
 
 // Render get profile page
 const getProfilePage = async (req, res) => {
-   res.send('Profile page');
+   // res.send('Profile page');
+   res.render('client/profile', { layout: "layouts/client/defaultLayout", userAuthentication: false });
 };
 
 // Render get email page
 const getEmailPage = async (req, res) => {
-   res.render('emailPageTesting', { layout: false, user: req.user });
+   res.render('client/resetPassword', { layout: "layouts/client/defaultLayout", userAuthentication: false, user: req.user });
 };
 
 // Function to generate OTP and timestamp
@@ -76,7 +77,7 @@ const sendOtp = async (req, res) => {
 const verifyOtpPage = async (req, res) => {
    const { token } = req.query;
 
-   res.render('verifyOTPTesting', { layout: false, token });
+   res.render('client/sendOTP', { layout: "layouts/client/defaultLayout", userAuthentication: false, token });
 };
 
 // Function to verify OTP expiration
