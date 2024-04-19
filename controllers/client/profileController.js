@@ -11,7 +11,7 @@ const getProfilePage = async (req, res) => {
 
 // Render get email page
 const getEmailPage = async (req, res) => {
-   res.render('emailPageTesting', { layout: false, user: req.user });
+   res.render('client/resetPassword', { layout: "layouts/client/defaultLayout", userAuthentication: false, user: req.user });
 };
 
 // Function to generate OTP and timestamp
