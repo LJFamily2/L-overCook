@@ -1,3 +1,7 @@
+header {
+    background-color: transparent;
+}
+
 .background {
     background-image: url('/images/bgSignupSignin.jpeg');
     background-size: cover;
