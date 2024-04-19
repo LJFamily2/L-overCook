@@ -1,5 +1,5 @@
-const User = require("../models/User");
-const Recipe = require("../models/Recipe");
+const User = require("../../models/User");
+const Recipe = require("../../models/Recipe");
 
 const favoriteRecipeController = {
   getFavoriteRecipe: async (req, res) => {
@@ -7,7 +7,7 @@ const favoriteRecipeController = {
       const favoriteRecipe = await User.find()
         .populate("favoriteRecipe")
         .exec();
-      // res.render(""{searchHistory});
+      res.render("client/favorite", { layout: "./layouts/client/defaultLayout", userAuthentication: true });
     } catch (err) {
       console.log(err);
       res.status(500).send("Internal Server Error");

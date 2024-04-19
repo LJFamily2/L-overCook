@@ -1,8 +1,7 @@
 const signInController = {
   // Signin page for user
   getSignIn: (req, res) => {
-    res.send("User authenticated page");
-    // res.render("signin", { layout: null });
+    res.render("partials/signIn", {  layout: './layouts/client/defaultLayout', userAuthentication: true });
   },
 
   // Signin page for admin

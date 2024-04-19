@@ -1,0 +1,94 @@
+.content {
+    width: 80%;
+    margin: 0 auto;
+    font-family: "Inika", serif;;
+}
+
+.banner {
+    width: 100%;
+    height: 60vh;
+    margin-bottom: 70px;
+}
+
+.banner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(50%);
+}
+
+.banner div {
+    text-align: center;
+    color: #fff;
+    font-family: "Inika", serif;
+    font-weight: 700;
+    font-size: xxx-large;
+    position: relative;
+    top: -275px;
+}
+
+.content p {
+    text-align: center;
+    font-size: large;
+}
+
+.image-gallery {
+    padding: 0;
+    columns: 15rem 4;
+    margin-top: 50px;
+    margin-bottom: 100px;
+}
+
+.gallery-item {
+    list-style: none;
+    aspect-ratio: 1 / 1;
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.item-name {
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    font-size: clamp(1rem, 2vw, 1.5rem);
+    width: calc(100% - 40px);
+    height: calc(30%);
+    position: absolute;
+    bottom: 4px;
+    padding: 15px 20px;
+    display: none;
+}
+
+/* Only display when the item is hovered */
+.gallery-item:hover .item-name {
+    display: block;
+}
+
+
+
+/* Responsive display */
+
+@media screen and (max-width: 1018px) {
+    .item-name {
+        font-size: x-large;
+    }
+}
+
+@media screen and (max-width: 677px) {
+    .item-name {
+        font-size: xx-large;
+    }
+}
+
+@media screen and (max-width: 490px) {
+    .item-name {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+}

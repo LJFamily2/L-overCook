@@ -1,0 +1,47 @@
+<div class="admin-content">
+   <!-- Header at the top of page -->
+   <div class="head-page">
+      <div class="nav-left">
+         <span class="welcome"> Welcome, <span>admin@gmail.com</span> ! </span>
+      </div>
+
+      <div class="nav-right">
+         <%- include('../partials/langButton') %>
+      </div>
+   </div>
+
+   <!-- Content -->
+   <div class="content">
+      <div class="frame-1">
+         <div class="frame-content">
+            <div class="total">
+               <span>72</span>
+               <div>Total Users</div>
+            </div>
+
+            <img src="/images/users.png" />
+         </div>
+         <a href="/userManagement">
+            <div class="more-info-1 <%= currentPage === 'user-management' ? 'nav-active' : '' %>">
+               <span>More <i class="far fa-arrow-alt-circle-right"></i></span>
+            </div>
+         </a>
+      </div>
+
+      <div class="frame-2">
+         <div class="frame-content">
+            <div class="total">
+               <span>72</span>
+               <div>Total Recipes</div>
+            </div>
+
+            <img src="/images/recipes.png" />
+         </div>
+         <a href="/recipeManagement">
+            <div class="more-info-2 <%= currentPage === 'user-management' ? 'nav-active' : '' %>">
+               <span>More <i class="far fa-arrow-alt-circle-right"></i></span>
+            </div>
+         </a>
+      </div>
+   </div>
+</div>

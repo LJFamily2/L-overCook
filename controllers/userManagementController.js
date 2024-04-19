@@ -10,15 +10,16 @@ const updateUser = async (req, res) => {
       req.flash("error", "User not found");
       return res.status(404).send("User not found");
     }
-
+    const { username, email, role, password } = req.body;
     let updateFields = {
-      username: req.body.username || existingUser.username,
-      email: req.body.email || existingUser.email,
-      role: req.body.role || existingUser.role,
+      username: username || existingUser.username,
+      email: email || existingUser.email,
+      role: role || existingUser.role,
     };
+    
 
-    if (req.body.password) {
-      const hashPassword = await bcrypt.hash(req.body.password, 10);
+    if (password) {
+      const hashPassword = await bcrypt.hash(password, 10);
       updateFields.password = hashPassword;
     } else {
       updateFields.password = existingUser.password;
@@ -29,12 +30,11 @@ const updateUser = async (req, res) => {
     });
 
     if(!updatedUser) {
-      res.send("Code ngu, sửa lại đi");
       req.flash("error", "Error updating user");
       return res.status(500).send("Error updating user");
     }
     req.flash("success", "User updated successfully");
-    return res.send("User updated successfully");
+    res.redirect("/userManagement");
   } catch (error) {
     console.error("Error updating user:", error);
     return res.status(500).send("Internal server error");
