@@ -111,6 +111,16 @@
     padding: 0;
 }
 
+.reset-password {
+    text-align: right;
+    color: var(--color-dimgray-100);
+    font-style: italic;
+}
+
+.reset-password:hover {
+    color: var(--color-dimgray-300);
+}
+
 .form-format {
     display: flex;
     flex-direction: column;
