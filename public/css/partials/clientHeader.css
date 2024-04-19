@@ -34,15 +34,23 @@ header {
 
 .nav-right a {
   text-decoration: none;
-  font-size: 18px;
+  font-size: 22px;
   color: #707070;
 }
 
-.nav-right span:nth-child(2) {
-  font-size: 25px;
-  margin: 0 13px;
+.nav-right span:nth-child(1) {
+  margin: 0 40px;
 }
 
 .nav-right a:hover {
   color: #75a26d;
+}
+
+.icon-profile {
+  font-size: 25px;
+}
+
+.nav-right a:nth-child(2) {
+  display: flex;
+  gap: 2px;
 }

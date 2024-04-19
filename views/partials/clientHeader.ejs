@@ -27,7 +27,7 @@
     </div>
   </header>
   <% }else{ %>
-    <header style="background: transparent;">
+    <header>
       <div class="nav-left">
         <a href="#">
           <img
@@ -40,6 +40,11 @@
         </a>
       </div>
       <div class="nav-right">
+        <a href="#"> <span> Favourites </span> </a>
+        <a href="/account/profile"> 
+          <i class='bx bx-user-circle icon-profile' style='color:#707070' ></i>
+          <span>johndoe</span> 
+        </a>
         <%- include('./langButton') %>
       </div>
     </div>
