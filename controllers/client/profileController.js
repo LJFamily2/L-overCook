@@ -77,7 +77,7 @@ const sendOtp = async (req, res) => {
 const verifyOtpPage = async (req, res) => {
    const { token } = req.query;
 
-   res.render('verifyOTPTesting', { layout: false, token });
+   res.render('client/sendOTP', { layout: "layouts/client/defaultLayout", userAuthentication: false, token });
 };
 
 // Function to verify OTP expiration
