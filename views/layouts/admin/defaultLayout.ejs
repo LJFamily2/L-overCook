@@ -6,11 +6,10 @@
       <title>L'overCook</title>
 
       <!-- Css -->
-      <link rel="stylesheet" href="/css/partials/globalCSS.css" />
+      <link rel="stylesheet" href="/css/admin/globalCSS.css" />
       <link rel="stylesheet" href="/css/admin/contentManagement.css" />
+      <link rel="stylesheet" href="/css/partials/adminHeader.css" />
       <link rel="stylesheet" href="/css/partials/langButton.css" />
-      <link rel="stylesheet" href="/css/admin/dashboard.css">  
-
       <!-- Js -->
       <script src="/js/admin/index.js"></script>
       <!-- Bootstrap -->
@@ -22,19 +21,9 @@
          rel="stylesheet"
          href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css"
       />
-      <!-- boxicons -->
-      <link
-      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
-      rel="stylesheet"
-      />
-      <!-- font awesome -->
-      <link 
-      rel="stylesheet" 
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" crossorigin="anonymous" 
-      />
    </head>
    <body>
-      <%- include('../../partials/adminHeader', {currentPage: currentPage}) %>
+      <%- include('../../partials/adminHeader') %>
       <main style="margin-left: 230px; overflow: hidden"><%- body %></main>
    </body>
 </html>

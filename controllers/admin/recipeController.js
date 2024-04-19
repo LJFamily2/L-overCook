@@ -31,7 +31,7 @@ exports.getRecipePage = async (req, res) => {
       const recipes = await this.getAllRecipes();
       const ingredients = await ingredientController.getAllIngredients();
       const cuisines = await cuisineController.getAllCuisines();
-      res.render('admin/recipeManagementPage', { recipes, ingredients, cuisines, layout: "./layouts/admin/defaultLayout", currentPage: 'recipe-management', heading: 'Recipe Management'});
+      res.render('admin/recipeManagementPage', { recipes, ingredients, cuisines, layout: "./layouts/admin/defaultLayout"});
    } catch (error) {
       throw new Error(error.message);
    }

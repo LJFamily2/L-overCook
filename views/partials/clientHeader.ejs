@@ -1,11 +1,4 @@
 
-<head>
-        <!-- Css -->
-        <link rel="stylesheet" href="/css/partials/clientHeader.css" />
-        <link rel="stylesheet" href="/css/partials/langButton.css" />
-</head>
-<% if(!userAuthentication){ %>
-
     <header>
       <div class="nav-left">
         <a href="#">
@@ -18,32 +11,16 @@
           <img id="logo-name" src="/images/loverCook.png" />
         </a>
       </div>
+
       <div class="nav-right">
         <a href="#"> <span> Register </span> </a>
         <span> | </span>
         <a href="#"> <span> Login </span> </a>
+
         <%- include('./langButton') %>
+        </div>
       </div>
-    </div>
-  </header>
-  <% }else{ %>
-    <header style="background: transparent;">
-      <div class="nav-left">
-        <a href="#">
-          <img
-            id="logo-without-name"
-            src="/images/logoWithoutName.png"
-          />
-        </a>
-        <a href="#">
-          <img id="logo-name" src="/images/loverCook.png" />
-        </a>
-      </div>
-      <div class="nav-right">
-        <%- include('./langButton') %>
-      </div>
-    </div>
-  </header>
-    <% } %>
+    </header>
+
     
 

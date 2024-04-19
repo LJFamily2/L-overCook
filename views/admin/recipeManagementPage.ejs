@@ -1,51 +1,22 @@
-<div class="fluid-container">
+<div class="container m-5">
   <!-- Headline -->
-  <!-- <h2 class="mb-5">Recipe Management</h2>
-  <hr/> -->
-
-  <!-- Header at the top of page -->
-  <div class="head-page">
-    <div class="nav-left">
-       <% if(heading){ %>
-          <span class="welcome"><%= heading %></span>
-       <% } %> 
-    </div>
-
-    <div class="nav-right">
-       <%- include('../partials/langButton') %>
-    </div>
- </div>
-
+  <h2 class="mb-5">Recipe Management</h2>
+  <hr/>
   <!-- breadcrumb -->
- <!--  <nav aria-label="breadcrumb">
+  <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="#">Home</a></li>
       <li class="breadcrumb-item active" aria-current="page">
         Recipe Management
       </li>
     </ol>
-  </nav> -->
-  <div class="container-fluid py-3 px-3">
-   <div class="row align-items-center justify-content-around">
-      <nav aria-label="breadcrumb" class="col-8">
-         <ol class="breadcrumb mb-0">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <% if(heading){ %>
+  </nav>
 
-            <li class="breadcrumb-item active" aria-current="page">
-               <%= heading %>
-            </li>
-            <% } %>
-         </ol>
-      </nav>
-      <div class="col-4 w-25 px-1 border-2">
-      </div>
-   </div>
-</div>
   <!-- HTML for displaying alerts -->
   <div id="alertContainer"></div>
   
   <!-- Table display information -->
+  <div class="table-container">
     <table class="table table-hover mt-3 text-center">
       <thead>
         <tr>
@@ -95,8 +66,16 @@
         <% }) %>
       </tbody>
     </table>
-  <%- include('../partials/navigationOfTable') %>
-
+  </div>
+  <!-- Button trigger modal -->
+  <button
+    type="button"
+    class="btn btn-primary"
+    data-bs-toggle="modal"
+    data-bs-target="#recipeModal"
+  >
+    Add item
+  </button>
   <!-- Modal -->
   <div
     class="modal fade"

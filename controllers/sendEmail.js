@@ -1,23 +1,27 @@
+const bcrypt = require('bcrypt');
 const nodemailer = require("nodemailer");
 
 
-const sendMailResetPassword = async (email, otp) => {
+const sendMail = async () => {
     const transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
             user: process.env.EMAIL_AUTH,
-            pass: process.env.EMAIL_PASS
+            pass: process.env.EMAIL_PASS 
         },
     });
-
+    
+    
     const mailOptions = {
-        from: process.env.EMAIL_AUTH,
-        to: email,
-        subject: "Password Reset Request",
-        html: `<h1>Reset Password</h1><p>Your OTP is: <br> ${otp}</p><p>Your OTP will expire in 5 minutes.</p>`,
-    };
+        from: process.env.EMAIL_AUTH, 
+        to: email, 
+        subject: "Password Reset Request", 
+        html:`<h1>Reset Password</h1>`,
+    }
 
-    await transporter.sendMail(mailOptions);
-};
+    await transporter.sendMail(mailOptions, () => {
+        console.log("Message sent: %s", info.messageId);
+    });
+}
 
-module.exports = sendMailResetPassword;
+module.exports = sendMail;

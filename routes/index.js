@@ -1,5 +1,5 @@
 // Page
-const home = require('./client/homeRoute');
+const home = require('./clients/homeRoute');
 const signUpRoute = require('./partials/signUpRoute');
 const signInRoute = require('./partials/signInRoute');
 const profileRoute = require('./partials/profileRoute');
@@ -7,10 +7,9 @@ const category = require('./admin/categoryRoute');
 const cuisine = require('./admin/cuisineRoute');
 const ingredient = require('./admin/ingredientRoute');
 const recipe = require('./admin/recipeRoute');
-const searchHistory = require('./client/searchHistoryRoute');
-const favoriteRecipe = require('./client/favoriteRecipeRoute');
+const searchHistory = require('./clients/searchHistoryRoute');
+const favoriteRecipe = require('./clients/favoriteRecipeRoute');
 const userManagement = require('./admin/userManagementRoute');
-const adminDashboard = require('./admin/dashboardRoute');
 
 const routes = [
     {path: '/', route: home},
@@ -23,8 +22,7 @@ const routes = [
     {path: '/recipeManagement', route: recipe},
     {path: '/searchHistory', route: searchHistory},
     {path: '/favoriteRecipe', route: favoriteRecipe},
-    {path: '/userManagement', route: userManagement},
-    {path: '/dashboard', route: adminDashboard}
+    {path: '/userManagement', route: userManagement}
 ];
 
 module.exports = routes;

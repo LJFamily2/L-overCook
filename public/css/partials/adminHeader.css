@@ -1,3 +1,8 @@
+* {
+  margin: 0;
+  box-sizing: border-box;
+}
+
 header {
   position: fixed;
   width: 230px;
@@ -33,13 +38,7 @@ nav div div,
   align-items: center;
 }
 
-nav div div:hover, 
-#log-out:hover {
-  background-color: #75a26d;
-  color: white;
-}
-
-.nav-active {
+nav div:hover, #log-out:hover {
   background-color: #75a26d;
 }
 
@@ -52,8 +51,13 @@ nav i {
 
 #log-out {
   position: absolute;
-  bottom: 0px;
+  bottom: 20px;
   width: 100%;
   background-color: rgba(89, 126, 82, 0.21);
+}
+
+/* Default background color for home button */
+.home-btn {
+  background-color: #75a26d;
 }
 

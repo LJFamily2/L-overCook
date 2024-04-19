@@ -3,24 +3,3 @@
     padding: 0;
     box-sizing: border-box;
 }
-
-:root {
-    /* Fonts */
-    --font-poppins: 'Poppins', sans-serif;
-  
-    /* Font Sizes */
-    --font-size-base: 16px;
-    --font-size-lg: 18px;
-    --font-size-sm: 14px;
-
-    /* Colors */
-  --color-gray: #111;
-  --color-dimgray-100: #666;
-  --color-dimgray-200: rgba(102, 102, 102, 0.8);
-  --color-dimgray-300: rgba(102, 102, 102, 0.35);
-  --color-darkslategray: #333;
-  --color-silver: rgba(192, 192, 192, 0.3);
-  --color-crimson: #ee1d52;
-  --color-floralwhite: #fffcf6;
-  --color-green: #6a896d;
-}
