@@ -5,7 +5,8 @@ const { v4: uuidv4 } = require('uuid');
 
 // Render get profile page
 const getProfilePage = async (req, res) => {
-   res.send('Profile page');
+   // res.send('Profile page');
+   res.render('client/profile', { layout: "layouts/client/defaultLayout", userAuthentication: false });
 };
 
 // Render get email page
