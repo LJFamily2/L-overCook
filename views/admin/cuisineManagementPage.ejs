@@ -7,17 +7,16 @@
     <div class="col-2"><%- include('../partials/langButton') %></div>
   </div>
   <hr />
-
   <!-- Headline  -->
   <%- include('../partials/headline') %>
 
-  <!-- Button trigger modal -->
+  <!-- Button trigger add cuisine modal -->
   <div class="d-grid d-md-flex justify-content-md-end mx-5">
     <button
       type="button"
       class="btn btn-primary"
       data-bs-toggle="modal"
-      data-bs-target="#addIngredientModal"
+      data-bs-target="#addCuisineModal"
     >
       Add item
     </button>
@@ -26,31 +25,29 @@
   <!-- HTML for displaying alerts -->
   <div id="alertContainer" class="mt-3"></div>
 
-  <!-- Ingredient table starts -->
+  <!-- Cuisine table starts -->
   <table class="table mt-3 text-center">
     <thead>
       <tr>
         <th scope="col">Id</th>
         <th scope="col">Name</th>
-        <th scope="col">Category</th>
         <th scope="col"></th>
         <th scope="col"></th>
       </tr>
     </thead>
     <tbody>
-      <% ingredients.forEach(ingredient => { %>
+      <% cuisines.forEach(cuisine => { %>
       <tr>
-        <td><%= ingredient.id %></td>
-        <td><%= ingredient.name %></td>
-        <td><%= ingredient.category.name %></td>
+        <td><%= cuisine.id %></td>
+        <td><%= cuisine.name %></td>
         <td>
           <!-- Button trigger update modal -->
           <button
             type="button"
-            class="btn btn-link update-ingredient"
+            class="btn btn-link update-cuisine"
             style="cursor: pointer; text-decoration: none; color: black"
             data-bs-toggle="modal"
-            data-bs-target="#updateIngredientModal-<%= ingredient.id %>"
+            data-bs-target="#updateCuisineModal-<%= cuisine.id %>"
           >
             <i class="ri-edit-box-line"></i>
           </button>
@@ -59,29 +56,29 @@
           <!-- Button trigger delete confirmation modal -->
           <button
             type="button"
-            class="btn btn-link delete-ingredient"
+            class="btn btn-link delete-cuisine"
             style="cursor: pointer; text-decoration: none; color: black"
             data-bs-toggle="modal"
-            data-bs-target="#deleteIngredientModal-<%= ingredient.id %>"
+            data-bs-target="#deleteCuisineModal-<%= cuisine.id %>"
           >
             <i class="bi bi-trash"></i>
           </button>
         </td>
       </tr>
 
-      <!-- Update ingredient modal starts -->
+      <!-- Update cuisine modal starts -->
       <div
         class="modal fade"
-        id="updateIngredientModal-<%= ingredient.id %>"
+        id="updateCuisineModal-<%= cuisine.id %>"
         tabindex="-1"
-        aria-labelledby="updateIngredientModalLabel"
+        aria-labelledby="updateCuisineModalLabel"
         aria-hidden="true"
       >
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
             <div class="modal-header">
-              <h1 class="modal-title fs-5" id="updateIngredientModalLabel">
-                Update Ingredient
+              <h1 class="modal-title fs-5" id="updateCuisineModalLabel">
+                Update Cuisine
               </h1>
               <button
                 type="button"
@@ -92,33 +89,20 @@
             </div>
             <div class="modal-body">
               <form
-                action="/ingredientManagement/update/<%= ingredient.id %>"
-                id="ingredientUpdateForm"
+                action="/cuisineManagement/update/<%= cuisine.id %>"
+                id="cuisineUpdateForm"
                 method="post"
               >
                 <div class="mb-3">
-                  <label for="ingredientName" class="form-label"
-                    >Update Ingredient Name</label
+                  <label for="cuisineName" class="form-label"
+                    >Update Cuisine Name</label
                   >
                   <input
                     type="text"
                     class="form-control"
-                    id="ingredientName"
-                    value="<%= ingredient.name %>"
+                    id="cuisineName"
+                    value="<%= cuisine.name %>"
                     name="name"
-                    required
-                  />
-                </div>
-                <div class="mb-3">
-                  <label for="categoryName" class="form-label"
-                    >Update Category Name</label
-                  >
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="categoryName"
-                    name="categoryName"
-                    value="<%= ingredient.category.name %>"
                     required
                   />
                 </div>
@@ -139,21 +123,21 @@
           </div>
         </div>
       </div>
-      <!-- Update ingredient modal ends -->
+      <!-- Update cuisine modal ends -->
 
-      <!-- Delete ingredient modal starts -->
+      <!-- Delete cuisine modal starts -->
       <div
         class="modal fade"
-        id="deleteIngredientModal-<%= ingredient.id %>"
+        id="deleteCuisineModal-<%= cuisine.id %>"
         tabindex="-1"
-        aria-labelledby="deleteIngredientModalLabel"
+        aria-labelledby="deleteCuisineModalLabel"
         aria-hidden="true"
       >
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
             <div class="modal-header">
-              <h1 class="modal-title fs-5" id="deleteIngredientModalLabel">
-                Delete Ingredient
+              <h1 class="modal-title fs-5" id="deleteCuisineModalLabel">
+                Delete Cuisine
               </h1>
               <button
                 type="button"
@@ -164,13 +148,11 @@
             </div>
             <div class="modal-body">
               <form
-                action="/ingredientManagement/delete/<%=ingredient.id%>"
-                id="ingredientDeleteForm"
+                action="/cuisineManagement/delete/<%=cuisine.id%>"
+                id="cuisineDeleteForm"
                 method="post"
               >
-                <p>
-                  Are you sure to permanently delete <%= ingredient.name %>?
-                </p>
+                <p>Are you sure to permanently delete <%= cuisine.name %>?</p>
 
                 <div class="modal-footer">
                   <button type="submit" class="btn btn-danger">Delete</button>
@@ -187,28 +169,28 @@
           </div>
         </div>
       </div>
-      <!-- Delete ingredient modal ends -->
+      <!-- Delete cuisine modal ends -->
 
       <% }) %>
     </tbody>
   </table>
   <%- include('../partials/navigationOfTable') %>
-  <!-- Ingredient table ends -->
+  <!-- cuisine table ends -->
 </div>
 
-<!-- Create ingredient modal starts -->
+<!-- Create Cuisine modal starts -->
 <div
   class="modal fade"
-  id="addIngredientModal"
+  id="addCuisineModal"
   tabindex="-1"
-  aria-labelledby="addIngredientModalLabel"
+  aria-labelledby="addCuisineModalLabel"
   aria-hidden="true"
 >
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="addIngredientModalLabel">
-          Add new ingredient
+        <h1 class="modal-title fs-5" id="addCuisineModalLabel">
+          Add New Cuisine
         </h1>
         <button
           type="button"
@@ -217,31 +199,15 @@
           aria-label="Close"
         ></button>
       </div>
-      <form
-        id="ingredientForm"
-        action="/ingredientManagement/new"
-        method="post"
-      >
+      <form id="cuisineForm" action="/cuisineManagement/new" method="post">
         <div class="modal-body">
           <div class="mb-3">
-            <label for="ingredientName" class="form-label"
-              >Ingredient Name</label
-            >
+            <label for="cuisineName" class="form-label">Cuisine Name</label>
             <input
               type="text"
               class="form-control"
-              id="ingredientName"
+              id="cuisineName"
               name="name"
-              required
-            />
-          </div>
-          <div class="mb-3">
-            <label for="categoryName" class="form-label">Category Name</label>
-            <input
-              type="text"
-              class="form-control"
-              id="categoryName"
-              name="categoryName"
               required
             />
           </div>
@@ -260,4 +226,4 @@
     </div>
   </div>
 </div>
-<!-- Create ingredient modal ends -->
+<!-- Create cuisine modal ends -->

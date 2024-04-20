@@ -5,7 +5,7 @@ const ingredientController = require('../../controllers/admin/ingredientControll
 router.get('/', ingredientController.getIngredientPage);
 router.post('/new', ingredientController.createIngredient);
 router.post('/delete/:id', ingredientController.deleteIngredient);
-router.put('/update/:id', ingredientController.updateIngredient);
+router.post('/update/:id', ingredientController.updateIngredient);
 
 module.exports = router
 
