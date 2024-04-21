@@ -7,7 +7,7 @@ async function initialize(passport) {
     try {
       const user = await UserModel.findOne({ username: username });
       if (!user) {
-        return done(null, false, { message: "User does not exist" });
+        return done(null, false, { message: "Invalid username or password" });
       }
 
       const isPasswordValid = await bcrypt.compare(password, user.password);
