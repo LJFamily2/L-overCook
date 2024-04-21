@@ -3,15 +3,20 @@
    <link rel="stylesheet" href="/css/partials/signUpSignIn.css" />
 </head>
 <!-- Sign up form -->
-<div class="background"></div>
+<div class="background">
+
+</div>
 <section class="client-sign-up-form">
    <div class="form-title">
       <div class="title-1">Sign Up</div>
       <div class="title-2">Let's get you started.</div>
    </div>
-
+   
    <div class="form-format">
-      <form class="form-layout" action="/" method="post">
+
+      <form class="form-layout" action="<%= isAdminSignUp ? '/signup/addAdmin' : '/signup/addUser' %>" method="post">
+         <%- include('./notificationMessage') %>
+
          <div class="field">
             <label class="label" for="username">Username</label>
             <input
@@ -19,12 +24,13 @@
                id="username"
                name="username"
                type="text"
+               required
             />
          </div>
 
          <div class="field">
             <label class="label" for="email">Email Address</label>
-            <input class="input-box" id="email" name="email" type="text" />
+            <input class="input-box" id="email" name="email" type="email" required/>
          </div>
 
          <div class="field">
@@ -33,7 +39,8 @@
                class="input-box"
                id="password"
                name="password"
-               type="text"
+               type="password"
+               required
             />
             <p>
                Use 8 or more characters with a mix of letters, numbers, and
