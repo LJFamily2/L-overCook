@@ -18,7 +18,7 @@ const routes = [
     {path: '/signin', route: signInRoute},
     {path: '/account', route: profileRoute},
     {path: '/category', route: category},
-    {path: '/cuisine', route: cuisine},
+    {path: '/cuisineManagement', route: cuisine},
     {path: '/ingredientManagement', route: ingredient},
     {path: '/recipeManagement', route: recipe},
     {path: '/searchHistory', route: searchHistory},

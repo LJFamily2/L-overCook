@@ -1,322 +1,415 @@
 <div class="fluid-container">
-  <!-- Headline -->
-  <!-- <h2 class="mb-5">Recipe Management</h2>
-  <hr/> -->
+  <!-- Title-->
+  <div class="row d-flex align-items-center m-0">
+    <% if(heading){ %>
+    <h1 class="py-3 px-5 col-10"><%= heading %></h1>
+    <% } %>
+    <div class="col-2"><%- include('../partials/langButton') %></div>
+  </div>
+  <hr />
 
-  <!-- Header at the top of page -->
-  <div class="head-page">
-    <div class="nav-left">
-       <% if(heading){ %>
-          <span class="welcome"><%= heading %></span>
-       <% } %> 
-    </div>
+  <!-- Headline  -->
+  <%- include('../partials/headline') %>
 
-    <div class="nav-right">
-       <%- include('../partials/langButton') %>
-    </div>
- </div>
-
-  <!-- breadcrumb -->
- <!--  <nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="#">Home</a></li>
-      <li class="breadcrumb-item active" aria-current="page">
-        Recipe Management
-      </li>
-    </ol>
-  </nav> -->
-  <div class="container-fluid py-3 px-3">
-   <div class="row align-items-center justify-content-around">
-      <nav aria-label="breadcrumb" class="col-8">
-         <ol class="breadcrumb mb-0">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <% if(heading){ %>
-
-            <li class="breadcrumb-item active" aria-current="page">
-               <%= heading %>
-            </li>
-            <% } %>
-         </ol>
-      </nav>
-      <div class="col-4 w-25 px-1 border-2">
-      </div>
-   </div>
-</div>
+  <!-- Button trigger modal -->
+  <div class="d-grid d-md-flex justify-content-md-end mx-5">
+    <!-- Button trigger add recipe modal -->
+    <button
+    id="addRecipeBtn"
+    class="btn btn-primary"
+    data-bs-toggle="modal"
+    data-bs-target="#addRecipeModal"
+  >
+    Add Item
+  </button>
+  </div>
   <!-- HTML for displaying alerts -->
-  <div id="alertContainer"></div>
-  
-  <!-- Table display information -->
-    <table class="table table-hover mt-3 text-center">
-      <thead>
-        <tr>
-          <th scope="col">Image</th>
-          <th scope="col">ID</th>
-          <th scope="col">Name</th>
-          <th scope="col">Description</th>
-          <th scope="col">Ingredients</th>
-          <th scope="col">Cuisine</th>
-          <th scope="col">Time</th>
-          <th scope="col">URL</th>
-          <th scope="col"></th>
-        </tr>
-      </thead>
-      <tbody>
-        <% recipes.forEach(recipe => { %>
+  <div id="alertContainer" class="mt-3"></div>
+
+  <!-- Recipe table starts -->
+  <table class="table table-hover mt-3 text-center">
+    <thead>
+      <tr>
+        <th scope="col">Image</th>
+        <th scope="col">ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Description</th>
+        <th scope="col">Ingredients</th>
+        <th scope="col">Cuisine</th>
+        <th scope="col">Time</th>
+        <th scope="col">URL</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% recipes.forEach(recipe => { %>
         <tr>
           <td>
-            <img
-              src="/images/<%= recipe.image %>"
-              alt="<%= recipe.image %>"
-              width="100"
-            />
+            <% if (recipe.image) { %>
+              <img
+                src="/images/<%= recipe.image %>"
+                alt="<%= recipe.image %>"
+                width="100"
+              />
+            <% } else { %>
+              N/A
+            <% } %>
           </td>
           <td><%= recipe.id %></td>
           <td><%= recipe.name %></td>
-          <td><%= recipe.description %></td>
+          <td><%= recipe.description ? recipe.description : 'N/A'%></td>
           <td>
             <% recipe.ingredients.forEach(ingredient=> {%>
             <p>
-              <%= ingredient.ingredient.name %> (<%= ingredient.quantity %>)
+              <%= ingredient?.ingredient?.name %> (<%= ingredient.quantity %>)
             </p>
             <% })%>
           </td>
-          <td><%= recipe.cuisine.name %></td>
-          <td><%= recipe.time %></td>
-          <td><%= recipe.url %></td>
+          <td><%= recipe.cuisine ? recipe.cuisine.name : 'N/A' %></td>
+          <td><%= recipe.time ? recipe.time : 'N/A' %></td>
+          <td><%= recipe.url ? recipe.url : 'N/A' %></td>
           <td>
-            <a
-              href=""
-              style="cursor: pointer; text-decoration: none; color: black"
-            >
-              <i class="ri-edit-box-line"></i>
-            </a>
-          </td>
-        </tr>
-        <% }) %>
-      </tbody>
-    </table>
-  <%- include('../partials/navigationOfTable') %>
-
-  <!-- Modal -->
-  <div
-    class="modal fade"
-    id="recipeModal"
-    tabindex="-1"
-    aria-labelledby="recipeModalLabel"
-    aria-hidden="true"
-  >
-    <div class="modal-dialog modal-dialog-centered" style="max-width: 40%">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="recipeModalLabel">Add New Recipe</h1>
-          <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="modal"
-            aria-label="Close"
-          ></button>
-        </div>
-        <form id="recipeForm" action="/recipeManagement/new" method="post">
-          <div class="modal-body">
-            <div class="mb-3">
-              <label for="recipeName" class="form-label">Recipe Name</label>
-              <input
-                type="text"
-                class="form-control"
-                id="recipeName"
-                name="name"
-                required
-              />
-            </div>
-            <div class="mb-3">
-              <label for="recipeDescription" class="form-label"
-                >Description</label
-              >
-              <input
-                class="form-control"
-                id="recipeDescription"
-                name="description"
-              ></input>
-            </div>
-                        
-            <div class="mb-3" id="ingredientsContainer">
-              <label class="mb-1">Ingredients</label>
-              <div class="row mb-3">
-                <div class="col position-relative">
-                    <input type="text" name="ingredient" id="searchIngredient" class="form-control" placeholder="Ingredient name" aria-label="Ingredient name" onclick="displayDropdown('dropDownSelectIngredients')" oninput="searchItems('searchIngredient')"/>
-                    <div class="position-absolute bg-light w-100" id="dropDownSelectIngredients" style="display: none; z-index: 1000">
-                        <div>
-                            <!-- Dropdown content -->
-                            <% ingredients.forEach(ingredient => { %>
-                            <div class="form-input" style="display: none">
-                                <label class="w-100 p-2" for="<%= ingredient.name %>"><%= ingredient.name %></label>
-                                <input type="checkbox" id="<%= ingredient.name %>" value="<%= ingredient.name %>" onchange="selectItem(this.value, 'searchIngredient')" hidden />
-                            </div>
-                            <% }) %>
-                            <!-- Add new ingredient link -->
-                            <div class="form-input form-input-new">
-                                <a href="#" class="link-dark p-2 text-decoration-none" style="display: block">+ Add new ingredient</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <input type="text" name="quantity" class="form-control" placeholder="Quantity" aria-label="Quantity"/>
-                </div>
-                <div class="col-1 fs-4 remove-ingredient" style="cursor: pointer; display: none" onclick="removeIngredient(this)">
-                    <i class="ri-close-line" aria-label="Remove ingredient"></i>
-                </div>
-              </div>
-              <div class="row mb-3">
-                  <div class="col px-3 add-new-ingredient" style="cursor: pointer; color: blue" onclick="addNewIngredient()">+ Add ingredient</div>
-              </div>
-            </div>
-
-            <div class="mb-3">
-              <label for="recipeCuisine" class="form-label">Cuisine</label>
-              <select class="form-select" id="cuisine" name="cuisine">
-                <% cuisines.forEach(function(cuisine) { %>
-                <option value="<%= cuisine._id%>"><%= cuisine.name %></option>
-                <% }) %>
-              </select>
-            </div>
-            <div class="mb-3">
-              <label for="recipeImage" class="form-label">Image</label>
-              <input
-                type="text"
-                class="form-control"
-                id="recipeImage"
-                name="image"
-              />
-            </div>
-            <div class="mb-3">
-              <label for="recipeTime" class="form-label">Time</label>
-              <input
-                type="text"
-                class="form-control"
-                id="recipeTime"
-                name="time"
-              />
-            </div>
-            <div class="mb-3">
-              <label for="recipeUrl" class="form-label">URL</label>
-              <input
-                type="text"
-                class="form-control"
-                id="recipeUrl"
-                name="url"
-              />
-            </div>
-          </div>
-
-
-          <div class="modal-footer">
-            <button type="submit" class="btn btn-primary">Save Recipe</button>
+            <!-- Button trigger update modal -->
             <button
               type="button"
-              class="btn btn-secondary"
-              data-bs-dismiss="modal"
+              class="btn btn-link update-recipe"
+              style="cursor: pointer; text-decoration: none; color: black"
+              data-bs-toggle="modal"
+              data-bs-target="#updateRecipeModal-<%= recipe._id %>"
             >
-              Close
+              <i class="ri-edit-box-line"></i>
             </button>
+          </td>
+          <td>
+            <!-- Button trigger delete confirmation modal -->
+            <button
+              type="button"
+              class="btn btn-link delete-recipe"
+              style="cursor: pointer; text-decoration: none; color: black"
+              data-bs-toggle="modal"
+              data-bs-target="#deleteRecipeModal-<%= recipe.id %>"
+            >
+              <i class="bi bi-trash"></i>
+            </button>
+          </td>
+        </tr>
+        <!-- Update recipe modal starts -->
+        <div
+        class="modal fade"
+        id="updateRecipeModal-<%= recipe._id %>"
+        tabindex="-1"
+        aria-labelledby="updateRecipeModalLabel"
+        aria-hidden="true"
+        >
+        <div class="modal-dialog modal-dialog-centered" style="max-width: 40%">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="updateRecipeModalLabel">Update Recipe</h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <form action="/recipeManagement/update/<%= recipe._id %>" method="post">
+              <div class="modal-body" id="updateRecipeFormContainer">
+                <!-- Pre-populate form fields with recipe data -->
+                <div class="mb-3">
+                  <label for="recipeName" class="form-label">Recipe Name</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="recipeName"
+                    name="name"
+                    value="<%= recipe.name %>"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="recipeDescription" class="form-label">Description</label>
+                  <input
+                    class="form-control"
+                    id="recipeDescription"
+                    name="description"
+                    value="<%= recipe.description %>"
+                  />
+                </div>
+
+                 <!-- Ingredients section -->
+                 <div class="mb-3 ingredientsContainer">
+                  <label for="recipeIngredients" class="form-label">Ingredients</label>
+                  <% recipe.ingredients.forEach(ingredient => { %>
+                      <div class="row mb-3 ingredientObject">
+                          <div class="col position-relative">
+                              <div class="search-select-box">
+                                  <select name="ingredient" class="w-100 form-control" data-live-search="true">
+                                      <% ingredients.forEach(ing => { %>
+                                        <option value="<%= ing.name %>" <%= ingredient.ingredient.name === ing.name ? 'selected' : '' %>><%= ing.name %></option>
+                                      <% }) %>
+                                  </select>
+                              </div>
+                          </div>
+                          <div class="col">
+                              <input type="text" name="quantity" class="form-control" placeholder="Quantity" aria-label="Quantity" value="<%= ingredient.quantity %>"/>
+                          </div>
+                          <div class="col-1 fs-4 remove-ingredient" style="cursor: pointer; display: none" onclick="removeIngredient(this)">
+                            <i class="ri-close-line" aria-label="Remove ingredient"></i>
+                          </div>
+                      </div>
+                  <% }) %>
+                  <div class="row mb-3">
+                    <div class="col px-3 add-ingredient" style="cursor: pointer; color: blue" onclick="addIngredient('updateRecipeModal-<%= recipe._id %>')">+ Add ingredient</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">Save Changes</button>
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-bs-dismiss="modal"
+                >
+                  Close
+                </button>
+              </div>
+            </form>
           </div>
-        </form>
+        </div>
+        </div>
+        <!-- Update recipe modal ends -->
+        
+        <!-- Delete recipe modal starts -->
+        <div
+          class="modal fade"
+          id="deleteRecipeModal-<%= recipe.id %>"
+          tabindex="-1"
+          aria-labelledby="deleteRecipeModalLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="deleteIngredientModalLabel">
+                  Delete Recipe
+                </h1>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <form
+                action="/recipeManagement/delete/<%=recipe.id%>"
+                id="recipeDeleteForm"
+                method="post"
+              >
+                <div class="modal-body">
+                  
+                    <p>
+                      Are you sure to permanently delete <%= recipe.name %>?
+                    </p>
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-danger">Delete</button>
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-bs-dismiss="modal"
+                  >
+                    Close
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <!-- Delete recipe modal ends -->
+        <% }) %>
+    </tbody>
+  </table>
+  <!-- Recipe table ends -->
+</div>
+
+<!-- Create recipe modal starts -->
+<div
+  class="modal fade"
+  id="addRecipeModal"
+  tabindex="-1"
+  aria-labelledby="addRecipeModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" style="max-width: 40%">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addRecipeModalLabel">Add New Recipe</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
       </div>
+      <form action="/recipeManagement/new" method="post">
+        <div class="modal-body" id="recipeFormContainer">
+          <div class="mb-3">
+            <label for="recipeName" class="form-label">Recipe Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="recipeName"
+              name="name"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="recipeDescription" class="form-label"
+              >Description</label
+            >
+            <input
+              class="form-control"
+              id="recipeDescription"
+              name="description"
+            ></input>
+          </div>
+
+          <div class="mb-3 ingredientsContainer">
+            <label for="recipeIngredients" class="form-label">Ingredients</label>
+            <div class="row mb-3 ingredientObject">
+              <div class="col position-relative">
+                <div class="search-select-box">
+                  <select name="ingredient" class="w-100 form-control" data-live-search="true">
+                    <% ingredients.forEach(ingredient => { %>
+                      <option name="<%= ingredient.name %>" value="<%= ingredient.name %>" data-tokens="<%= ingredient.name %>"><%= ingredient.name %></option>
+                    <% }) %> 
+                  </select>
+                </div>
+              </div>
+              <div class="col">
+                <input type="text" name="quantity" class="form-control" placeholder="Quantity" aria-label="Quantity"/>
+              </div>
+              <div class="col-1 fs-4 remove-ingredient" style="cursor: pointer; display: none" onclick="removeIngredient(this)">
+                <i class="ri-close-line" aria-label="Remove ingredient"></i>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col px-3 add-ingredient" style="cursor: pointer; color: blue" onclick="addIngredient('addRecipeModal')">+ Add ingredient</div>
+              <div class="col">
+                <a href="/ingredientManagement">Can't find your ingredient? Create new here.</a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="mb-3">
+            <label for="recipeCuisine" class="form-label">Cuisine</label>
+            <select class="form-select" id="recipeCuisine" name="cuisine">
+              <% cuisines.forEach(function(cuisine) { %>
+              <option value="<%= cuisine._id%>"><%= cuisine.name %></option>
+              <% }) %>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="recipeImage" class="form-label">Image</label>
+            <input
+              type="text"
+              class="form-control"
+              id="recipeImage"
+              name="image"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="recipeTime" class="form-label">Time</label>
+            <input
+              type="text"
+              class="form-control"
+              id="recipeTime"
+              name="time"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="recipeUrl" class="form-label">URL</label>
+            <input
+              type="text"
+              class="form-control"
+              id="recipeUrl"
+              name="url"
+            />
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Save Recipe</button>
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+        </div>
+      </form>
     </div>
   </div>
 </div>
+<!-- Create recipe modal ends -->
+
 
 <script>
-  let i = 0;
-  function addNewIngredient() {
-      i++;
-      const ingredientsContainer = document.getElementById('ingredientsContainer');
-      const newRow = document.createElement('div');
-      newRow.classList.add('row', 'mb-3');
-      newRow.innerHTML = `
+  function addIngredient(modalId){
+    const newRow = document.createElement('div');
+    newRow.classList.add('row', 'mb-3', 'ingredientObject');
+    newRow.innerHTML = `
       <div class="col position-relative">
-          <input type="text" id="searchIngredient${i}" name="ingredient" class="form-control" placeholder="Ingredient name" aria-label="Ingredient name" onclick="displayDropdown('dropDownSelectIngredients${i}' )" oninput="searchItems('searchIngredient${i}' )" />
-          <div class="position-absolute bg-light w-100" id="dropDownSelectIngredients${i}"  style="display: none; z-index: 1000">
-              <div>
-                  <!-- Dropdown content -->
-                  <% ingredients.forEach(ingredient => { %>
-                  <div class="form-input" style="display: none">
-                      <label class="w-100 p-2" for="<%= ingredient.name %>${i}"><%= ingredient.name %></label>
-                      <input type="checkbox" id="<%= ingredient.name %>${i}" value="<%= ingredient.name %>" onchange="selectItem(this.value, 'searchIngredient${i}' )" hidden />
-                  </div>
-                  <% }) %>
-                  <!-- Add new ingredient link -->
-                  <div class="form-input form-input-new">
-                      <a href="#" class="link-dark p-2 text-decoration-none" style="display: block">+ Add new ingredient</a>
-                  </div>
-              </div>
-          </div>
+        <div class="search-select-box">
+          <select name="ingredient" class="w-100 form-control" data-live-search="true">
+            <% ingredients.forEach(ingredient => { %>
+              <option name="<%= ingredient.name %>" value="<%= ingredient.name %>" data-tokens="<%= ingredient.name %>"><%= ingredient.name %></option>
+            <% }) %> 
+          </select>
+        </div>
       </div>
       <div class="col">
-          <input type="text" name="quantity" class="form-control" placeholder="Quantity" aria-label="Quantity" />
+        <input type="text" name="quantity" class="form-control" placeholder="Quantity" aria-label="Quantity"/>
       </div>
-      <div class="col-1 fs-4 remove-ingredient" style="cursor: pointer;">
-          <i class="ri-close-line" aria-label="Remove ingredient" onclick="removeIngredient(this)"></i>
+      <div class="col-1 fs-4 remove-ingredient" style="cursor: pointer; display: none" onclick="removeIngredient(this)">
+        <i class="ri-close-line" aria-label="Remove ingredient"></i>
       </div>
-  `;
+    `
+    const modal = document.getElementById(modalId);
+    const ingredientsContainer = modal.querySelector('.ingredientsContainer');
+    const addNewIngredientButton = ingredientsContainer.querySelector('.add-ingredient');
+    ingredientsContainer.insertBefore(newRow, addNewIngredientButton.parentElement);
+    
+    //Re-initialize Bootstrap-select plugin
+    $('.search-select-box select').selectpicker();
 
-      const addNewIngredientButton = ingredientsContainer.querySelector('.add-new-ingredient');
-      ingredientsContainer.insertBefore(
-          newRow,
-          addNewIngredientButton.parentElement
-      );
+    const removeIngredients = modal.querySelectorAll('.remove-ingredient');
+    if (removeIngredients.length > 1) {
+        removeIngredients.forEach((element) => {
+            element.style.display = 'block';
+        });
+    } else {
+        removeIngredients[0].style.display = 'none';
+    }
 
-      const removeIngredients = document.querySelectorAll('.remove-ingredient');
-      if (removeIngredients.length > 1) {
-          removeIngredients.forEach((element) => {
-              element.style.display = 'block';
-          });
-      } else {
-          removeIngredients[0].style.display = 'none';
-      }
+    console.log('Modal ID:', modalId);
+    console.log('Modal Element:', modal);
+    console.log('Ingredients Container:', ingredientsContainer);
   }
 
   function removeIngredient(element) {
-      const row = element.closest('.row');
-      row.parentNode.removeChild(row);
+    const row = element.closest('.row');
+    row.parentNode.removeChild(row);
 
-      const removeIngredients = document.querySelectorAll('.remove-ingredient');
-      if (removeIngredients.length <= 1) {
-          removeIngredients.forEach((element) => {
-              element.style.display = 'none';
-          });
-      }
+    const removeIngredients = document.querySelectorAll('.remove-ingredient');
+    if (removeIngredients.length <= 1) {
+        removeIngredients.forEach((element) => {
+            element.style.display = 'none';
+        });
+    }
   }
 
-  function displayDropdown(dropdownId) {
-      var dropdown = document.getElementById(dropdownId);
-      dropdown.style.display = dropdown.style.display === 'none'
-          ? 'block'
-          : 'none';
-  }
-
-  function searchItems(inputId) {
-      var input = document
-      .getElementById(inputId)
-      .value.toLowerCase();
-      var parentDiv = document.getElementById(inputId).parentNode;
-      var items = parentDiv.querySelectorAll('.form-input label');
-
-      for (var i = 0; i < items.length; i++) {
-          var itemName = items[i].innerText.toLowerCase();
-
-          if (!items[i].parentNode.classList.contains('form-input-new')) {
-              items[i].parentNode.style.display =
-                  itemName.includes(input)
-                      ? 'block'
-                      : 'none';
-              }
-          }
-      }
-
-  function selectItem(itemName, inputId) {
-      document.getElementById(inputId).value = itemName;
-      console.log(itemName);
-      console.log(inputId);
-  }
 </script>
