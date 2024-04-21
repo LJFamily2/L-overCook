@@ -137,9 +137,32 @@
                   />
                 </div>
 
-                <!-- Ingredients section -->
-
-
+                 <!-- Ingredients section -->
+                 <div class="mb-3 ingredientsContainer">
+                  <label for="recipeIngredients" class="form-label">Ingredients</label>
+                  <% recipe.ingredients.forEach(ingredient => { %>
+                      <div class="row mb-3 ingredientObject">
+                          <div class="col position-relative">
+                              <div class="search-select-box">
+                                  <select name="ingredient" class="w-100 form-control" data-live-search="true">
+                                      <% ingredients.forEach(ing => { %>
+                                        <option value="<%= ing.name %>" <%= ingredient.ingredient.name === ing.name ? 'selected' : '' %>><%= ing.name %></option>
+                                      <% }) %>
+                                  </select>
+                              </div>
+                          </div>
+                          <div class="col">
+                              <input type="text" name="quantity" class="form-control" placeholder="Quantity" aria-label="Quantity" value="<%= ingredient.quantity %>"/>
+                          </div>
+                          <div class="col-1 fs-4 remove-ingredient" style="cursor: pointer; display: none" onclick="removeIngredient(this)">
+                            <i class="ri-close-line" aria-label="Remove ingredient"></i>
+                          </div>
+                      </div>
+                  <% }) %>
+                  <div class="row mb-3">
+                    <div class="col px-3 add-ingredient" style="cursor: pointer; color: blue" onclick="addIngredient('updateRecipeModal-<%= recipe._id %>')">+ Add ingredient</div>
+                  </div>
+                </div>
               </div>
 
               <div class="modal-footer">
