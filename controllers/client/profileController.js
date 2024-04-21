@@ -29,7 +29,8 @@ const generateAndSendOtpEmail = async (user) => {
 
       // Check if the last OTP request was less than 60 seconds ago
       if (lastOtpRequest && currentTime - lastOtpRequest < 60000) {
-         return res.status(429).send('Too many OTP requests. Please wait a moment and try again.');
+         req.flash('error', 'Too many OTP requests. Please wait a moment and try again.');
+         return res.status(429)
       }
 
       const { otp, timestamp } = generateOTP();
