@@ -1,11 +1,19 @@
 const User = require("../../models/User");
 const Recipe = require("../../models/Recipe");
+const categoryController = require("../admin/categoryController");
+const ingredientController = require("../admin/ingredientController");
 
 const searchHistoryController = {
   getSearchHistory: async (req, res) => {
     try {
+      const categories = await categoryController.getAllCategories();
+      const ingredients = await ingredientController.getIngredientsForAllCategories();
       const searchHistory = await User.find().populate("searchHistory").exec();
-      // res.render(""{searchHistory});
+      res.render("client/searchHistory", {
+        categories,
+        ingredients, 
+        layout: "./layouts/client/defaultLayout", 
+        userAuthentication: true });
     } catch (err) {
       console.log(err);
       res.status(500).send("Internal Server Error");
