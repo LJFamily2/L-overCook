@@ -12,7 +12,8 @@
    </div>
 
    <div class="form-format">
-      <form class="form-layout" action="/" method="post">
+      <form class="form-layout" action="<%= isAdminSignUp ? '/signin/adminAuth' : '/signin/userAuth' %>" method="post">
+         <%- include('./notificationMessage') %>
          <div class="field">
             <label class="label" for="username">Username</label>
             <input
@@ -29,7 +30,7 @@
                class="input-box"
                id="password"
                name="password"
-               type="text"
+               type="password"
             />
             <p>
                Use 8 or more characters with a mix of letters, numbers, and

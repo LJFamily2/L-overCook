@@ -8,12 +8,10 @@ router.get("/", signInController.getSignIn);
 router.post(
   "/userAuth",
   passport.authenticate("local", {
+    successReturnToOrRedirect:'/',
     failureRedirect: "/signin",
     failureFlash: true,
-  }),
-  (req, res) => {
-    res.send("User authenticated successfully");
-  }
+  })
 );
 
 // Signin page for admin
@@ -21,12 +19,10 @@ router.get("/admin", signInController.getAdminSignIn);
 router.post(
   "/adminAuth",
   passport.authenticate("local", {
+    successReturnToOrRedirect:'/dashboard',
     failureRedirect: "/signin/admin",
     failureFlash: true,
-  }),
-  (req, res) => {
-    res.send("Admin authenticated successfully");
-  }
+  })
 );
 
 module.exports = router;
