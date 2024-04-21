@@ -36,6 +36,28 @@ exports.getRecipePage = async (req, res) => {
    }
 };
 
+// Get recipe data
+exports.getRecipeData = async (req, res) => {
+   try {
+      // Extract the recipe ID from the request parameters
+      const recipeId = req.params.id;
+  
+      // Fetch the recipe data from the database
+      const recipe = await Recipe.findById(recipeId);
+  
+      // If the recipe is found, send it as a JSON response
+      if (recipe) {
+        res.json(recipe);
+      } else {
+        // If the recipe is not found, send a 404 response
+        res.status(404).json({ message: 'Recipe not found' });
+      }
+   } catch (error) {
+      // If there's an error, send a 500 response
+      res.status(500).json({ message: 'Server error' });
+   }
+};
+
 
 // Helper function to create recipe without returning status
 exports.createRecipeLogic = async (
@@ -172,5 +194,21 @@ exports.updateRecipe = async(req, res) => {
 
    }catch(error){
       res.redirect('/recipeManagement?error=true&message=' + encodeURIComponent(error.message));        
+  }
+}
+
+exports.deleteRecipe = async(req, res)=>{
+   const recipeId = req.params.id;
+   try{
+      const recipe = await Recipe.findById(recipeId);
+      if(!recipe){
+         throw new Error('Failed to delete item: Recipe not found');
+      }
+
+      await Recipe.deleteOne({_id: recipeId});
+      res.redirect('/recipeManagement?success=Recipe+deleted+successfully');
+      
+   }catch(error){
+      res.redirect('/recipeManagement?error=true&message=' + encodeURIComponent(error.message));
   }
 }
