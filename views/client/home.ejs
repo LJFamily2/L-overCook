@@ -17,79 +17,12 @@
   />
 
   <!-- Css -->
+  <link rel="stylesheet" href="/css/partials/ingredientFilter.css" />
   <link rel="stylesheet" href="/css/clients/home.css" />
+  
 </head>
-<div class="ingredient-filter">
-  <h3>Ingredient Filter</h3>
-  <% Object.entries(ingredients).forEach(([category, ingredientsList]) => { %>
-  <div class="ingredients">
-    <div class="ingredient-header">
-      <img src="/images/vegetableIcon.png" alt="vegetable icon" />
-      <span><%= category %></span>
-    </div>
-    <% const maxVisibleIngredients =4; %> <%
-    ingredientsList.forEach((ingredient, index) => { %>
-    <button
-      type="button"
-      class="ingredient <%= index + 1 > maxVisibleIngredients ? 'hidden' : '' %>"
-    >
-      <%= ingredient %>
-    </button>
-    <% }) %> <% if (ingredientsList.length > maxVisibleIngredients) { %>
-    <button
-      type="button"
-      class="more-btn"
-      data-max-visible="<%= maxVisibleIngredients %>"
-    >
-      + <%= ingredientsList.length - maxVisibleIngredients %> more
-    </button>
-    <% } %>
-  </div>
-  <% }) %>
 
-  <script>
-    document.querySelectorAll(".more-btn").forEach((button) => {
-      button.addEventListener("click", () => {
-        const parent = button.parentNode;
-        const ingredients = parent.querySelectorAll(".ingredient");
-        const isShowingMore = button.textContent.startsWith("+");
-        const maxVisibleIngredients = parseInt(button.dataset.maxVisible);
-
-        ingredients.forEach((ingredient, index) => {
-          if (isShowingMore) {
-            ingredient.classList.remove("hidden");
-            button.textContent = `- Show less`;
-          } else {
-            ingredient.classList.toggle(
-              "hidden",
-              index + 1 > maxVisibleIngredients
-            );
-            button.textContent = `+ ${
-              ingredients.length - maxVisibleIngredients
-            } more`;
-          }
-        });
-      });
-    });
-  </script>
-
-  <!-- <div class="ingredients fruits">
-        <div class="ingredient-header">
-          <img src="/images/fruitsIcon.png" alt="fruit icon" />
-          <span> Fruits </span>
-        </div>
-        <button type="button">Lemon</button>
-        <button type="button">Apple</button>
-        <button type="button">Peach</button>
-        <button type="button">Banana</button>
-        <button type="button">+ 90 more</button>
-      </div> -->
-</div>
-
-<!-- Icon to show the ingredient filter when the screen is small -->
-<div class="expand-icon-container">
-  <img src="/images/expandShrink.png" class="expand-icon" />
-</div>
+<%- include('../partials/ingredientFilter') %>
 
 <div id="main-content-container">
   <div id="main-content">

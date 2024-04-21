@@ -6,10 +6,6 @@ let pantryIcon = document.querySelector(".pantry-icon");
 
 let pantryContents = document.querySelector(".pantry-contents");
 
-let expandIcon = document.querySelector(".expand-icon-container");
-
-let ingredientFilter = document.querySelector(".ingredient-filter");
-
 filterIcon.addEventListener("click", () => {
   filterCriteria.classList.toggle("show");
 });
@@ -19,7 +15,3 @@ pantryIcon.addEventListener("click", () => {
   pantryContents.classList.toggle("show");
 });
 
-expandIcon.addEventListener("click", () => {
-  expandIcon.classList.toggle("moveRight");
-  ingredientFilter.classList.toggle("moveRight");
-});
