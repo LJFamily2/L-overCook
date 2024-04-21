@@ -1,44 +1,88 @@
 <head>
-    <!-- css -->
-    <link rel="stylesheet" href="/css/clients/profile.css" />
+   <!-- css -->
+   <link rel="stylesheet" href="/css/clients/profile.css" />
 </head>
 
-<div class="container-fluid">
-    <div class="profile-head">
-        <span class="my-profile">My Profile</span>
-        <div class="profile-picture-frame">
-            <img
-                class="profile-picture"
-                loading="lazy"
-                src="/images/profile.jpg"
-                alt="profile picture"
+<form class="container-fluid p-0" action="" method="post">
+   <div class="profile-head">
+      <span class="my-profile">My Profile</span>
+      <div class="profile-picture-frame">
+         <img
+            class="profile-picture"
+            loading="eager"
+            src="/images/profile.jpg"
+            alt="profile picture"
+         />
+         <div
+            class="uploadImage w-100 h-100 position-absolute"
+            style="background: linear-gradient(180deg, transparent 70%, black)"
+         >
+            <label
+               class="w-100 h-100 d-flex align-items-center justify-content-center"
+               for="file"
+               style="cursor: pointer"
+            >
+               <input type="file" id="file" onchange="showButton()" hidden />
+               <img
+                  src="/images/up-loading.png"
+                  class="w-25"
+                  alt="upload file"
+               />
+            </label>
+         </div>
+      </div>
+   </div>
+
+   <!-- <button class="profile-button">
+      <span>Edit Avatar</span>
+   </button> -->
+
+   <div class="profile-information">
+      <div class="field">
+         <span class="field-title">Username</span>
+         <div class="field-info">
+            <input
+               type="text"
+               class="w-100 border-0"
+               name="username"
+               id="username"
+               value=""
+               style="outline: none"
+               oninput="showButton()"
             />
-        </div>
-    </div>
+         </div>
+      </div>
+      <div class="field">
+         <span class="field-title">Email Address</span>
+         <div class="field-info">
+            <input
+               type="text"
+               class="w-100 border-0"
+               name="email"
+               id="email"
+               value=""
+               style="outline: none"
+               oninput="showButton()"
+            />
+         </div>
+      </div>
+      <div class="field">
+         <span class="field-title">Forgot Password?</span>
+         <a href="/account/profile/resetPassword">Reset Password</a>
+      </div>
+      <button
+         type="submit"
+         id="saveBtn"
+         class="btn btn-primary"
+         style="display: none"
+      >
+         Save Changes
+      </button>
+   </div>
+</form>
 
-    <button class="profile-button">
-        <span>Edit Profile</span>
-    </button>
-
-    <div class="profile-information">
-        <div class="field">
-            <span class="field-title">Username</span>
-            <div class="field-info">
-                <span>johndoe</span>
-              </div>
-        </div>
-        <div class="field">
-            <span class="field-title">Email Address</span>
-            <div class="field-info">
-                <span>johndoe@gmail.com</span>
-            </div>
-        </div>
-        <div class="field">
-            <span class="field-title">Password</span>
-            <div class="field-info">
-                <span>*****************</span>
-            </div>
-            <a href="/account/profile/resetPassword" class="reset-password">Reset Password</a>
-        </div>
-    </div>
-</div>
+<script>
+   function showButton() {
+      document.getElementById('saveBtn').style.display = 'block';
+   }
+</script>
