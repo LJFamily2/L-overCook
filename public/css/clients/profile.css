@@ -60,6 +60,15 @@
     font-size: 18px;
 }
 
+.change-picture {
+    font-family: var(--font-poppins);
+    font-size: 18px;
+    font-style: italic;
+    text-decoration: underline;
+    color: black;
+    margin-top: -10px;
+}
+
 .profile-button:hover {
     background-color: #efe1bc;
 }
