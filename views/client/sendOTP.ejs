@@ -21,12 +21,15 @@
          "
       >
          <div class="enter-your-email-address-parent">
+            <div class="message w-100 fs-5">
+               <%- include('../partials/notificationMessage') %>
+            </div>
             <i class="enter-your-email"
                >An OTP has been sent to your email address.</i
             >
             <i class="enter-your-email">Enter OTP:</i>
             <div class="johndoegmailcom-wrapper">
-               <input type="hidden" name="token" value="<%=  token %>" />
+               <input type="hidden" name="token" value="<%= token %>" />
                <input
                   class="johndoegmailcom"
                   placeholder=""
@@ -35,56 +38,32 @@
                />
             </div>
          </div>
-         <div id="countdown" class=" w-100 fs-6"></div>
+         <div id="countdown" class="w-100 fs-6"></div>
+         <input type="hidden" name="action" id="action" value="" />
          <div class="d-flex justify-content-evenly w-100">
             <div class="button-wrapper">
                <div class="button">
                   <div class="sign-up-button">
-                     <!-- <img class="icons" alt="" src="/images/icons.svg" /> -->
-
                      <button
                         id="resendButton"
-                        type="button"
+                        type="submit"
                         class="sign-up"
                         style="background: transparent; border: none"
+                        onclick="setAction('resend')"
                      >
                         Resend OTP
                      </button>
                   </div>
                </div>
             </div>
-
-            <script>
-               const resendButton = document.getElementById('resendButton');
-               const countdown = document.getElementById('countdown');
-
-               let secondsRemaining = 30;
-
-               function updateCountdown() {
-                  countdown.textContent = `Gửi lại sau ${secondsRemaining} giây`;
-
-                  if (secondsRemaining === 0) {
-                     resendButton.disabled = false;
-                     countdown.textContent = '';
-                  } else {
-                     resendButton.disabled = true;
-                     secondsRemaining--;
-                     setTimeout(updateCountdown, 1000);
-                  }
-               }
-
-               updateCountdown();
-            </script>
-
             <div class="button-wrapper">
                <div class="button">
                   <div class="sign-up-button">
-                     <!-- <img class="icons" alt="" src="/images/icons.svg" /> -->
-
                      <button
                         type="submit"
                         class="sign-up"
                         style="background: transparent; border: none"
+                        onclick="setAction('verify')"
                      >
                         Confirm
                      </button>
@@ -93,5 +72,31 @@
             </div>
          </div>
       </form>
+
+      <script>
+         function setAction(action) {
+            document.getElementById('action').value = action;
+            if (action === 'resend') {
+               updateCountdown();
+            } 
+         }
+         
+         let secondsRemaining = 30;
+         const countdown = document.getElementById('countdown');
+         function updateCountdown() {
+            countdown.textContent = `Resend OTP in ${secondsRemaining} seconds`;
+
+            if (secondsRemaining === 0) {
+               document.getElementById('resendButton').disabled = false;
+               countdown.textContent = '';
+            } else {
+               document.getElementById('resendButton').disabled = true;
+               secondsRemaining--;
+               setTimeout(updateCountdown, 1000);
+            }
+         }
+
+         updateCountdown();
+      </script>
    </div>
 </section>

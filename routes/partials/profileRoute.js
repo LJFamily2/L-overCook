@@ -7,7 +7,7 @@ router.get('/profile/resetPassword', profileController.getEmailPage);
 router.post('/profile/resetPassword', profileController.sendOtp);
 
 router.get('/profile/resetPassword/verifyOTP', profileController.verifyOtpPage);
-router.post('/profile/resetPassword/verifyOTP', profileController.verifyOtp);
+router.post('/profile/resetPassword/verifyOTP', profileController.handleOtpRequest);
 
 // layout only
 // update password
