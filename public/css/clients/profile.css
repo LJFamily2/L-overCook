@@ -2,7 +2,10 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 70px;
+    padding-bottom: 70px;
+    padding-left: 0;
+    padding-right: 0;
+    background-color: var(--color-background-white);
 }
 
 .profile-head {
@@ -19,7 +22,7 @@
     position: relative;
     margin-top: 25px;
     margin-bottom: 20px;
-    font-family: var(--font-poppins);
+    font-family: var(--font-inika);
     font-size: 30px;
     color: #f8dbe0;
     font-weight: 700;
@@ -43,6 +46,10 @@
     width: auto;
 }
 
+.container-fluid a {
+    text-decoration: none;
+}
+
 .profile-button {
     display: flex;
     justify-content: center;
@@ -58,6 +65,15 @@
 .profile-button span {
     font-family: var(--font-poppins);
     font-size: 18px;
+}
+
+.change-picture {
+    font-family: var(--font-poppins);
+    font-size: 18px;
+    font-style: italic;
+    text-decoration: underline;
+    color: black;
+    margin-top: -10px;
 }
 
 .profile-button:hover {
