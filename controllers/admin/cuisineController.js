@@ -13,6 +13,21 @@ exports.getAllCuisines = async(req, res) => {
     }
 }
 
+// Get ingredient page
+exports.getCuisinePage = async (req,res) => {
+    try{
+        const cuisines = await this.getAllCuisines();
+        res.render('admin/cuisineManagementPage', {
+            cuisines, 
+            layout: "./layouts/admin/defaultLayout", 
+            currentPage: 'cuisineManagementPage',
+            heading: 'Cuisine Management',
+        });
+    }catch(error){
+        throw new Error(error.message);
+    }
+};
+
 // Create new cuisine
 exports.createCuisine = async (req, res) => {
     const { name } = req.body;
@@ -21,7 +36,7 @@ exports.createCuisine = async (req, res) => {
         // Check if category already exists
         const existingCuisine = await Cuisine.findOne({ name });
         if (existingCuisine) {
-            return res.status(400).json({error: 'Cuisine already exists' });
+            throw new Error('Failed to add item: Cuisine already exists');
         }
 
         // Create new category instance with a new ObjectId
@@ -31,10 +46,10 @@ exports.createCuisine = async (req, res) => {
 
         // Save the new category
         const newCuisine = await cuisine.save();
-
-        res.status(201).json({ cuisine: newCuisine, message: 'Cuisine added to database' });
+        res.redirect('/cuisineManagement?success=Cuisine+added+successfully');
     } catch (error) {
-        res.status(500).json({message: error.message});
+        res.redirect('/cuisineManagement?error=true&message=' + encodeURIComponent(error.message));
+
     }
 };
 
@@ -43,13 +58,7 @@ exports.createCuisine = async (req, res) => {
 exports.deleteCuisine = async (req,res) => {
     const cuisineId = req.params.id;
     console.log(cuisineId)
-    try{
-        // Check if category exists
-        const cuisine = await Cuisine.findById(cuisineId);
-        if (!cuisine) {
-            return res.status(404).json({ error: 'Cuisine not found' });
-        }
-        
+    try{        
         // Update recipes associated with the deleted cuisine
         await Recipe.updateMany(
             {cuisine: cuisineId},
@@ -58,7 +67,7 @@ exports.deleteCuisine = async (req,res) => {
         
         // Delete cuisine
         await Cuisine.deleteOne({ _id: cuisineId });
-        res.status(200).json({ message: `Cuisine '${cuisine.name}' deleted successfully` });
+        res.redirect('/cuisineManagement?success=Cuisine+deleted+successfully');
     }catch(error){
         res.status(500).json({message:error.message});
     }
@@ -72,7 +81,7 @@ exports.updateCuisine = async (req, res) => {
         // Check if id existed
         const cuisine = await Cuisine.findById(cuisineId);
         if(!cuisine){
-            return res.status(404).json({error: 'Cuisine not found'});
+            throw new Error('Failed to update item: Cuisine not found.')
         }
 
         // Check if name existed
@@ -80,13 +89,14 @@ exports.updateCuisine = async (req, res) => {
 
         // Throw error if cuisine name already existed
         if(updatedCuisine){
-            throw new Error(`Cuisine name '${cuisine.name}' already exists`);
+            throw new Error(`Failed to update item: Cuisine with name '${name}' already exists`);
         }
         
         await Cuisine.findByIdAndUpdate(cuisineId, { name }, { new: true });
-        res.status(200).json({ message: `Cuisine updated successfully, changed '${cuisine.name}' to '${name}'`});
+        res.redirect('/cuisineManagement?success=Cuisine+updated+successfully');
+        
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        res.redirect('/cuisineManagement?error=true&message=' + encodeURIComponent(error.message));        
     }
 }
 

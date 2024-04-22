@@ -1,7 +1,6 @@
 const mongoose = require('../../middlewares/database');
 const Recipe = require('../../models/Recipe');
 const Ingredient = require('../../models/Ingredient');
-const Cuisine = require('../../models/Cuisine');
 const ingredientController = require('./ingredientController');
 const cuisineController = require('./cuisineController');
 
@@ -37,6 +36,28 @@ exports.getRecipePage = async (req, res) => {
    }
 };
 
+// Get recipe data
+exports.getRecipeData = async (req, res) => {
+   try {
+      // Extract the recipe ID from the request parameters
+      const recipeId = req.params.id;
+  
+      // Fetch the recipe data from the database
+      const recipe = await Recipe.findById(recipeId);
+  
+      // If the recipe is found, send it as a JSON response
+      if (recipe) {
+        res.json(recipe);
+      } else {
+        // If the recipe is not found, send a 404 response
+        res.status(404).json({ message: 'Recipe not found' });
+      }
+   } catch (error) {
+      // If there's an error, send a 500 response
+      res.status(500).json({ message: 'Server error' });
+   }
+};
+
 
 // Helper function to create recipe without returning status
 exports.createRecipeLogic = async (
@@ -65,7 +86,7 @@ exports.createRecipeLogic = async (
       for (const ingredient of ingredients) {
          let ingredientId = ingredientMap.get(ingredient.name);
          if (!ingredientId) {
-            throw new Error('Ingredient not found: ' + ingredient.name);
+            throw new Error('Ingredient "' + ingredient.name + '" not found. Please ensure that all ingredients are present in the database before creating new recipe. <a href="/ingredientManagement">View ingredient database.</a>');
          }
          ingredient.ingredient = ingredientId;
       }
@@ -92,13 +113,14 @@ exports.createRecipeLogic = async (
 // Create new ingredient by calling the helper function and return status
 exports.createRecipe = async (req, res) => {
    const { name, description, ingredient, quantity, cuisine, image, time, url } = req.body;
-   console.log(req.body);
 
    // Ensure ingredient and quantity are arrays and map ingredient name with quantity
    const ingredients = Array.isArray(ingredient) ? 
        ingredient.map((name, index) => ({ name, quantity: quantity[index] })) :
        [{ name: ingredient, quantity }];
-   
+
+   console.log(ingredients);
+
    try {
       
       const newRecipe = await this.createRecipeLogic(
@@ -111,9 +133,82 @@ exports.createRecipe = async (req, res) => {
          url
       );
       if (newRecipe) {
-         res.redirect('/recipeManagement?success=true'); 
+         res.redirect('/recipeManagement?success=Recipe+added+successfully'); 
       }
    } catch (error) {
       res.redirect('/recipeManagement?error=true&message=' + encodeURIComponent(error.message));
    }
 };
+
+exports.updateRecipe = async(req, res) => {
+   const recipeId = req.params.id;
+   const { name, description, ingredient, quantity, cuisine, image, time, url } = req.body;
+   console.log('update input: ', ingredient);
+
+   // Ensure ingredient and quantity are arrays and map ingredient name with quantity
+   const ingredients = Array.isArray(ingredient) ? 
+       ingredient.map((name, index) => ({ name, quantity: quantity[index] })) :
+       [{ name: ingredient, quantity }];
+
+   console.log(ingredients);
+
+   // Map ingredient
+   const ingredientMap = new Map(
+      (await Ingredient.find()).map((ing) => [ing.name, ing._id])
+   );
+
+   // Loop through ingredient list to map id with name
+   for (const ingredient of ingredients) {
+      let ingredientId = ingredientMap.get(ingredient.name);
+      if (!ingredientId) {
+         throw new Error('Ingredient "' + ingredient.name + '" not found. Please ensure that all ingredients are present in the database before creating new recipe. <a href="/ingredientManagement">View ingredient database.</a>');
+      }
+      ingredient.ingredient = ingredientId;
+   }
+   console.log('update ingredients: ', ingredients);
+
+   try{
+      const recipe = await Recipe.findById(recipeId);
+      if(!recipe){
+         throw new Error('Failed to update item: Recipe not found.')
+      }
+
+      // Check if name already exists for another ingredient
+      const existingRecipe = await Recipe.findOne({name});
+      if (existingRecipe && existingRecipe._id.toString() !== recipeId) {
+         throw new Error(`Failed to update item: Recipe with name '${name}' already exists`);
+     }
+
+     const resultRecipe = await Recipe.findByIdAndUpdate(recipeId, { 
+         name,
+         description,
+         ingredients,
+         cuisine,
+         image,
+         time,
+         url
+      }, { new: true });
+      console.log('results: ', resultRecipe);
+      console.log('----------------------------------------------------------------')
+      res.redirect('/recipeManagement?success=Recipe+updated+successfully');
+
+   }catch(error){
+      res.redirect('/recipeManagement?error=true&message=' + encodeURIComponent(error.message));        
+  }
+}
+
+exports.deleteRecipe = async(req, res)=>{
+   const recipeId = req.params.id;
+   try{
+      const recipe = await Recipe.findById(recipeId);
+      if(!recipe){
+         throw new Error('Failed to delete item: Recipe not found');
+      }
+
+      await Recipe.deleteOne({_id: recipeId});
+      res.redirect('/recipeManagement?success=Recipe+deleted+successfully');
+      
+   }catch(error){
+      res.redirect('/recipeManagement?error=true&message=' + encodeURIComponent(error.message));
+  }
+}

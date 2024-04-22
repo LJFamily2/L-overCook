@@ -6,7 +6,7 @@ const signUpController = {
   // Signup page for user
   getSignUp: async (req, res) => {
     // res.send("Signup page for user")
-    res.render("partials/signUp", { layout: './layouts/client/defaultLayout', userAuthentication: true });
+    res.status(200).render("partials/signUp", { layout: './layouts/client/defaultLayout', userAuthentication: true, messages: req.flash(), isAdminSignUp: false});
   },
 
   postSignUp: async (req, res) => {
@@ -17,7 +17,9 @@ const signUpController = {
       // Check for existed email
       const existedUser = await User.findOne({email});
       if(existedUser){
-        return res.status(400).send("Can't create account with this email!");
+        req.flash("error", "Can't create account with this email!");
+        res.status(404).redirect('/signup');
+        return;
       };
 
       const user = await User.create({
@@ -29,14 +31,12 @@ const signUpController = {
       });
 
       if (!user) {
-        res.send('An error occurred while signing up!')
         req.flash("error", "An error occurred while signing up!");
-        res.redirect("/signup");
+        res.status(404).redirect("/signup");
         return;
       }
-      res.send("You have successfully signed up!")
       req.flash("success", "You have successfully signed up!");
-      res.redirect("/signin");
+      res.status(201).redirect("/signin");
     } catch (err) {
       console.log(err);
     }
@@ -44,20 +44,20 @@ const signUpController = {
 
   // Signup page for admin
   getAdminSignUp: (req, res) => {
-    res.send("Signup page for admin")
-    res.render("admin/signup", { layout: null });
+    res.render("partials/signup", { layout: './layouts/client/defaultLayout', userAuthentication: true, messages: req.flash(), isAdminSignUp: true});
   },
 
   postAdminSignUp: async (req, res) => {
     try {
-      console.log(req.body);
       const { username, password,email } = req.body;
       const hashedPassword = await bcrypt.hash(password, 10);
 
       // Check for existed email
       const existedUser = await User.findOne({email});
       if(existedUser){
-        return res.status(400).send("Can't create account with this email!");
+        req.flash("error", "Can't create account with this email!");
+        res.status(404).redirect('/signup/admin');
+        return;
       };
 
       const adminUser = await User.create({
@@ -69,14 +69,13 @@ const signUpController = {
       });
 
       if (!adminUser) {
-        res.send("An error occurred while signing up!")
         req.flash("error", "An error occurred while signing up!");
-        res.redirect("/signup");
+        res.status(404).redirect("/signup/admin");
         return;
       }
-      res.send("You have successfully signed up!")
+
       req.flash("success", "You have successfully signed up!");
-      res.redirect("/signin");
+      res.status(201).redirect("/signin");
     } catch (err) {
       console.log(err);
     }

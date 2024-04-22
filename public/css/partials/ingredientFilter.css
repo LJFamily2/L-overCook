@@ -1,0 +1,127 @@
+/* Ingredient filter section */
+.ingredient-filter {
+    background-color: rgba(226, 209, 167, 0.8);
+    position: fixed;
+    top: 15vh;
+    width: 20%;
+    min-width: 300px;
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 15px;
+    margin-left: 20px;
+    z-index: 100;
+    overflow-y: scroll;
+  }
+  
+  .ingredient-filter h3 {
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 17px;
+    color: #597e52;
+    text-align: center;
+    margin: 20px 0 20px 0;
+  }
+  
+  .ingredient-filter > div {
+    background-color: #fff;
+    width: 85%;
+    height: max-content;
+    min-height: 150px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .ingredient-filter img {
+    width: 30px;
+  }
+  
+  .ingredient-header {
+    height: 40px;
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    border-bottom: #000 1px solid;
+    margin-bottom: 20px;
+  }
+  
+  .ingredient-header span {
+    margin-left: 10px;
+    font-weight: 600;
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+  }
+  
+  .ingredients {
+    padding: 4px 10px;
+  }
+  
+  .ingredients button {
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    background-color: #fff;
+    padding: 5px 15px;
+    border-radius: 15px;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    border: none;
+    margin: 0 7px 15px 5px;
+    cursor: pointer;
+  }
+  
+.ingredients button:hover {
+    background-color: #a7c957;
+    color: #fff;
+}
+
+  /* Expand - shrink icon */
+.expand-icon {
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    rotate: 180deg;
+    cursor: pointer;
+  }
+  
+.expand-icon-container {
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    position: fixed;
+    top: 40%;
+    left: 16px;
+    display: none;
+    z-index: 100;
+}
+
+.moveRight {
+    animation: moveRight 0.5s forwards;
+}
+
+
+/* Responsive */
+@media screen and (max-width: 914px) {
+    .ingredient-filter {
+      left: -310px;
+    }
+
+    .expand-icon-container {
+        display: block;
+      }
+}
+
+
+
+/* Move the element by 310px to the right*/
+@keyframes moveRight {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(310px);
+    }
+  }
