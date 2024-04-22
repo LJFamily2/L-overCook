@@ -3,15 +3,15 @@
    <link rel="stylesheet" href="/css/clients/profile.css" />
 </head>
 
-<form class="container-fluid p-0" action="" method="post">
+<form class="container-fluid p-0" action="/userManagement/update/<%= user._id %>" method="post" enctype="multipart/form-data">
    <div class="profile-head">
       <span class="my-profile">My Profile</span>
       <div class="profile-picture-frame">
          <% if(user.avatar){ %>
          <img
             class="profile-picture"
-            loading="eager"
-            src="/images/<%= user.avatar %>"
+            loading="eager"   
+            src="/uploadImages/<%= user.avatar %>"
             alt="profile picture"
          />
          <% } else { %>
@@ -33,7 +33,7 @@
                for="file"
                style="cursor: pointer"
             >
-               <input type="file" id="file" onchange="showButton()" hidden />
+               <input type="file" id="file" name="newAvatar" onchange="showButton()"  hidden/>
                <img
                   src="/images/up-loading.png"
                   class="w-25"

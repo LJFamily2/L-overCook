@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const User = require("../../models/User");
 const userManagementController = require("../../controllers/userManagementController");
+const upload = require("../../middlewares/UploadMedia");
 
 router.get("/", async(req,res) =>{
     const users = await User.find({role: false});
@@ -14,7 +15,7 @@ router.get("/", async(req,res) =>{
         currentPage: 'user-management'
     });
 });
-router.post("/update/:id", userManagementController.updateUser);
+router.post("/update/:id", upload.single('newAvatar'), userManagementController.updateUser);
 router.post("/delete/:id", userManagementController.deleteUser);
 
 module.exports = router;
