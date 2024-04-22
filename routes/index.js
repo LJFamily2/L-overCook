@@ -21,8 +21,8 @@ const routes = [
     {path: '/cuisineManagement', route: cuisine},
     {path: '/ingredientManagement', route: ingredient},
     {path: '/recipeManagement', route: recipe},
-    {path: '/searchHistory', route: searchHistory},
-    {path: '/favoriteRecipe', route: favoriteRecipe},
+    {path: '/search-history', route: searchHistory},
+    {path: '/favorite-recipe', route: favoriteRecipe},
     {path: '/userManagement', route: userManagement},
     {path: '/dashboard', route: adminDashboard}
 ];
