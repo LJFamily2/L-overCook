@@ -7,12 +7,23 @@
    <div class="profile-head">
       <span class="my-profile">My Profile</span>
       <div class="profile-picture-frame">
+         <% if(user.avatar){ %>
          <img
             class="profile-picture"
             loading="eager"
-            src="/images/profile.jpg"
+            src="/images/<%= user.avatar %>"
             alt="profile picture"
          />
+         <% } else { %>
+         <img
+            class="profile-picture"
+            loading="eager"
+            src="/images/user.png"
+            alt="profile picture"
+            style="backdrop-filter: blur(50px);"
+         />
+         <% } %>
+
          <div
             class="uploadImage w-100 h-100 position-absolute"
             style="background: linear-gradient(180deg, transparent 70%, black)"
@@ -46,7 +57,7 @@
                class="w-100 border-0"
                name="username"
                id="username"
-               value=""
+               value="<%= user.username %>"
                style="outline: none"
                oninput="showButton()"
             />
@@ -60,7 +71,7 @@
                class="w-100 border-0"
                name="email"
                id="email"
-               value=""
+               value="<%= user.email %>"
                style="outline: none"
                oninput="showButton()"
             />

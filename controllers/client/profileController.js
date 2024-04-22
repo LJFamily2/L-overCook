@@ -5,13 +5,18 @@ const { v4: uuidv4 } = require('uuid');
 
 // Render get profile page
 const getProfilePage = async (req, res) => {
-   // res.send('Profile page');
-   res.render('client/profile', { layout: "layouts/client/defaultLayout", userAuthentication: true });
+   try {
+   
+   res.render('client/profile', { layout: "layouts/client/defaultLayout", userAuthentication: false, user: req.user});
+   } catch (error) {
+      console.error(error);
+      res.status(500);
+   }
 };
 
 // Render get email page
 const getEmailPage = async (req, res) => {
-   res.render('client/resetPassword', { layout: "layouts/client/defaultLayout", userAuthentication: true, user: req.user });
+   res.render('client/resetPassword', { layout: "layouts/client/defaultLayout", userAuthentication: false, user: req.user });
 };
 
 // Function to generate OTP and timestamp
