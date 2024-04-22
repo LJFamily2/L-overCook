@@ -1,6 +1,7 @@
 const mongoose = require('../../middlewares/database');
 const Recipe = require('../../models/Recipe');
 const Ingredient = require('../../models/Ingredient');
+const Cuisine = require('../../models/Cuisine');
 const ingredientController = require('./ingredientController');
 const cuisineController = require('./cuisineController');
 
@@ -142,8 +143,11 @@ exports.createRecipe = async (req, res) => {
 
 exports.updateRecipe = async(req, res) => {
    const recipeId = req.params.id;
+   console.log('Recipe ID: ', recipeId)
    const { name, description, ingredient, quantity, cuisine, image, time, url } = req.body;
-   console.log('update input: ', ingredient);
+   
+   console.log(ingredient);
+   console.log(quantity);
 
    // Ensure ingredient and quantity are arrays and map ingredient name with quantity
    const ingredients = Array.isArray(ingredient) ? 
@@ -165,13 +169,24 @@ exports.updateRecipe = async(req, res) => {
       }
       ingredient.ingredient = ingredientId;
    }
-   console.log('update ingredients: ', ingredients);
 
+   // Check if category existed
+   let cuisineId;
+   const cuisineMap = new Map((await Cuisine.find()).map(cui => [cui.name, cui._id]));
+   if (cuisineMap.has(cuisine)) {
+       // If the category exists, retrieve its ID from the map
+       cuisineId = cuisineMap.get(cuisine);
+   } else {
+       throw new Error('Cuisine "' + cuisine + '" not found.')
+   }
+   
    try{
+      console.log('Looking for recipe with matching id...')
       const recipe = await Recipe.findById(recipeId);
       if(!recipe){
          throw new Error('Failed to update item: Recipe not found.')
       }
+      console.log('Recipe found, checking if updated name exist...')
 
       // Check if name already exists for another ingredient
       const existingRecipe = await Recipe.findOne({name});
@@ -179,20 +194,21 @@ exports.updateRecipe = async(req, res) => {
          throw new Error(`Failed to update item: Recipe with name '${name}' already exists`);
      }
 
-     const resultRecipe = await Recipe.findByIdAndUpdate(recipeId, { 
-         name,
-         description,
-         ingredients,
-         cuisine,
-         image,
-         time,
-         url
+      console.log('Updating recipe...')
+      const resultRecipe = await Recipe.findByIdAndUpdate(recipeId, { 
+         name: name,
+         description: description,
+         ingredients: ingredients,
+         cuisine: cuisineId,
+         image: image,
+         time: time,
+         url: url
       }, { new: true });
       console.log('results: ', resultRecipe);
-      console.log('----------------------------------------------------------------')
       res.redirect('/recipeManagement?success=Recipe+updated+successfully');
 
    }catch(error){
+      console.log('Error updating recipe.')
       res.redirect('/recipeManagement?error=true&message=' + encodeURIComponent(error.message));        
   }
 }
