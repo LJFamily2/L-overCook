@@ -7,7 +7,7 @@ const favoriteRecipeController = {
       const favoriteRecipe = await User.find()
         .populate("favoriteRecipe")
         .exec();
-      // res.render(""{searchHistory});
+      res.render("client/favorite", { layout: "./layouts/client/defaultLayout", userAuthentication: true });
     } catch (err) {
       console.log(err);
       res.status(500).send("Internal Server Error");

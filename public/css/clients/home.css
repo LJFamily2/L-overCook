@@ -21,13 +21,14 @@ body {
   top: 15vh;
   width: 20%;
   min-width: 300px;
-  height: max-content;
+  height: 80vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   border-radius: 15px;
   margin-left: 20px;
   z-index: 100;
+  overflow-y: scroll;
 }
 
 .ingredient-filter h3 {
@@ -177,7 +178,7 @@ body {
 }
 
 .show {
-  display: block;
+  display: block !important;
 }
 
 .filter-criteria > div {
@@ -539,7 +540,7 @@ input[type="checkbox"] {
     transform: translateY(0);
   }
   100% {
-    transform: translateY(-340px);
+    transform: translateY(-310px);
   }
 }
 

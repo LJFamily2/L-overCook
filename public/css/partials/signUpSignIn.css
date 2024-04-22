@@ -1,3 +1,17 @@
+/* Overwriting values*/
+header {
+    background-color: transparent;
+}
+
+.drop-down {
+  background-color: rgba(241, 228, 195, 0.8);
+}
+
+.list {
+    background-color: rgba(241, 228, 195, 0.8);
+}
+
+
 .background {
     background-image: url('/images/bgSignupSignin.jpeg');
     background-size: cover;
