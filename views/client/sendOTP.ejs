@@ -1,32 +1,97 @@
 <head>
-    <!-- css -->
-    <link rel="stylesheet" href="/css/clients/resetPassword.css" />
+   <!-- css -->
+   <link rel="stylesheet" href="/css/clients/resetPassword.css" />
 </head>
 
 <section class="member-update-password-inner">
-    <div class="frame-container">
+   <div class="frame-container">
       <div class="reset-password-wrapper">
-        <h2 class="reset-password">Reset Password</h2>
+         <h2 class="reset-password">Reset Password</h2>
       </div>
-      <div class="enter-your-email-address-parent">
-        <i class="enter-your-email">An OTP has been sent to your email address.</i>
-        <i class="enter-your-email">Enter OTP:</i>
-        <div class="johndoegmailcom-wrapper">
-          <input
-            class="johndoegmailcom"
-            placeholder="367812  "
-            type="text"
-          />
-        </div>
-      </div>
-      <div class="button-wrapper">
-        <div class="button">
-          <div class="sign-up-button">
-            <img class="icons" alt="" src="./public/icons.svg" />
+      <form
+         action="/account/profile/resetPassword/verifyOTP"
+         method="post"
+         style="
+            min-width: 100%;
+            height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+            flex-direction: column;
+         "
+      >
+         <div class="enter-your-email-address-parent">
+            <i class="enter-your-email"
+               >An OTP has been sent to your email address.</i
+            >
+            <i class="enter-your-email">Enter OTP:</i>
+            <div class="johndoegmailcom-wrapper">
+               <input type="hidden" name="token" value="<%=  token %>" />
+               <input
+                  class="johndoegmailcom"
+                  placeholder=""
+                  type="text"
+                  name="otp"
+               />
+            </div>
+         </div>
+         <div id="countdown" class=" w-100 fs-6"></div>
+         <div class="d-flex justify-content-evenly w-100">
+            <div class="button-wrapper">
+               <div class="button">
+                  <div class="sign-up-button">
+                     <!-- <img class="icons" alt="" src="/images/icons.svg" /> -->
 
-            <div class="sign-up">Confirm</div>
-          </div>
-        </div>
-      </div>
-    </div>
+                     <button
+                        id="resendButton"
+                        type="button"
+                        class="sign-up"
+                        style="background: transparent; border: none"
+                     >
+                        Resend OTP
+                     </button>
+                  </div>
+               </div>
+            </div>
+
+            <script>
+               const resendButton = document.getElementById('resendButton');
+               const countdown = document.getElementById('countdown');
+
+               let secondsRemaining = 30;
+
+               function updateCountdown() {
+                  countdown.textContent = `Gửi lại sau ${secondsRemaining} giây`;
+
+                  if (secondsRemaining === 0) {
+                     resendButton.disabled = false;
+                     countdown.textContent = '';
+                  } else {
+                     resendButton.disabled = true;
+                     secondsRemaining--;
+                     setTimeout(updateCountdown, 1000);
+                  }
+               }
+
+               updateCountdown();
+            </script>
+
+            <div class="button-wrapper">
+               <div class="button">
+                  <div class="sign-up-button">
+                     <!-- <img class="icons" alt="" src="/images/icons.svg" /> -->
+
+                     <button
+                        type="submit"
+                        class="sign-up"
+                        style="background: transparent; border: none"
+                     >
+                        Confirm
+                     </button>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </form>
+   </div>
 </section>
