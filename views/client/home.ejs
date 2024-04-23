@@ -75,8 +75,12 @@
           </div>
 
           <div class="first-row">
+            
             <div class="recipe-name" title="Tom Yum Soup">
-              <%= recipe.name %>
+              <a href="/recipeManagement/<%= recipe.slug %>" style="text-decoration: none;  color: black;">
+                <%= recipe.name %>
+
+              </a>
             </div>
             <img src="/images/emptyHeart.png" />
           </div>

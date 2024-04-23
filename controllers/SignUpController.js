@@ -26,6 +26,7 @@ const signUpController = {
         username: username.trim(),
         password: hashedPassword,
         email: email.trim(),
+        avatar: '',
         role: false,
         token: uuidv4(),
       });
