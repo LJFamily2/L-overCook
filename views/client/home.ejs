@@ -100,35 +100,6 @@
           </div>
         </div>
         <% }) %>
-
-        <% recipes.forEach(recipe => { %>
-          <div class="recipe">
-            <div class="recipe-img-container">
-              <img class="recipe-img" src="/images/<%= recipe.image %>" />
-            </div>
-  
-            <div class="first-row">
-              <div class="recipe-name" title="Tom Yum Soup">
-                <%= recipe.name %>
-              </div>
-              <img src="/images/emptyHeart.png" />
-            </div>
-  
-            <div class="second-row">
-              <div class="cook-time">
-                <img src="/images/clock.png" />
-                <span><%= recipe.time %></span>
-              </div>
-              <div class="rating">
-                <span class="fa fa-star"></span>
-                <span class="fa fa-star"></span>
-                <span class="fa fa-star"></span>
-                <span class="fa fa-star"></span>
-                <span class="fa fa-star"></span>
-              </div>
-            </div>
-          </div>
-          <% }) %>
       </div>
     </div>
   </div>
