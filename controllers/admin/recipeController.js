@@ -145,16 +145,13 @@ exports.updateRecipe = async(req, res) => {
    const recipeId = req.params.id;
    console.log('Recipe ID: ', recipeId)
    const { name, description, ingredient, quantity, cuisine, image, time, url } = req.body;
-   
    console.log(ingredient);
-   console.log(quantity);
 
    // Ensure ingredient and quantity are arrays and map ingredient name with quantity
    const ingredients = Array.isArray(ingredient) ? 
        ingredient.map((name, index) => ({ name, quantity: quantity[index] })) :
        [{ name: ingredient, quantity }];
 
-   console.log(ingredients);
 
    // Map ingredient
    const ingredientMap = new Map(
@@ -168,16 +165,6 @@ exports.updateRecipe = async(req, res) => {
          throw new Error('Ingredient "' + ingredient.name + '" not found. Please ensure that all ingredients are present in the database before creating new recipe. <a href="/ingredientManagement">View ingredient database.</a>');
       }
       ingredient.ingredient = ingredientId;
-   }
-
-   // Check if category existed
-   let cuisineId;
-   const cuisineMap = new Map((await Cuisine.find()).map(cui => [cui.name, cui._id]));
-   if (cuisineMap.has(cuisine)) {
-       // If the category exists, retrieve its ID from the map
-       cuisineId = cuisineMap.get(cuisine);
-   } else {
-       throw new Error('Cuisine "' + cuisine + '" not found.')
    }
    
    try{
@@ -199,7 +186,7 @@ exports.updateRecipe = async(req, res) => {
          name: name,
          description: description,
          ingredients: ingredients,
-         cuisine: cuisineId,
+         cuisine: cuisine,
          image: image,
          time: time,
          url: url
