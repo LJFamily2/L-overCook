@@ -1,30 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-   <head>
-      <meta charset="UTF-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-      <!-- Bootstrap -->
-      <link
-         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-         rel="stylesheet"
-         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
-         crossorigin="anonymous"
-      />
-      <script
-         src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-         crossorigin="anonymous"
-      ></script>
-      <title>Document</title>
-   </head>
-   <body>
+     
       <div class="container-fluid m-0" style="background: #f5f5f5">
          <div class="container py-4">
             <div class="row breadcumb px-md-5 py-2" style="background: white">
                <div class="col p-0">
                   <a href="/" class="text-decoration-none"> Home </a>
-                  > Nem Ran
+                  > <%= recipe.name %>
                </div>
             </div>
             <div
@@ -32,11 +12,11 @@
                style="margin-bottom: 130px; padding-top: 30px"
             >
                <div class="col-md-10 col-12 p-0">
-                  <h1>Nem Ran</h1>
-                  <p>Description of nem ran</p>
+                  <h1><%= recipe.name %></h1>
+                  <p><%= recipe.description %></p>
                </div>
                <div class="col-md-2 col-12 position-relative cuisine p-1" style="background: #e7a046; text-align: right; clip-path: polygon(100% 0, 100% 50%, 100% 100%, 0% 100%, 25% 50%, 0% 0%);">
-                  <h4>Vietnam</h4>
+                  <h4><%= recipe.cuisine.name %></h4>
                   <h5>Cuisine</h5>
                   <div class="container position-absolute bottom-0 start-0 h-100" style="width: 100px;  clip-path: polygon(30% 100%, 60% 100%, 70% 75%, 100% 50%, 70% 25%, 60% 0, 30% 0, 70% 25%, 75% 50%, 70% 75%, 30% 100%); background: #F1E4C3;">
                      
@@ -47,9 +27,9 @@
                <div class="row media  px-md-5 m-0" style="height: 550px">
                   <div class="col p-0 text-center position-relative">
                      <img
-                        src="/public/images/bgSignupSignin.jpeg"
+                        src="/images/<%= recipe.image %>"
                         class="center w-100 position-absolute bottom-0 start-0 border border-dark"
-                        alt="Nem ran image"
+                        alt="<%= recipe.name %> image"
                         style="
                            object-fit: cover;
                            height: 600px;
@@ -73,7 +53,7 @@
                                  "
                               >
                                  <img
-                                    src="/public/images/chef-hat.png"
+                                    src="/images/chef-hat.png"
                                     class="position-absolute end-0 top-0"
                                     alt="Icon"
                                     style="
@@ -90,17 +70,18 @@
                                  style="background: #f1e4c3"
                               >
                                  <h5>Cook time:</h5>
-                                 <p class="m-0">1 hours 30 minutes</p>
+                                 <p class="m-0"><%= recipe.time %></p>
                               </div>
                            </div>
                         </div>
                         <div class="row ingredient-list mt-4">
                            <div class="col">
                               <h2>Ingredients</h2>
+                              
                               <ul>
-                                 <li>YOu</li>
-                                 <li>YOu</li>
-                                 <li>Season</li>
+                                    <% recipe.ingredients.forEach(eachIngredient =>{ %>
+                                    <li><%= eachIngredient.ingredient.name %> (<%= eachIngredient.quantity %>)</li>
+                                    <% })  %>
                               </ul>
                            </div>
                         </div>
@@ -113,7 +94,7 @@
                            <div class="row fact-image text-center m-3">
                               <div class="col">
                                  <img
-                                    src="/public/images/planet-earth.png"
+                                    src="/images/planet-earth.png"
                                     alt="fact image"
                                     class="w-50 center"
                                     style="object-fit: cover"
@@ -198,7 +179,7 @@
                         style="height: 100px"
                      >
                         <img
-                           src="/public/images/curve-arrow.png"
+                           src="/images/curve-arrow.png"
                            class="position-absolute start-50"
                            alt="arrow"
                            style="
@@ -212,8 +193,7 @@
                      >
                         <p class="fs-5">View the full recipe at:</p>
                         <a href="" class="w-md-100 w-100  text-wrap " style="overflow-wrap: break-word">
-
-                           https://www.allrecipes.com/recipe/245343/authentic-vietnamese-spring-rolls-nem-ran-hay-cha-gio/
+                           <%= recipe.url %>
                         </a>
                      </div>
                   </div>
@@ -226,14 +206,14 @@
                            class="px-2 py-1 border-0 text-white"
                            style="background: #e7aa46"
                         >
-                           Vietnam
+                           <%= recipe.cuisine.name %>
                         </button>
                         <button
                            type="button"
                            class="px-2 py-1 border-0 text-white"
                            style="background: #e7aa46"
                         >
-                           Over 30 min
+                           <%= recipe.time %>
                         </button>
                      </p>
                   </div>
@@ -241,5 +221,3 @@
             </div>
          </div>
       </div>
-   </body>
-</html>
