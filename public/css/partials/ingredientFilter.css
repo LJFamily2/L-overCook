@@ -16,6 +16,24 @@
     overflow-y: scroll;
     border: #aeaeae 0.2px solid;
   }
+
+  /* Scrollbar width */
+  .ingredient-filter::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  /* Track */
+  .ingredient-filter::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px rgba(159, 159, 159, 0.5); 
+    border-radius: 20px;
+  }
+
+  /* Handle */
+  .ingredient-filter::-webkit-scrollbar-thumb {
+  /* background: #C6AC69; */
+  background: #6A994E;
+  border-radius: 20px;
+} 
   
   .ingredient-filter h3 {
     font-family: "Inter", sans-serif;
