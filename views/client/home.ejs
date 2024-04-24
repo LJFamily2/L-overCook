@@ -1,9 +1,4 @@
 <head>
-  <!-- for the magnifier glass icon -->
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-  />
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -26,18 +21,7 @@
 
 <div id="main-content-container">
   <div id="main-content">
-    <div id="search">
-      <h2>Recipe Search</h2>
-      <div id="search-bar">
-        <button type="button">
-          <i class="fa fa-search" aria-hidden="true"></i>
-        </button>
-        <input
-          type="text"
-          placeholder="Enter recipe name or ingredients you have..."
-        />
-      </div>
-    </div>
+    <%- include ('../partials/searchBar') %>
 
     <div id="filter-row">
       <p>You can make <span id="num-of-recipes">25</span> recipes</p>
