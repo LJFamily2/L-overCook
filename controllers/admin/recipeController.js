@@ -172,7 +172,7 @@ exports.updateRecipe = async(req, res) => {
    const recipeId = req.params.id;
    console.log('Recipe ID: ', recipeId)
    const { name, description, ingredient, quantity, cuisine, image, time, url } = req.body;
-   console.log(ingredient);
+   console.log(req.body);
 
    // Ensure ingredient and quantity are arrays and map ingredient name with quantity
    const ingredients = Array.isArray(ingredient) ? 
