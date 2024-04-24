@@ -1,3 +1,6 @@
+document.addEventListener('DOMContentLoaded', function() {
+    $('.search-select-box select').selectpicker();
+});
 
 document.addEventListener('DOMContentLoaded', function() {
     const urlParams = new URLSearchParams(window.location.search);
