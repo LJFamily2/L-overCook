@@ -82,7 +82,14 @@
 
               </a>
             </div>
-            <img src="/images/emptyHeart.png" />
+          <form action="/favorite-recipe/add-favorite/<%= recipe.slug %>" method="post">
+            
+            <button type="submit" class="bg-none border-0">
+              <img src="/images/emptyHeart.png" />
+
+            </button>
+
+            </form>
           </div>
 
           <div class="second-row">
