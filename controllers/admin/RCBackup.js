@@ -37,7 +37,6 @@ exports.getRecipeDetailPage = async (req, res) => {
             path: 'cuisine',
             select: 'name -_id',
          })
-         .populate('reviews.user')
          .exec();
          if (!recipe) {
             res.status(404).redirect('/')
@@ -169,11 +168,38 @@ exports.createRecipe = async (req, res) => {
    }
 };
 
+exports.addIngredientToRecipe = async (req, res) => {
+   try {
+      // Extract the recipe ID and ingredient details from the request body
+      const { ingredient, quantity } = req.body;
+      const  recipeId  = req.params.id; 
+
+      // Find the recipe by its ID and update it to push the new ingredient and quantity
+      const updatedRecipe = await Recipe.findByIdAndUpdate(
+         recipeId,
+         { $push: { ingredients: { ingredient, quantity } } },
+         { new: true }
+      );
+
+      // Check if the recipe was successfully updated
+      if (!updatedRecipe) {
+         return res.status(404).json({ error: 'Recipe not found' });
+      }
+
+      // If the recipe was updated successfully, send a success response
+      res.status(200).redirect('/recipeManagement?success=Ingredient+added+successfully');
+   } catch (error) {
+      // If an error occurs during the process, handle it and send an error response
+      console.error('Error adding ingredient to recipe:', error);
+      res.status(500).json({ error: 'Internal server error' });
+   }
+};
+
 exports.updateRecipe = async(req, res) => {
    const recipeId = req.params.id;
    console.log('Recipe ID: ', recipeId)
    const { name, description, ingredient, quantity, cuisine, image, time, url } = req.body;
-   console.log(req.body);
+   console.log(ingredient);
 
    // Ensure ingredient and quantity are arrays and map ingredient name with quantity
    const ingredients = Array.isArray(ingredient) ? 
