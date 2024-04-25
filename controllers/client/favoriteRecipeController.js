@@ -1,6 +1,5 @@
 const User = require('../../models/User');
 const Recipe = require('../../models/Recipe');
-const UserModel = require('../../models/User');
 
 const favoriteRecipeController = {
    getFavoriteRecipe: async (req, res) => {

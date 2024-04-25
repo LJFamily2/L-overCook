@@ -97,4 +97,14 @@ const deleteUser = async (req, res) => {
    }
 };
 
-module.exports = { updateUser, deleteUser  };
+const logout = async (req, res) => {
+   req.logout(err =>{
+      if(err){
+         console.log(err);
+      }
+   });
+   req.flash('success', 'You have successfully logged out!');
+   res.redirect('/signin');
+}
+
+module.exports = { updateUser, deleteUser, logout  };

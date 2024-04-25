@@ -77,7 +77,7 @@ const signUpController = {
       }
 
       req.flash("success", "You have successfully signed up!");
-      res.status(201).redirect("/signin");
+      res.status(201).redirect("/signin/admin");
     } catch (err) {
       console.log(err);
     }

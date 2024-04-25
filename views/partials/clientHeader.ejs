@@ -31,8 +31,10 @@
               <span><%= user.username %></span> 
             </a>
           </div>
-        
-          <div class="log-out"> Log out </div>
+          
+          <form action="/users/log-out" method="post">
+            <button type="submit" class="log-out border-0">Log out </button>
+          </form> 
         </div>
         
         <% }else{ %>
