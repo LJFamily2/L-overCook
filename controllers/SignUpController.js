@@ -28,6 +28,7 @@ const signUpController = {
         email: email.trim(),
         avatar: '',
         role: false,
+        otpVerify: false,
         token: uuidv4(),
       });
 
@@ -76,7 +77,7 @@ const signUpController = {
       }
 
       req.flash("success", "You have successfully signed up!");
-      res.status(201).redirect("/signin");
+      res.status(201).redirect("/signin/admin");
     } catch (err) {
       console.log(err);
     }

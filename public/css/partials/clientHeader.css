@@ -5,8 +5,11 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: fixed;
+  position: sticky;
+  top: 0  ;
   z-index: 1000;
+  font-family: var(--font-inika);
+  font-size: 20px;
 }
 
 #logo-without-name {
@@ -26,7 +29,7 @@ header {
 
 .nav-right {
   position: absolute;
-  top: 30px;
+  top: 22px;
   right: 60px;
   display: flex;
   align-items: center;
@@ -35,9 +38,7 @@ header {
 
 .nav-right a {
   text-decoration: none;
-  font-size: 20px;
   color: #707070;
-  font-family: var(--font-inika);
 }
 
 .nav-right a:nth-child(2) {
@@ -55,4 +56,51 @@ header {
 .nav-right a:nth-child(3) {
   display: flex;
   gap: 2px;
+}
+
+.user-profile img {
+  font-size: 0;
+  width: 30px; 
+  height: 30px; 
+  object-fit: cover;
+  border-radius: 50%; 
+  margin-right: 2px;
+  border: gray 0.5px solid;
+  position: relative;
+  bottom: 2px;
+}
+
+.user-section {
+  max-width: 120px;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.user-profile {
+  padding: 8px 0;
+}
+
+.user-profile span {
+  text-overflow: ellipsis;
+}
+
+.log-out {
+  position: absolute;
+  top: 45px;
+  cursor: pointer;
+  width: 120px;
+  background-color: #6A994E;
+  color: #fff;
+  padding: 10px 15px;
+  opacity: 0;
+  font-size: 18px;
+}
+
+.user-section:hover .log-out {
+  transition: ease-out 0.3s;
+  opacity: 1;
+}
+
+.log-out:hover {
+  background-color: #568b39;
 }

@@ -1,10 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const signInController = require("../../controllers/client/favoriteRecipeController");
 const favoriteRecipeController = require("../../controllers/client/favoriteRecipeController");
+const connectEnsureLogin = require('connect-ensure-login');
 
-router.get("/", favoriteRecipeController.getFavoriteRecipe);
-router.post("/addFavorite/:slug",);
-router.post("/deleteFavorite/:slug",);
+router.get("/",connectEnsureLogin.ensureLoggedIn({redirectTo:'/signin'}), favoriteRecipeController.getFavoriteRecipe);
+router.post("/add-favorite/:slug",connectEnsureLogin.ensureLoggedIn({redirectTo:'/signin'}),favoriteRecipeController.addFavorite);
+router.post("/delete-favorite/:slug",favoriteRecipeController.deleteFavorite);
 
 module.exports = router;

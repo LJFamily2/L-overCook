@@ -1,3 +1,16 @@
+/* Overwriting values */
+.log-out {
+    background-color: #fff;
+    color: #707070;
+}
+
+.log-out:hover {
+    background-color: #ffffffe9;
+    /* background-color: #a7c957f8; */
+    color: #6A994E;
+}
+
+
 .container-fluid {
     display: flex;
     flex-direction: column;
@@ -15,7 +28,7 @@
     flex-direction: column;
     align-items: center;
     align-self: stretch;
-    margin-bottom: 100px;
+    margin-bottom: 110px;
 }
 
 .my-profile {
@@ -23,9 +36,10 @@
     margin-top: 25px;
     margin-bottom: 20px;
     font-family: var(--font-inika);
-    font-size: 30px;
-    color: #f8dbe0;
+    font-size: 35px;
+    color: white;
     font-weight: 700;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .profile-picture-frame {
@@ -68,6 +82,8 @@
     border-radius: 20px;
     border: 1px solid #474c50;
     cursor: pointer;
+    font-family: var(--font-poppins);
+    font-size: 18px;
 }
 
 .profile-button span {
@@ -91,7 +107,6 @@
 .profile-information {
     display: flex;
     flex-direction: column;
-    margin-top: 30px;
     padding: 30px 45px;
     background-color: rgba(210, 208, 208, 0.392);
     border-radius: 20px;
@@ -120,7 +135,7 @@
     z-index: 1;
 }
 
-.field-info span {
+/* .field-info span {
     width: 100%;
     border: 0;
     outline: 0;
@@ -134,7 +149,7 @@
     min-width: 350px;
     max-width: 100%;
     padding: 0;
-}
+} */
 
 .reset-password {
     text-align: right;

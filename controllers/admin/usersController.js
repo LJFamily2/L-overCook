@@ -1,4 +1,4 @@
-const User = require('../models/User');
+const User = require('../../models/User');
 const bcrypt = require('bcrypt');
 const fs = require('fs').promises;
 const path = require('path');
@@ -21,17 +21,12 @@ const updateUser = async (req, res) => {
          return res.status(404).send('User not found');
       }
 
-      const { username, email, role, password } = req.body;
+      const { username, email, role } = req.body;
       const updateFields = {
          username: username || existingUser.username,
          email: email || existingUser.email,
          role: role || existingUser.role,
       };
-
-      // Update password if provided
-      if (password) {
-         updateFields.password = await bcrypt.hash(password, 10);
-      }
 
       // Update avatar if a new one is provided
       if (req.file) {
@@ -40,8 +35,7 @@ const updateUser = async (req, res) => {
             try {
                await deleteImageFile(
                   path.join(
-                     __dirname,
-                     '../public/uploadImages',
+                     'public/uploadImages',
                      existingUser.avatar
                   )
                );
@@ -71,6 +65,8 @@ const updateUser = async (req, res) => {
    }
 };
 
+
+
 // Controller for deleting a user
 const deleteUser = async (req, res) => {
    try {
@@ -84,7 +80,6 @@ const deleteUser = async (req, res) => {
          try {
             await deleteImageFile(
                path.join(
-                  __dirname,
                   '../public/uploadImages',
                   deletedUser.avatar
                )
@@ -102,4 +97,14 @@ const deleteUser = async (req, res) => {
    }
 };
 
-module.exports = { updateUser, deleteUser };
+const logout = async (req, res) => {
+   req.logout(err =>{
+      if(err){
+         console.log(err);
+      }
+   });
+   req.flash('success', 'You have successfully logged out!');
+   res.redirect('/signin');
+}
+
+module.exports = { updateUser, deleteUser, logout  };

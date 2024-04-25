@@ -37,6 +37,7 @@ exports.getRecipeDetailPage = async (req, res) => {
             path: 'cuisine',
             select: 'name -_id',
          })
+         .populate('reviews.user')
          .exec();
          if (!recipe) {
             res.status(404).redirect('/')

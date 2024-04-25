@@ -15,18 +15,32 @@
             <img id="logo-name" src="/images/loverCook.png" />
         </a>
       </div>
+
       <div class="nav-right">
-        <a href="#"> <span> History </span> </a>
-        <a href="/favorite-recipe"> <span> Favourites </span> </a>
         <% if(user){ %>
-        <a href="/account/profile"> 
-          <i class='bx bx-user-circle icon-profile' style='color:#707070' ></i>
-          <span><%= user.username %></span> 
-        </a>
+        <a href="#"> <span> History </span> </a>
+        <a href="/favorite-recipe"> <span> Favorites </span> </a>
+        
+        <div class="user-section">
+          <div class="user-profile">
+            <a href="/account/profile"> 
+              <img
+                src="/uploadImages/<%= user.avatar %>"
+                alt="upload file"
+                />
+              <span><%= user.username %></span> 
+            </a>
+          </div>
+          
+          <form action="/users/log-out" method="post">
+            <button type="submit" class="log-out border-0">Log out </button>
+          </form> 
+        </div>
+        
         <% }else{ %>
-        <a href="/signup"> <span> Register </span> </a>
-        <span> | </span>
-        <a href="/signin"> <span> Login </span> </a>
+          <a href="/signin"> <span> Login </span> </a>
+          <span class="m-2"> | </span>
+          <a href="/signup"> <span> Register </span> </a>
         <% } %>
         <%- include('./langButton') %>
       </div>
