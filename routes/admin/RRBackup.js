@@ -1,16 +1,18 @@
 const express = require('express');
 const router = express.Router();
 const recipeController = require('../../controllers/admin/recipeController');
-const reviewController = require('../../controllers//client/reviewController');
+const reviewController = require('../../controllers/client/reviewController');
 
 // Recipe Routes
 router.get('/', recipeController.getRecipePage);
+
 // Recipe detail page
 router.get('/:slug', recipeController.getRecipeDetailPage);
 // router.get('/:id', recipeController.getRecipeData);
 router.post('/new', recipeController.createRecipe);
 router.post('/update/:id', recipeController.updateRecipe); 
 router.post('/delete/:id', recipeController.deleteRecipe); 
+router.post('/add-ingredient/:id', recipeController.addIngredientToRecipe); 
 
 // Add review 
 router.post("/:slug/addReview", reviewController.addReview);

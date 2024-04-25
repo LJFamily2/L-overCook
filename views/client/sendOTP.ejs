@@ -1,36 +1,102 @@
 <head>
-    <!-- css -->
-    <link rel="stylesheet" href="/css/clients/resetPassword.css" />
+   <!-- css -->
+   <link rel="stylesheet" href="/css/clients/resetPassword.css" />
 </head>
 
-<div class="container-fluid">
-  <section class="member-update-password-inner">
-      <div class="frame-container">
-        <div class="reset-password-wrapper">
-          <h2 class="reset-password">Reset Password</h2>
-        </div>
-        <div class="enter-your-email-address-parent">
-          <i class="enter-your-email">An OTP has been sent to your email address.</i>
-          <i class="enter-your-email">Enter OTP:</i>
-          <div class="johndoegmailcom-wrapper">
-            <input
-              class="johndoegmailcom"
-              placeholder="367812  "
-              type="text"
-            />
-          </div>
-        </div>
-        <div class="button-wrapper">
-          <div class="button">
-            <div class="sign-up-button">
-              <a href="/account/profile/updatePassword">
-                <img class="icons" alt="" src="./public/icons.svg" />
-
-                <div class="sign-up">Confirm</div>
-              </a>
-            </div>
-          </div>
-        </div>
+<section class="member-update-password-inner">
+   <div class="frame-container">
+      <div class="reset-password-wrapper">
+         <h2 class="reset-password">Reset Password</h2>
       </div>
-  </section>
-</div>
+      <form
+         action="/account/profile/resetPassword/verifyOTP"
+         method="post"
+         style="
+            min-width: 100%;
+            height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+            flex-direction: column;
+         "
+      >
+         <div class="enter-your-email-address-parent">
+            <div class="message w-100 fs-5">
+               <%- include('../partials/notificationMessage') %>
+            </div>
+            <i class="enter-your-email"
+               >An OTP has been sent to your email address.</i
+            >
+            <i class="enter-your-email">Enter OTP:</i>
+            <div class="johndoegmailcom-wrapper">
+               <input type="hidden" name="token" value="<%= token %>" />
+               <input
+                  class="johndoegmailcom"
+                  placeholder=""
+                  type="text"
+                  name="otp"
+               />
+            </div>
+         </div>
+         <div id="countdown" class="w-100 fs-6"></div>
+         <input type="hidden" name="action" id="action" value="" />
+         <div class="d-flex justify-content-evenly w-100">
+            <div class="button-wrapper">
+               <div class="button">
+                  <div class="sign-up-button">
+                     <button
+                        id="resendButton"
+                        type="submit"
+                        class="sign-up"
+                        style="background: transparent; border: none"
+                        onclick="setAction('resend')"
+                     >
+                        Resend OTP
+                     </button>
+                  </div>
+               </div>
+            </div>
+            <div class="button-wrapper">
+               <div class="button">
+                  <div class="sign-up-button">
+                     <button
+                        type="submit"
+                        class="sign-up"
+                        style="background: transparent; border: none"
+                        onclick="setAction('verify')"
+                     >
+                        Confirm
+                     </button>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </form>
+
+      <script>
+         function setAction(action) {
+            document.getElementById('action').value = action;
+            if (action === 'resend') {
+               updateCountdown();
+            } 
+         }
+         
+         let secondsRemaining = 30;
+         const countdown = document.getElementById('countdown');
+         function updateCountdown() {
+            countdown.textContent = `Resend OTP in ${secondsRemaining} seconds`;
+
+            if (secondsRemaining === 0) {
+               document.getElementById('resendButton').disabled = false;
+               countdown.textContent = '';
+            } else {
+               document.getElementById('resendButton').disabled = true;
+               secondsRemaining--;
+               setTimeout(updateCountdown, 1000);
+            }
+         }
+
+         updateCountdown();
+      </script>
+   </div>
+</section>

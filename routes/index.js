@@ -6,7 +6,7 @@ const profileRoute = require('./partials/profileRoute');
 const category = require('./admin/categoryRoute');
 const cuisine = require('./admin/cuisineRoute');
 const ingredient = require('./admin/ingredientRoute');
-const recipe = require('./admin/recipeRoute');
+const recipeManagement = require('./admin/recipeRoute');
 const searchHistory = require('./client/searchHistoryRoute');
 const favoriteRecipe = require('./client/favoriteRecipeRoute');
 const userManagement = require('./admin/userManagementRoute');
@@ -20,9 +20,9 @@ const routes = [
     {path: '/category', route: category},
     {path: '/cuisineManagement', route: cuisine},
     {path: '/ingredientManagement', route: ingredient},
-    {path: '/recipeManagement', route: recipe},
-    {path: '/searchHistory', route: searchHistory},
-    {path: '/favoriteRecipe', route: favoriteRecipe},
+    {path: '/recipeManagement', route: recipeManagement},
+    {path: '/search-history', route: searchHistory},
+    {path: '/favorite-recipe', route: favoriteRecipe},
     {path: '/userManagement', route: userManagement},
     {path: '/dashboard', route: adminDashboard}
 ];

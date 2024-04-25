@@ -5,13 +5,18 @@ const { v4: uuidv4 } = require('uuid');
 
 // Render get profile page
 const getProfilePage = async (req, res) => {
-   // res.send('Profile page');
-   res.render('client/profile', { layout: "layouts/client/defaultLayout", userAuthentication: true });
+   try {
+   
+   res.render('client/profile', { layout: "layouts/client/defaultLayout", userAuthentication: false, user: req.user});
+   } catch (error) {
+      console.error(error);
+      res.status(500);
+   }
 };
 
 // Render get email page
 const getEmailPage = async (req, res) => {
-   res.render('client/resetPassword', { layout: "layouts/client/defaultLayout", userAuthentication: true, user: req.user });
+   res.render('client/resetPassword', { layout: "layouts/client/defaultLayout", userAuthentication: false, user: req.user });
 };
 
 // Function to generate OTP and timestamp
@@ -29,7 +34,7 @@ const generateAndSendOtpEmail = async (user) => {
 
       // Check if the last OTP request was less than 60 seconds ago
       if (lastOtpRequest && currentTime - lastOtpRequest < 60000) {
-         return res.status(429).send('Too many OTP requests. Please wait a moment and try again.');
+         return;
       }
 
       const { otp, timestamp } = generateOTP();
@@ -46,7 +51,6 @@ const generateAndSendOtpEmail = async (user) => {
       return { otp, timestamp };
    } catch (error) {
       console.error(error);
-      res.status(500);
    }
 };
 
@@ -77,7 +81,22 @@ const sendOtp = async (req, res) => {
 const verifyOtpPage = async (req, res) => {
    const { token } = req.query;
 
-   res.render('client/sendOTP', { layout: "layouts/client/defaultLayout", userAuthentication: true, token });
+   res.render('client/sendOTP', { layout: "layouts/client/defaultLayout", userAuthentication: true, token, messages: req.flash() });
+};
+
+const handleOtpRequest =  async (req, res) => {
+   try {
+       const { action } = req.body;
+
+       if (action === 'resend') {
+           await resendOtp(req, res);
+       } else if (action === 'verify') {
+           await verifyOtp(req, res);
+       }
+   } catch (error) {
+       console.error(error);
+       res.status(500).send('Internal Server Error');
+   }
 };
 
 // Function to verify OTP expiration
@@ -112,8 +131,12 @@ const verifyOtp = async (req, res) => {
             { _id: user._id },
             { token: newToken, $unset: { otp: 1, otpTimestamp: 1, otpRequestTimestamp: 1 } }
          );
-         res.send('OTP verified successfully').status(200);
+         req.flash('success','OTP verified successfully')
+         res.status(200).redirect('/account/profile/updatePassword');
+
       } else {
+         req.flash('error','Invalid OTP')
+         res.status(400);
          res.redirect(
             `/account/profile/resetPassword/verifyOTP?token=${user.token}`
          );
@@ -138,8 +161,9 @@ const resendOtp = async (req, res) => {
 
      // Generate OTP and timestamp
      await generateAndSendOtpEmail(user);
+      req.flash('success','OTP resend successfully')
 
-      res.redirect(
+      res.status(200).redirect(
          `/account/profile/resetPassword/verifyOTP?token=${user.token}`
       );
    } catch (error) {
@@ -154,4 +178,5 @@ module.exports = {
    sendOtp,
    verifyOtp,
    resendOtp,
+   handleOtpRequest
 };

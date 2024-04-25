@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-
+const slugify = require('slugify');
 const { Schema } = mongoose;
 
 const reviewSchema = Schema({
@@ -40,7 +40,13 @@ const recipeSchema = Schema({
     reviews: [reviewSchema],
     image: String,
     time: String,
-    url: String
+    url: String,
+    slug: {
+        type: String,
+        unique: true,
+        required: true
+
+    },
 })
 
 recipeSchema.virtual("averageRating").get(function() {
@@ -50,7 +56,12 @@ recipeSchema.virtual("averageRating").get(function() {
 });
 
 
-
+recipeSchema.pre("validate", function (next) {
+    if (this.name) {
+      this.slug = slugify(this.name, { lower: true, strict: true });
+    }
+    next();
+  });
 
 const Recipe = mongoose.model('Recipe', recipeSchema);
 

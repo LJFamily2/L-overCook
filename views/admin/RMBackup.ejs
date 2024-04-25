@@ -43,7 +43,7 @@
       </tr>
     </thead>
     <tbody>
-      <% recipes.forEach(function(recipe,index){ %>
+      <% recipes.forEach((recipe,index) => { %>
         <tr>
           <td>
             <% if (recipe.image) { %>
@@ -76,7 +76,7 @@
               class="btn btn-link update-recipe"
               style="cursor: pointer; text-decoration: none; color: black"
               data-bs-toggle="modal"
-              data-bs-target="#updateRecipeModal-<%= index %>"
+              data-bs-target="#updateRecipeModal-<%= recipe._id %>"
             >
               <i class="ri-edit-box-line"></i>
             </button>
@@ -88,7 +88,7 @@
               class="btn btn-link delete-recipe"
               style="cursor: pointer; text-decoration: none; color: black"
               data-bs-toggle="modal"
-              data-bs-target="#deleteRecipeModal-<%= index %>"
+              data-bs-target="#deleteRecipeModal-<%= recipe.id %>"
             >
               <i class="bi bi-trash"></i>
             </button>
@@ -97,15 +97,15 @@
         <!-- Update recipe modal starts -->
         <div
           class="modal fade"
-          id="updateRecipeModal-<%=index%>"
+          id="updateRecipeModal-<%=recipe.id%>"
           tabindex="-1"
-          aria-labelledby="updateRecipeModalLabel-<%=index%>"
+          aria-labelledby="updateRecipeModalLabel"
           aria-hidden="true"
         >
           <div class="modal-dialog modal-dialog-centered" style="max-width: 40%">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="updateRecipeModalLabel-<%=index%>">Update Recipe</h5>
+                <h5 class="modal-title" id="updateRecipeModalLabel">Update Recipe</h5>
                 <button
                   type="button"
                   class="btn-close"
@@ -113,8 +113,8 @@
                   aria-label="Close"
                 ></button>
               </div>
-              <div class="modal-body" id="updateRecipeFormContainer-<%=index%>">
-                <form action="/recipeManagement/update/<%=recipe.id%>" method="post" id="updateRecipeForm-<%=index%>">
+              <form action="/recipeManagement/update/<%=recipe.id%>" method="post">
+                <div class="modal-body" id="updateRecipeFormContainer">
                   <div class="mb-3">
                     <label for="recipeName" class="form-label">Recipe Name</label>
                     <input
@@ -160,7 +160,7 @@
                       </div>
                     <% }) %>
                     <div class="row mb-3">
-                      <div class="col px-3 add-ingredient" style="cursor: pointer; color: blue" onclick="addIngredient('updateRecipeModal-<%=index%>')">+ Add ingredient</div>
+                      <button type="button" class="btn btn-danger" data-bs-target="#exampleModalToggle<%= index %>" data-bs-toggle="modal">Add new ingredient</button>
                       <div class="col">
                         <a href="/ingredientManagement">Can't find your ingredient? Create new here.</a>
                       </div>
@@ -208,11 +208,10 @@
 
                     />
                   </div>
-                </form> 
-              </div>
+                </div>
 
-              <div class="modal-footer">
-                  <button type="submit" class="btn btn-primary" form="updateRecipeForm-<%=index%>">Save Recipe</button>
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-primary">Save Recipe</button>
                   <button
                     type="button"
                     class="btn btn-secondary"
@@ -220,8 +219,8 @@
                   >
                     Close
                   </button>
-              </div>
-              
+                </div>
+              </form>
             </div>
           </div>
         </div>
@@ -230,15 +229,15 @@
         <!-- Delete recipe modal starts -->
         <div
           class="modal fade"
-          id="deleteRecipeModal-<%=index%>"
+          id="deleteRecipeModal-<%= recipe.id %>"
           tabindex="-1"
-          aria-labelledby="deleteRecipeModalLabel-<%=index%>"
+          aria-labelledby="deleteRecipeModalLabel"
           aria-hidden="true"
         >
           <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
               <div class="modal-header">
-                <h1 class="modal-title fs-5" id="deleteIngredientModalLabel-<%=index%>">
+                <h1 class="modal-title fs-5" id="deleteIngredientModalLabel">
                   Delete Recipe
                 </h1>
                 <button
@@ -274,6 +273,37 @@
           </div>
         </div>
         <!-- Delete recipe modal ends -->
+<!-- View all ingredient modal starts -->
+<div class="modal fade" id="exampleModalToggle<%= index %>" aria-hidden="true" aria-labelledby="exampleModalToggleLabel<%= index %>" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Ingredients</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form action="/recipeManagement/add-ingredient/<%= recipe._id %>" method="post">
+        <div class="modal-body">
+          <div class="col position-relative">
+            <div class="search-select-box">
+              <select name="ingredient" class="w-100 form-control" data-live-search="true">
+                <% ingredients.forEach(ingredient => { %>
+                  <option value="<%= ingredient._id %>"><%= ingredient.name %></option>
+                <% }) %> 
+              </select>
+            </div>
+          </div>
+          <div class="col">
+            <input type="text" name="quantity" class="form-control" placeholder="Quantity" aria-label="Quantity"/>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-success">Confirm</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
         <% }) %>
     </tbody>
   </table>
@@ -408,9 +438,9 @@
     const newRow = document.createElement('div');
     newRow.classList.add('row', 'mb-3', 'ingredientObject');
     newRow.innerHTML = `
-      <div class="col position-relative">
+    <div class="col position-relative">
         <div class="search-select-box">
-          <select name="ingredient[]" class="w-100 form-control" data-live-search="true">
+          <select name="ingredient" class="w-100 form-control" data-live-search="true">
             <% ingredients.forEach(ingredient => { %>
               <option name="<%= ingredient.name %>" value="<%= ingredient.name %>" data-tokens="<%= ingredient.name %>"><%= ingredient.name %></option>
             <% }) %> 
@@ -418,13 +448,12 @@
         </div>
       </div>
       <div class="col">
-        <input type="text" name="quantity[]" class="form-control" placeholder="Quantity" aria-label="Quantity"/>
+        <input type="text" name="quantity" class="form-control" placeholder="Quantity" aria-label="Quantity"/>
       </div>
       <div class="col-1 fs-4 remove-ingredient" style="cursor: pointer; display: none" onclick="removeIngredient(this)">
         <i class="ri-close-line" aria-label="Remove ingredient"></i>
       </div>
-    `;
-    
+    `
     const modal = document.getElementById(modalId);
     const ingredientsContainer = modal.querySelector('.ingredientsContainer');
     const addNewIngredientButton = ingredientsContainer.querySelector('.add-ingredient');
@@ -432,7 +461,6 @@
     
     // Re-initialize Bootstrap-select plugin
     $('.search-select-box select').selectpicker();
-
 
     const removeIngredients = modal.querySelectorAll('.remove-ingredient');
     if (removeIngredients.length > 1) {
@@ -460,7 +488,4 @@
     }
   }
 
-  $(document).ready(function () {
-        $('.search-select-box select').selectpicker();
-    });
 </script>

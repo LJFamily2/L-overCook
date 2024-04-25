@@ -14,6 +14,7 @@ exports.getHomePage = async (req, res) => {
       ingredients,
       recipes,
       cuisines,
+      user:req.user,
       userAuthentication: false,
       layout: "./layouts/client/defaultLayout",
     });
