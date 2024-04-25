@@ -15,10 +15,10 @@ const userSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "Recipe",
   },
-  favoriteRecipe: {
+  favoriteRecipes: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: "Recipe",
-  },
+  }],
   otp: {
     type: String, 
     default: null,
