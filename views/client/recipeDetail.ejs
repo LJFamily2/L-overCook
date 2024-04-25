@@ -20,15 +20,15 @@
          </div>
       </div>
       <div
-         class="row title px-md-5 d-flex justify-content-center align-items-center"
-         style="margin-bottom: 130px; padding-top: 30px"
+         class="row title d-flex justify-content-center align-items-center"
+         style="margin-bottom: 130px; padding-top: 30px; "
       >
          <div class="col-md-10 col-12 p-0">
             <h1><%= recipe.name %></h1>
             <p><%= recipe.description %></p>
          </div>
          <div
-            class="col-md-2 col-12 position-relative cuisine p-1"
+            class="col-md-2 col-12 px-2 position-relative cuisine p-1"
             style="
                background: #e7a046;
                text-align: right;
@@ -259,7 +259,8 @@
          </div>
       </div>
       <div class="row comment-section mt-4 py-4" style="background: white">
-         <div class="row comment-body p-0 m-0">
+         <% if(user){ %>
+         <div class="row comment-body p-0 m-0 mb-4">
             <div class="col">
                <div class="section d-flex align-items-center">
                   <img
@@ -335,7 +336,8 @@
                </form>
             </div>
          </div>
-         <div class="row comment-list pt-4 px-0 m-0">
+         <% } %>
+         <div class="row comment-list px-0 m-0">
             <div class="col">
                <div class="comment-list-header" id="comments">
                   <% if(recipe.reviews.length <2){ %>
