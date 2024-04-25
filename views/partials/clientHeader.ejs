@@ -15,10 +15,11 @@
             <img id="logo-name" src="/images/loverCook.png" />
         </a>
       </div>
+
       <div class="nav-right">
+        <% if(user){ %>
         <a href="#"> <span> History </span> </a>
         <a href="/favorite-recipe"> <span> Favourites </span> </a>
-        <% if(user){ %>
         <a href="/account/profile"> 
           <i class='bx bx-user-circle icon-profile' style='color:#707070' ></i>
           <span><%= user.username %></span> 
