@@ -21,12 +21,16 @@
         <a href="#"> <span> History </span> </a>
         <a href="/favorite-recipe"> <span> Favourites </span> </a>
         <a href="/account/profile"> 
-          <i class='bx bx-user-circle icon-profile' style='color:#707070' ></i>
+          <img
+            src="/uploadImages/<%= user.avatar %>"
+            alt="upload file"
+            style="width: 30px; height: 30px; border-radius: 50%; margin-right: 2px;"
+            >
           <span><%= user.username %></span> 
         </a>
         <% }else{ %>
         <a href="/signup"> <span> Register </span> </a>
-        <span> | </span>
+        <span class="m-2"> | </span>
         <a href="/signin"> <span> Login </span> </a>
         <% } %>
         <%- include('./langButton') %>
