@@ -28,11 +28,6 @@ const updateUser = async (req, res) => {
          role: role || existingUser.role,
       };
 
-      // Update password if provided
-      if (password) {
-         updateFields.password = await bcrypt.hash(password, 10);
-      }
-
       // Update avatar if a new one is provided
       if (req.file) {
          const newAvatar = req.file.filename;
@@ -70,6 +65,8 @@ const updateUser = async (req, res) => {
    }
 };
 
+
+
 // Controller for deleting a user
 const deleteUser = async (req, res) => {
    try {
@@ -100,4 +97,4 @@ const deleteUser = async (req, res) => {
    }
 };
 
-module.exports = { updateUser, deleteUser };
+module.exports = { updateUser, deleteUser  };

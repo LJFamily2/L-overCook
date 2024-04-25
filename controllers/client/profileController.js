@@ -2,6 +2,7 @@ const crypto = require('crypto');
 const UserModel = require('../../models/User');
 const sendMailResetPassword = require('../sendEmail');
 const { v4: uuidv4 } = require('uuid');
+const bcrypt = require('bcrypt');
 
 // Render get profile page
 const getProfilePage = async (req, res) => {
@@ -61,17 +62,19 @@ const sendOtp = async (req, res) => {
    try {
       const user = await UserModel.findOne({ email });
       if (!user) {
-         res.send('User not found').status(404);
+         req.flash('error','User not found')
+         res.status(404).redirect('/account/profile/resetPassword');
          return;
       }
 
       // Generate OTP and timestamp
-      await generateAndSendOtpEmail(user);
-
-      res.redirect(
+      
+      
+      
+      res.status(200).redirect(
          `/account/profile/resetPassword/verifyOTP?token=${user.token}`
       );
-      // .status(200);
+      generateAndSendOtpEmail(user);
    } catch (error) {
       console.error(error);
       res.status(500);
@@ -171,6 +174,46 @@ const resendOtp = async (req, res) => {
       res.status(500);
    }
 };
+
+const updateUserPassword = async(req, res) => {
+   try {
+      const userId = req.user.id;
+      const existingUser = await UserModel.findById(userId);
+
+      if (!existingUser) {
+         req.flash('error', 'User not found');
+         return res.status(404).redirect('/account/profile');
+      }
+
+      const { newPassword, reenterPassword } = req.body;
+
+      // Check if the new password matches the re-entered password
+      if (newPassword !== reenterPassword) {
+         req.flash('error', 'Passwords do not match');
+         return res.status(400).redirect('/account/profile/updatePassword');
+      }
+
+      const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+      const updatedUser = await UserModel.findByIdAndUpdate(userId, {password: hashedPassword}, {
+         new: true,
+      });
+
+      if (!updatedUser) {
+         req.flash('error', 'Error updating user');
+         return res.status(500).redirect('/account/profile');
+      }
+
+      req.flash('success', 'User password updated successfully');
+      res.status(201).redirect('/account/profile')
+   } catch (error) {
+      console.error('Error updating user password:', error);
+      return res.status(500).send('Internal server error');
+   }
+}
+
+
+
 module.exports = {
    verifyOtpPage,
    getProfilePage,
@@ -178,5 +221,6 @@ module.exports = {
    sendOtp,
    verifyOtp,
    resendOtp,
-   handleOtpRequest
+   handleOtpRequest,
+   updateUserPassword
 };

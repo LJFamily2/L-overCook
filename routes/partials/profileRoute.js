@@ -14,15 +14,19 @@ router.post('/profile/resetPassword/verifyOTP', profileController.handleOtpReque
 router.get('/profile/updatePassword', (req, res) => {
     res.render('client/updatePassword', {
         layout: 'layouts/client/defaultLayout',
-        userAuthentication: true
+        userAuthentication: false,
+        user:req.user
     })
 });
+router.post('/profile/updatePassword', profileController.updateUserPassword);
 
 // edit profile
 router.get('/profile/editProfile', (req, res) => {
     res.render('client/editProfile', {
         layout: 'layouts/client/defaultLayout',
-        userAuthentication: true
+        userAuthentication: false,
+        user:req.user
+
     })
 });
 
