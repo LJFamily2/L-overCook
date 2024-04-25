@@ -40,8 +40,7 @@ const updateUser = async (req, res) => {
             try {
                await deleteImageFile(
                   path.join(
-                     __dirname,
-                     '../public/uploadImages',
+                     'public/uploadImages',
                      existingUser.avatar
                   )
                );
@@ -84,7 +83,6 @@ const deleteUser = async (req, res) => {
          try {
             await deleteImageFile(
                path.join(
-                  __dirname,
                   '../public/uploadImages',
                   deletedUser.avatar
                )
