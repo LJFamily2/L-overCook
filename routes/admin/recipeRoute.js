@@ -13,7 +13,7 @@ router.post('/update/:id', recipeController.updateRecipe);
 router.post('/delete/:id', recipeController.deleteRecipe); 
 
 // Add review 
-router.post("/:slug/addReview", reviewController.addReview);
+router.post("/:slug/add-review", reviewController.addReview);
 router.post("/:slug/delete", reviewController.removeReview);
 
 module.exports = router;

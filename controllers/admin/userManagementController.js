@@ -1,4 +1,4 @@
-const User = require('../models/User');
+const User = require('../../models/User');
 const bcrypt = require('bcrypt');
 const fs = require('fs').promises;
 const path = require('path');
@@ -40,8 +40,7 @@ const updateUser = async (req, res) => {
             try {
                await deleteImageFile(
                   path.join(
-                     __dirname,
-                     '../public/uploadImages',
+                     'public/uploadImages',
                      existingUser.avatar
                   )
                );
@@ -84,7 +83,6 @@ const deleteUser = async (req, res) => {
          try {
             await deleteImageFile(
                path.join(
-                  __dirname,
                   '../public/uploadImages',
                   deletedUser.avatar
                )
