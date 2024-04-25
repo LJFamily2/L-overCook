@@ -132,7 +132,7 @@ const verifyOtp = async (req, res) => {
          const newToken = uuidv4();
          await UserModel.findOneAndUpdate(
             { _id: user._id },
-            { token: newToken, $unset: { otp: 1, otpTimestamp: 1, otpRequestTimestamp: 1 } }
+            { token: newToken, otpVerify: true, $unset: { otp: 1, otpTimestamp: 1, otpRequestTimestamp: 1 } }
          );
          req.flash('success','OTP verified successfully')
          res.status(200).redirect('/account/profile/updatePassword');
@@ -195,7 +195,7 @@ const updateUserPassword = async(req, res) => {
 
       const hashedPassword = await bcrypt.hash(newPassword, 10);
 
-      const updatedUser = await UserModel.findByIdAndUpdate(userId, {password: hashedPassword}, {
+      const updatedUser = await UserModel.findByIdAndUpdate(userId, {password: hashedPassword , verifyOtp: false}, {
          new: true,
       });
 

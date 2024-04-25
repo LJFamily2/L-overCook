@@ -28,6 +28,7 @@ const signUpController = {
         email: email.trim(),
         avatar: '',
         role: false,
+        otpVerify: false,
         token: uuidv4(),
       });
 

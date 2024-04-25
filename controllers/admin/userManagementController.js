@@ -21,7 +21,7 @@ const updateUser = async (req, res) => {
          return res.status(404).send('User not found');
       }
 
-      const { username, email, role, password } = req.body;
+      const { username, email, role } = req.body;
       const updateFields = {
          username: username || existingUser.username,
          email: email || existingUser.email,
