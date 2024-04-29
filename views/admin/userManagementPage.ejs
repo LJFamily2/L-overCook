@@ -1,3 +1,13 @@
+<head>
+   <!-- Css -->
+   <link rel="stylesheet" href="/css/admin/dashboard.css" />
+
+
+   <!-- Add datatable -->
+   <link rel="stylesheet" href="https://cdn.datatables.net/2.0.5/css/dataTables.dataTables.css" />
+   <script src="https://cdn.datatables.net/2.0.5/js/dataTables.js"></script>
+   <script src="/js/admin/datatable.js" defer></script>
+</head>
 <div class="fluid-container">
    <!-- Header at the top of page -->
    <div class="head-page">
@@ -13,15 +23,12 @@
    </div>
 
    <div style="position: fixed; top: 10px; right: 5px;">
-
       <%- include('../partials/notificationMessage') %>
    </div>
-   
-
    <!-- Table display information user account-->
-
-   <h3 class="px-5 ">User account</h3>
-   <table  class="table text-center" style="height: 500px">
+   <h3 class="px-2 mt-3">User account</h3>
+   <div class="p-3">
+         <table class="table" style="height: 500px" id="table">
       <thead>
          <tr>
 
@@ -34,7 +41,7 @@
       </thead>
       <tbody>
          <% users.forEach( (user,index) => { %>
-         <tr>
+         <tr >
             <td class="w-25"><%= index + 1  %></td>
             <td class="w-25"><%= user.getFormattedDateTime() %></td>
             <td class="w-25"><%= user.username %></td>
@@ -43,7 +50,7 @@
                <i
                   class="ri-edit-box-line"
                   data-bs-toggle="modal"
-                  data-bs-target="#staticBackdrop<%= index %>"
+                  data-bs-target="#staticBackdrop<%= index + 1%>"
                   style="cursor: pointer;"
                ></i>
 
@@ -54,7 +61,7 @@
                <!-- Modal for updating -->
                <div
                   class="modal fade"
-                  id="staticBackdrop<%= index %>"
+                  id="staticBackdrop<%= index + 1%>"
                   data-bs-backdrop="static"
                   data-bs-keyboard="false"
                   tabindex="-1"
@@ -82,29 +89,29 @@
                         <div class="modal-body">
                            <form action="/users/update/<%= user._id %>" method="post">
                               <div class="mb-3">
-                                 <label for="username<%= index %>" class="form-label" style="float: left;">Username</label>
+                                 <label for="username<%= index + 1  %>" class="form-label" style="float: left;">Username</label>
                                  <input
                                     type="text"
                                     class="form-control"
-                                    id="username<%= index %>"
+                                    id="username<%= index + 1  %>"
                                     name="username"
                                     value="<%= user.username %>"
                                  />
                               </div>
                               <div class="mb-3">
-                                 <label for="email<%= index %>" class="form-label" style="float: left;">Email</label>
+                                 <label for="email<%= index  + 1 %>" class="form-label" style="float: left;">Email</label>
                                  <input
                                     type="email"
                                     class="form-control"
-                                    id="email<%= index %>"
+                                    id="email<%= index  + 1 %>"
                                     name="email"
                                     value="<%= user.email %>"
                                  />
                               </div>
 
                               <div class="mb-3">
-                                 <label for="role<%= index %>" class="form-label" style="float: left;">Role</label>
-                                 <select class="form-select" id="role<%= index %>" name="role" aria-label="Default select example">
+                                 <label for="role<%= index + 1 %>" class="form-label" style="float: left;">Role</label>
+                                 <select class="form-select" id="role<%= index + 1 %>" name="role" aria-label="Default select example">
                                     <option value="true" <%= (user.role === true) ? 'selected' : '' %>>Admin</option>
                                     <option value="false" <%= (user.role === false) ? 'selected' : '' %>>User</option>
                                   </select>
@@ -146,9 +153,13 @@
          <% }) %>
       </tbody>
    </table>
-   <%- include('../partials/navigationOfTable') %>
+   </div>
+
+
+
    <!-- Table display information admin account -->
-   <h3 class="px-5">Admin account</h3>
+   <h3 class="px-2">Admin account</h3>
+   <!-- Add new user -->
    <div class="d-grid d-md-flex justify-content-md-end mx-5">
       
       <button
@@ -159,9 +170,8 @@
          style="margin-left: 20px;"
       >Add User</button>
    </div>
-   
-
-   <table class="table  text-center" style="height: 500px" id="admin-users-table">
+   <div class="p-3">
+   <table class="table " style="height: 500px" id="admin-table">
       <thead>
          <tr>
 
@@ -292,80 +302,76 @@
          <% }) %>
       </tbody>
    </table>
+   </div>
 
 
-
-   <!-- Navigation of the table -->                            
-   <%- include('../partials/navigationOfTable') %>
    
-                  <!-- Modal for creating admin -->
-               <div
-                  class="modal fade"
-                  id="add-admin-user"
-                  data-bs-backdrop="static"
-                  data-bs-keyboard="false"
-                  tabindex="-1"
-                  aria-labelledby="staticBackdropLabel"
-                  aria-hidden="true"
-               >
-                  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                     <div class="modal-content">
+   <!-- Modal for creating admin -->
+<div class="modal fade"
+               id="add-admin-user"
+               data-bs-backdrop="static"
+               data-bs-keyboard="false"
+               tabindex="-1"
+               aria-labelledby="staticBackdropLabel"
+               aria-hidden="true"
+            >
+               <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                  <div class="modal-content">
 
-                        <div class="modal-header">
-                           <h1
-                              class="modal-title fs-5"
-                              id="staticBackdropLabel"
-                           >
-                              Add user
-                           </h1>
-                           <button
-                              type="button"
-                              class="btn-close"
-                              data-bs-dismiss="modal"
-                              aria-label="Close"
-                           ></button>
-                        </div>
-
-                        <div class="modal-body">
-                           <form action="/signup/addAdmin" method="post">
-                              <div class="mb-3">
-                                 <label for="username" class="form-label" style="float: left;">Username</label>
-                                 <input
-                                    type="text"
-                                    class="form-control"
-                                    id="username"
-                                    name="username"
-                                 />
-                              </div>
-                              <div class="mb-3">
-                                 <label for="email" class="form-label" style="float: left;">Email</label>
-                                 <input
-                                    type="email"
-                                    class="form-control"
-                                    id="email"
-                                    name="email"
-                                 />
-                              </div>
-                              <div class="mb-3">
-                                 <label for="password" class="form-label" style="float: left;">Password</label>
-                                 <input
-                                    type="password"
-                                    class="form-control"
-                                    id="password"
-                                    name="password"
-                                 />
-                              </div>
-                              <div class="modal-footer">
-                                 <button type="submit" class="btn btn-success">
-                                    Add user
-                                 </button>
-
-
-                              </div>
-                        </form>
-                        </div>
+                     <div class="modal-header">
+                        <h1
+                           class="modal-title fs-5"
+                           id="staticBackdropLabel"
+                        >
+                           Add user
+                        </h1>
+                        <button
+                           type="button"
+                           class="btn-close"
+                           data-bs-dismiss="modal"
+                           aria-label="Close"
+                        ></button>
                      </div>
-               </div>
-   
+
+                     <div class="modal-body">
+                        <form action="/signup/addAdmin" method="post">
+                           <div class="mb-3">
+                              <label for="username" class="form-label" style="float: left;">Username</label>
+                              <input
+                                 type="text"
+                                 class="form-control"
+                                 id="username"
+                                 name="username"
+                              />
+                           </div>
+                           <div class="mb-3">
+                              <label for="email" class="form-label" style="float: left;">Email</label>
+                              <input
+                                 type="email"
+                                 class="form-control"
+                                 id="email"
+                                 name="email"
+                              />
+                           </div>
+                           <div class="mb-3">
+                              <label for="password" class="form-label" style="float: left;">Password</label>
+                              <input
+                                 type="password"
+                                 class="form-control"
+                                 id="password"
+                                 name="password"
+                              />
+                           </div>
+                           <div class="modal-footer">
+                              <button type="submit" class="btn btn-success">
+                                 Add user
+                              </button>
+
+
+                        </div>
+                     </form>
+                     </div>
+                  </div>
+            </div>
 
 </div>
