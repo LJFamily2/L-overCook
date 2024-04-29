@@ -80,7 +80,7 @@ const deleteUser = async (req, res) => {
          try {
             await deleteImageFile(
                path.join(
-                  '../public/uploadImages',
+                  'public/uploadImages',
                   deletedUser.avatar
                )
             );

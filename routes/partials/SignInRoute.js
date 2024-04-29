@@ -2,9 +2,10 @@ const express = require("express");
 const router = express.Router();
 const signInController = require("../../controllers/signInController");
 const passport = require("passport");
+const connectEnsureLogin = require('connect-ensure-login');
 
 // Sigin page for user
-router.get("/", signInController.getSignIn);
+router.get("/", connectEnsureLogin.ensureLoggedOut({redirectTo:'/account/profile'}), signInController.getSignIn);
 router.post(
   "/userAuth",
   passport.authenticate("local", {
@@ -15,7 +16,7 @@ router.post(
 );
 
 // Signin page for admin
-router.get("/admin", signInController.getAdminSignIn);
+router.get("/admin", connectEnsureLogin.ensureLoggedOut({redirectTo:'/dashboard'}), signInController.getAdminSignIn);
 router.post(
   "/adminAuth",
   passport.authenticate("local", {
