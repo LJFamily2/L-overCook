@@ -101,15 +101,7 @@
                                     value="<%= user.email %>"
                                  />
                               </div>
-                              <div class="mb-3">
-                                 <label for="password<%= index %>" class="form-label" style="float: left;">Password</label>
-                                 <input
-                                    type="password"
-                                    class="form-control"
-                                    id="password<%= index %>"
-                                    name="password"
-                                 />
-                              </div>
+
                               <div class="mb-3">
                                  <label for="role<%= index %>" class="form-label" style="float: left;">Role</label>
                                  <select class="form-select" id="role<%= index %>" name="role" aria-label="Default select example">
@@ -117,7 +109,6 @@
                                     <option value="false" <%= (user.role === false) ? 'selected' : '' %>>User</option>
                                   </select>
                               </div>
-                           </div>
                            
                            <div class="modal-footer">
                               <button type="button" class="btn btn-danger" data-bs-target="#exampleModalToggle2<%= index %>" data-bs-toggle="modal">Delete user</button>
@@ -265,7 +256,6 @@
                                     <option value="false" <%= (admin.role === false) ? 'selected' : '' %>>User</option>
                                   </select>
                               </div>
-                           </div>
                            
                            <div class="modal-footer">
                               <button type="button" class="btn btn-danger" data-bs-target="#exampleModalToggle<%= index %>" data-bs-toggle="modal">Delete user</button>
@@ -364,13 +354,6 @@
                                     id="password"
                                     name="password"
                                  />
-                              </div>
-                              <div class="mb-3">
-                                 <label for="role" class="form-label" style="float: left;">Role</label>
-                                 <select class="form-select" id="role" name="role" aria-label="Default select example">
-                                    <option value="true">Admin</option>
-                                    <option value="false" >User</option>
-                                  </select>
                               </div>
                               <div class="modal-footer">
                                  <button type="submit" class="btn btn-success">
