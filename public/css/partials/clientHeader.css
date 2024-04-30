@@ -81,13 +81,10 @@ header {
 }
 
 .user-section {
-  max-width: 120px;
   white-space: nowrap;
-  overflow: hidden;
 }
 
 .user-profile {
-  padding: 8px 0;
 }
 
 .user-profile span {
@@ -96,7 +93,7 @@ header {
 
 .log-out {
   position: absolute;
-  top: 45px;
+  top: 50px;
   cursor: pointer;
   width: 120px;
   background-color: #6A994E;
@@ -104,6 +101,8 @@ header {
   padding: 10px 15px;
   opacity: 0;
   font-size: 18px;
+  font-family: inherit;
+  border-radius: 5px;
 }
 
 .user-section:hover .log-out {
@@ -113,6 +112,7 @@ header {
 
 .log-out:hover {
   background-color: #568b39;
+}
 
 @media (max-width: 767px) {
   .logo-without-name {
