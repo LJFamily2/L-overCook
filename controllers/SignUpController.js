@@ -48,7 +48,7 @@ const signUpController = {
   getAdminSignUp: (req, res) => {
     res.render("partials/signup", { layout: './layouts/client/defaultLayout', userAuthentication: true, messages: req.flash(), isAdminSignUp: true});
   },
-
+  
   postAdminSignUp: async (req, res) => {
     try {
       const { username, password,email } = req.body;
@@ -58,9 +58,11 @@ const signUpController = {
       const existedUser = await User.findOne({email});
       if(existedUser){
         req.flash("error", "Can't create account with this email!");
-        res.status(404).redirect('/signup/admin');
+        res.status(404).redirect(req.headers.referer + "#admin-users-table");
         return;
       };
+
+      
 
       const adminUser = await User.create({
         username: username.trim(),
@@ -76,8 +78,8 @@ const signUpController = {
         return;
       }
 
-      req.flash("success", "You have successfully signed up!");
-      res.status(201).redirect("/signin/admin");
+      req.flash("success", "You have successfully add admin!");
+      res.status(201).redirect( req.headers.referer + "#admin-users-table");
     } catch (err) {
       console.log(err);
     }

@@ -13,55 +13,42 @@ const deleteImageFile = async (imagePath) => {
 
 const updateUser = async (req, res) => {
    try {
-      const userId = req.params.id;
-      const existingUser = await User.findById(userId);
+      const { id } = req.params;
+      const { username, email, role, password } = req.body;
 
-      if (!existingUser) {
-         req.flash('error', 'User not found');
-         return res.status(404).send('User not found');
+      let hashedPassword;
+      if (password) {
+         hashedPassword = await bcrypt.hash(password, 10);
       }
 
-      const { username, email, role } = req.body;
       const updateFields = {
-         username: username || existingUser.username,
-         email: email || existingUser.email,
-         role: role || existingUser.role,
+         username,
+         email,
+         role,
+         password: hashedPassword,
       };
 
-      // Update avatar if a new one is provided
       if (req.file) {
          const newAvatar = req.file.filename;
          if (existingUser.avatar) {
-            try {
-               await deleteImageFile(
-                  path.join(
-                     'public/uploadImages',
-                     existingUser.avatar
-                  )
-               );
-            } catch (err) {
-               console.log('Error deleting old avatar file:', err);
-            }
+            await deleteImageFile(
+               path.join('public/uploadImages', existingUser.avatar)
+            );
          }
-         // Set the new avatar
          updateFields.avatar = newAvatar;
       }
 
-      const updatedUser = await User.findByIdAndUpdate(userId, updateFields, {
-         new: true,
-      });
-
-      if (!updatedUser) {
-         req.flash('error', 'Error updating user');
-         return res.status(500).send('Error updating user');
-      }
+      await User.findOneAndUpdate(
+         { _id: id },
+         { $set: updateFields },
+         { new: true,}
+      );
 
       req.flash('success', 'User updated successfully');
-      const referer = req.headers.referer;
-      res.redirect(referer);
+      res.redirect(req.headers.referer);
    } catch (error) {
       console.error('Error updating user:', error);
-      return res.status(500).send('Internal server error');
+      res.status(500).send('Internal server error');
    }
 };
 
@@ -80,7 +67,7 @@ const deleteUser = async (req, res) => {
          try {
             await deleteImageFile(
                path.join(
-                  '../public/uploadImages',
+                  'public/uploadImages',
                   deletedUser.avatar
                )
             );

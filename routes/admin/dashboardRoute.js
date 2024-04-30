@@ -8,6 +8,7 @@ router.get('/',connectEnsureLogin.ensureLoggedIn({redirectTo:'/signin/admin'}),c
     res.render('admin/dashboard', {
         layout: 'layouts/admin/defaultLayout',
         currentPage: 'dashboard'
+        ,user: req.user
     });    
 });
 

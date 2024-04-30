@@ -12,11 +12,15 @@ header {
   font-size: 20px;
 }
 
-#logo-without-name {
+.logo {
+  text-decoration: none;
+}
+
+.logo-without-name {
   height: 90px;
 }
 
-#logo-name {
+.logo-name {
   height: 30px;
 }
 
@@ -29,11 +33,17 @@ header {
 
 .nav-right {
   position: absolute;
-  top: 22px;
-  right: 60px;
+  /* top: 30px; */
+  /* right: 60px; */
+  right: 10px;
   display: flex;
   align-items: center;
   color: #707070;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
 }
 
 .nav-right a {
@@ -71,13 +81,10 @@ header {
 }
 
 .user-section {
-  max-width: 120px;
   white-space: nowrap;
-  overflow: hidden;
 }
 
 .user-profile {
-  padding: 8px 0;
 }
 
 .user-profile span {
@@ -86,7 +93,7 @@ header {
 
 .log-out {
   position: absolute;
-  top: 45px;
+  top: 50px;
   cursor: pointer;
   width: 120px;
   background-color: #6A994E;
@@ -94,6 +101,8 @@ header {
   padding: 10px 15px;
   opacity: 0;
   font-size: 18px;
+  font-family: inherit;
+  border-radius: 5px;
 }
 
 .user-section:hover .log-out {
@@ -103,4 +112,48 @@ header {
 
 .log-out:hover {
   background-color: #568b39;
+}
+
+@media (max-width: 767px) {
+  .logo-without-name {
+    height: 90px;
+  }
+
+  .logo-name {
+    display: none;
+  }
+
+  .navbar-collapse {
+    background-color: #f8f9fa;
+    border-radius: 4px;
+    padding: 10px;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+  }
+  
+  .navbar-toggler {
+    border: none;
+    background-color: transparent;
+    outline: none;
+  }
+
+  .navbar-toggler-icon span {
+    background-color: #333;
+    display: block;
+    height: 2px;
+    margin-bottom: 4px;
+  }
+
+  .nav-item {
+    justify-content: center;
+  }
+
+  .nav-item .drop-down {
+    margin-left: 0;
+  }
+
 }
