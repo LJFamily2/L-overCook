@@ -1,4 +1,5 @@
 const User = require('../../models/User');
+const Recipe = require('../../models/Recipe');
 const bcrypt = require('bcrypt');
 const fs = require('fs').promises;
 const path = require('path');
@@ -75,6 +76,11 @@ const deleteUser = async (req, res) => {
             console.log('Error deleting avatar file:', err);
          }
       }
+      await Recipe.updateMany(
+         {}, 
+         { $pull: { 'reviews': { 'user': userId } } }, 
+         { multi: true } 
+     );
       req.flash('success', 'User deleted successfully');
       const referer = req.headers.referer;
       res.redirect(referer);
