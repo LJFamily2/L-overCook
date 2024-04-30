@@ -6,6 +6,7 @@ const userSchema = new mongoose.Schema({
   avatar: String,
   email: String,
   role: Boolean,
+  token: String,
   createAt: {
     type: Date,
     default: Date.now,
@@ -31,7 +32,7 @@ const userSchema = new mongoose.Schema({
     type: Date,
     default: null,
   },
-  token: String,
+  otpVerify: Boolean,
 });
 
 userSchema.methods.getFormattedDateTime = function () {

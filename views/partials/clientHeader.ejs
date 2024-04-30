@@ -20,15 +20,24 @@
       <!-- <div class="nav-right">
         <% if(user){ %>
         <a href="#"> <span> History </span> </a>
-        <a href="/favorite-recipe"> <span> Favourites </span> </a>
-        <a href="/account/profile"> 
-          <img
-            src="/uploadImages/<%= user.avatar %>"
-            alt="upload file"
-            style="width: 30px; height: 30px; border-radius: 50%; margin-right: 2px;"
-            >
-          <span><%= user.username %></span> 
-        </a>
+        <a href="/favorite-recipe"> <span> Favorites </span> </a>
+        
+        <div class="user-section">
+          <div class="user-profile">
+            <a href="/account/profile"> 
+              <img
+                src="/uploadImages/<%= user.avatar %>"
+                alt="upload file"
+                />
+              <span><%= user.username %></span> 
+            </a>
+          </div>
+          
+          <form action="/users/log-out" method="post">
+            <button type="submit" class="log-out border-0">Log out </button>
+          </form> 
+        </div>
+        
         <% }else{ %>
           <a href="/signin"> <span> Login </span> </a>
           <span class="m-2"> | </span>

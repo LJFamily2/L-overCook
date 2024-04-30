@@ -22,7 +22,6 @@ body {
   position: absolute;
   right: 0;
   z-index: 90;
-  margin-top: 100px;
 }
 
 #main-content {
@@ -41,7 +40,7 @@ body {
   display: flex;
   justify-content: space-between;
   font-size: larger;
-  margin-bottom: 20px;
+  margin-bottom: 5px;
 }
 
 .filter-criteria {
