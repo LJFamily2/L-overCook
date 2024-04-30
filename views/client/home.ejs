@@ -1,144 +1,146 @@
 <head>
-   <!-- Fonts -->
-   <link rel="preconnect" href="https://fonts.googleapis.com" />
-   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-   <link
-      href="https://fonts.googleapis.com/css2?family=Inika:wght@400;700&display=swap"
-      rel="stylesheet"
-   />
-   <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
-      rel="stylesheet"
-   />
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inika:wght@400;700&display=swap"
+    rel="stylesheet"
+  />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
+    rel="stylesheet"
+  />
 
-   <!-- Css -->
-   <link rel="stylesheet" href="/css/partials/ingredientFilter.css" />
-   <link rel="stylesheet" href="/css/clients/home.css" />
+  <!-- Css -->
+  <link rel="stylesheet" href="/css/partials/ingredientFilter.css" />
+  <link rel="stylesheet" href="/css/clients/home.css" />
 </head>
 
 <%- include('../partials/ingredientFilter') %>
 
 <div id="main-content-container">
-   <div id="main-content">
-      <%- include ('../partials/searchBar') %>
+  <div id="main-content">
+    <%- include ('../partials/searchBar') %>
 
-      <div id="filter-row">
-         <p>You can make <span id="num-of-recipes">25</span> recipes</p>
-         <div class="filter-icon-container">
-            <img
-               class="filter-icon"
-               src="/images/filterIcon.png"
-               alt="filter-icon"
-            />
-         </div>
+    <div id="filter-row">
+      <p>You can make <span id="num-of-recipes">25</span> recipes</p>
+      <div class="filter-icon-container">
+        <img
+          class="filter-icon"
+          src="/images/filterIcon.png"
+          alt="filter-icon"
+        />
+      </div>
+    </div>
+
+    <div class="filter-criteria">
+      <h3>Cuisine:</h3>
+      <div>
+        <% cuisines.forEach(cuisine => {%>
+        <div>
+          <input
+            type="checkbox"
+            id="<%= cuisine.name %>"
+            name="<%= cuisine.name %>"
+          />
+          <label for="<%= cuisine.name %>"> <%= cuisine.name %> </label>
+        </div>
+        <% }) %>
       </div>
 
-      <div class="filter-criteria">
-         <h3>Cuisine:</h3>
-         <div>
-            <% cuisines.forEach(cuisine => {%>
-            <div>
-               <input
-                  type="checkbox"
-                  id="<%= cuisine.name %>"
-                  name="<%= cuisine.name %>"
-               />
-               <label for="<%= cuisine.name %>"> <%= cuisine.name %> </label>
-            </div>
-            <% }) %>
-         </div>
-
-         <h3>Cook time:</h3>
-         <div>
-            <div>
-               <input type="checkbox" id="under-15" name="under-15" />
-               <label for="under-15"> Under 15 mins </label>
-            </div>
-            <div>
-               <input type="checkbox" id="15-30" name="15-30" />
-               <label for="15-30"> 15 - 30 mins </label>
-            </div>
-            <div>
-               <input type="checkbox" id="over-30" name="over-30" />
-               <label for="over-30"> Over 30 mins </label>
-            </div>
-         </div>
+      <h3>Cook time:</h3>
+      <div>
+        <div>
+          <input type="checkbox" id="under-15" name="under-15" />
+          <label for="under-15"> Under 15 mins </label>
+        </div>
+        <div>
+          <input type="checkbox" id="15-30" name="15-30" />
+          <label for="15-30"> 15 - 30 mins </label>
+        </div>
+        <div>
+          <input type="checkbox" id="over-30" name="over-30" />
+          <label for="over-30"> Over 30 mins </label>
+        </div>
       </div>
+    </div>
 
-      <div id="results">
-         <div id="recipes">
-            <% recipes.forEach(recipe => { %>
-            <div class="recipe">
-               <div class="recipe-img-container">
-                  <img class="recipe-img" src="/images/<%= recipe.image %>" />
-               </div>
+    <div id="results">
+      <div id="recipes">
+        <% recipes.forEach(recipe => { %>
+        <div class="recipe">
+          <div class="recipe-img-container">
+            <img class="recipe-img" src="/images/<%= recipe.image %>" />
+          </div>
 
-               <div class="first-row">
-                  <div class="recipe-name" title="<%= recipe.name %>">
-                     <a
-                        href="/recipeManagement/<%= recipe.slug %>"
-                        style="text-decoration: none; color: black"
-                     >
-                        <%= recipe.name %>
-                     </a>
-                  </div>
-                  <form
-                     action="/favorite-recipe/add-favorite/<%= recipe.slug %>"
-                     method="post"
-                  >
-                     <button type="submit" class="bg-none border-0">
-                        <img src="/images/emptyHeart.png" />
-                     </button>
-                  </form>
-               </div>
-
-               <div class="second-row">
-                  <div class="cook-time">
-                     <img src="/images/clock.png" />
-                     <span><%= recipe.time %></span>
-                  </div>
-                  <div class="rating">
-                     <% function displayStars(rating) { %> <% const
-                     roundedRating=Math.round(rating); %> <% for (let i=1; i
-                     <=5; i++) { %> <% if (i <=roundedRating) { %>
-                     <span class="stars" style="color: #e7a046">&#128972;</span>
-                     <% } else { %>
-                     <span class="stars">&#128972;</span>
-                     <% } %> <% } %> <% } %> <%=
-                     displayStars(recipe.averageRating) %>
-                  </div>
-               </div>
+          <div class="first-row">
+            <div class="recipe-name" title="<%= recipe.name %>">
+              <a
+                href="/recipeManagement/<%= recipe.slug %>"
+                style="text-decoration: none; color: black"
+              >
+                <%= recipe.name %>
+              </a>
             </div>
-            <% }) %>
-         </div>
-      </div>
-   </div>
+            <form
+              action="/favorite-recipe/add-favorite/<%= recipe.slug %>"
+              method="post"
+            >
+              <button type="submit" class="bg-none border-0">
+                <img src="/images/emptyHeart.png" />
+              </button>
+            </form>
+          </div>
 
-   <div class="pantry-icon">
+          <div class="second-row">
+            <div class="cook-time">
+              <img src="/images/clock.png" />
+              <span><%= recipe.time %></span>
+            </div>
+            <div class="rating">
+              <% function displayStars(rating) { %> <% const
+              roundedRating=Math.round(rating); %> <% for (let i=1; i <=5; i++)
+              { %> <% if (i <=roundedRating) { %>
+              <span class="stars" style="color: #e7a046">&#128972;</span>
+              <% } else { %>
+              <span class="stars">&#128972;</span>
+              <% } %> <% } %> <% } %> <%= displayStars(recipe.averageRating) %>
+            </div>
+          </div>
+        </div>
+        <% }) %>
+      </div>
+    </div>
+  </div>
+
+  <div class="pantry-icon">
+    <img src="/images/basket.png" />
+    <span id="num-of-ingredients"> 10 </span>
+  </div>
+
+  <div class="pantry-contents">
+    <div class="pantry-title">
       <img src="/images/basket.png" />
-      <span id="num-of-ingredients"> 10 </span>
-   </div>
+      <span> My pantry </span>
+    </div>
 
-   <div class="pantry-contents">
-      <div class="pantry-title">
-         <img src="/images/basket.png" />
-         <span> My pantry </span>
-      </div>
-
-      <div class="pantry-list">
-         <div class="pantry-item">1. Egg</div>
-         <div class="pantry-item">2. Milk</div>
-         <div class="pantry-item">3. Tomato</div>
-         <div class="pantry-item">4. Banana</div>
-         <div class="pantry-item">5. Watermelon</div>
-         <div class="pantry-item">6. Carrot</div>
-         <div class="pantry-item">7. Onion</div>
-         <div class="pantry-item">8. Potato</div>
-         <div class="pantry-item">9. Pepper</div>
-         <div class="pantry-item">10. Cucumber</div>
-         <div class="pantry-item">11. Mushroom</div>
-      </div>
-   </div>
+    <div class="pantry-list">
+      <div class="pantry-item">1. Egg</div>
+      <div class="pantry-item">2. Milk</div>
+      <div class="pantry-item">3. Tomato</div>
+      <div class="pantry-item">4. Banana</div>
+      <div class="pantry-item">5. Watermelon</div>
+      <div class="pantry-item">6. Carrot</div>
+      <div class="pantry-item">7. Onion</div>
+      <div class="pantry-item">8. Potato</div>
+      <div class="pantry-item">9. Pepper</div>
+      <div class="pantry-item">10. Cucumber</div>
+      <div class="pantry-item">11. Mushroom</div>
+    </div>
+  </div>
 </div>
 
 <script src="/js/clients/home.js"></script>
+<script>
+   
+</script>

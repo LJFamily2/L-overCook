@@ -15,3 +15,5 @@ pantryIcon.addEventListener("click", () => {
   pantryContents.classList.toggle("show");
 });
 
+
+

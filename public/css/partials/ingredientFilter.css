@@ -123,6 +123,33 @@
 }
 
 
+/* Style for the button */
+.selectable-button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Style for the button when selected */
+.selectable-button.selected {
+  background-color: #28a745;
+}
+
+/* Hover effect */
+.selectable-button:hover {
+  background-color: #0056b3;
+}
+
+/* Style for button text */
+.button-text {
+  font-size: 16px;
+  font-weight: bold;
+}
+
 /* Responsive */
 @media screen and (max-width: 914px) {
     .ingredient-filter {
