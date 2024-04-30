@@ -7,16 +7,17 @@
 <% if(!userAuthentication){ %>
     <header>
       <div class="nav-left">
-        <a href="/" style="text-decoration: none;">
+        <a href="/" class="logo">
           <img
             id="logo-without-name"
             src="/images/logoWithoutName.png"
+            class="logo-without-name"
           />
-            <img id="logo-name" src="/images/loverCook.png" />
+            <img id="logo-name" src="/images/loverCook.png" class="logo-name"/>
         </a>
       </div>
 
-      <div class="nav-right">
+      <!-- <div class="nav-right">
         <% if(user){ %>
         <a href="#"> <span> History </span> </a>
         <a href="/favorite-recipe"> <span> Favorites </span> </a>
@@ -44,17 +45,58 @@
         <% } %>
         <%- include('./langButton') %>
       </div>
-    </div>
+    </div> -->
+    <nav class="navbar navbar-expand-md nav-right">
+      <div class="container-fluid">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse justify-content-md-end" id="navbarSupportedContent">
+              <ul class="navbar-nav mb-2 mb-lg-0">
+                  <% if(user){ %>
+                  <li class="nav-item">
+                      <a class="nav-link" href="#">History</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="/favorite-recipe">Favourites</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="/account/profile">
+                          <img
+                              src="/uploadImages/<%= user.avatar %>"
+                              alt="upload file"
+                              style="width: 30px; height: 30px; border-radius: 50%; margin-right: 2px;"
+                          />
+                          <%= user.username %>
+                      </a>
+                  </li>
+                  <% }else{ %>
+                  <li class="nav-item">
+                      <a class="nav-link" href="/signin">Login</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="/signup">Register</a>
+                  </li>
+                  <% } %>
+                  <li class="nav-item">
+                      <!-- Include langButton inside the navbar -->
+                      <%- include('./langButton') %>
+                  </li>
+              </ul>
+          </div>
+      </div>
+  </nav>
   </header>
   <% }else{ %>
     <header>
       <div class="nav-left">
-        <a href="/" style="text-decoration: none;">
+        <a href="/" class="logo">
           <img
             id="logo-without-name"
             src="/images/logoWithoutName.png"
+            class="logo-without-name"
           />
-            <img id="logo-name" src="/images/loverCook.png" />
+            <img id="logo-name" src="/images/loverCook.png" class="logo-name"/>
         </a>
       </div>
       <div class="nav-right">
@@ -63,5 +105,6 @@
     </div>
   </header>
     <% } %>
+  
     
 
