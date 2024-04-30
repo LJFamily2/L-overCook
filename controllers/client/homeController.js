@@ -3,6 +3,7 @@ const categoryController = require("../admin/categoryController");
 const ingredientController = require("../admin/ingredientController");
 const recipeController = require("../admin/recipeController");
 const Cuisine = require("../../models/Cuisine");
+
 exports.getHomePage = async (req, res) => {
   try {
     const categories = await categoryController.getAllCategories();
