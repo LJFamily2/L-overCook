@@ -66,9 +66,29 @@
     </div>
 
     <div id="results">
-      <div id="recipes">
+      <div id="all-recipes">
         <% recipes.forEach(recipe => { %>
-        <div class="recipe">
+        <div
+          class="recipe"
+          recipe-name="<%= recipe.name %>"
+          recipe-img="<%= recipe.image %>"
+          cook-time="<%= recipe.time %>"
+          rating="<%=recipe.reviews.rating%>"
+        >
+          <!-- Hidden element to store ingredient and rating -->
+          <% recipe.ingredients.forEach(ingredient => { %>
+          <div
+            class="recipe-ingredients hidden"
+            recipe-ingredient="<%=ingredient.ingredient.name%>"
+          >
+            <%= ingredient.ingredient.name %>
+          </div>
+          <% }) %> <% recipe.reviews.forEach(review => { %>
+          <div class="recipe-rating hidden" recipe-rating="<%=review.rating%>">
+            <%=review.rating%>
+          </div>
+          <% }) %>
+
           <div class="recipe-img-container">
             <img class="recipe-img" src="/images/<%= recipe.image %>" />
           </div>
@@ -141,6 +161,3 @@
 </div>
 
 <script src="/js/clients/home.js"></script>
-<script>
-   
-</script>

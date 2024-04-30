@@ -15,5 +15,113 @@ pantryIcon.addEventListener("click", () => {
   pantryContents.classList.toggle("show");
 });
 
+// Function to toggle the selection state of the button
+function toggleSelection(button) {
+  button.classList.toggle("selected");
+  let selectedIngredients = getSelectedButtonIds();
+  let recipes = getRecipes();
+  getRecipeByIngredient(selectedIngredients, recipes);
+}
+
+function getSelectedButtonIds() {
+  const selectedButtons = document.querySelectorAll(
+    ".selectable-button.selected"
+  );
+
+  const selectedIngredients = [];
+  selectedButtons.forEach((button) => {
+    selectedIngredients.push(button.id);
+  });
+  return selectedIngredients;
+}
+
+function getRecipes() {
+  const recipes = [];
+  document.querySelectorAll(".recipe").forEach((recipe) => {
+    const recipeName = recipe.getAttribute("recipe-name");
+    const recipeImg = recipe.getAttribute("recipe-img");
+    const cookTime = recipe.getAttribute("cook-time");
+    const recipeIngredients = [];
+    recipe.querySelectorAll(".recipe-ingredients").forEach((ingredient) => {
+      const ingredientName = ingredient.getAttribute("recipe-ingredient");
+      recipeIngredients.push(ingredientName);
+    });
+
+    let recipeRating = 0;
+    recipe.querySelectorAll(".recipe-rating").forEach((review) => {
+      const rating = review.getAttribute("recipe-rating");
+      recipeRating = rating;
+    });
+    recipes.push({
+      recipeName,
+      recipeImg,
+      recipeIngredients,
+      cookTime,
+      recipeRating,
+    });
+  });
+  return recipes;
+}
+
+function getRecipeByIngredient(selectedIngredients, recipes) {
+  let anyRecipeShown = false; // Flag to track if any recipe is shown
+  
+  if (selectedIngredients.length === 0) {
+    // If no ingredients are selected, display all recipes
+    recipes.forEach((recipe) => {
+      const recipeElement = document.querySelector(`.recipe[recipe-name="${recipe.recipeName}"]`);
+      if (recipeElement) {
+        recipeElement.style.display = 'block'; // Show the recipe
+        anyRecipeShown = true; // Set flag to true
+        
+        // Remove the div indicating matched ingredients if it exists
+        let ingredientMatchDiv = recipeElement.querySelector('.ingredient-match');
+        if (ingredientMatchDiv) {
+          ingredientMatchDiv.remove();
+        }
+      }
+    });
+  } else {
+    // If ingredients are selected, show only relevant recipes
+    recipes.forEach((recipe) => {
+      const hasSelectedIngredient = recipe.recipeIngredients.some(ingredient =>
+        selectedIngredients.includes(ingredient)
+      );
+      const recipeElement = document.querySelector(`.recipe[recipe-name="${recipe.recipeName}"]`);
+      if (recipeElement) {
+        if (hasSelectedIngredient) {
+          recipeElement.style.display = 'block'; // Show the recipe
+          anyRecipeShown = true; // Set flag to true
+          
+          // Create or update the div indicating matched ingredients
+          let ingredientMatchDiv = recipeElement.querySelector('.ingredient-match');
+          if (!ingredientMatchDiv) {
+            ingredientMatchDiv = document.createElement('p');
+            ingredientMatchDiv.classList.add('ingredient-match');
+            recipeElement.insertBefore(ingredientMatchDiv, recipeElement.querySelector('.second-row'));
+          }
+          // Update the content of the message div with relevant ingredients
+          const relevantIngredients = selectedIngredients.filter(ingredient =>
+            recipe.recipeIngredients.includes(ingredient)
+          );
+          ingredientMatchDiv.textContent = `You have: ${relevantIngredients.join(', ')}`;
+        } else {
+          recipeElement.style.display = 'none'; // Hide the recipe
+          
+          // Remove the div indicating matched ingredients if it exists
+          let ingredientMatchDiv = recipeElement.querySelector('.ingredient-match');
+          if (ingredientMatchDiv) {
+            ingredientMatchDiv.remove();
+          }
+        }
+      }
+    });
+  }
+  
+  // If no recipe is shown despite having selected ingredients, show alert
+  if (!anyRecipeShown && selectedIngredients.length > 0) {
+    alert("No recipes match the selected ingredients.");
+  }
+}
 
 

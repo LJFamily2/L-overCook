@@ -13,7 +13,11 @@
     </div>
     <% const maxVisibleIngredients =4; %> <%
     ingredientsList.forEach((ingredient, index) => { %>
-    <button class="selectable-button" onclick="toggleSelection(this)">
+    <button
+      class="selectable-button"
+      id="<%=ingredient%>"
+      onclick="toggleSelection(this)"
+    >
       <span class="button-text"><%=ingredient%></span>
     </button>
     <% }) %> <% if (ingredientsList.length > maxVisibleIngredients) { %>
@@ -27,11 +31,4 @@
     <% } %>
   </div>
   <% }) %>
-
-  <script>
-    // Function to toggle the selection state of the button
-    function toggleSelection(button) {
-      button.classList.toggle("selected");
-    }
-  </script>
 </div>

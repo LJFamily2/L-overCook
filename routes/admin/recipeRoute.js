@@ -9,10 +9,10 @@ const connectEnsureLogin = require('connect-ensure-login');
 router.get('/',connectEnsureLogin.ensureLoggedIn({redirectTo:'/signin/admin'}),checkAdmin, recipeController.getRecipePage);
 // Recipe detail page
 router.get('/:slug', recipeController.getRecipeDetailPage);
-// router.get('/:id', recipeController.getRecipeData);
 router.post('/new', recipeController.createRecipe);
 router.post('/update/:id', recipeController.updateRecipe); 
 router.post('/delete/:id', recipeController.deleteRecipe); 
+
 
 // Add review 
 router.post("/:slug/add-review", reviewController.addReview);
