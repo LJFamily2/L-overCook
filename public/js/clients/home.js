@@ -65,19 +65,25 @@ function getRecipes() {
 
 function getRecipeByIngredient(selectedIngredients, recipes) {
   let anyRecipeShown = false; // Flag to track if any recipe is shown
-  
+  let matchingRecipesCount = 0; // Counter for matching recipes
+
   if (selectedIngredients.length === 0) {
-    // If no ingredients are selected, display all recipes
+    // If no ingredients are selected, remove content from p element
+    const recipeCountElement = document.querySelector('.recipe-count');
+    if (recipeCountElement) {
+      recipeCountElement.innerHTML = "";
+    }
+
+    // Hide all recipes and remove content from the ingredient-match div
     recipes.forEach((recipe) => {
       const recipeElement = document.querySelector(`.recipe[recipe-name="${recipe.recipeName}"]`);
       if (recipeElement) {
-        recipeElement.style.display = 'block'; // Show the recipe
-        anyRecipeShown = true; // Set flag to true
+        recipeElement.style.display = 'none'; // Hide the recipe
         
         // Remove the div indicating matched ingredients if it exists
         let ingredientMatchDiv = recipeElement.querySelector('.ingredient-match');
         if (ingredientMatchDiv) {
-          ingredientMatchDiv.remove();
+          ingredientMatchDiv.textContent = ""; // Remove content
         }
       }
     });
@@ -105,22 +111,26 @@ function getRecipeByIngredient(selectedIngredients, recipes) {
             recipe.recipeIngredients.includes(ingredient)
           );
           ingredientMatchDiv.textContent = `You have: ${relevantIngredients.join(', ')}`;
+          matchingRecipesCount++; // Increment matching recipe count
         } else {
           recipeElement.style.display = 'none'; // Hide the recipe
           
           // Remove the div indicating matched ingredients if it exists
           let ingredientMatchDiv = recipeElement.querySelector('.ingredient-match');
           if (ingredientMatchDiv) {
-            ingredientMatchDiv.remove();
+            ingredientMatchDiv.textContent = ""; // Remove content
           }
         }
       }
     });
   }
-  
-  // If no recipe is shown despite having selected ingredients, show alert
-  if (!anyRecipeShown && selectedIngredients.length > 0) {
-    alert("No recipes match the selected ingredients.");
+
+  // Update recipe count in the DOM if any recipe is shown
+  if (anyRecipeShown) {
+    const recipeCountElement = document.querySelector('.recipe-count');
+    if (recipeCountElement) {
+      recipeCountElement.innerHTML = `You can make <span id="num-of-recipes">${matchingRecipesCount}</span> recipes.`;
+    }
   }
 }
 
