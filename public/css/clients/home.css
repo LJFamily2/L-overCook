@@ -145,6 +145,13 @@ input[type="checkbox"] {
   font-style: italic;
 }
 
+.missing-ingredient{
+  font-size: 14px;
+  margin: 10px 0 0 14px;
+  color: red;
+  font-style: italic;
+}
+
 .second-row {
   /* position: relative; */
   /* top: 9px; */

@@ -15,12 +15,18 @@ pantryIcon.addEventListener("click", () => {
   pantryContents.classList.toggle("show");
 });
 
-// Function to toggle the selection state of the button
+// Function to toggle selection state of the button and update pantry items
 function toggleSelection(button) {
   button.classList.toggle("selected");
-  let selectedIngredients = getSelectedButtonIds();
-  let recipes = getRecipes();
+  const selectedIngredients = getSelectedButtonIds();
+  const recipes = getRecipes();
   getRecipeByIngredient(selectedIngredients, recipes);
+  
+  // Update pantry items based on selected ingredients
+  updatePantryList(selectedIngredients);
+
+  // Update the number of ingredients displayed in the pantry icon
+  updatePantryCount(selectedIngredients.length);
 }
 
 function getSelectedButtonIds() {
@@ -62,70 +68,88 @@ function getRecipes() {
   });
   return recipes;
 }
-
-function getRecipeByIngredient(selectedIngredients, recipes) {
-  let anyRecipeShown = false; // Flag to track if any recipe is shown
-  let matchingRecipesCount = 0; // Counter for matching recipes
-
-  if (selectedIngredients.length === 0) {
-    // If no ingredients are selected, remove content from p element
-    const recipeCountElement = document.querySelector('.recipe-count');
-    if (recipeCountElement) {
-      recipeCountElement.innerHTML = "";
-    }
-
-    // Hide all recipes and remove content from the ingredient-match div
-    recipes.forEach((recipe) => {
-      const recipeElement = document.querySelector(`.recipe[recipe-name="${recipe.recipeName}"]`);
-      if (recipeElement) {
-        recipeElement.style.display = 'none'; // Hide the recipe
-        
-        // Remove the div indicating matched ingredients if it exists
-        let ingredientMatchDiv = recipeElement.querySelector('.ingredient-match');
-        if (ingredientMatchDiv) {
-          ingredientMatchDiv.textContent = ""; // Remove content
-        }
-      }
-    });
-  } else {
-    // If ingredients are selected, show only relevant recipes
-    recipes.forEach((recipe) => {
-      const hasSelectedIngredient = recipe.recipeIngredients.some(ingredient =>
-        selectedIngredients.includes(ingredient)
-      );
-      const recipeElement = document.querySelector(`.recipe[recipe-name="${recipe.recipeName}"]`);
-      if (recipeElement) {
-        if (hasSelectedIngredient) {
-          recipeElement.style.display = 'block'; // Show the recipe
-          anyRecipeShown = true; // Set flag to true
-          
-          // Create or update the div indicating matched ingredients
-          let ingredientMatchDiv = recipeElement.querySelector('.ingredient-match');
-          if (!ingredientMatchDiv) {
-            ingredientMatchDiv = document.createElement('p');
-            ingredientMatchDiv.classList.add('ingredient-match');
-            recipeElement.insertBefore(ingredientMatchDiv, recipeElement.querySelector('.second-row'));
-          }
-          // Update the content of the message div with relevant ingredients
-          const relevantIngredients = selectedIngredients.filter(ingredient =>
-            recipe.recipeIngredients.includes(ingredient)
-          );
-          ingredientMatchDiv.textContent = `You have: ${relevantIngredients.join(', ')}`;
-          matchingRecipesCount++; // Increment matching recipe count
-        } else {
-          recipeElement.style.display = 'none'; // Hide the recipe
-          
-          // Remove the div indicating matched ingredients if it exists
-          let ingredientMatchDiv = recipeElement.querySelector('.ingredient-match');
-          if (ingredientMatchDiv) {
-            ingredientMatchDiv.textContent = ""; // Remove content
-          }
-        }
-      }
-    });
+function clearRecipeDisplay(recipes) {
+  const recipeCountElement = document.querySelector('.recipe-count');
+  if (recipeCountElement) {
+    recipeCountElement.innerHTML = "";
   }
 
-  // Update recipe count in the DOM if any recipe is shown
+  // Hide all recipes and remove content from the ingredient-match div
+  recipes.forEach((recipe) => {
+    const recipeElement = document.querySelector(`.recipe[recipe-name="${recipe.recipeName}"]`);
+    if (recipeElement) {
+      recipeElement.style.display = 'none'; // Hide the recipe
+
+      // Remove the div indicating matched ingredients if it exists
+      let ingredientMatchDiv = recipeElement.querySelector('.ingredient-match');
+      if (ingredientMatchDiv) {
+        ingredientMatchDiv.textContent = ""; // Remove content
+      }
+    }
+  });
+}
+function showMatchingRecipes(recipes, selectedIngredients) {
+  let matchingRecipesCount = 0; // Counter for matching recipes
+
+  recipes.forEach((recipe) => {
+    const hasSelectedIngredient = recipe.recipeIngredients.some(ingredient =>
+      selectedIngredients.includes(ingredient)
+    );
+    const recipeElement = document.querySelector(`.recipe[recipe-name="${recipe.recipeName}"]`);
+    if (recipeElement) {
+      if (hasSelectedIngredient) {
+        showRecipe(recipeElement, recipe, selectedIngredients);
+        matchingRecipesCount++;
+      } else {
+        hideRecipe(recipeElement);
+      }
+    }
+  });
+
+  return matchingRecipesCount;
+}
+
+function showRecipe(recipeElement, recipe, selectedIngredients) {
+  recipeElement.style.display = 'block'; // Show the recipe
+
+  // Create or update the div indicating matched ingredients and missing ingredients
+  let ingredientMatchDiv = recipeElement.querySelector('.ingredient-match');
+  if (!ingredientMatchDiv) {
+    ingredientMatchDiv = document.createElement('p');
+    ingredientMatchDiv.classList.add('ingredient-match');
+    recipeElement.insertBefore(ingredientMatchDiv, recipeElement.querySelector('.second-row'));
+  }
+  
+  // Update the content of the message div with relevant and missing ingredients
+  const relevantIngredients = selectedIngredients.filter(ingredient =>
+    recipe.recipeIngredients.includes(ingredient)
+  );
+  const missingIngredients = recipe.recipeIngredients.filter(ingredient =>
+    !selectedIngredients.includes(ingredient)
+  );
+
+  let ingredientMatchContent = '';
+
+  if (missingIngredients.length === 0) {
+    ingredientMatchContent = 'You have all ingredients!';
+  } else {
+    ingredientMatchContent = `You have: ${relevantIngredients.join(', ')}.<span class="missing-ingredient"><br>Missing: ${missingIngredients.join(', ')}</span>`;
+  }
+
+  ingredientMatchDiv.innerHTML = ingredientMatchContent;
+}
+
+function hideRecipe(recipeElement) {
+  recipeElement.style.display = 'none'; // Hide the recipe
+
+  // Remove the div indicating matched ingredients if it exists
+  let ingredientMatchDiv = recipeElement.querySelector('.ingredient-match');
+  if (ingredientMatchDiv) {
+    ingredientMatchDiv.textContent = ""; // Remove content
+  }
+}
+
+function updateRecipeCount(anyRecipeShown, matchingRecipesCount) {
   if (anyRecipeShown) {
     const recipeCountElement = document.querySelector('.recipe-count');
     if (recipeCountElement) {
@@ -134,4 +158,44 @@ function getRecipeByIngredient(selectedIngredients, recipes) {
   }
 }
 
+function getRecipeByIngredient(selectedIngredients, recipes) {
+  if (selectedIngredients.length === 0) {
+    clearRecipeDisplay(recipes);
+    updateRecipeCount(false, 0);
+    updatePantryList([]);
+    updatePantryCount(0);
+  } else {
+    const matchingRecipesCount = showMatchingRecipes(recipes, selectedIngredients);
+    updateRecipeCount(matchingRecipesCount > 0, matchingRecipesCount);
+    updatePantryList(selectedIngredients);
+    updatePantryCount(selectedIngredients.length);
+  }
+}
 
+function updatePantryList(ingredients) {
+  const pantryList = document.querySelector('.pantry-list');
+  pantryList.innerHTML = ''; // Clear existing pantry list
+
+  ingredients.forEach((ingredient, index) => {
+    const listItem = document.createElement('li');
+    listItem.textContent = `${ingredient}`;
+    pantryList.appendChild(listItem);
+  });
+}
+
+// Function to remove selected ingredient from pantry items
+function removePantryItem(ingredientName) {
+  const pantryItems = document.querySelectorAll('.pantry-item');
+  pantryItems.forEach(item => {
+    if (item.textContent === ingredientName) {
+      item.remove();
+    }
+  });
+}
+
+function updatePantryCount(count) {
+  const numOfIngredients = document.getElementById('num-of-ingredients');
+  if (numOfIngredients) {
+    numOfIngredients.textContent = count;
+  }
+}
