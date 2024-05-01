@@ -22,6 +22,48 @@
   <div id="main-content">
     <%- include ('../partials/searchBar') %>
 
+    <div id="filter-row">
+      <p>You can make <span id="num-of-recipes">25</span> recipes</p>
+      <div class="filter-icon-container">
+        <img
+          class="filter-icon"
+          src="/images/filterIcon.png"
+          alt="filter-icon"
+        />
+      </div>
+    </div>
+
+    <div class="filter-criteria">
+      <h3>Cuisine:</h3>
+      <div>
+        <% cuisines.forEach(cuisine => {%>
+        <div>
+          <input
+            type="checkbox"
+            id="<%= cuisine.name %>"
+            name="<%= cuisine.name %>"
+          />
+          <label for="<%= cuisine.name %>"> <%= cuisine.name %> </label>
+        </div>
+        <% }) %>
+      </div>
+
+      <h3>Cook time:</h3>
+      <div>
+        <div>
+          <input type="checkbox" id="under-15" name="under-15" />
+          <label for="under-15"> Under 15 mins </label>
+        </div>
+        <div>
+          <input type="checkbox" id="15-30" name="15-30" />
+          <label for="15-30"> 15 - 30 mins </label>
+        </div>
+        <div>
+          <input type="checkbox" id="over-30" name="over-30" />
+          <label for="over-30"> Over 30 mins </label>
+        </div>
+      </div>
+    </div>
 
     <div id="results">
       <div id="all-recipes">

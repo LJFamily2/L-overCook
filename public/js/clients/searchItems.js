@@ -24,6 +24,22 @@ function searchItems(inputId, list, containerID) {
    setTimeout(debouncedSearch, 100);
 }
 
+function toggleSelectionInFilter(inputId, ingredient, list) {
+   const button = document.getElementById(ingredient);
+   console.log('Button:', button);
+   toggleSelection(button);
+   const activeStatus = document.querySelector('li .active-status');
+   console.log('Active status:', activeStatus);
+   if (button.classList.contains('selected')) {
+      activeStatus.textContent = '-';
+   } else {
+      activeStatus.textContent = '+';
+   }
+   document.getElementById(list).classList.toggle('hidden');
+   document.getElementById(inputId).value = '';
+}
+
+
 function setValue(inputId, value, list) {
    document.getElementById(inputId).value = value;
    document.getElementById(list).classList.toggle('hidden');
