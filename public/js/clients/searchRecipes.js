@@ -12,18 +12,21 @@ searchButton.addEventListener('click', function(event) {
     // Get the search query entered by the user
     const searchQuery = searchInput.value.trim().toLowerCase();
 
-    // Loop through each recipe card
-    recipeCards.forEach(recipeCard => {
-        // Get the recipe name from the recipe card
-        const recipeName = recipeCard.getAttribute('recipe-name').toLowerCase();
-        
-        // Check if the recipe name contains the search query
-        if (recipeName.includes(searchQuery)) {
-            // Show the recipe card if it matches the search query
-            recipeCard.style.display = 'block';
-        } else {
-            // Hide the recipe card if it doesn't match the search query
-            recipeCard.style.display = 'none';
-        }
-    });
+    // Check if the search query is not empty
+    if (searchQuery) {
+        // Loop through each recipe card
+        recipeCards.forEach(recipeCard => {
+            // Get the recipe name from the recipe card
+            const recipeName = recipeCard.getAttribute('recipe-name').toLowerCase();
+            
+            // Check if the recipe name contains the search query
+            if (recipeName.includes(searchQuery)) {
+                // Show the recipe card if it matches the search query
+                recipeCard.style.display = 'block';
+            } else {
+                // Hide the recipe card if it doesn't match the search query
+                recipeCard.style.display = 'none';
+            }
+        });
+    } 
 });

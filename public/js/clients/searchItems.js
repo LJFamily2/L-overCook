@@ -25,16 +25,7 @@ function searchItems(inputId, list, containerID) {
 }
 
 function toggleSelectionInFilter(inputId, ingredient, list) {
-   const button = document.getElementById(ingredient);
-   console.log('Button:', button);
-   toggleSelection(button);
-   const activeStatus = document.querySelector('li .active-status');
-   console.log('Active status:', activeStatus);
-   if (button.classList.contains('selected')) {
-      activeStatus.textContent = '-';
-   } else {
-      activeStatus.textContent = '+';
-   }
+   toggleSelection(document.getElementById(ingredient));
    document.getElementById(list).classList.toggle('hidden');
    document.getElementById(inputId).value = '';
 }
