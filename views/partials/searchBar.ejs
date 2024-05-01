@@ -13,7 +13,7 @@
 
 <div id="search">
    <h2>Recipe Search</h2>
-   <form action="/" method="post" id="search-bar" class="position-relative">
+   <form action="/search" method="post" id="search-bar" class="position-relative">
       <button type="submit">
          <i class="bx bx-search"></i>
       </button>
@@ -29,8 +29,17 @@
          class="searchDropDown w-100 position-absolute start-0 top-100 hidden"
          id="searchDropDown"
       >
-         <ul class="list-group" id="item-list">
-            <% recipes.forEach(recipe => {%>
+      <ul class="list-group" id="item-list">
+            <% searchIngredients.forEach(ingredient => {%>
+            <li
+               class="list-group-item"
+               style="cursor: pointer"
+               onclick="setValue('searchInput', '<%= ingredient.name %>', 'searchDropDown')"
+            >
+               <%= ingredient.name %>
+            </li>
+            <% }) %>
+            <% searchRecipes.forEach(recipe => {%>
             <li
                class="list-group-item"
                style="cursor: pointer"
@@ -39,6 +48,7 @@
                <%= recipe.name %>
             </li>
             <% }) %>
+
          </ul>
       </div>
    </form>

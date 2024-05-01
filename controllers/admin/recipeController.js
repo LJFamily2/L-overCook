@@ -74,6 +74,12 @@ exports.getRecipePage = async (req, res) => {
    }
 };
 
+// Search for recipes limit by 4
+exports.searchRecipe = async (req, res) => {
+   const recipes = await Recipe.find({}).limit(4);
+   res.json(recipes);
+}
+
 // Helper function to create recipe without returning status
 exports.createRecipeLogic = async (
    name,

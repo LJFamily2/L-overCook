@@ -56,6 +56,9 @@ exports.getIngredientPage = async (req, res) => {
    }
 };
 
+// Search for ingredients limit by 4
+
+
 // Helper function to create ingredient without returning status
 exports.createIngredientLogic = async(name, categoryName) => {
    try {
