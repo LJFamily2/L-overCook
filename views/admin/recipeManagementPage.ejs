@@ -34,10 +34,10 @@
         <th scope="col">ID</th>
         <th scope="col">Name</th>
         <th scope="col">Description</th>
-        <th scope="col">Ingredients</th>
+        <th scope="col" colspan="2">Ingredients</th>
         <th scope="col">Cuisine</th>
         <th scope="col">Time</th>
-        <th scope="col">URL</th>
+        <th scope="col" style="width: 100px;">URL</th>
         <th scope="col"></th>
         <th scope="col"></th>
       </tr>
@@ -59,16 +59,14 @@
           <td><%= recipe.id %></td>
           <td><%= recipe.name %></td>
           <td><%= recipe.description ? recipe.description : 'N/A'%></td>
-          <td>
-            <% recipe.ingredients.forEach(ingredient=> {%>
-            <p>
-              <%= ingredient?.ingredient?.name %> (<%= ingredient.quantity %>)
-            </p>
+          <td colspan="2">
+            <% recipe.ingredients.forEach(ingredient => { %>
+              <%= ingredient?.ingredient?.name %> (<%= ingredient.quantity %>)<br>
             <% })%>
           </td>
           <td><%= recipe.cuisine ? recipe.cuisine.name : 'N/A' %></td>
           <td><%= recipe.time ? recipe.time : 'N/A' %></td>
-          <td><%= recipe.url ? recipe.url : 'N/A' %></td>
+          <td style="width: 100px;"><%= recipe.url ? recipe.url : 'N/A' %></td>
           <td>
             <!-- Button trigger update modal -->
             <button

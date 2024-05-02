@@ -16,8 +16,16 @@ mongoose.connect('mongodb+srv://hantran:LoverCookPassword@lovercook.i9gijho.mong
 async function seedCategories() {
   const categoriesData = [
     { name: 'Vegetables' },
-    { name: 'Fruits' },
+    { name: 'Herb & Spice' },
     { name: 'Meat' },
+    { name: 'Liquid' },
+    { name: 'Oil' },
+    { name: 'Seafood' },
+    { name: 'Fruit' },
+    { name: 'Condiment' },
+    { name: 'Grains' },
+    { name: 'Noodles' },
+    { name: 'Dairy' },
   ];
 
   try {
@@ -32,9 +40,38 @@ async function seedCategories() {
 // Function to seed ingredients
 async function seedIngredients() {
   const ingredientsData = [
-    { name: 'Tomato', category: 'Vegetables' },
     { name: 'Chicken Breast', category: 'Meat' },
+    { name: 'Tomato', category: 'Vegetables' },
     { name: 'Onion', category: 'Vegetables' },
+    { name: 'Garlic', category: 'Vegetables' },
+    { name: 'Shallots', category: 'Vegetables' },
+    { name: 'Chile Pepper', category: 'Vegetables' },
+    { name: 'Ground Coriander', category: 'Herb & Spice' },
+    { name: 'Ginger', category: 'Herb & Spice' },
+    { name: 'Galangal', category: 'Herb & Spice' },
+    { name: 'Chicken Thighs', category: 'Meat' },
+    { name: 'Water', category: 'Liquid' },
+    { name: 'Salam Leaves', category: 'Herb & Spice' },
+    { name: 'Lemon Basil', category: 'Herb & Spice' },
+    { name: 'Oil', category: 'Oil' },
+    { name: 'Shrimp Paste', category: 'Seafood' },
+    { name: 'Key Lime Juice', category: 'Liquid' },
+    { name: 'Salt', category: 'Condiment' },
+    { name: 'White Sugar', category: 'Condiment' },
+
+    { name: 'Beef Bones', category: 'Meat' },
+    { name: 'Star Anise Pods', category: 'Herb & Spice' },
+    { name: 'Cinnamon Stick', category: 'Herb & Spice' },
+    { name: 'Fish Sauce', category: 'Condiment' },
+    { name: 'Rock Sugar', category: 'Condiment' },
+    { name: 'Pho Noodles', category: 'Noodles' },
+    { name: 'Sirloin Steak', category: 'Meat' },
+    { name: 'Bean Sprouts', category: 'Vegetables' },
+    { name: 'Thai Basil Leaves', category: 'Herb & Spice' },
+    { name: 'Lime', category: 'Fruit' },
+    { name: 'Bird Chiles', category: 'Vegetables' },
+    { name: 'Hoisin Sauce', category: 'Condiment' },
+    { name: 'Sriracha Sauce', category: 'Condiment' },
   ];
 
   try {
@@ -57,6 +94,8 @@ async function seedCuisines() {
     { name: 'Italian' },
     { name: 'Mexican' },
     { name: 'Indian' },
+    { name: 'Indonesian' },
+    { name: 'Vietnamese' },
   ];
 
   try {
@@ -84,7 +123,60 @@ async function seedRecipes() {
       time: '30 minutes',
       url: 'https://example.com/tomato-pasta-recipe',
     },
-    // Add more recipes as needed
+    {
+      name: 'Ayam Penyet Pedas',
+      description: 'Indonesian Spicy Penyet Chicken',
+      ingredients: [
+        { name: 'Garlic', quantity: '5 cloves' },
+        { name: 'Shallots', quantity: '3' },
+        { name: 'Ginger', quantity: '1 ½ inch piece' },
+        { name: 'Galangal', quantity: '1 ½ inch piece' },
+        { name: 'Ground Coriander', quantity: '½ teaspoon' },
+        { name: 'Salt', quantity: '2 teaspoons' },
+        { name: 'Chicken Thighs', quantity: '4' },
+        { name: 'Water', quantity: '1 ¼ cups' },
+        { name: 'Salam Leaves', quantity: '2 leaves' },
+        { name: 'Oil', quantity: '3 teaspoons' },
+        { name: 'Tomato', quantity: '½' },
+        { name: 'Chile Pepper', quantity: '11' },
+        { name: 'Key Lime Juice', quantity: '4 tablespoons' },
+        { name: 'Shrimp Paste', quantity: '1 teaspoon' },
+        { name: 'White Sugar', quantity: '½ teaspoon' },
+        { name: 'Lemon Basil', quantity: '1 bunch' },
+      ],
+      cuisine: 'Indonesian',
+      image: 'ayamPenyetPedas.jpeg',
+      time: '2 hours',
+      url: 'https://www.allrecipes.com/recipe/264557/ayam-penyet-pedas-indonesian-spicy-penyet-chicken/',
+    },
+    {
+      name: 'Pho',
+      description: 'Authentic Vietnamese Pho',
+      ingredients: [
+        { name: 'Beef Bones', quantity: '4 pounds' },
+        { name: 'Water', quantity: '16 cups' },
+        { name: 'Onion', quantity: '1 large' },
+        { name: 'Ginger', quantity: '3 inches' },
+        { name: 'Star Anise Pods', quantity: '4' },
+        { name: 'Cinnamon Stick', quantity: '1' },
+        { name: 'Fish Sauce', quantity: '1/4 cup' },
+        { name: 'Rock Sugar', quantity: '3 tablespoons' },
+        { name: 'Salt', quantity: '1 1/2 tablespoons' },
+        { name: 'Pho Noodles', quantity: '1 pound' },
+        { name: 'Sirloin Steak', quantity: '1/2 pound' },
+        { name: 'Onion', quantity: '1 small' },
+        { name: 'Bean Sprouts', quantity: '1 cup' },
+        { name: 'Thai Basil Leaves', quantity: '1 cup' },
+        { name: 'Lime', quantity: '1' },
+        { name: 'Bird Chiles', quantity: '2' },
+        { name: 'Hoisin Sauce', quantity: '2 tablespoons' },
+        { name: 'Sriracha Sauce', quantity: '2 tablespoons' }
+      ],
+      cuisine: 'Vietnamese',
+      image: 'beefPho.jpeg',
+      time: '4 hours',
+      url: 'https://www.allrecipes.com/recipe/228443/authentic-pho/'
+    }
   ];
 
   try {

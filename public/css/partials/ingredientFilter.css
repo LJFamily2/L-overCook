@@ -49,8 +49,8 @@
   .ingredient-filter > div {
     background-color: #fff;
     width: 85%;
-    height: max-content;
-    min-height: 150px;
+    height: auto;
+    /* min-height: 150px; */
     border-radius: 10px;
     margin-bottom: 20px;
   }
@@ -66,8 +66,12 @@
     padding-left: 10px;
     border-bottom: #000 1px solid;
     margin-bottom: 20px;
+    justify-content: space-between;
   }
-  
+ 
+.more-icon{
+  margin-left:auto;
+}
   .ingredient-header span {
     margin-left: 10px;
     font-weight: 600;
@@ -78,6 +82,7 @@
   
   .ingredients {
     padding: 4px 10px;
+    height: auto;
   }
   
   .ingredients button {
