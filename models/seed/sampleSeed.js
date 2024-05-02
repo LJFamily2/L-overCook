@@ -26,6 +26,7 @@ async function seedCategories() {
     { name: 'Grains' },
     { name: 'Noodles' },
     { name: 'Dairy' },
+    { name: 'Wrapper' },
   ];
 
   try {
@@ -55,7 +56,7 @@ async function seedIngredients() {
     { name: 'Lemon Basil', category: 'Herb & Spice' },
     { name: 'Oil', category: 'Oil' },
     { name: 'Shrimp Paste', category: 'Seafood' },
-    { name: 'Key Lime Juice', category: 'Liquid' },
+    { name: 'Lime Juice', category: 'Liquid' },
     { name: 'Salt', category: 'Condiment' },
     { name: 'White Sugar', category: 'Condiment' },
 
@@ -84,7 +85,18 @@ async function seedIngredients() {
     { name: 'Sesame Oil', category: 'Oil' },
     { name: 'Vegetable Oil', category: 'Oil' },
 
-    
+    { name: 'Glutinous Sweet Rice', category: 'Grains' },
+    { name: 'Light Coconut Milk', category: 'Liquid' },
+    { name: 'Cocoa Powder', category: 'Condiment' },
+    { name: 'Thick Coconut Milk', category: 'Liquid' },
+
+    { name: 'Rice Vermicelli', category: 'Noodles' },
+    { name: 'Lettuce Leaves', category: 'Vegetables' },
+    { name: 'Mint Leaves', category: 'Herb & Spice' },
+    { name: 'Thai Basil Leaves', category: 'Herb & Spice' },
+    { name: 'Rice Paper', category: 'Wrapper' },
+    { name: 'Red Pepper Flakes', category: 'Condiment' },
+
   ];
 
   try {
@@ -109,6 +121,9 @@ async function seedCuisines() {
     { name: 'Indian' },
     { name: 'Indonesian' },
     { name: 'Vietnamese' },
+    { name: 'Filipino' },
+
+    
   ];
 
   try {
@@ -152,7 +167,7 @@ async function seedRecipes() {
         { name: 'Oil', quantity: '3 teaspoons' },
         { name: 'Tomato', quantity: '½' },
         { name: 'Chile Pepper', quantity: '11' },
-        { name: 'Key Lime Juice', quantity: '4 tablespoons' },
+        { name: 'Lime Juice', quantity: '4 tablespoons' },
         { name: 'Shrimp Paste', quantity: '1 teaspoon' },
         { name: 'White Sugar', quantity: '½ teaspoon' },
         { name: 'Lemon Basil', quantity: '1 bunch' },
@@ -216,6 +231,46 @@ async function seedRecipes() {
       time: '45 minutes',
       url: 'https://www.allrecipes.com/recipe/166608/cap-cai/',
     },
+    {
+      name: 'Champorado',
+      description: 'Filipino chocolate rice porridge',
+      ingredients: [
+          { name: 'Glutinous Sweet Rice', quantity: '1 cup' },
+          { name: 'Light Coconut Milk', quantity: '2 cups' },
+          { name: 'Cocoa Powder', quantity: '½ cup' },
+          { name: 'White Sugar', quantity: '1 cup' },
+          { name: 'Salt', quantity: '1 teaspoon' },
+          { name: 'Thick Coconut Milk', quantity: '1 cup' }
+      ],
+      cuisine: 'Filipino',
+      image: 'champorado.jpeg',
+      time: '30 minutes',
+      url: 'https://www.allrecipes.com/recipe/212939/champorado/',
+    },
+    {
+      name: 'Vietnamese Fresh Spring Rolls',
+      description: 'Healthy and delicious Vietnamese-style spring rolls',
+      ingredients: [
+        { name: 'Rice Vermicelli', quantity: '1 ounce' },
+        { name: 'Shrimp', quantity: '2 ounces' },
+        { name: 'Chicken Breast', quantity: '2 ounces' },
+        { name: 'Lettuce Leaves', quantity: '4' },
+        { name: 'Mint Leaves', quantity: '4' },
+        { name: 'Thai Basil Leaves', quantity: '4' },
+        { name: 'Rice Paper', quantity: '2 sheets' },
+        { name: 'Hoisin Sauce', quantity: '2 tablespoons' },
+        { name: 'Fish Sauce', quantity: '1 tablespoon' },
+        { name: 'Water', quantity: '2 tablespoons' },
+        { name: 'Lime Juice', quantity: '1 tablespoon' },
+        { name: 'Garlic', quantity: '1 clove, minced' },
+        { name: 'White Sugar', quantity: '½ teaspoon' },
+        { name: 'Red Pepper Flakes', quantity: '½ teaspoon' }
+      ],
+      cuisine: 'Vietnamese',
+      image: 'freshSpringRolls.jpeg',
+      time: '50 minutes',
+      url: 'https://www.allrecipes.com/recipe/24239/vietnamese-fresh-spring-rolls/'
+    }
   ];
 
   try {
