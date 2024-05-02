@@ -3,11 +3,19 @@
         <!-- Css -->
         <link rel="stylesheet" href="/css/partials/clientHeader.css" />
         <link rel="stylesheet" href="/css/partials/langButton.css" />
+
+        <!-- Js -->
+        <script src="/js/clients/header.js"></script>
 </head>
 <% if(!userAuthentication){ %>
     <header>
       <nav class="navbar navbar-expand-md">
         <div class="container-fluid">
+
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
           <div class="navbar-brand nav-left">
             <a href="/" class="logo">
               <img
@@ -18,53 +26,52 @@
                 <img id="logo-name" src="/images/loverCook.png" class="logo-name"/>
             </a>
           </div>
-
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-
+          <% if(user){ %>
           <div class="collapse navbar-collapse justify-content-md-end" id="navbarSupportedContent">
             <ul class="navbar-nav mb-lg-0">
-            <% if(user){ %>
+            
               <li class="nav-item">
                   <a class="nav-link" href="#">History</a>
               </li>
               <li class="nav-item">
                   <a class="nav-link" href="/favorite-recipe">Favourites</a>
               </li>
-              <li class="nav-item">
-                <div class="user-section">
-                  <div class="user-profile">
-                    <a class="nav-link" href="/account/profile">
-                      <img
-                          src="/uploadImages/<%= user.avatar %>"
-                          alt="upload file"
-                          style="width: 30px; height: 30px; border-radius: 50%; margin-right: 2px;"
-                      />
-                      <span><%= user.username %></span>
-                  </a>  
-                  </div>
-
-                  <form action="/users/log-out" method="post">
-                    <button type="submit" class="log-out border-0">Log out </button>
-                  </form> 
-                </div>    
-              </li>
-
-              <% }else{ %>
-              <li class="nav-item">
-                  <a class="nav-link" href="/signin">Login</a>
-              </li>
-              <li class="nav-item">
-                  <a class="nav-link" href="/signup">Register</a>
-              </li>
-              <% } %>
-              <li class="nav-item">
-                  <!-- Include langButton inside the navbar -->
-                  <%- include('./langButton') %>
+              <li class="nav-item user-lang-button">
+                <!-- Include langButton inside the navbar -->
+                <%- include('./langButton') %>
               </li>
             </ul>
           </div>
+
+          <div class="navbar-brand user-section">
+            <a class="nav-link" href="/account/profile">
+              <img
+                  src="/uploadImages/<%= user.avatar %>"
+                  alt="upload file"
+              />
+            </a>
+
+            <form action="/users/log-out" method="post">
+              <button type="submit" class="log-out border-0">Log out </button>
+            </form> 
+          </div>
+
+          <% }else{ %>
+          <div class="collapse navbar-collapse justify-content-md-end" id="navbarSupportedContent">
+            <ul class="navbar-nav mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link" href="/signin">Login</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/signup">Register</a>
+              </li>
+              <li class="nav-item">
+                <!-- Include langButton inside the navbar -->
+                <%- include('./langButton') %>
+              </li>
+            </ul>
+          </div>
+          <% } %>
         </div>
       </nav>
     </header>
@@ -86,7 +93,7 @@
       </div>
     </div>
   </header>
-    <% } %>
+<% } %>
   
     
 
