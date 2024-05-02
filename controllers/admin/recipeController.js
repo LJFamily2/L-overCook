@@ -86,7 +86,6 @@ exports.createRecipeLogic = async (
    description,
    ingredients,
    cuisine,
-   image,
    time,
    url
 ) => {
@@ -114,6 +113,8 @@ exports.createRecipeLogic = async (
          }
          ingredient.ingredient = ingredientId;
       }
+
+      const image = req.file ? req.file.filename : null;
 
       // Create a new Recipe instance
       const recipe = new Recipe({
@@ -178,7 +179,7 @@ exports.createRecipe = async (req, res) => {
 exports.updateRecipe = async(req, res) => {
    const recipeId = req.params.id;
    console.log('Recipe ID: ', recipeId)
-   const { name, description, ingredient, quantity, cuisine, image, time, url } = req.body;
+   const { name, description, ingredient, quantity, cuisine, time, url } = req.body;
    console.log(req.body);
 
    // Ensure ingredient and quantity are arrays and map ingredient name with quantity
@@ -214,6 +215,8 @@ exports.updateRecipe = async(req, res) => {
       if (existingRecipe && existingRecipe._id.toString() !== recipeId) {
          throw new Error(`Failed to update item: Recipe with name '${name}' already exists`);
      }
+
+     
 
       console.log('Updating recipe...')
       const resultRecipe = await Recipe.findByIdAndUpdate(recipeId, { 

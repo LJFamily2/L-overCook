@@ -4,9 +4,9 @@ const bcrypt = require('bcrypt');
 const fs = require('fs').promises;
 const path = require('path');
 
-const deleteImageFile = async (imagePath) => {
+const deleteImageFile = async (image) => {
    try {
-      await fs.unlink(imagePath);
+      await fs.unlink(path.join('public/uploadImages', image));
    } catch (err) {
       console.log('Error deleting image file:', err);
    }
@@ -32,9 +32,7 @@ const updateUser = async (req, res) => {
       if (req.file) {
          const newAvatar = req.file.filename;
          if (existingUser.avatar) {
-            await deleteImageFile(
-               path.join('public/uploadImages', existingUser.avatar)
-            );
+            await deleteImageFile(existingUser.avatar);
          }
          updateFields.avatar = newAvatar;
       }
@@ -42,7 +40,7 @@ const updateUser = async (req, res) => {
       await User.findOneAndUpdate(
          { _id: id },
          { $set: updateFields },
-         { new: true,}
+         { new: true }
       );
 
       req.flash('success', 'User updated successfully');
@@ -52,8 +50,6 @@ const updateUser = async (req, res) => {
       res.status(500).send('Internal server error');
    }
 };
-
-
 
 // Controller for deleting a user
 const deleteUser = async (req, res) => {
@@ -66,21 +62,16 @@ const deleteUser = async (req, res) => {
       }
       if (deletedUser.avatar) {
          try {
-            await deleteImageFile(
-               path.join(
-                  'public/uploadImages',
-                  deletedUser.avatar
-               )
-            );
+            await deleteImageFile(deletedUser.avatar);
          } catch (err) {
             console.log('Error deleting avatar file:', err);
          }
       }
       await Recipe.updateMany(
-         {}, 
-         { $pull: { 'reviews': { 'user': userId } } }, 
-         { multi: true } 
-     );
+         {},
+         { $pull: { reviews: { user: userId } } },
+         { multi: true }
+      );
       req.flash('success', 'User deleted successfully');
       const referer = req.headers.referer;
       res.redirect(referer);
@@ -91,13 +82,13 @@ const deleteUser = async (req, res) => {
 };
 
 const logout = async (req, res) => {
-   req.logout(err =>{
-      if(err){
+   req.logout((err) => {
+      if (err) {
          console.log(err);
       }
    });
    req.flash('success', 'You have successfully logged out!');
    res.redirect('/signin');
-}
+};
 
-module.exports = { updateUser, deleteUser, logout  };
+module.exports = { updateUser, deleteUser, logout };
