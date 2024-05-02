@@ -50,6 +50,7 @@ function getRecipes() {
    document.querySelectorAll('.recipe').forEach((recipe) => {
       const recipeName = recipe.getAttribute('recipe-name');
       const recipeImg = recipe.getAttribute('recipe-img');
+      const recipeCuisine = recipe.getAttribute('recipe-cuisine');
       const cookTime = recipe.getAttribute('cook-time');
       const recipeIngredients = [];
       recipe.querySelectorAll('.recipe-ingredients').forEach((ingredient) => {
@@ -66,6 +67,7 @@ function getRecipes() {
          recipeName,
          recipeImg,
          recipeIngredients,
+         recipeCuisine,
          cookTime,
          recipeRating,
       });
@@ -218,3 +220,61 @@ function updatePantryCount(count) {
       numOfIngredients.textContent = count;
    }
 }
+
+function filterByCuisines() {
+   const selectedCuisines = Array.from(document.querySelectorAll('.filter-criteria input[name="cuisine"]:checked')).map(cuisine => cuisine.id);
+   const recipes = getRecipes();
+   
+   recipes.forEach(recipe => {
+      console.log(recipe.recipeCuisine)
+      const recipeElement = document.querySelector(`.recipe[recipe-name="${recipe.recipeName}"]`);
+      if (recipeElement) {
+         if (selectedCuisines.length === 0 || selectedCuisines.includes(recipe.recipeCuisine)) {
+            recipeElement.style.display = 'block';
+         } else {
+            recipeElement.style.display = 'none';
+         }
+      }
+   });
+}
+
+function filterByCookTime() {
+   const selectedCookTime = Array.from(document.querySelectorAll('input[name="cookTime"]:checked')).map(checkbox => checkbox.id);
+   const recipes = getRecipes();
+   console.log(selectedCookTime);
+ 
+   recipes.forEach(recipe => {
+      const recipeElement = document.querySelector(`.recipe[recipe-name="${recipe.recipeName}"]`);
+      const timeArray = separateTime(recipe.cookTime);
+      console.log(timeArray);
+
+      if (selectedCookTime.includes("over30") && (timeArray.hours > 0 || timeArray.minutes > 30)) {
+         recipeElement.style.display = 'block';
+      }
+      else if (selectedCookTime.includes("under30") && timeArray.hours == 0 && timeArray.minutes > 15 && timeArray.minutes <= 30) {
+         recipeElement.style.display = 'block';
+      } 
+      else if (selectedCookTime.includes("under15") && timeArray.hours == 0 && timeArray.minutes <= 15) {
+         recipeElement.style.display = 'block';
+      }
+      else{ 
+         recipeElement.style.display = 'none';
+      }
+   });
+ }
+
+ function separateTime(cookTime) {
+   let hours = 0;
+   let minutes = 0;
+ 
+   const timeParts = cookTime.split(' ');
+   timeParts.forEach((part, index) => {
+     if (part === 'hrs') {
+       hours = parseInt(timeParts[index - 1]);
+     } else if (part === 'mins') {
+       minutes = parseInt(timeParts[index - 1]);
+     }
+   });
+ 
+   return { hours, minutes };
+ }

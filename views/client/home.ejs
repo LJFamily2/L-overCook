@@ -44,7 +44,8 @@
           <input
             type="checkbox"
             id="<%= cuisine.name %>"
-            name="<%= cuisine.name %>"
+            name="cuisine"
+            onchange="filterByCuisines()"
           />
           <label for="<%= cuisine.name %>"> <%= cuisine.name %> </label>
         </div>
@@ -54,16 +55,31 @@
       <h3>Cook time:</h3>
       <div>
         <div>
-          <input type="checkbox" id="under-15" name="under-15" />
-          <label for="under-15"> Under 15 mins </label>
+          <input
+            type="checkbox"
+            id="under15"
+            name="cookTime"
+            onchange="filterByCookTime()"
+          />
+          <label for="under15"> Under 15 mins </label>
         </div>
         <div>
-          <input type="checkbox" id="15-30" name="15-30" />
-          <label for="15-30"> 15 - 30 mins </label>
+          <input
+            type="checkbox"
+            id="under30"
+            name="cookTime"
+            onchange="filterByCookTime()"
+          />
+          <label for="under30"> 15 - 30 mins </label>
         </div>
         <div>
-          <input type="checkbox" id="over-30" name="over-30" />
-          <label for="over-30"> Over 30 mins </label>
+          <input
+            type="checkbox"
+            id="over30"
+            name="cookTime"
+            onchange="filterByCookTime()"
+          />
+          <label for="over30"> Over 30 mins </label>
         </div>
       </div>
     </div>
@@ -75,6 +91,7 @@
           class="recipe"
           recipe-name="<%= recipe.name %>"
           recipe-img="<%= recipe.image %>"
+          recipe-cuisine="<%= recipe.cuisine.name %>"
           cook-time="<%= recipe.time %>"
           rating="<%=recipe.reviews.rating%>"
         >
@@ -93,7 +110,7 @@
           <% }) %>
 
           <div class="recipe-img-container">
-            <img class="recipe-img" src="/images/<%= recipe.image %>" />
+            <img class="recipe-img" src="/uploadImages/<%= recipe.image %>" />
           </div>
 
           <div class="first-row">

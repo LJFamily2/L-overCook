@@ -117,13 +117,9 @@ async function seedIngredients() {
 async function seedCuisines() {
   const cuisinesData = [
     { name: 'Italian' },
-    { name: 'Mexican' },
-    { name: 'Indian' },
     { name: 'Indonesian' },
     { name: 'Vietnamese' },
     { name: 'Filipino' },
-
-    
   ];
 
   try {
@@ -147,8 +143,8 @@ async function seedRecipes() {
         { name: 'Onion', quantity: '100g' },
       ],
       cuisine: 'Italian',
-      image: 'tomato-pasta.jpg',
-      time: '30 minutes',
+      image: 'uoB3lkQcT.jpg',
+      time: '30 mins',
       url: 'https://example.com/tomato-pasta-recipe',
     },
     {
@@ -173,8 +169,8 @@ async function seedRecipes() {
         { name: 'Lemon Basil', quantity: '1 bunch' },
       ],
       cuisine: 'Indonesian',
-      image: 'ayamPenyetPedas.jpeg',
-      time: '2 hours',
+      image: 'NALPgR_ly.jpeg',
+      time: '2 hrs',
       url: 'https://www.allrecipes.com/recipe/264557/ayam-penyet-pedas-indonesian-spicy-penyet-chicken/',
     },
     {
@@ -201,7 +197,7 @@ async function seedRecipes() {
         { name: 'Sriracha Sauce', quantity: '2 tablespoons' }
       ],
       cuisine: 'Vietnamese',
-      image: 'beefPho.jpeg',
+      image: 'vqtcAJmNN.jpeg',
       time: '8 hrs 25 mins',
       url: 'https://www.allrecipes.com/recipe/228443/authentic-pho/'
     },
@@ -227,8 +223,8 @@ async function seedRecipes() {
         { name: 'Water', quantity: '1/4 cup' },
       ],
       cuisine: 'Indonesian',
-      image: 'capCai.jpeg',
-      time: '45 minutes',
+      image: 'E72zXWLdv.jpeg',
+      time: '45 mins',
       url: 'https://www.allrecipes.com/recipe/166608/cap-cai/',
     },
     {
@@ -243,8 +239,8 @@ async function seedRecipes() {
           { name: 'Thick Coconut Milk', quantity: '1 cup' }
       ],
       cuisine: 'Filipino',
-      image: 'champorado.jpeg',
-      time: '30 minutes',
+      image: 'cLzvluTl8.jpeg',
+      time: '30 mins',
       url: 'https://www.allrecipes.com/recipe/212939/champorado/',
     },
     {
@@ -267,8 +263,8 @@ async function seedRecipes() {
         { name: 'Red Pepper Flakes', quantity: '½ teaspoon' }
       ],
       cuisine: 'Vietnamese',
-      image: 'freshSpringRolls.jpeg',
-      time: '50 minutes',
+      image: 'ToPEY6ytB.jpeg',
+      time: '50 mins',
       url: 'https://www.allrecipes.com/recipe/24239/vietnamese-fresh-spring-rolls/'
     }
   ];
