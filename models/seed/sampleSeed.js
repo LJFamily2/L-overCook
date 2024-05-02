@@ -72,6 +72,19 @@ async function seedIngredients() {
     { name: 'Bird Chiles', category: 'Vegetables' },
     { name: 'Hoisin Sauce', category: 'Condiment' },
     { name: 'Sriracha Sauce', category: 'Condiment' },
+
+    { name: 'Shrimp', category: 'Seafood' },
+    { name: 'Carrot', category: 'Vegetables' },
+    { name: 'Baby Corn', category: 'Vegetables' },
+    { name: 'Snap Peas', category: 'Vegetables' },
+    { name: 'Red Bell Pepper', category: 'Vegetables' },
+    { name: 'Green Bell Pepper', category: 'Vegetables' },
+    { name: 'Oyster Sauce', category: 'Condiment' },
+    { name: 'Soy Sauce', category: 'Condiment' },
+    { name: 'Sesame Oil', category: 'Oil' },
+    { name: 'Vegetable Oil', category: 'Oil' },
+
+    
   ];
 
   try {
@@ -174,9 +187,35 @@ async function seedRecipes() {
       ],
       cuisine: 'Vietnamese',
       image: 'beefPho.jpeg',
-      time: '4 hours',
+      time: '8 hrs 25 mins',
       url: 'https://www.allrecipes.com/recipe/228443/authentic-pho/'
-    }
+    },
+    {
+      name: 'Cap Cai',
+      description: 'Indonesian Stir-Fried Mixed Vegetables',
+      ingredients: [
+        { name: 'Chicken Breast', quantity: '200g' },
+        { name: 'Shrimp', quantity: '200g' },
+        { name: 'Carrot', quantity: '1 large' },
+        { name: 'Baby Corn', quantity: '100g' },
+        { name: 'Snap Peas', quantity: '100g' },
+        { name: 'Red Bell Pepper', quantity: '1 large' },
+        { name: 'Green Bell Pepper', quantity: '1 large' },
+        { name: 'Onion', quantity: '1 large' },
+        { name: 'Garlic', quantity: '3 cloves' },
+        { name: 'Oyster Sauce', quantity: '2 tablespoons' },
+        { name: 'Soy Sauce', quantity: '1 tablespoon' },
+        { name: 'Salt', quantity: 'to taste' },
+        { name: 'White Sugar', quantity: '1 teaspoon' },
+        { name: 'Sesame Oil', quantity: '1 teaspoon' },
+        { name: 'Vegetable Oil', quantity: '2 tablespoons' },
+        { name: 'Water', quantity: '1/4 cup' },
+      ],
+      cuisine: 'Indonesian',
+      image: 'capCai.jpeg',
+      time: '45 minutes',
+      url: 'https://www.allrecipes.com/recipe/166608/cap-cai/',
+    },
   ];
 
   try {

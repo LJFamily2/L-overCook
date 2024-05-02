@@ -69,9 +69,11 @@
     justify-content: space-between;
   }
  
-.more-icon{
-  margin-left:auto;
-}
+  .more-icon{
+    margin-left:auto;
+    cursor: pointer;
+  }
+  
   .ingredient-header span {
     margin-left: 10px;
     font-weight: 600;
