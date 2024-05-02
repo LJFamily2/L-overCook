@@ -3,6 +3,17 @@ const Ingredient = require('../../models/Ingredient');
 const Recipe = require('../../models/Recipe');
 const Category = require('../../models/Category');
 const categoryController = require('./categoryController');
+const fs = require('fs').promises;
+const path = require('path');
+
+// Delete image path
+const deleteImageFile = async (image) => {
+    try {
+       await fs.unlink(path.join('public/uploadImages', image));
+    } catch (err) {
+       console.log('Error deleting image file:', err);
+    }
+ };
 
 // Get all ingredients
 exports.getAllIngredients = async (req,res) => {
@@ -60,7 +71,7 @@ exports.getIngredientPage = async (req, res) => {
 
 
 // Helper function to create ingredient without returning status
-exports.createIngredientLogic = async(name, categoryName) => {
+exports.createIngredientLogic = async(name, categoryName, image) => {
    try {
        // Check if ingredient exist
        const existingIngredient = await Ingredient.findOne({ name });
@@ -84,7 +95,8 @@ exports.createIngredientLogic = async(name, categoryName) => {
        // Create a new ingredient object with name and category
        const ingredient = new Ingredient({
            name,
-           category: categoryId
+           category: categoryId,
+           categoryImage: image
        });
 
        // Save the new ingredient to the database
@@ -100,7 +112,9 @@ exports.createIngredientLogic = async(name, categoryName) => {
 exports.createIngredient = async (req, res) => {
    const { name, categoryName } = req.body;
    try{
-       const newIngredient = await this.createIngredientLogic(name, categoryName);
+       const image = req.file ? req.file.filename : null;
+       console.log(image)
+       const newIngredient = await this.createIngredientLogic(name, categoryName, image);
        if(newIngredient){
            res.redirect('/ingredientManagement?success=Ingredient+added+successfully');
        }
@@ -124,6 +138,10 @@ exports.deleteIngredient = async (req,res) => {
            { "ingredients.ingredient": ingredientId },
            { $pull: { ingredients: { ingredient: ingredientId } } }
        );
+
+       if (ingredient.categoryImage) {
+        await deleteImageFile(ingredient.categoryImage);
+     }
        
        // Delete ingredient
        await Ingredient.deleteOne({ _id: ingredientId });
@@ -135,14 +153,60 @@ exports.deleteIngredient = async (req,res) => {
 };
 
 //Update ingredient
+// exports.updateIngredient = async (req, res) => {
+//     const ingredientId = req.params.id;
+//     const { name, categoryName } = req.body;
+//     try{
+//         // Check if id existed
+//         const ingredient = await Ingredient.findById(ingredientId);
+//         if(!ingredient){
+//             throw new Error('Failed to update item: Ingredient not found.')
+//         }
+
+//         // Check if name already exists for another ingredient
+//         const existingIngredient = await Ingredient.findOne({ name });
+//         if (existingIngredient && existingIngredient._id.toString() !== ingredientId) {
+//             throw new Error(`Failed to update item: Ingredient with name '${name}' already exists`);
+//         }
+
+//         // Check if category existed
+//         let categoryId;
+//         const categoryMap = new Map((await Category.find()).map(cat => [cat.name, cat._id]));
+//         if (categoryMap.has(categoryName)) {
+//             // If the category exists, retrieve its ID from the map
+//             categoryId = categoryMap.get(categoryName);
+//         } else {
+//             // If the category doesn't exist, create a new one
+//             const newCategory = await categoryController.createCategoryLogic(categoryName);
+//             categoryId = newCategory._id;
+//         }
+//         console.log(req.file.filename)
+//         // Update image 
+//         if (req.file) {
+//             if (ingredient.categoryImage) {
+//                 await deleteImageFile(ingredient.categoryImage);
+//             }
+//             ingredient.categoryImage = req.file.filename;
+//         }
+        
+//         // Update the ingredient
+//         const resultIngredient = await Ingredient.findByIdAndUpdate(ingredientId, { name: name, category: categoryId, categoryImage: ingredient.categoryImage}, { new: true });
+//         res.redirect('/ingredientManagement?success=Ingredient+updated+successfully');
+        
+//     }catch(error){
+//         res.redirect('/ingredientManagement?error=true&message=' + encodeURIComponent(error.message));        
+//     }
+// }
+
+// Update ingredient
 exports.updateIngredient = async (req, res) => {
     const ingredientId = req.params.id;
     const { name, categoryName } = req.body;
-    try{
+    try {
         // Check if id existed
         const ingredient = await Ingredient.findById(ingredientId);
-        if(!ingredient){
-            throw new Error('Failed to update item: Ingredient not found.')
+        if (!ingredient) {
+            throw new Error('Failed to update item: Ingredient not found.');
         }
 
         // Check if name already exists for another ingredient
@@ -162,13 +226,33 @@ exports.updateIngredient = async (req, res) => {
             const newCategory = await categoryController.createCategoryLogic(categoryName);
             categoryId = newCategory._id;
         }
-        
-        // Update the ingredient
-        const resultIngredient = await Ingredient.findByIdAndUpdate(ingredientId, { name: name, category: categoryId}, { new: true });
-        res.redirect('/ingredientManagement?success=Ingredient+updated+successfully');
-        
-    }catch(error){
-        res.redirect('/ingredientManagement?error=true&message=' + encodeURIComponent(error.message));        
+
+        // Check if there are changes in the ingredient's name, category, or image
+        const updateFields = {};
+        if (name !== ingredient.name) {
+            updateFields.name = name;
+        }
+        if (categoryId.toString() !== ingredient.category.toString()) {
+            updateFields.category = categoryId;
+        }
+        if (req.file) {
+            if (ingredient.categoryImage) {
+                await deleteImageFile(ingredient.categoryImage);
+            }
+            updateFields.categoryImage = req.file.filename;
+        }
+
+        // Update the ingredient if there are changes
+        if (Object.keys(updateFields).length > 0) {
+            const resultIngredient = await Ingredient.findByIdAndUpdate(ingredientId, updateFields, { new: true });
+            res.redirect('/ingredientManagement?success=Ingredient+updated+successfully');
+        } else {
+            res.redirect('/ingredientManagement?success=No+changes+detected');
+        }
+    } catch (error) {
+        res.redirect('/ingredientManagement?error=true&message=' + encodeURIComponent(error.message));
     }
 }
+
+
 

@@ -31,6 +31,7 @@
     <thead>
       <tr>
         <th scope="col">Id</th>
+        <th scope="col">Image</th>
         <th scope="col">Name</th>
         <th scope="col">Category</th>
         <th scope="col"></th>
@@ -38,9 +39,10 @@
       </tr>
     </thead>
     <tbody>
-      <% ingredients.forEach(ingredient => { %>
+      <% ingredients.forEach((ingredient, index) => { %>
       <tr>
         <td><%= ingredient.id %></td>
+        <td> <img src="/uploadImages/<%= ingredient.categoryImage %>" width="100" alt="category image"></td>
         <td><%= ingredient.name %></td>
         <td><%= ingredient.category.name %></td>
         <td>
@@ -95,6 +97,7 @@
                 action="/ingredientManagement/update/<%= ingredient.id %>"
                 id="ingredientUpdateForm"
                 method="post"
+                enctype="multipart/form-data"
               >
                 <div class="mb-3">
                   <label for="ingredientName" class="form-label"
@@ -120,6 +123,17 @@
                     name="categoryName"
                     value="<%= ingredient.category.name %>"
                     required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="newImage<%= index %>" class="form-label"
+                    >Update Category Image</label
+                  >
+                  <input
+                    type="file"
+                    class="form-control"
+                    id="newImage<%= index %>"
+                    name="newImage"
                   />
                 </div>
                 <div class="modal-footer">
@@ -221,6 +235,7 @@
         id="ingredientForm"
         action="/ingredientManagement/new"
         method="post"
+        enctype="multipart/form-data"
       >
         <div class="modal-body">
           <div class="mb-3">
@@ -245,9 +260,18 @@
               required
             />
           </div>
+          <div class="mb-3">
+            <label for="image" class="form-label">Category image</label>
+            <input
+              type="file"
+              class="form-control"
+              id="image"
+              name="image"
+            />
+          </div>
         </div>
         <div class="modal-footer">
-          <button type="submit" class="btn btn-primary">Save changes</button>
+          <button type="submit" class="btn btn-primary">Add</button>
           <button
             type="button"
             class="btn btn-secondary"

@@ -188,11 +188,87 @@ exports.createRecipe = async (req, res) => {
    }
 };
 
+// exports.updateRecipe = async (req, res) => {
+//    const recipeId = req.params.id;
+//    console.log('Recipe ID: ', recipeId);
+//    const { name, description, ingredient, quantity, cuisine, time, url } =
+//       req.body;
+//    console.log(req.body);
+
+//    // Ensure ingredient and quantity are arrays and map ingredient name with quantity
+//    const ingredients = Array.isArray(ingredient)
+//       ? ingredient.map((name, index) => ({ name, quantity: quantity[index] }))
+//       : [{ name: ingredient, quantity }];
+
+//    // Map ingredient
+//    const ingredientMap = new Map(
+//       (await Ingredient.find()).map((ing) => [ing.name, ing._id])
+//    );
+
+//    // Loop through ingredient list to map id with name
+//    for (const ingredient of ingredients) {
+//       let ingredientId = ingredientMap.get(ingredient.name);
+//       if (!ingredientId) {
+//          throw new Error(
+//             'Ingredient "' +
+//                ingredient.name +
+//                '" not found. Please ensure that all ingredients are present in the database before creating new recipe. <a href="/ingredientManagement">View ingredient database.</a>'
+//          );
+//       }
+//       ingredient.ingredient = ingredientId;
+//    }
+
+//    try {
+//       console.log('Looking for recipe with matching id...');
+//       const recipe = await Recipe.findById(recipeId);
+//       if (!recipe) {
+//          throw new Error('Failed to update item: Recipe not found.');
+//       }
+//       console.log('Recipe found, checking if updated name exist...');
+
+//       // Check if name already exists for another ingredient
+//       const existingRecipe = await Recipe.findOne({ name });
+//       if (existingRecipe && existingRecipe._id.toString() !== recipeId) {
+//          throw new Error(
+//             `Failed to update item: Recipe with name '${name}' already exists`
+//          );
+//       }
+//       console.log(req.file)
+//       // Update image if a new file is uploaded
+//       if (req.file && recipe.image) {
+//             const de = await deleteImageFile(recipe.image);
+//             console.log("remove image: " ,de)
+//       }else{
+//          recipe.image = req.file.filename;
+//       }
+//       console.log('Updating recipe...');
+//       const resultRecipe = await Recipe.findByIdAndUpdate(
+//          recipeId,
+//          {
+//             name: name,
+//             description: description,
+//             ingredients: ingredients,
+//             cuisine: cuisine,
+//             image: req.file ? req.file.filename : recipe.image, // Update image only if a new file is uploaded
+//             time: time,
+//             url: url,
+//          },
+//          { new: true }
+//       );
+//       console.log('results: ', resultRecipe);
+//       res.redirect('/recipeManagement?success=Recipe+updated+successfully');
+//    } catch (error) {
+//       console.log('Error updating recipe.');
+//       res.redirect(
+//          '/recipeManagement?error=true&message=' +
+//             encodeURIComponent(error.message)
+//       );
+//    }
+// };
 exports.updateRecipe = async (req, res) => {
    const recipeId = req.params.id;
    console.log('Recipe ID: ', recipeId);
-   const { name, description, ingredient, quantity, cuisine, time, url } =
-      req.body;
+   const { name, description, ingredient, quantity, cuisine, time, url } = req.body;
    console.log(req.body);
 
    // Ensure ingredient and quantity are arrays and map ingredient name with quantity
@@ -224,24 +300,28 @@ exports.updateRecipe = async (req, res) => {
       if (!recipe) {
          throw new Error('Failed to update item: Recipe not found.');
       }
-      console.log('Recipe found, checking if updated name exist...');
+      console.log('Recipe found, checking if updated name exists...');
 
-      // Check if name already exists for another ingredient
+      // Check if name already exists for another recipe
       const existingRecipe = await Recipe.findOne({ name });
       if (existingRecipe && existingRecipe._id.toString() !== recipeId) {
          throw new Error(
             `Failed to update item: Recipe with name '${name}' already exists`
          );
       }
-      console.log(req.file)
-      // Update image if a new file is uploaded
-      if (req.file && recipe.image) {
-            const de = await deleteImageFile(recipe.image);
-            console.log("remove image: " ,de)
-      }else{
-         recipe.image = req.file.filename;
+
+      // Check if there are changes in the image
+      let updatedImage = recipe.image;
+      if (req.file) {
+         // If a new file is uploaded, update the image
+         if (recipe.image) {
+            // If the recipe already has an image, delete the old one
+            await deleteImageFile(recipe.image);
+         }
+         updatedImage = req.file.filename;
       }
-      console.log('Updating recipe...');
+
+      // Update the recipe
       const resultRecipe = await Recipe.findByIdAndUpdate(
          recipeId,
          {
@@ -249,22 +329,24 @@ exports.updateRecipe = async (req, res) => {
             description: description,
             ingredients: ingredients,
             cuisine: cuisine,
-            image: req.file ? req.file.filename : recipe.image, // Update image only if a new file is uploaded
+            image: updatedImage, // Use the updated image filename
             time: time,
             url: url,
          },
          { new: true }
       );
-      console.log('results: ', resultRecipe);
+
+      console.log('Recipe updated:', resultRecipe);
       res.redirect('/recipeManagement?success=Recipe+updated+successfully');
    } catch (error) {
-      console.log('Error updating recipe.');
+      console.error('Error updating recipe:', error);
       res.redirect(
          '/recipeManagement?error=true&message=' +
             encodeURIComponent(error.message)
       );
    }
 };
+
 
 
 exports.deleteRecipe = async (req, res) => {
