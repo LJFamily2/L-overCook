@@ -3,7 +3,7 @@ const Recipe = require('../../models/Recipe');
 const bcrypt = require('bcrypt');
 const fs = require('fs').promises;
 const path = require('path');
-
+// Delete image path
 const deleteImageFile = async (image) => {
    try {
       await fs.unlink(path.join('public/uploadImages', image));

@@ -37,7 +37,7 @@
         <th scope="col" style="width: 300px;">Ingredients</th>
         <th scope="col">Cuisine</th>
         <th scope="col">Time</th>
-        <th scope="col" style="max-width: 200px; word-wrap: break-word;"">URL</th>
+        <th scope="col" style="max-width: 200px; word-wrap: break-word;">URL</th>
         <th scope="col"></th>
         <th scope="col"></th>
       </tr>
@@ -112,7 +112,7 @@
                 ></button>
               </div>
               <div class="modal-body" id="updateRecipeFormContainer-<%=index%>">
-                <form action="/recipeManagement/update/<%=recipe.id%>" method="post" id="updateRecipeForm-<%=index%>">
+                <form action="/recipeManagement/update/<%=recipe.id%>" method="post" id="updateRecipeForm-<%=index%>" enctype="multipart/form-data">
                   <div class="mb-3">
                     <label for="recipeName" class="form-label">Recipe Name</label>
                     <input
@@ -133,7 +133,7 @@
                       id="recipeDescription"
                       name="description"
                       value="<%=recipe.description%>"
-                    ></input>
+                    >
                   </div>
 
                   <div class="mb-3 ingredientsContainer">
@@ -166,22 +166,20 @@
                   </div>
                   
                   <div class="mb-3">
-                    <label for="recipeCuisine" class="form-label">Cuisine</label>
-                    <select class="form-select" id="recipeCuisine" name="cuisine">
+                    <label for="updateRecipeCuisine" class="form-label">Cuisine</label>
+                    <select class="form-select" id="updateRecipeCuisine" name="cuisine">
                       <% cuisines.forEach(function(cuisine) { %>
                       <option value="<%= cuisine._id%>"><%= cuisine.name %></option>
                       <% }) %>
                     </select>
                   </div>
                   <div class="mb-3">
-                    <label for="recipeImage" class="form-label">Image</label>
+                    <label for="newImage" class="form-label">Image</label>
                     <input
-                      type="text"
+                      type="file"
                       class="form-control"
-                      id="recipeImage"
-                      name="image"
-                      value="<%=recipe.image%>"
-
+                      id="newImage"
+                      name="newImage"
                     />
                   </div>
                   <div class="mb-3">
@@ -297,7 +295,7 @@
           aria-label="Close"
         ></button>
       </div>
-      <form action="/recipeManagement/new" method="post">
+      <form action="/recipeManagement/new" method="post" enctype="multipart/form-data">
         <div class="modal-body" id="recipeFormContainer">
           <div class="mb-3">
             <label for="recipeName" class="form-label">Recipe Name</label>
@@ -356,11 +354,11 @@
             </select>
           </div>
           <div class="mb-3">
-            <label for="recipeImage" class="form-label">Image</label>
+            <label for="image" class="form-label">Image</label>
             <input
-              type="text"
+              type="file"
               class="form-control"
-              id="recipeImage"
+              id="image"
               name="image"
             />
           </div>

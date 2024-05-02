@@ -1,9 +1,19 @@
-const mongoose = require('../../middlewares/database');
 const Recipe = require('../../models/Recipe');
 const Ingredient = require('../../models/Ingredient');
 const Cuisine = require('../../models/Cuisine');
 const ingredientController = require('./ingredientController');
 const cuisineController = require('./cuisineController');
+const fs = require('fs').promises;
+const path = require('path');
+
+// Delete image path
+const deleteImageFile = async (image) => {
+   try {
+      await fs.unlink(path.join('public/uploadImages', image));
+   } catch (err) {
+      console.log('Error deleting image file:', err);
+   }
+};
 
 // Get all recipes
 exports.getAllRecipes = async (req, res) => {
@@ -39,19 +49,19 @@ exports.getRecipeDetailPage = async (req, res) => {
          })
          .populate('reviews.user')
          .exec();
-         if (!recipe) {
-            res.status(404).redirect('/')
-            return; 
-         }
+      if (!recipe) {
+         res.status(404).redirect('/');
+         return;
+      }
 
-         res.render('client/recipeDetail', {
-            layout: './layouts/client/defaultLayout',
-            recipe,
-            userAuthentication: false,
-            user: req.user,
-         });
+      res.render('client/recipeDetail', {
+         layout: './layouts/client/defaultLayout',
+         recipe,
+         userAuthentication: false,
+         user: req.user,
+      });
    } catch (error) {
-      console.log(error)
+      console.log(error);
    }
 };
 
@@ -78,7 +88,7 @@ exports.getRecipePage = async (req, res) => {
 exports.searchRecipe = async (req, res) => {
    const recipes = await Recipe.find({}).limit(4);
    res.json(recipes);
-}
+};
 
 // Helper function to create recipe without returning status
 exports.createRecipeLogic = async (
@@ -86,6 +96,7 @@ exports.createRecipeLogic = async (
    description,
    ingredients,
    cuisine,
+   image,
    time,
    url
 ) => {
@@ -114,7 +125,6 @@ exports.createRecipeLogic = async (
          ingredient.ingredient = ingredientId;
       }
 
-      const image = req.file ? req.file.filename : null;
 
       // Create a new Recipe instance
       const recipe = new Recipe({
@@ -137,13 +147,13 @@ exports.createRecipeLogic = async (
 
 // Create new ingredient by calling the helper function and return status
 exports.createRecipe = async (req, res) => {
+   
    const {
       name,
       description,
       ingredient,
       quantity,
       cuisine,
-      image,
       time,
       url,
    } = req.body;
@@ -154,7 +164,9 @@ exports.createRecipe = async (req, res) => {
       : [{ name: ingredient, quantity }];
 
    console.log(ingredients);
+   const image = req.file ? req.file.filename : null;
 
+   console.log('Image: ', image);
    try {
       const newRecipe = await this.createRecipeLogic(
          name,
@@ -176,17 +188,17 @@ exports.createRecipe = async (req, res) => {
    }
 };
 
-exports.updateRecipe = async(req, res) => {
+exports.updateRecipe = async (req, res) => {
    const recipeId = req.params.id;
-   console.log('Recipe ID: ', recipeId)
-   const { name, description, ingredient, quantity, cuisine, time, url } = req.body;
+   console.log('Recipe ID: ', recipeId);
+   const { name, description, ingredient, quantity, cuisine, time, url } =
+      req.body;
    console.log(req.body);
 
    // Ensure ingredient and quantity are arrays and map ingredient name with quantity
-   const ingredients = Array.isArray(ingredient) ? 
-       ingredient.map((name, index) => ({ name, quantity: quantity[index] })) :
-       [{ name: ingredient, quantity }];
-
+   const ingredients = Array.isArray(ingredient)
+      ? ingredient.map((name, index) => ({ name, quantity: quantity[index] }))
+      : [{ name: ingredient, quantity }];
 
    // Map ingredient
    const ingredientMap = new Map(
@@ -197,45 +209,63 @@ exports.updateRecipe = async(req, res) => {
    for (const ingredient of ingredients) {
       let ingredientId = ingredientMap.get(ingredient.name);
       if (!ingredientId) {
-         throw new Error('Ingredient "' + ingredient.name + '" not found. Please ensure that all ingredients are present in the database before creating new recipe. <a href="/ingredientManagement">View ingredient database.</a>');
+         throw new Error(
+            'Ingredient "' +
+               ingredient.name +
+               '" not found. Please ensure that all ingredients are present in the database before creating new recipe. <a href="/ingredientManagement">View ingredient database.</a>'
+         );
       }
       ingredient.ingredient = ingredientId;
    }
-   
-   try{
-      console.log('Looking for recipe with matching id...')
+
+   try {
+      console.log('Looking for recipe with matching id...');
       const recipe = await Recipe.findById(recipeId);
-      if(!recipe){
-         throw new Error('Failed to update item: Recipe not found.')
+      if (!recipe) {
+         throw new Error('Failed to update item: Recipe not found.');
       }
-      console.log('Recipe found, checking if updated name exist...')
+      console.log('Recipe found, checking if updated name exist...');
 
       // Check if name already exists for another ingredient
-      const existingRecipe = await Recipe.findOne({name});
+      const existingRecipe = await Recipe.findOne({ name });
       if (existingRecipe && existingRecipe._id.toString() !== recipeId) {
-         throw new Error(`Failed to update item: Recipe with name '${name}' already exists`);
-     }
-
-     
-
-      console.log('Updating recipe...')
-      const resultRecipe = await Recipe.findByIdAndUpdate(recipeId, { 
-         name: name,
-         description: description,
-         ingredients: ingredients,
-         cuisine: cuisine,
-         image: image,
-         time: time,
-         url: url
-      }, { new: true });
+         throw new Error(
+            `Failed to update item: Recipe with name '${name}' already exists`
+         );
+      }
+      console.log(req.file)
+      // Update image if a new file is uploaded
+      if (req.file && recipe.image) {
+            const de = await deleteImageFile(recipe.image);
+            console.log("remove image: " ,de)
+      }else{
+         recipe.image = req.file.filename;
+      }
+      console.log('Updating recipe...');
+      const resultRecipe = await Recipe.findByIdAndUpdate(
+         recipeId,
+         {
+            name: name,
+            description: description,
+            ingredients: ingredients,
+            cuisine: cuisine,
+            image: req.file ? req.file.filename : recipe.image, // Update image only if a new file is uploaded
+            time: time,
+            url: url,
+         },
+         { new: true }
+      );
       console.log('results: ', resultRecipe);
       res.redirect('/recipeManagement?success=Recipe+updated+successfully');
+   } catch (error) {
+      console.log('Error updating recipe.');
+      res.redirect(
+         '/recipeManagement?error=true&message=' +
+            encodeURIComponent(error.message)
+      );
+   }
+};
 
-   }catch(error){
-      console.log('Error updating recipe.')
-      res.redirect('/recipeManagement?error=true&message=' + encodeURIComponent(error.message));        
-  }
-}
 
 exports.deleteRecipe = async (req, res) => {
    const recipeId = req.params.id;
@@ -243,6 +273,11 @@ exports.deleteRecipe = async (req, res) => {
       const recipe = await Recipe.findById(recipeId);
       if (!recipe) {
          throw new Error('Failed to delete item: Recipe not found');
+      }
+
+      // Delete the image file
+      if (recipe.image) {
+         await deleteImageFile(recipe.image);
       }
 
       await Recipe.deleteOne({ _id: recipeId });
@@ -253,7 +288,4 @@ exports.deleteRecipe = async (req, res) => {
             encodeURIComponent(error.message)
       );
    }
-}
-
-
-
+};
