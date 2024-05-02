@@ -17,7 +17,7 @@
   <% Object.entries(ingredients).forEach(([category, ingredientsList]) => { %>
   <div class="ingredients">
     <div class="ingredient-header">
-      <img src="/images/vegetableIcon.png" alt="vegetable icon" />
+      <img src="/uploadImages/<%= ingredient.categoryImage %>" alt="vegetable icon" />
       <span><%= category %></span>
       <div class="more-icon">
         <i class="bi bi-chevron-down" onclick="toggleChevron(this)"></i>
