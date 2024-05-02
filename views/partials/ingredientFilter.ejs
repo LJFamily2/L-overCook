@@ -1,6 +1,15 @@
 <head>
   <!-- CSS -->
   <link rel="stylesheet" href="/css/partials/ingredientFilter.css" />
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+  />
+  <style>
+    .hidden {
+      display: none;
+    }
+  </style>
 </head>
 
 <div class="ingredient-filter">
@@ -10,21 +19,25 @@
     <div class="ingredient-header">
       <img src="/images/vegetableIcon.png" alt="vegetable icon" />
       <span><%= category %></span>
+      <div class="more-icon">
+        <i class="bi bi-chevron-down" onclick="toggleChevron(this)"></i>
+      </div>
     </div>
-    <% const maxVisibleIngredients =4; %> <%
+    <% const maxVisibleIngredients = 4; %> <%
     ingredientsList.forEach((ingredient, index) => { %>
     <button
-      class="selectable-button"
-      id="<%=ingredient%>"
+      class="selectable-button <%= index >= maxVisibleIngredients ? 'hidden' : '' %>"
+      id="<%= ingredient %>"
       onclick="toggleSelection(this)"
     >
-      <span class="button-text"><%=ingredient%></span>
+      <span class="button-text"><%= ingredient %></span>
     </button>
     <% }) %> <% if (ingredientsList.length > maxVisibleIngredients) { %>
     <button
       type="button"
       class="more-btn"
       data-max-visible="<%= maxVisibleIngredients %>"
+      onclick="showMore(this)"
     >
       + <%= ingredientsList.length - maxVisibleIngredients %> more
     </button>
@@ -32,3 +45,55 @@
   </div>
   <% }) %>
 </div>
+
+<script>
+  function showMore(button) {
+    const maxVisible = parseInt(button.getAttribute("data-max-visible"));
+    const parent = button.parentElement;
+    const hiddenButtons = parent.querySelectorAll(".selectable-button.hidden");
+    hiddenButtons.forEach((btn, index) => {
+      if (index < maxVisible) {
+        btn.classList.remove("hidden");
+      }
+    });
+    button.style.display = "none"; // Hide the "Show More" button
+
+    // Toggle the chevron icon
+    const icon = parent.querySelector(".bi-chevron-down");
+    if (icon) {
+      icon.classList.replace("bi-chevron-down", "bi-chevron-up");
+      icon.onclick = function () {
+        hideSelection(button, parent, maxVisible);
+      };
+    }
+  }
+
+  function hideSelection(button, parent, maxVisible) {
+    const buttons = parent.querySelectorAll(".selectable-button");
+    buttons.forEach((btn, index) => {
+      if (index >= maxVisible) {
+        btn.classList.add("hidden");
+      }
+    });
+    const icon = parent.querySelector(".bi-chevron-up");
+    if (icon) {
+      icon.classList.replace("bi-chevron-up", "bi-chevron-down");
+      icon.onclick = function () {
+        showMore(button);
+      };
+    }
+    button.style.display = ""; // Show the "Show More" button again
+  }
+
+  function toggleChevron(icon) {
+    const parent = icon.closest(".ingredients");
+    console.log(parent);
+    const moreButton = parent.querySelector(".more-btn");
+    const maxVisible = parseInt(moreButton.getAttribute("data-max-visible"));
+    if (icon.classList.contains("bi-chevron-down")) {
+      showMore(moreButton);
+    } else {
+      hideSelection(moreButton, parent, maxVisible);
+    }
+  }
+</script>
