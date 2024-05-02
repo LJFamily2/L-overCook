@@ -14,6 +14,9 @@
   <!-- Css -->
   <link rel="stylesheet" href="/css/partials/ingredientFilter.css" />
   <link rel="stylesheet" href="/css/clients/home.css" />
+
+  <!-- Js -->
+  <script src="/js/clients/home.js" defer></script>
 </head>
 
 <%- include('../partials/ingredientFilter') %>
@@ -133,19 +136,5 @@
     </div>
   </div>
 
-  <div class="pantry-icon">
-    <img src="/images/basket.png" />
-    <span id="num-of-ingredients"> 0 </span>
-  </div>
-
-  <div class="pantry-contents">
-    <div class="pantry-title">
-      <img src="/images/basket.png" />
-      <span> My pantry </span>
-    </div>
-
-    <ol class="pantry-list"></ol>
-  </div>
+  <%- include ('../partials/pantry') %>
 </div>
-
-<script src="/js/clients/home.js"></script>

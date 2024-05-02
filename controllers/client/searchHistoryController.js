@@ -2,6 +2,7 @@ const User = require("../../models/User");
 const Recipe = require("../../models/Recipe");
 const categoryController = require("../admin/categoryController");
 const ingredientController = require("../admin/ingredientController");
+const Ingredient = require('../../models/Ingredient');
 
 const searchHistoryController = {
   getSearchHistory: async (req, res) => {
@@ -9,9 +10,13 @@ const searchHistoryController = {
       const categories = await categoryController.getAllCategories();
       const ingredients = await ingredientController.getIngredientsForAllCategories();
       const searchHistory = await User.find().populate("searchHistory").exec();
+      const searchIngredients = await Ingredient.find({}).limit(4);
+      const searchRecipes = await Recipe.find({}).limit(4);
       res.render("client/searchHistory", {
         categories,
         ingredients, 
+        searchIngredients,
+        searchRecipes,
         layout: "./layouts/client/defaultLayout", 
         userAuthentication: true });
     } catch (err) {
