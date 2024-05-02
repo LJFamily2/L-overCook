@@ -1,9 +1,23 @@
-<%- include('../partials/ingredientFilter') %>
+<head>
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/clients/searchHistory.css" />
 
-<div id="main-content-container">
-    <div id="main-content">
+    <!-- JS -->
+    <script src="/js/clients/searchHistory.js" defer></script>
+</head>
+
+<div class="search-history-container">
+    <div class="search-history-content">
+        <div class="breadcrumb">
+            <span>&#127968; <a href="/">Home</a> > Search History </span>
+        </div>
+        <h2>Search History</h2>
         <%- include ('../partials/searchBar') %>
 
+        <%- include ('../partials/pantry') %>
+
+        <!-- List of viewed recipes here -->
         
-    </div>
-</div>
+
+    </div> <!-- End of search-history-content -->
+</div> <!-- End of search-history-container -->
