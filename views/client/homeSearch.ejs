@@ -14,9 +14,6 @@
   <!-- Css -->
   <link rel="stylesheet" href="/css/partials/ingredientFilter.css" />
   <link rel="stylesheet" href="/css/clients/home.css" />
-
-  <!-- Js -->
-  <script src="/js/clients/home.js" defer></script>
 </head>
 
 <%- include('../partials/ingredientFilter') %>
@@ -26,7 +23,7 @@
     <%- include ('../partials/searchBar') %>
 
     <div id="filter-row">
-      <p class="recipe-count"></p>
+      <p>You can make <span id="num-of-recipes">25</span> recipes</p>
       <div class="filter-icon-container">
         <img
           class="filter-icon"
@@ -44,8 +41,7 @@
           <input
             type="checkbox"
             id="<%= cuisine.name %>"
-            name="cuisine"
-            onchange="filterByCuisines()"
+            name="<%= cuisine.name %>"
           />
           <label for="<%= cuisine.name %>"> <%= cuisine.name %> </label>
         </div>
@@ -55,31 +51,16 @@
       <h3>Cook time:</h3>
       <div>
         <div>
-          <input
-            type="checkbox"
-            id="under15"
-            name="cookTime"
-            onchange="filterByCookTime()"
-          />
-          <label for="under15"> Under 15 mins </label>
+          <input type="checkbox" id="under-15" name="under-15" />
+          <label for="under-15"> Under 15 mins </label>
         </div>
         <div>
-          <input
-            type="checkbox"
-            id="under30"
-            name="cookTime"
-            onchange="filterByCookTime()"
-          />
-          <label for="under30"> 15 - 30 mins </label>
+          <input type="checkbox" id="15-30" name="15-30" />
+          <label for="15-30"> 15 - 30 mins </label>
         </div>
         <div>
-          <input
-            type="checkbox"
-            id="over30"
-            name="cookTime"
-            onchange="filterByCookTime()"
-          />
-          <label for="over30"> Over 30 mins </label>
+          <input type="checkbox" id="over-30" name="over-30" />
+          <label for="over-30"> Over 30 mins </label>
         </div>
       </div>
     </div>
@@ -91,7 +72,6 @@
           class="recipe"
           recipe-name="<%= recipe.name %>"
           recipe-img="<%= recipe.image %>"
-          recipe-cuisine="<%= recipe.cuisine.name %>"
           cook-time="<%= recipe.time %>"
           rating="<%=recipe.reviews.rating%>"
         >
@@ -110,7 +90,7 @@
           <% }) %>
 
           <div class="recipe-img-container">
-            <img class="recipe-img" src="/uploadImages/<%= recipe.image %>" />
+            <img class="recipe-img" src="/images/<%= recipe.image %>" />
           </div>
 
           <div class="first-row">
@@ -153,5 +133,31 @@
     </div>
   </div>
 
-  <%- include ('../partials/pantry') %>
+  <div class="pantry-icon">
+    <img src="/images/basket.png" />
+    <span id="num-of-ingredients"> 10 </span>
+  </div>
+
+  <div class="pantry-contents">
+    <div class="pantry-title">
+      <img src="/images/basket.png" />
+      <span> My pantry </span>
+    </div>
+
+    <div class="pantry-list">
+      <div class="pantry-item">1. Egg</div>
+      <div class="pantry-item">2. Milk</div>
+      <div class="pantry-item">3. Tomato</div>
+      <div class="pantry-item">4. Banana</div>
+      <div class="pantry-item">5. Watermelon</div>
+      <div class="pantry-item">6. Carrot</div>
+      <div class="pantry-item">7. Onion</div>
+      <div class="pantry-item">8. Potato</div>
+      <div class="pantry-item">9. Pepper</div>
+      <div class="pantry-item">10. Cucumber</div>
+      <div class="pantry-item">11. Mushroom</div>
+    </div>
+  </div>
 </div>
+
+<script src="/js/clients/home.js"></script>

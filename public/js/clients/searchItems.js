@@ -24,6 +24,13 @@ function searchItems(inputId, list, containerID) {
    setTimeout(debouncedSearch, 100);
 }
 
+function toggleSelectionInFilter(inputId, ingredient, list) {
+   toggleSelection(document.getElementById(ingredient));
+   document.getElementById(list).classList.toggle('hidden');
+   document.getElementById(inputId).value = '';
+}
+
+
 function setValue(inputId, value, list) {
    document.getElementById(inputId).value = value;
    document.getElementById(list).classList.toggle('hidden');

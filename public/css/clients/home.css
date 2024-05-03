@@ -82,7 +82,7 @@ input[type="checkbox"] {
 }
 
 /* Recipe results section */
-#recipes {
+#all-recipes {
   display: flex;
   flex-wrap: wrap;
   gap: 50px;
@@ -96,7 +96,7 @@ input[type="checkbox"] {
 .recipe {
   width: calc(100% / 3 - 40px);
   min-width: 220px;
-  height: max-content;
+  height: auto;
   min-height: 303px;
   background-color: #fff;
   border-radius: 15px;
@@ -138,18 +138,32 @@ input[type="checkbox"] {
   padding-top: 10px;
 }
 
+.ingredient-match{
+  font-size: 14px;
+  margin: 10px 0 0 14px;
+  color: #28a745;
+  font-style: italic;
+}
+
+.missing-ingredient{
+  font-size: 14px;
+  margin: 10px 0 0 14px;
+  color: red;
+  font-style: italic;
+}
+
 .second-row {
-  position: relative;
-  top: 9px;
+  /* position: relative; */
+  /* top: 9px; */
+  margin-top: 9px;
   font-size: 14px;
 }
 
 .recipe-name {
   font-size: 20px;
   width: 100%;
-  height: 50px;
   white-space: nowrap;
-  height: 50px;
+  height: 30px;
   overflow: hidden;
   text-overflow: ellipsis;
 }
@@ -166,79 +180,6 @@ input[type="checkbox"] {
   color: #d9d9d9;
 }
 
-/* Ingredient basket (Pantry) */
-.pantry-icon {
-  width: 85px;
-  height: 85px;
-  border-radius: 50%;
-  position: fixed;
-  bottom: 30px;
-  right: 60px;
-  background-color: #f1e4c3;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: #597e52 0.5px solid;
-  box-shadow: 2px 2px 10px #fff;
-  animation: wiggle 3s infinite;
-  cursor: pointer;
-}
-
-.moveUp {
-  animation: moveUp 0.5s forwards;
-}
-
-.pantry-icon img {
-  width: 30px;
-}
-
-#num-of-ingredients {
-  padding-left: 4px;
-  margin-top: 5px;
-  font-size: 24px;
-  font-family: "Inter", sans-serif;
-}
-
-.pantry-contents {
-  background-color: #fff;
-  border: #9a9999 1px solid;
-  width: 300px;
-  height: 330px;
-  overflow-y: scroll;
-  position: fixed;
-  bottom: 0;
-  right: 60px;
-  border-radius: 10px 10px 0 0;
-
-  /* Not displayed by default - only show if user clicks pantry icon */
-  display: none;
-}
-
-.pantry-title img {
-  width: 28px;
-  margin-right: 5px;
-}
-
-.pantry-title span {
-  font-size: 20px;
-}
-
-.pantry-title {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding-top: 15px;
-}
-
-.pantry-list {
-  margin-top: 10px;
-  padding: 10px 30px;
-  border-top: #000 0.5px solid;
-}
-
-.pantry-item {
-  margin-bottom: 8px;
-}
 
 
 
@@ -248,7 +189,7 @@ input[type="checkbox"] {
     width: 75%;
   }
 
-  #recipes {
+  #all-recipes {
     gap: 30px;
   }
 }
@@ -323,45 +264,6 @@ input[type="checkbox"] {
 
     /* After the above statement, the image becomes shorter than the "you can make.." line, so we add margin to push it up*/
     margin-bottom: 5px;
-  }
-}
-
-@keyframes wiggle {
-  0% {
-    transform: rotate(0deg);
-  }
-  5% {
-    transform: rotate(5deg);
-  }
-  10% {
-    transform: rotate(0deg);
-  }
-  15% {
-    transform: rotate(-5deg);
-  }
-  20% {
-    transform: rotate(0deg);
-  }
-  25% {
-    transform: rotate(5deg);
-  }
-  30% {
-    transform: rotate(0deg);
-  }
-  35% {
-    transform: rotate(-5deg);
-  }
-  40% {
-    transform: rotate(0deg);
-  }
-}
-
-@keyframes moveUp {
-  0% {
-    transform: translateY(0);
-  }
-  100% {
-    transform: translateY(-310px);
   }
 }
 

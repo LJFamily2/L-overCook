@@ -1,5 +1,6 @@
 <head>
    <link rel="stylesheet" href="/css/clients/stars.css" />
+   <link rel="stylesheet" href="/css/partials/globalCSS.css" />
 
    <style>
       ::-webkit-scrollbar {
@@ -16,7 +17,7 @@
       <div class="row breadcumb px-md-3 py-2" style="background: white">
          <div class="col p-0">
             <a href="/" class="text-decoration-none"> &#127968; Home </a>
-            > <%= recipe.name %>
+            <span class="path-arrow"> > </span> <%= recipe.name %>
          </div>
       </div>
       <div
@@ -349,17 +350,32 @@
                <% if(recipe.reviews.length > 0){ %> <%
                recipe.reviews.forEach((review) => { %>
                <div class="section mt-3 d-flex align-items-center">
-                  <img
-                     src="/uploadImages/<%= review.user.avatar %>"
-                     alt="User image"
-                     style="
-                        border-radius: 50%;
-                        width: 50px;
-                        height: 50px;
-                        margin: 0 20px 10px 0;
-                     "
-                  />
+                  <% if(review.user && review.user.avatar){ %>
+                     <img
+                        src="/uploadImages/<%= review.user.avatar %>"
+                        alt="User image"
+                        style="
+                           border-radius: 50%;
+                           width: 50px;
+                           height: 50px;
+                           margin: 0 20px 10px 0;
+                        "
+                     />
+                  <% } else { %>
+                     <img
+                        src="/images/default-avatar.png"
+                        alt="User image"
+                        style="
+                           border-radius: 50%;
+                           width: 50px;
+                           height: 50px;
+                           margin: 0 20px 10px 0;
+                        "
+                     />
+                  <% } %>
+                  <% if(review.user &&  review.user.username) { %>
                   <h6><%= review.user.username %></h6>
+                  <% } %>
                </div>
                <div
                class="comment border border-dark p-1 rounded-3 bg-white overflow-auto position-relative"

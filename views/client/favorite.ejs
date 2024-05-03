@@ -7,21 +7,27 @@
     
     <div class="banner">
         <img src="/images/freshSpringRolls.jpeg">
-        <div>My Favorites</div>
+        <div>Favourites</div>
     </div>
 
-    <div class="content">
-        <p> Which shall I make today? </p>
-        <ul class="image-gallery">
-            <% user.favoriteRecipes.forEach(recipe => { %>
-            <li class="gallery-item">
-                <a href="/recipeManagement/<%= recipe.slug %>">
-                    <img src="/images/<%= recipe.image %>">
-                    <div class="item-name"><%= recipe.name %></div>
-                </a>
-            </li>
-            <% }) %>
-        </ul>
-    </div> 
+    <div class="favorite-container">
+        <div class="favorite-content">
+            <div class="breadcrumb">
+                <span>&#127968; <a href="/">Home</a> <span class="path-arrow"> > </span> Favourites </span>
+            </div>
+
+            <p> ⭐️ My tasty treats ⭐️ </p>
+            <ul class="image-gallery">
+                <% user.favoriteRecipes.forEach(recipe => { %>
+                <li class="gallery-item">
+                    <a href="/recipeManagement/<%= recipe.slug %>">
+                        <img src="/images/<%= recipe.image %>">
+                        <div class="item-name"><%= recipe.name %></div>
+                    </a>
+                </li>
+                <% }) %>
+            </ul>
+        </div> <!-- End of favorite-content -->
+    </div>  <!-- End of favorite-container -->
 </body>
 
