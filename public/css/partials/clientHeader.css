@@ -3,7 +3,6 @@ header {
   height: 90px;
   background-color: #f1e4c3;
   display: flex;
-  justify-content: space-between;
   align-items: center;
   position: sticky;
   top: 0  ;
@@ -24,7 +23,12 @@ header {
   height: 30px;
 }
 
-.nav-left {
+.navbar {
+  width: 100%;
+  padding: 0;
+}
+
+/* .nav-left {
   height: 100%;
   margin-left: 16px;
   display: flex;
@@ -33,12 +37,16 @@ header {
 
 .nav-right {
   position: absolute;
-  /* top: 30px; */
-  /* right: 60px; */
+  top: 30px;
+  right: 60px;
   right: 10px;
   display: flex;
   align-items: center;
   color: #707070;
+} */
+
+.navbar-nav {
+  gap: 20px;
 }
 
 .nav-item {
@@ -46,17 +54,17 @@ header {
   align-items: center;
 }
 
-.nav-right a {
+.nav-item a {
   text-decoration: none;
   color: #707070;
 }
 
-.nav-right a:nth-child(2) {
-  margin: 0 40px;
+.nav-item a:hover {
+  color: #75a26d;
 }
 
-.nav-right a:hover {
-  color: #75a26d;
+.user-lang-button .drop-down {
+  margin-left: 0;
 }
 
 .icon-profile {
@@ -68,50 +76,74 @@ header {
   gap: 2px;
 }
 
-.user-profile img {
-  font-size: 0;
-  width: 30px; 
-  height: 30px; 
-  object-fit: cover;
-  border-radius: 50%; 
-  margin-right: 2px;
-  border: gray 0.5px solid;
-  position: relative;
-  bottom: 2px;
-}
-
 .user-section {
   white-space: nowrap;
+  padding-left: 30px;
 }
 
-.user-profile {
+.user-section img {
+  font-size: 0;
+  min-width: 40px; 
+  min-height: 40px; 
+  object-fit: cover;
+  border-radius: 50%; 
+  border: gray 0.5px solid;
+  position: relative;
 }
 
-.user-profile span {
+.user-section span {
   text-overflow: ellipsis;
 }
 
-.log-out {
-  position: absolute;
-  top: 50px;
-  cursor: pointer;
-  width: 120px;
-  background-color: #6A994E;
-  color: #fff;
-  padding: 10px 15px;
-  opacity: 0;
-  font-size: 18px;
-  font-family: inherit;
-  border-radius: 5px;
+.navbar-brand {
+  margin-right: 0;
 }
 
-.user-section:hover .log-out {
-  transition: ease-out 0.3s;
-  opacity: 1;
+.profile-section {
+  position: absolute;
+  top: 100%;
+  right: 0;
+}
+
+.profile-layout {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.profile-layout img {
+  min-height: 80px;
+  min-width: 80px;
+}
+
+.user-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-content span {
+  font-weight: 600;
+  font-size: 20px;
+}
+
+.view-my-profile,
+.log-out {
+  font-size: 15px;
+  text-decoration: none;
+}
+
+.view-my-profile:hover {
+  text-decoration: underline;
 }
 
 .log-out:hover {
-  background-color: #568b39;
+  color: #333;
+}
+
+.log-out {
+  background-color: white;
+  color: #707070;
+  margin-top: 5px;
 }
 
 @media (max-width: 767px) {
@@ -125,14 +157,10 @@ header {
 
   .navbar-collapse {
     background-color: #f8f9fa;
-    border-radius: 4px;
-    padding: 10px;
     position: absolute;
     top: 100%;
-    right: 0;
+    width: 100%;
     z-index: 1000;
-    display: flex;
-    align-items: center;
   }
   
   .navbar-toggler {
@@ -150,10 +178,27 @@ header {
 
   .nav-item {
     justify-content: center;
+    padding: 2px 0;
   }
 
   .nav-item .drop-down {
     margin-left: 0;
+  }
+
+  .user-section {
+    padding-left: 0;
+  }
+
+  .navbar-nav {
+    gap: 0;
+  }
+
+  .user-lang-button {
+    padding: 5px 0;
+  }
+
+  .empty {
+    width: 54px;
   }
 
 }
