@@ -43,6 +43,10 @@
     width: calc(100% - 70px - 7px);
     font-size: 14px;
   }
+
+  #search-bar input:focus {
+    outline-width: 0;
+  }
   
   #search h2 {
     margin-bottom: 20px;
