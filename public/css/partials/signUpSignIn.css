@@ -1,6 +1,8 @@
 /* Overwriting values*/
 header {
     background-color: transparent;
+    display: flex;
+    align-items: center;
 }
 
 .drop-down {
@@ -42,7 +44,7 @@ header {
 .nav-right {
     position: absolute;
     top: 30px;
-    right: 60px;
+    right: 10px;
     display: flex;
     align-items: center;
     color: #707070;
