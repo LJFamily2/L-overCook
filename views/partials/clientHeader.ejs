@@ -3,70 +3,96 @@
         <!-- Css -->
         <link rel="stylesheet" href="/css/partials/clientHeader.css" />
         <link rel="stylesheet" href="/css/partials/langButton.css" />
+
+        <!-- Js -->
+        <script src="/js/clients/header.js"></script>
 </head>
 <% if(!userAuthentication){ %>
     <header>
-      <div class="nav-left">
-        <a href="/" class="logo">
-          <img
-            id="logo-without-name"
-            src="/images/logoWithoutName.png"
-            class="logo-without-name"
-          />
-            <img id="logo-name" src="/images/loverCook.png" class="logo-name"/>
-        </a>
-      </div>
+      <nav class="navbar navbar-expand-md">
+        <div class="container-fluid">
 
-    <nav class="navbar navbar-expand-md nav-right">
-      <div class="container-fluid">
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
+            <span class="navbar-toggler-icon"></span>
           </button>
-          <div class="collapse navbar-collapse justify-content-md-end" id="navbarSupportedContent">
-              <ul class="navbar-nav mb-2 mb-lg-0">
-                  <% if(user){ %>
-                  <li class="nav-item">
-                      <a class="nav-link" href="#">History</a>
-                  </li>
-                  <li class="nav-item">
-                      <a class="nav-link" href="/favorite-recipe">Favourites</a>
-                  </li>
-                  <li class="nav-item">
-                    <div class="user-section">
-                      <div class="user-profile">
-                        <a class="nav-link" href="/account/profile">
-                          <img
-                              src="/uploadImages/<%= user.avatar %>"
-                              alt="upload file"
-                              style="width: 30px; height: 30px; border-radius: 50%; margin-right: 2px;"
-                          />
-                          <span><%= user.username %></span>
-                      </a>  
-                      </div>
 
-                      <form action="/users/log-out" method="post">
-                        <button type="submit" class="log-out border-0">Log out </button>
-                      </form> 
-                    </div>    
-                  </li>
-
-                  <% }else{ %>
-                  <li class="nav-item">
-                      <a class="nav-link" href="/signin">Login</a>
-                  </li>
-                  <li class="nav-item">
-                      <a class="nav-link" href="/signup">Register</a>
-                  </li>
-                  <% } %>
-                  <li class="nav-item">
-                      <!-- Include langButton inside the navbar -->
-                      <%- include('./langButton') %>
-                  </li>
-              </ul>
+          <div class="navbar-brand nav-left">
+            <a href="/" class="logo">
+              <img
+                id="logo-without-name"
+                src="/images/logoWithoutName.png"
+                class="logo-without-name"
+              />
+                <img id="logo-name" src="/images/loverCook.png" class="logo-name"/>
+            </a>
           </div>
-      </div>
-  </nav>
-  </header>
+          <% if(user){ %>
+          <div class="collapse navbar-collapse justify-content-md-end" id="navbarSupportedContent">
+            <ul class="navbar-nav mb-lg-0">
+            
+              <li class="nav-item">
+                  <a class="nav-link" href="#">History</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="/favorite-recipe">Favourites</a>
+              </li>
+              <li class="nav-item user-lang-button">
+                <!-- Include langButton inside the navbar -->
+                <%- include('./langButton') %>
+              </li>
+            </ul>
+          </div>
+
+          <div class="navbar-brand user-section">
+            <a class="nav-link" data-bs-toggle="collapse" href="#userCollapse" role="button" aria-expanded="false" aria-controls="userCollapse">
+              <img
+                  src="/uploadImages/<%= user.avatar %>"
+                  alt="upload file"
+              />
+            </a>
+
+            <div class="collapse profile-section card card-body" id="userCollapse">
+              <div class="profile-layout">
+                <img
+                  src="/uploadImages/<%= user.avatar %>"
+                  alt="upload file"
+                />
+
+                <div class="user-content">
+                  <span><%= user.username %></span>
+                  <a href="/account/profile" class="view-my-profile">View My Profile</a>
+                  <form action="/users/log-out" method="post">
+                    <button type="submit" class="log-out border-0">Log out </button>
+                  </form> 
+                </div>
+              </div>              
+            </div>
+
+            
+          </div>
+
+          <% }else{ %>
+          <div class="collapse navbar-collapse justify-content-md-end" id="navbarSupportedContent">
+            <ul class="navbar-nav mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link" href="/signin">Login</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/signup">Register</a>
+              </li>
+              <li class="nav-item">
+                <!-- Include langButton inside the navbar -->
+                <%- include('./langButton') %>
+              </li>
+            </ul>
+          </div>
+
+          <div class="navbar-brand empty"></div>
+          <% } %>
+        </div>
+      </nav>
+    </header>
+        
   <% }else{ %>
     <header>
       <div class="nav-left">
@@ -84,7 +110,7 @@
       </div>
     </div>
   </header>
-    <% } %>
+<% } %>
   
     
 
