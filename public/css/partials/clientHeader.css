@@ -59,10 +59,6 @@ header {
   color: #707070;
 }
 
-/* .nav-item a:nth-child(2) {
-  margin: 0 40px;
-} */
-
 .nav-item a:hover {
   color: #75a26d;
 }
@@ -103,27 +99,51 @@ header {
   margin-right: 0;
 }
 
-.log-out {
+.profile-section {
   position: absolute;
-  top: 50px;
-  cursor: pointer;
-  width: 120px;
-  background-color: #6A994E;
-  color: #fff;
-  padding: 10px 15px;
-  opacity: 0;
-  font-size: 18px;
-  font-family: inherit;
-  border-radius: 5px;
+  top: 100%;
+  right: 0;
 }
 
-.user-section:hover .log-out {
-  transition: ease-out 0.3s;
-  opacity: 1;
+.profile-layout {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.profile-layout img {
+  min-height: 80px;
+  min-width: 80px;
+}
+
+.user-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-content span {
+  font-weight: 600;
+  font-size: 20px;
+}
+
+.view-my-profile,
+.log-out {
+  font-size: 15px;
+  text-decoration: none;
+}
+
+.view-my-profile:hover {
+  text-decoration: underline;
 }
 
 .log-out:hover {
-  background-color: #568b39;
+  color: #333;
+}
+
+.log-out {
+  background-color: white;
+  color: #707070;
+  margin-top: 5px;
 }
 
 @media (max-width: 767px) {
@@ -137,12 +157,9 @@ header {
 
   .navbar-collapse {
     background-color: #f8f9fa;
-    /* border-radius: 4px; */
-    /* padding: 10px; */
     position: absolute;
     top: 100%;
     width: 100%;
-    /* right: 0; */
     z-index: 1000;
   }
   
@@ -178,6 +195,10 @@ header {
 
   .user-lang-button {
     padding: 5px 0;
+  }
+
+  .empty {
+    width: 54px;
   }
 
 }

@@ -44,16 +44,31 @@
           </div>
 
           <div class="navbar-brand user-section">
-            <a class="nav-link" href="/account/profile">
+            <a class="nav-link" data-bs-toggle="collapse" href="#userCollapse" role="button" aria-expanded="false" aria-controls="userCollapse">
               <img
                   src="/uploadImages/<%= user.avatar %>"
                   alt="upload file"
               />
             </a>
 
-            <form action="/users/log-out" method="post">
-              <button type="submit" class="log-out border-0">Log out </button>
-            </form> 
+            <div class="collapse profile-section card card-body" id="userCollapse">
+              <div class="profile-layout">
+                <img
+                  src="/uploadImages/<%= user.avatar %>"
+                  alt="upload file"
+                />
+
+                <div class="user-content">
+                  <span><%= user.username %></span>
+                  <a href="/account/profile" class="view-my-profile">View My Profile</a>
+                  <form action="/users/log-out" method="post">
+                    <button type="submit" class="log-out border-0">Log out </button>
+                  </form> 
+                </div>
+              </div>              
+            </div>
+
+            
           </div>
 
           <% }else{ %>
@@ -71,6 +86,8 @@
               </li>
             </ul>
           </div>
+
+          <div class="navbar-brand empty"></div>
           <% } %>
         </div>
       </nav>
