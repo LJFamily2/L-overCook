@@ -42,7 +42,7 @@
       <% ingredients.forEach((ingredient, index) => { %>
       <tr>
         <td><%= ingredient.id %></td>
-        <td> <img src="/uploadImages/<%= ingredient.categoryImage %>" width="100" alt="category image"></td>
+        <td> <img src="/uploadImages/<%= ingredient.category.image %>" width="100" alt="category image"></td>
         <td><%= ingredient.name %></td>
         <td><%= ingredient.category.name %></td>
         <td>
