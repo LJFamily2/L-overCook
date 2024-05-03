@@ -4,6 +4,7 @@ let filterCriteria = document.querySelector('.filter-criteria');
 
 
 filterIcon.addEventListener('click', () => {
+   filterCriteria.classList.toggle('hidden');
    filterCriteria.classList.toggle('show');
 });
 

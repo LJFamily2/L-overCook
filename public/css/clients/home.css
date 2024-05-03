@@ -49,12 +49,6 @@ body {
   border: #d0d0d0 solid 1px;
   border-radius: 7px;
   margin-bottom: 30px;
-  /* Not displayed by default */
-  display: none;
-}
-
-.show {
-  display: block !important;
 }
 
 .filter-criteria > div {
