@@ -21,7 +21,6 @@ exports.getAllIngredients = async (req,res) => {
       const ingredients = await Ingredient.find()
       .populate({
           path: 'category',
-         select: 'name -_id'
       })
       .exec();
       return ingredients;
@@ -88,7 +87,7 @@ exports.createIngredientLogic = async(name, categoryName, image) => {
            categoryId = categoryMap.get(categoryName);
        } else {
            // If the category doesn't exist, create a new one
-           const newCategory = await categoryController.createCategoryLogic(categoryName);
+           const newCategory = await categoryController.createCategoryLogic(categoryName, image);
            categoryId = newCategory._id;
        }
 
@@ -96,7 +95,6 @@ exports.createIngredientLogic = async(name, categoryName, image) => {
        const ingredient = new Ingredient({
            name,
            category: categoryId,
-           categoryImage: image
        });
 
        // Save the new ingredient to the database
@@ -139,9 +137,7 @@ exports.deleteIngredient = async (req,res) => {
            { $pull: { ingredients: { ingredient: ingredientId } } }
        );
 
-       if (ingredient.categoryImage) {
-        await deleteImageFile(ingredient.categoryImage);
-     }
+
        
        // Delete ingredient
        await Ingredient.deleteOne({ _id: ingredientId });
@@ -215,6 +211,7 @@ exports.updateIngredient = async (req, res) => {
             throw new Error(`Failed to update item: Ingredient with name '${name}' already exists`);
         }
 
+        
         // Check if category existed
         let categoryId;
         const categoryMap = new Map((await Category.find()).map(cat => [cat.name, cat._id]));
@@ -222,10 +219,12 @@ exports.updateIngredient = async (req, res) => {
             // If the category exists, retrieve its ID from the map
             categoryId = categoryMap.get(categoryName);
         } else {
+            const image = req.file ? req.file.filename : null;
             // If the category doesn't exist, create a new one
-            const newCategory = await categoryController.createCategoryLogic(categoryName);
+            const newCategory = await categoryController.createCategoryLogic(categoryName, image);
             categoryId = newCategory._id;
         }
+
 
         // Check if there are changes in the ingredient's name, category, or image
         const updateFields = {};
@@ -235,20 +234,15 @@ exports.updateIngredient = async (req, res) => {
         if (categoryId.toString() !== ingredient.category.toString()) {
             updateFields.category = categoryId;
         }
+
+        // If a new image is provided, update the category's image
         if (req.file) {
-            if (ingredient.categoryImage) {
-                await deleteImageFile(ingredient.categoryImage);
-            }
-            updateFields.categoryImage = req.file.filename;
+            await categoryController.updateCategoryImage(categoryId, req.file);
         }
 
         // Update the ingredient if there are changes
-        if (Object.keys(updateFields).length > 0) {
             const resultIngredient = await Ingredient.findByIdAndUpdate(ingredientId, updateFields, { new: true });
             res.redirect('/ingredientManagement?success=Ingredient+updated+successfully');
-        } else {
-            res.redirect('/ingredientManagement?success=No+changes+detected');
-        }
     } catch (error) {
         res.redirect('/ingredientManagement?error=true&message=' + encodeURIComponent(error.message));
     }
