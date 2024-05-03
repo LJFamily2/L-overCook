@@ -52,7 +52,8 @@ header {
   
 
 .client-sign-up-form {
-    width: 800px;
+    /* width: 800px; */
+    width: 50%;
     height: calc(100dvh - 100px) ;
     margin: auto 50px;
     display: flex;

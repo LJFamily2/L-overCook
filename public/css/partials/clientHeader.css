@@ -84,7 +84,9 @@ header {
 .user-section img {
   font-size: 0;
   min-width: 40px; 
-  min-height: 40px; 
+  min-height: 40px;
+  max-width: 40px; 
+  max-height: 40px;  
   object-fit: cover;
   border-radius: 50%; 
   border: gray 0.5px solid;

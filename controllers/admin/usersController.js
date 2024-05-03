@@ -16,7 +16,7 @@ const updateUser = async (req, res) => {
    try {
       const { id } = req.params;
       const { username, email, role, password } = req.body;
-
+      const existingUser = await User.findById(id);
       let hashedPassword;
       if (password) {
          hashedPassword = await bcrypt.hash(password, 10);
