@@ -36,9 +36,9 @@
       </tr>
     </thead>
     <tbody>
-      <% cuisines.forEach(cuisine => { %>
+      <% cuisines.forEach((cuisine, index) => { %>
       <tr>
-        <td><%= cuisine.id %></td>
+        <td><%= index %></td>
         <td><%= cuisine.name %></td>
         <td>
           <!-- Button trigger update modal -->
@@ -89,7 +89,7 @@
             </div>
             <div class="modal-body">
               <form
-                action="/cuisineManagement/update/<%= cuisine.id %>"
+                action="/cuisines/update/<%= cuisine.id %>"
                 id="cuisineUpdateForm"
                 method="post"
               >
@@ -148,7 +148,7 @@
             </div>
             <div class="modal-body">
               <form
-                action="/cuisineManagement/delete/<%=cuisine.id%>"
+                action="/cuisines/delete/<%=cuisine.id%>"
                 id="cuisineDeleteForm"
                 method="post"
               >
@@ -199,7 +199,7 @@
           aria-label="Close"
         ></button>
       </div>
-      <form id="cuisineForm" action="/cuisineManagement/new" method="post">
+      <form id="cuisineForm" action="/cuisines/new" method="post">
         <div class="modal-body">
           <div class="mb-3">
             <label for="cuisineName" class="form-label">Cuisine Name</label>

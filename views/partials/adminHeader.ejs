@@ -33,6 +33,18 @@
           <span>Recipe Management</span>
         </div>
       </a>
+      <a href="/ingredients" >
+        <div class="<%= currentPage === 'ingredient-management' ? 'nav-active' : '' %>">
+          <i class="bx bx-bowl-hot"></i>
+          <span>Ingredient Management</span>
+        </div>
+      </a>
+      <a href="/cuisines" >
+        <div class="<%= currentPage === 'cuisine-management' ? 'nav-active' : '' %>">
+          <i class="bx bx-bowl-hot"></i>
+          <span>Cuisine Management</span>
+        </div>
+      </a>
     </div>
 
     <form action="/users/log-out" method="post">
