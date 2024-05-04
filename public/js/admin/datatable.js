@@ -1,12 +1,6 @@
 function initializeDataTable(selector) {
     $(selector).DataTable({
-        lengthMenu: [4, 8, 15],
-        language: {
-            entries: {
-                _: 'users',
-                1: 'user'
-            }
-        }
+        lengthChange:false,
     });
 }
 

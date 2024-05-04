@@ -34,6 +34,33 @@ exports.getAllRecipes = async (req, res) => {
    }
 };
 
+exports.getUpdateRecipePage = async (req, res) => {
+   try {
+      const id = req.params.id; 
+      const cuisines = await Cuisine.find({});
+      const ingredients = await Ingredient.find({});
+      const recipe = await Recipe.findById(id) 
+         .populate({
+            path: 'ingredients.ingredient',
+            select: 'name -_id',
+         })
+         .populate({
+            path: 'cuisine',
+            select: 'name -_id',
+         })
+         .exec();
+      if (!recipe) { 
+         return res.status(404).send("Recipe not found"); // 
+      }
+      res.render('admin/updateRecipe', { layout: './layouts/admin/defaultLayout', recipe, ingredients,cuisines ,currentPage: 'recipe-management' });
+   } catch (error) {
+      
+      console.error(error); 
+      res.status(500).send("Internal Server Error"); 
+   }
+};
+
+
 // Recipe detail page
 exports.getRecipeDetailPage = async (req, res) => {
    try {
@@ -178,11 +205,11 @@ exports.createRecipe = async (req, res) => {
          url
       );
       if (newRecipe) {
-         res.redirect('/recipeManagement?success=Recipe+added+successfully');
+         res.redirect('/recipes?success=Recipe+added+successfully');
       }
    } catch (error) {
       res.redirect(
-         '/recipeManagement?error=true&message=' +
+         '/recipes?error=true&message=' +
             encodeURIComponent(error.message)
       );
    }
@@ -256,11 +283,11 @@ exports.createRecipe = async (req, res) => {
 //          { new: true }
 //       );
 //       console.log('results: ', resultRecipe);
-//       res.redirect('/recipeManagement?success=Recipe+updated+successfully');
+//       res.redirect('/recipes?success=Recipe+updated+successfully');
 //    } catch (error) {
 //       console.log('Error updating recipe.');
 //       res.redirect(
-//          '/recipeManagement?error=true&message=' +
+//          '/recipes?error=true&message=' +
 //             encodeURIComponent(error.message)
 //       );
 //    }
@@ -337,11 +364,11 @@ exports.updateRecipe = async (req, res) => {
       );
 
       console.log('Recipe updated:', resultRecipe);
-      res.redirect('/recipeManagement?success=Recipe+updated+successfully');
+      res.redirect('/recipes?success=Recipe+updated+successfully');
    } catch (error) {
       console.error('Error updating recipe:', error);
       res.redirect(
-         '/recipeManagement?error=true&message=' +
+         '/recipes?error=true&message=' +
             encodeURIComponent(error.message)
       );
    }
@@ -363,10 +390,10 @@ exports.deleteRecipe = async (req, res) => {
       }
 
       await Recipe.deleteOne({ _id: recipeId });
-      res.redirect('/recipeManagement?success=Recipe+deleted+successfully');
+      res.redirect('/recipes?success=Recipe+deleted+successfully');
    } catch (error) {
       res.redirect(
-         '/recipeManagement?error=true&message=' +
+         '/recipes?error=true&message=' +
             encodeURIComponent(error.message)
       );
    }

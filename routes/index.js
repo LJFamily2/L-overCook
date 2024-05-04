@@ -35,15 +35,15 @@ const routes = [
       route: category,
    },
    {
-      path: '/cuisineManagement',
+      path: '/cuisines',
       route: cuisine,
    },
    {
-      path: '/ingredientManagement',
+      path: '/ingredients',
       route: ingredient,
    },
    {
-      path: '/recipeManagement',
+      path: '/recipes',
       route: recipeManagement,
    },
    {
