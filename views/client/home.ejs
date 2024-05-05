@@ -99,9 +99,9 @@
           <% recipe.ingredients.forEach(ingredient => { %>
           <div
             class="recipe-ingredients hidden"
-            recipe-ingredient="<%=ingredient.ingredient.name%>"
+            recipe-ingredient="<%= ingredient.ingredient?.name %>"
           >
-            <%= ingredient.ingredient.name %>
+            <%= ingredient.ingredient?.name %>
           </div>
           <% }) %> <% recipe.reviews.forEach(review => { %>
           <div class="recipe-rating hidden" recipe-rating="<%=review.rating%>">
