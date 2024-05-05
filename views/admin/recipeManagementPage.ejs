@@ -1,8 +1,8 @@
 <head>
    <!-- Add datatable -->
-   <link rel="stylesheet" href="https://cdn.datatables.net/2.0.5/css/dataTables.dataTables.css" />
+   <!-- <link rel="stylesheet" href="https://cdn.datatables.net/2.0.5/css/dataTables.dataTables.css" />
    <script src="https://cdn.datatables.net/2.0.5/js/dataTables.js"></script>
-   <script src="/js/admin/datatable.js" defer></script>
+   <script src="/js/admin/datatable.js" defer></script> -->
 </head>
 
 <div class="fluid-container">
@@ -60,7 +60,7 @@
           <td>
             <% if (recipe.image) { %>
               <img
-                src="/uploadImages/<%= recipe.image %>"
+                src="<%= recipe.image %>"
                 alt="<%= recipe.image %>"
                 width="100"
               />
@@ -68,7 +68,6 @@
               N/A
             <% } %>
           </td>
-          <!-- <td><%= recipe.id %></td> -->
           <td><%= recipe.name %></td>
           <td><%= recipe.description ? recipe.description : 'N/A'%></td>
           <td style="width: 300px;">
@@ -282,7 +281,8 @@
         <% }) %>
     </tbody>
   </table>
-  </div>
+  <%- include('../partials/NavigationOfTable') %>
+</div>
 
   <!-- Recipe table ends -->
 </div>
