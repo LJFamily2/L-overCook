@@ -8,6 +8,7 @@
     border-radius: 10px;
     margin-left: 40px;
     width: 61px;
+    cursor: pointer;
 }
 
 .wrapper {
@@ -30,7 +31,6 @@
     left: 0;
     background-color: #fffdf6;
     padding-top: 9px;
-    cursor: pointer;
     overflow-y: scroll;
     width: 100%;
     border-radius: 0 0 10px 10px;

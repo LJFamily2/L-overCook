@@ -113,11 +113,14 @@ input[type="checkbox"] {
   object-fit: cover;
 }
 
-.first-row img {
-  width: 25px;
-
-  /* Not displayed for guest users */
-  /* display: none; */
+.first-row button {
+  /* Remove default button styles */
+  background: none;
+  font-size: 28px;
+  border: none;
+  cursor: pointer;
+  color: #ff5e5e;
+  margin-top: -5px;
 }
 
 .first-row,
@@ -160,6 +163,8 @@ input[type="checkbox"] {
   height: 30px;
   overflow: hidden;
   text-overflow: ellipsis;
+  /* Add spacing between the name and heart icon*/
+  margin-right: 5px;
 }
 
 .second-row img {

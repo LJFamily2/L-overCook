@@ -1,7 +1,8 @@
 .search-history-container {
     background-color: #F5F5F5;
     font-family: 'Inika', serif;
-    min-height: 70vh;
+    height: 100vh;
+    overflow: auto;
 }
 
 .search-history-content {
@@ -21,6 +22,7 @@ a:visited {
 
 #search {
     margin-top: 50px;
+    margin-bottom: 70px;
 }
 
 h2 {
@@ -34,4 +36,133 @@ h2 {
     background-color: #fff;
     padding: 8px 15px;
     font-family: 'Inter', sans-serif;
+}
+
+#all-recipes {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    flex-wrap: wrap;
+    height: fit-content;
+    padding-bottom: 50px;
+}
+
+.recipe {
+    width: calc(100% / 4 - 40px);
+    min-width: 220px;
+    height: auto;
+    min-height: 303px;
+    background-color: #fff;
+    border-radius: 15px;
+    border: #7c5532 solid 0.25px;
+    margin-bottom: 30px;
+}
+  
+.recipe-img-container {
+    width: 100%;
+    min-width: 220px;
+    height: 212px;
+    background-color: #f5f5f5;
+    overflow: hidden;
+    border-radius: 15px 15px 0 0;
+}
+  
+.recipe-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.first-row button {
+    /* Remove default button styles */
+    background: none;
+    font-size: 28px;
+    border: none;
+    cursor: pointer;
+    color: #ff5e5e;
+    margin-top: -5px;
+}
+  
+.first-row,
+.second-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 0 13px;
+}
+  
+.first-row {
+    padding-top: 10px;
+}
+
+.second-row {
+    margin-top: 9px;
+    font-size: 14px;
+}
+  
+.recipe-name {
+    font-size: 20px;
+    width: 100%;
+    white-space: nowrap;
+    height: 30px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /* Add spacing between the name and heart icon*/
+    margin-right: 5px;
+}
+  
+.second-row img {
+    width: 10px;
+}
+  
+.cook-time span {
+    color: #9a9999;
+}
+  
+.fa-star {
+    color: #d9d9d9;
+}
+
+
+/* Media queries */
+
+@media screen and (max-width: 1142px) {
+    .recipe {
+        width: calc(100% / 3 - 40px);
+    }
+}
+
+@media screen and (max-width: 845px) {
+    .search-history-content {
+        width: 85%;
+    }
+
+    #all-recipes {
+        gap: 30px;
+    }
+
+    .recipe {
+        width: calc(100% / 2 - 30px);
+    }
+}
+
+@media screen and (max-width: 552px) {
+    .search-history-content {
+        width: 70%;
+    }
+
+    .recipe {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 280px) {
+    .recipe {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .recipe-img-container {
+        min-width: 0;
+    }
 }
