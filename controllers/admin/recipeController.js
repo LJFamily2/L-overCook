@@ -93,11 +93,41 @@ exports.getRecipeDetailPage = async (req, res) => {
 };
 
 // Get all recipes
+// exports.getRecipePage = async (req, res) => {
+//    try {
+//       const recipes = await this.getAllRecipes();
+//       const ingredients = await ingredientController.getAllIngredients();
+//       const cuisines = await cuisineController.getAllCuisines();
+//       res.render('admin/recipeManagementPage', {
+//          recipes,
+//          ingredients,
+//          cuisines,
+//          layout: './layouts/admin/defaultLayout',
+//          currentPage: 'recipe-management',
+//          heading: 'Recipe Management',
+//       });
+//    } catch (error) {
+//       throw new Error(error.message);
+//    }
+// };
+
 exports.getRecipePage = async (req, res) => {
    try {
-      const recipes = await this.getAllRecipes();
+      const rowsPerPage = parseInt(req.query.rows) || 5;
+      const page = parseInt(req.query.page) || 1;
+      const limit = rowsPerPage; 
+      const skip = (page - 1) * limit;
+
+      // Query the database to fetch a subset of recipes
+      const recipes = await Recipe.find().skip(skip).limit(limit);
+      
+      // Get total count of recipes for pagination
+      const totalRecipes = await Recipe.countDocuments();
+
       const ingredients = await ingredientController.getAllIngredients();
       const cuisines = await cuisineController.getAllCuisines();
+      
+
       res.render('admin/recipeManagementPage', {
          recipes,
          ingredients,
@@ -105,11 +135,16 @@ exports.getRecipePage = async (req, res) => {
          layout: './layouts/admin/defaultLayout',
          currentPage: 'recipe-management',
          heading: 'Recipe Management',
+         totalPages: Math.ceil(totalRecipes / limit), 
+         currentPageNumber: page,
+         rowsPerPage: rowsPerPage,
       });
    } catch (error) {
       throw new Error(error.message);
    }
 };
+
+
 
 // Search for recipes limit by 4
 exports.searchRecipe = async (req, res) => {
