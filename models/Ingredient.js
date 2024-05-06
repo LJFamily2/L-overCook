@@ -10,7 +10,6 @@ const ingredientSchema = Schema({
         type: Schema.Types.ObjectId,
         ref: 'Category'
     },
-    categoryImage: String,
 })
 
 const Ingredient = mongoose.model('Ingredient', ingredientSchema);

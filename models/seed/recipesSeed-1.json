@@ -78,7 +78,11 @@
         "quantity": "1 tablespoon"
       },
       {
-        "name": "chicken legs and thighs",
+        "name": "chicken legs",
+        "quantity": "3 pounds"
+      },
+      {
+        "name": "chicken thighs",
         "quantity": "3 pounds"
       }
     ],
@@ -210,7 +214,7 @@
         "quantity": "1 pound"
       },
       {
-        "name": "water, more",
+        "name": "water",
         "quantity": "4 cups"
       },
       {
@@ -643,7 +647,7 @@
         "quantity": "2 pounds"
       },
       {
-        "name": "water,",
+        "name": "water",
         "quantity": "1 ½ cups"
       },
       {
@@ -725,7 +729,7 @@
         "quantity": "½ pound"
       },
       {
-        "name": "onion",
+        "name": "onions",
         "quantity": "⅓ cup"
       },
       {
@@ -758,7 +762,11 @@
         "quantity": "1 cup"
       },
       {
-        "name": "watercress leaves and stems",
+        "name": "watercress leaves",
+        "quantity": "1 cup"
+      },
+      {
+        "name": "watercress stems",
         "quantity": "1 cup"
       },
       {
@@ -866,7 +874,7 @@
         "quantity": "3 tablespoons"
       },
       {
-        "name": "fresh lemon or lime juice",
+        "name": "lime juice",
         "quantity": "1 teaspoon"
       }
     ],
@@ -919,7 +927,7 @@
         "quantity": "2 teaspoons"
       },
       {
-        "name": "green onion",
+        "name": "green onions",
         "quantity": "½ cup"
       },
       {
@@ -1258,8 +1266,16 @@
         "quantity": "2 cloves"
       },
       {
-        "name": "chicken legs, thighs, and wings",
-        "quantity": "4 pounds"
+        "name": "chicken legs",
+        "quantity": "1 pounds"
+      },
+      {
+        "name": "chicken thighs",
+        "quantity": "1 pounds"
+      },
+      {
+        "name": "chicken wings",
+        "quantity": "1 pounds"
       }
     ],
     "time": "1 hr 10 mins",
@@ -1390,7 +1406,7 @@
         "quantity": "1 tablespoon"
       },
       {
-        "name": "onion",
+        "name": "onions",
         "quantity": "2 tablespoons"
       },
       {
@@ -1840,7 +1856,7 @@
         "quantity": "3 tablespoons"
       },
       {
-        "name": "boneless, skinless chicken thighs",
+        "name": "skinless, boneless chicken thighs",
         "quantity": "3 pounds"
       },
       {
@@ -1914,7 +1930,7 @@
         "quantity": "1 ¼ pounds"
       },
       {
-        "name": "boneless, skinless chicken thighs",
+        "name": "skinless, boneless chicken thighs",
         "quantity": "1 ¼ pounds"
       },
       {
@@ -2447,7 +2463,7 @@
         "quantity": "1 teaspoon"
       },
       {
-        "name": "durian or banana extract",
+        "name": "durian",
         "quantity": "1 tablespoon"
       }
     ],
@@ -3175,7 +3191,7 @@
   },
   {
     "name": "Beef Pho",
-    "description": "This beef pho features a comforting, richly-seasoned meat broth ladled over rice noodles and thinly sliced sirloin. Serve with hoisin, Sriracha, green onion, cilantro, bean sprouts, basil, and lime.",
+    "description": "This beef pho features a comforting, richly-seasoned meat broth ladled over rice noodles and thinly sliced sirloin. Serve with hoisin, Sriracha, green onions, cilantro, bean sprouts, basil, and lime.",
     "ingredients": [
       {
         "name": "beef soup bones",
@@ -3833,7 +3849,7 @@
         "quantity": "½ cup"
       },
       {
-        "name": "green onion",
+        "name": "green onions",
         "quantity": "¼ cup"
       },
       {
@@ -3902,7 +3918,7 @@
         "quantity": "2 tablespoons"
       },
       {
-        "name": "garlic,",
+        "name": "garlic",
         "quantity": "4 cloves"
       },
       {
@@ -4411,7 +4427,7 @@
         "quantity": "1 teaspoon"
       },
       {
-        "name": "green onion",
+        "name": "green onions",
         "quantity": "1 tablespoon"
       }
     ],
@@ -4592,7 +4608,7 @@
         "quantity": "⅓ cup"
       },
       {
-        "name": "onion",
+        "name": "onions",
         "quantity": "¼ cup"
       },
       {
@@ -4850,7 +4866,7 @@
   },
   {
     "name": "Vietnamese Eggplant with Spicy Sauce",
-    "description": "I got this recipe from a cooking class in Hoi An, Vietnam. Such a flavorful and easy way to prepare eggplant. Now this is a family favorite! Serve garnished with green onion and basil.",
+    "description": "I got this recipe from a cooking class in Hoi An, Vietnam. Such a flavorful and easy way to prepare eggplant. Now this is a family favorite! Serve garnished with green onions and basil.",
     "ingredients": [
       {
         "name": "vegetable oil",
@@ -4865,7 +4881,7 @@
         "quantity": "1 tablespoon"
       },
       {
-        "name": "green onion",
+        "name": "green onions",
         "quantity": "1 tablespoon"
       },
       {
@@ -4999,83 +5015,5 @@
     "time": "15 mins",
     "cuisine": "Vietnamese",
     "image": "https://www.allrecipes.com/thmb/KdV2yI_zam868zuNfUd0xwBH_1w=/282x188/filters:no_upscale():max_bytes(150000):strip_icc():focal(1124x0:1126x2):format(webp)/6864922-5c1faae2a8074971b50c660fdfb83927.jpg"
-  },
-  {
-    "name": "Instant Pot® Pho",
-    "description": "Pho in the Instant Pot® takes only 2 1/2 hours versus a whole day of cooking and simmering! Serve with greens, bean sprouts, cilantro, Thai basil. Garnish with hoisin sauce, Sriracha, and quartered limes.",
-    "ingredients": [
-      {
-        "name": "oxtail",
-        "quantity": "3 pounds"
-      },
-      {
-        "name": "coriander seeds",
-        "quantity": "1 teaspoon"
-      },
-      {
-        "name": "fennel seeds",
-        "quantity": "1 teaspoon"
-      },
-      {
-        "name": "water",
-        "quantity": "6 cups"
-      },
-      {
-        "name": "fish sauce",
-        "quantity": "¼ cup"
-      },
-      {
-        "name": "white sugar",
-        "quantity": "1 ½ tablespoons"
-      },
-      {
-        "name": "salt",
-        "quantity": "1 teaspoon"
-      }
-    ],
-    "time": "15 mins",
-    "cuisine": "Vietnamese",
-    "image": "https://www.allrecipes.com/thmb/OY66ONV12WUyibYjqBszoDJnz0g=/282x188/filters:no_upscale():max_bytes(150000):strip_icc():focal(1124x0:1126x2):format(webp)/8078379-8ef59fd927fd4abcb385bc35cb5dba8f.jpg"
-  },
-  {
-    "name": "Vietnamese Grilled Pork Skewers",
-    "description": "For this dish, we need to prepare two things (1) the grilled pork, and (2) the dipping sauce.",
-    "ingredients": [
-      {
-        "name": "pork belly",
-        "quantity": "1 pound"
-      },
-      {
-        "name": "fish sauce",
-        "quantity": "3 tablespoons"
-      },
-      {
-        "name": "garlic,",
-        "quantity": "3 cloves"
-      },
-      {
-        "name": "monosodium glutamate",
-        "quantity": "1 teaspoon"
-      },
-      {
-        "name": "white sugar",
-        "quantity": "1 teaspoon"
-      },
-      {
-        "name": "Chinese five-spice powder",
-        "quantity": "1 teaspoon"
-      }
-    ],
-    "time": "1 hr",
-    "cuisine": "Vietnamese",
-    "image": "https://www.allrecipes.com/thmb/smxLXrrDNo_seOXm51k0fiBfoJ4=/282x188/filters:no_upscale():max_bytes(150000):strip_icc():focal(1538x0:1540x2):format(webp)/4574138-a882ec2ebf2f40439524a82029693174.jpg"
-  },
-  {
-    "name": "Goi Ga (Vietnamese Chicken and Cabbage Salad)",
-    "description": "Crisp, fresh, and delicious! The key to a good plate of goi ga is tossing the shredded chicken in a balance of dressing and fresh vegetables and herbs. This is a taste of summer - right to your plate.",
-    "ingredients": [],
-    "time": "2 hrs 20 mins",
-    "cuisine": "Vietnamese",
-    "image": "https://www.allrecipes.com/thmb/XRTbwn_QQoPV88ExBuYuD663vN0=/282x188/filters:no_upscale():max_bytes(150000):strip_icc():focal(124x0:126x2):format(webp)/288032-6f971411c2474fcea1cca74b91ae5553.jpg"
   }
 ]

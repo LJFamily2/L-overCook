@@ -1,0 +1,138 @@
+[
+    {
+        "image": "https://www.supercook.com/statics/sicons/All%20cuisines.png",
+        "name": "Pantry Essentials"
+    },
+    {
+        "image": "https://www.supercook.com/statics/sicons/vegetables.png",
+        "name": "Vegetables & Greens"
+    },
+    {
+        "image": "https://www.supercook.com/statics/sicons/mushrooms.png",
+        "name": "Mushrooms"
+    },
+    {
+        "image": "https://www.supercook.com/statics/sicons/fruits.png",
+        "name": "Fruits"
+    },
+    {
+        "image": "https://www.supercook.com/statics/sicons/berries.png",
+        "name": "Berries"
+    },
+    {
+        "image": "https://www.supercook.com/statics/sicons/seeds.png",
+        "name": "Nuts & Seeds"
+    },
+    {
+        "image": "https://www.supercook.com/statics/sicons/cheese.png",
+        "name": "Cheeses"
+    },
+    {
+        "image": "https://www.supercook.com/statics/sicons/dairy_no_cheese.png",
+        "name": "Dairy & Eggs"
+    },
+    {
+        "image": "https://www.supercook.com/statics/sicons/lactose_free.png",
+        "name": "Dairy-Free & Meat Substitutes"
+    },
+    {
+        "image": "https://www.supercook.com/statics/sicons/meats.png",
+        "name": "Meats"
+    },
+    {
+        "image": "https://www.supercook.com/statics/sicons/game_and_fowl.png",
+        "name": "Poultry"
+    },
+    {
+        "image": "https://www.supercook.com/statics/sicons/fish.png",
+        "name": "Fish"
+    },
+    {
+        "image": "https://www.supercook.com/statics/sicons/seafood.png",
+        "name": "Seafood"
+    },
+    {
+        "image": "https://www.supercook.com/statics/sicons/spices.png",
+        "name": "Herbs & Spices"
+    },
+    {
+        "image": "https://www.supercook.com/statics/sicons/sugar_and_sweeteners.png",
+        "name": "Sugar & Sweeteners"
+    },
+    {
+        "image": "https://www.supercook.com/statics/sicons/seasonings.png",
+        "name": "Seasonings & Spice Blends"
+    },
+    {
+        "image": "https://www.supercook.com/statics/sicons/baking_flours.png",
+        "name": "Baking"
+    },
+    {
+        "image": "https://www.supercook.com/statics/sicons/baking_and_grains.png",
+        "name": "Pre-Made Doughs & Wrappers"
+    },
+    {
+        "image": "https://www.supercook.com/statics/sicons/porridge.png",
+        "name": "Grains & Cereals"
+    },
+    {
+        "image": "https://www.supercook.com/statics/sicons/Legumes.png",
+        "name": "Legumes"
+    },
+    {
+        "image": "https://www.supercook.com/statics/sicons/past.png",
+        "name": "Pasta"
+    },
+    {
+        "image": "https://www.supercook.com/statics/sicons/sandwiches.png",
+        "name": "Bread & Salty Snacks"
+    },
+    {
+        "image": "https://www.supercook.com/statics/sicons/oils.png",
+        "name": "Oils & Fats"
+    },
+    {
+        "image": "https://www.supercook.com/statics/sicons/salads.png",
+        "name": "Dressings & Vinegars"
+    },
+    {
+        "image": "https://www.supercook.com/statics/sicons/condiments.png",
+        "name": "Condiments"
+    },
+    {
+        "image": "https://www.supercook.com/statics/sicons/canned_veggies.png",
+        "name": "Canned Food"
+    },
+    {
+        "image": "https://www.supercook.com/statics/sicons/sauces.png",
+        "name": "Sauces, Spreads & Dips"
+    },
+    {
+        "image": "https://www.supercook.com/statics/sicons/soups_and_stews.png",
+        "name": "Soups, Stews & Stocks"
+    },
+    {
+        "image": "https://www.supercook.com/statics/sicons/desserts_and_snacks.png",
+        "name": "Desserts & Sweet Snacks"
+    },
+    {
+        "image": "https://www.supercook.com/statics/sicons/alcohol.png",
+        "name": "Wine, Beer & Spirits"
+    },
+    {
+        "image": "https://www.supercook.com/statics/sicons/beverages.png",
+        "name": "Beverages"
+    },
+    {
+        "image": "https://www.supercook.com/statics/sicons/supplements.png",
+        "name": "Supplements & Extracts"
+    },
+    {
+        "image": "",
+        "name": "Liquid"
+    },
+    {
+        "image": "",
+        "name": "Others"
+    }
+]
