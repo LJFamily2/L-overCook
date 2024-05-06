@@ -227,3 +227,10 @@
     align-items: center;
     gap: 10px;
 }
+
+@media (max-width: 520px) {
+    .profile-information {
+        width: 90%;
+        padding: 20px 20px;
+    }
+}
