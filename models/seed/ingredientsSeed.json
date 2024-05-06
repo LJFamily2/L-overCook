@@ -1,1694 +1,1682 @@
 [
   {
     "name": "olive oil",
-    "category": "N/A"
+    "category": "Oils & Fats"
   },
   {
     "name": "garlic",
-    "category": "N/A"
+    "category": "Vegetables & Greens"
   },
   {
     "name": "chicken wings",
-    "category": "N/A"
+    "category": "Poultry"
   },
   {
     "name": "fish sauce",
-    "category": "N/A"
+    "category": "Condiments"
   },
   {
     "name": "chicken broth",
-    "category": "N/A"
+    "category": "Soups, Stews & Stocks"
   },
   {
     "name": "glutinous sweet rice",
-    "category": "N/A"
+    "category": "Grains & Cereals"
   },
   {
     "name": "vegetable oil",
-    "category": "N/A"
+    "category": "Oils & Fats"
   },
   {
     "name": "chicken breast",
-    "category": "N/A"
+    "category": "Poultry"
   },
   {
     "name": "soy sauce",
-    "category": "N/A"
+    "category": "Condiments"
   },
   {
     "name": "cooking oil",
-    "category": "N/A"
+    "category": "Oils & Fats"
   },
   {
-    "name": "chicken legs and thighs",
-    "category": "N/A"
-  },
-  {
-    "name": "low sodium soy sauce",
-    "category": "N/A"
-  },
-  {
-    "name": "white vinegar",
-    "category": "N/A"
-  },
-  {
-    "name": "garlic powder",
-    "category": "N/A"
-  },
-  {
-    "name": "black pepper",
-    "category": "N/A"
-  },
-  {
-    "name": "red cabbage",
-    "category": "N/A"
-  },
-  {
-    "name": "spiced cane vinegar",
-    "category": "N/A"
-  },
-  {
-    "name": "white sugar",
-    "category": "N/A"
-  },
-  {
-    "name": "whole coriander seeds",
-    "category": "N/A"
-  },
-  {
-    "name": "ground black pepper",
-    "category": "N/A"
-  },
-  {
-    "name": "kosher salt",
-    "category": "N/A"
-  },
-  {
-    "name": "pork loin",
-    "category": "N/A"
-  },
-  {
-    "name": "prawns",
-    "category": "N/A"
-  },
-  {
-    "name": "zucchini",
-    "category": "N/A"
-  },
-  {
-    "name": "fresh okra",
-    "category": "N/A"
-  },
-  {
-    "name": "fresh green beans",
-    "category": "N/A"
-  },
-  {
-    "name": "eggplant",
-    "category": "N/A"
-  },
-  {
-    "name": "salt",
-    "category": "N/A"
-  },
-  {
-    "name": "bone-in pork chops",
-    "category": "N/A"
-  },
-  {
-    "name": "water, more",
-    "category": "N/A"
-  },
-  {
-    "name": "ground pork",
-    "category": "N/A"
-  },
-  {
-    "name": "ground beef",
-    "category": "N/A"
-  },
-  {
-    "name": "water",
-    "category": "N/A"
-  },
-  {
-    "name": "yuca",
-    "category": "N/A"
-  },
-  {
-    "name": "Italian hot sausage links",
-    "category": "N/A"
-  },
-  {
-    "name": "green onions",
-    "category": "N/A"
-  },
-  {
-    "name": "carrots",
-    "category": "N/A"
-  },
-  {
-    "name": "water chestnuts",
-    "category": "N/A"
-  },
-  {
-    "name": "onions",
-    "category": "N/A"
-  },
-  {
-    "name": "ground ginger",
-    "category": "N/A"
-  },
-  {
-    "name": "New York strip steak",
-    "category": "N/A"
-  },
-  {
-    "name": "cornstarch",
-    "category": "N/A"
-  },
-  {
-    "name": "fresh green papaya",
-    "category": "N/A"
-  },
-  {
-    "name": "paprika",
-    "category": "N/A"
-  },
-  {
-    "name": "onion powder",
-    "category": "N/A"
-  },
-  {
-    "name": "dried oregano",
-    "category": "N/A"
-  },
-  {
-    "name": "ground cumin",
-    "category": "N/A"
-  },
-  {
-    "name": "chili powder",
-    "category": "N/A"
-  },
-  {
-    "name": "all-purpose flour",
-    "category": "N/A"
-  },
-  {
-    "name": "butter",
-    "category": "N/A"
-  },
-  {
-    "name": "squid",
-    "category": "N/A"
-  },
-  {
-    "name": "canola oil",
-    "category": "N/A"
-  },
-  {
-    "name": "fresh ginger",
-    "category": "N/A"
-  },
-  {
-    "name": "bone-in goat",
-    "category": "N/A"
-  },
-  {
-    "name": "vinegar",
-    "category": "N/A"
-  },
-  {
-    "name": "tomato sauce",
-    "category": "N/A"
-  },
-  {
-    "name": "beef stock",
-    "category": "N/A"
-  },
-  {
-    "name": "green peas",
-    "category": "N/A"
-  },
-  {
-    "name": "pepper",
-    "category": "N/A"
-  },
-  {
-    "name": "pork belly",
-    "category": "N/A"
-  },
-  {
-    "name": "oil",
-    "category": "N/A"
-  },
-  {
-    "name": "glutinous rice flour",
-    "category": "N/A"
-  },
-  {
-    "name": "water,",
-    "category": "N/A"
-  },
-  {
-    "name": "raisins",
-    "category": "N/A"
-  },
-  {
-    "name": "cake flour",
-    "category": "N/A"
-  },
-  {
-    "name": "baking powder",
-    "category": "N/A"
-  },
-  {
-    "name": "ube",
-    "category": "N/A"
-  },
-  {
-    "name": "milk",
-    "category": "N/A"
-  },
-  {
-    "name": "vanilla extract",
-    "category": "N/A"
-  },
-  {
-    "name": "corn syrup",
-    "category": "N/A"
-  },
-  {
-    "name": "cream of tartar",
-    "category": "N/A"
-  },
-  {
-    "name": "onion",
-    "category": "N/A"
-  },
-  {
-    "name": "green bell pepper",
-    "category": "N/A"
-  },
-  {
-    "name": "carrot",
-    "category": "N/A"
-  },
-  {
-    "name": "milkfish",
-    "category": "N/A"
-  },
-  {
-    "name": "watercress leaves and stems",
-    "category": "N/A"
-  },
-  {
-    "name": "tamarind powder",
-    "category": "N/A"
-  },
-  {
-    "name": "lukewarm water",
-    "category": "N/A"
-  },
-  {
-    "name": "light coconut milk",
-    "category": "N/A"
-  },
-  {
-    "name": "cocoa powder",
-    "category": "N/A"
-  },
-  {
-    "name": "thick coconut milk",
-    "category": "N/A"
-  },
-  {
-    "name": "beef short ribs",
-    "category": "N/A"
-  },
-  {
-    "name": "black peppercorns",
-    "category": "N/A"
-  },
-  {
-    "name": "fresh lemon or lime juice",
-    "category": "N/A"
-  },
-  {
-    "name": "active dry yeast",
-    "category": "N/A"
-  },
-  {
-    "name": "rice flour",
-    "category": "N/A"
-  },
-  {
-    "name": "solid vegetable shortening",
-    "category": "N/A"
-  },
-  {
-    "name": "chicken",
-    "category": "N/A"
-  },
-  {
-    "name": "green onion",
-    "category": "N/A"
-  },
-  {
-    "name": "rice vinegar",
-    "category": "N/A"
-  },
-  {
-    "name": "ketchup",
-    "category": "N/A"
-  },
-  {
-    "name": "brown sugar",
-    "category": "N/A"
-  },
-  {
-    "name": "sweet rice flour",
-    "category": "N/A"
-  },
-  {
-    "name": "packed brown sugar",
-    "category": "N/A"
-  },
-  {
-    "name": "pork spareribs",
-    "category": "N/A"
-  },
-  {
-    "name": "honey",
-    "category": "N/A"
-  },
-  {
-    "name": "Worcestershire sauce",
-    "category": "N/A"
-  },
-  {
-    "name": "lemon juice",
-    "category": "N/A"
-  },
-  {
-    "name": "bone-in chicken thighs",
-    "category": "N/A"
-  },
-  {
-    "name": "chicken bouillon granules",
-    "category": "N/A"
-  },
-  {
-    "name": "evaporated milk",
-    "category": "N/A"
-  },
-  {
-    "name": "sugar",
-    "category": "N/A"
-  },
-  {
-    "name": "miso paste",
-    "category": "N/A"
-  },
-  {
-    "name": "patis",
-    "category": "N/A"
-  },
-  {
-    "name": "red snapper fillets",
-    "category": "N/A"
-  },
-  {
-    "name": "kalamansi juice",
-    "category": "N/A"
-  },
-  {
-    "name": "tomatoes",
-    "category": "N/A"
-  },
-  {
-    "name": "white rice",
-    "category": "N/A"
-  },
-  {
-    "name": "garlic salt",
-    "category": "N/A"
-  },
-  {
-    "name": "distilled white vinegar",
-    "category": "N/A"
+    "name": "chicken legs",
+    "category": "Meats"
   },
   {
     "name": "chicken thighs",
-    "category": "N/A"
+    "category": "Meats"
+  },
+  {
+    "name": "low sodium soy sauce",
+    "category": "Condiments"
+  },
+  {
+    "name": "white vinegar",
+    "category": "Dressings & Vinegars"
+  },
+  {
+    "name": "garlic powder",
+    "category": "Herbs & Spices"
+  },
+  {
+    "name": "black pepper",
+    "category": "Herbs & Spices"
+  },
+  {
+    "name": "red cabbage",
+    "category": "Vegetables & Greens"
+  },
+  {
+    "name": "spiced cane vinegar",
+    "category": "Condiments"
+  },
+  {
+    "name": "white sugar",
+    "category": "Sugar & Sweeteners"
+  },
+  {
+    "name": "whole coriander seeds",
+    "category": "Herbs & Spices"
+  },
+  {
+    "name": "ground black pepper",
+    "category": "Herbs & Spices"
+  },
+  {
+    "name": "kosher salt",
+    "category": "Seasonings & Spice Blends"
+  },
+  {
+    "name": "pork loin",
+    "category": "Meats"
+  },
+  {
+    "name": "prawns",
+    "category": "Seafood"
+  },
+  {
+    "name": "zucchini",
+    "category": "Vegetables & Greens"
+  },
+  {
+    "name": "fresh okra",
+    "category": "Vegetables & Greens"
+  },
+  {
+    "name": "fresh green beans",
+    "category": "Vegetables & Greens"
+  },
+  {
+    "name": "eggplant",
+    "category": "Vegetables & Greens"
+  },
+  {
+    "name": "salt",
+    "category": "Seasonings & Spice Blends"
+  },
+  {
+    "name": "bone-in pork chops",
+    "category": "Meats"
+  },
+  {
+    "name": "water",
+    "category": "Liquid"
+  },
+  {
+    "name": "ground pork",
+    "category": "Meats"
+  },
+  {
+    "name": "ground beef",
+    "category": "Meats"
+  },
+  {
+    "name": "yuca",
+    "category": "Vegetables & Greens"
+  },
+  {
+    "name": "Italian hot sausage links",
+    "category": "Meats"
+  },
+  {
+    "name": "green onions",
+    "category": "Vegetables & Greens"
+  },
+  {
+    "name": "carrots",
+    "category": "Vegetables & Greens"
+  },
+  {
+    "name": "water chestnuts",
+    "category": "Vegetables & Greens"
+  },
+  {
+    "name": "onions",
+    "category": "Vegetables & Greens"
+  },
+  {
+    "name": "ground ginger",
+    "category": "Herbs & Spices"
+  },
+  {
+    "name": "New York strip steak",
+    "category": "Meats"
+  },
+  {
+    "name": "cornstarch",
+    "category": "Baking"
+  },
+  {
+    "name": "fresh green papaya",
+    "category": "Vegetables & Greens"
+  },
+  {
+    "name": "paprika",
+    "category": "Herbs & Spices"
+  },
+  {
+    "name": "onion powder",
+    "category": "Herbs & Spices"
+  },
+  {
+    "name": "dried oregano",
+    "category": "Herbs & Spices"
+  },
+  {
+    "name": "ground cumin",
+    "category": "Herbs & Spices"
+  },
+  {
+    "name": "chili powder",
+    "category": "Herbs & Spices"
+  },
+  {
+    "name": "all-purpose flour",
+    "category": "Baking"
+  },
+  {
+    "name": "butter",
+    "category": "Dairy & Eggs"
+  },
+  {
+    "name": "squid",
+    "category": "Seafood"
+  },
+  {
+    "name": "canola oil",
+    "category": "Oils & Fats"
+  },
+  {
+    "name": "fresh ginger",
+    "category": "Herbs & Spices"
+  },
+  {
+    "name": "bone-in goat",
+    "category": "Meats"
+  },
+  {
+    "name": "vinegar",
+    "category": "Dressings & Vinegars"
+  },
+  {
+    "name": "tomato sauce",
+    "category": "Sauces, Spreads & Dips"
+  },
+  {
+    "name": "beef stock",
+    "category": "Soups, Stews & Stocks"
+  },
+  {
+    "name": "green peas",
+    "category": "Legumes"
+  },
+  {
+    "name": "pepper",
+    "category": "Herbs & Spices"
+  },
+  {
+    "name": "pork belly",
+    "category": "Meats"
+  },
+  {
+    "name": "oil",
+    "category": "Oils & Fats"
+  },
+  {
+    "name": "glutinous rice flour",
+    "category": "Baking"
+  },
+  {
+    "name": "raisins",
+    "category": "Fruits"
+  },
+  {
+    "name": "cake flour",
+    "category": "Baking"
+  },
+  {
+    "name": "baking powder",
+    "category": "Baking"
+  },
+  {
+    "name": "ube",
+    "category": "Vegetables & Greens"
+  },
+  {
+    "name": "milk",
+    "category": "Dairy & Eggs"
+  },
+  {
+    "name": "vanilla extract",
+    "category": "Baking"
+  },
+  {
+    "name": "corn syrup",
+    "category": "Sugar & Sweeteners"
+  },
+  {
+    "name": "cream of tartar",
+    "category": "Baking"
+  },
+  {
+    "name": "green bell pepper",
+    "category": "Vegetables & Greens"
+  },
+  {
+    "name": "carrot",
+    "category": "Vegetables & Greens"
+  },
+  {
+    "name": "milkfish",
+    "category": "Seafood"
+  },
+  {
+    "name": "watercress leaves",
+    "category": "Vegetables & Greens"
+  },
+  {
+    "name": "watercress stems",
+    "category": "Vegetables & Greens"
+  },
+  {
+    "name": "tamarind powder",
+    "category": "Herbs & Spices"
+  },
+  {
+    "name": "lukewarm water",
+    "category": "Liquid"
+  },
+  {
+    "name": "light coconut milk",
+    "category": "Canned Food"
+  },
+  {
+    "name": "cocoa powder",
+    "category": "Baking"
+  },
+  {
+    "name": "thick coconut milk",
+    "category": "Canned Food"
+  },
+  {
+    "name": "beef short ribs",
+    "category": "Meats"
+  },
+  {
+    "name": "black peppercorns",
+    "category": "Herbs & Spices"
+  },
+  {
+    "name": "active dry yeast",
+    "category": "Baking"
+  },
+  {
+    "name": "rice flour",
+    "category": "Baking"
+  },
+  {
+    "name": "solid vegetable shortening",
+    "category": "Oils & Fats"
+  },
+  {
+    "name": "chicken",
+    "category": "Meats"
+  },
+  {
+    "name": "green onion",
+    "category": "Vegetables & Greens"
+  },
+  {
+    "name": "rice vinegar",
+    "category": "Dressings & Vinegars"
+  },
+  {
+    "name": "ketchup",
+    "category": "Condiments"
+  },
+  {
+    "name": "brown sugar",
+    "category": "Sugar & Sweeteners"
+  },
+  {
+    "name": "sweet rice flour",
+    "category": "Baking"
+  },
+  {
+    "name": "packed brown sugar",
+    "category": "Sugar & Sweeteners"
+  },
+  {
+    "name": "pork spareribs",
+    "category": "Meats"
+  },
+  {
+    "name": "honey",
+    "category": "Sugar & Sweeteners"
+  },
+  {
+    "name": "Worcestershire sauce",
+    "category": "Condiments"
+  },
+  {
+    "name": "lemon juice",
+    "category": "Condiments"
+  },
+  {
+    "name": "bone-in chicken thighs",
+    "category": "Meats"
+  },
+  {
+    "name": "chicken bouillon granules",
+    "category": "Seasonings & Spice Blends"
+  },
+  {
+    "name": "evaporated milk",
+    "category": "Dairy & Eggs"
+  },
+  {
+    "name": "sugar",
+    "category": "Sugar & Sweeteners"
+  },
+  {
+    "name": "miso paste",
+    "category": "Soups, Stews & Stocks"
+  },
+  {
+    "name": "patis",
+    "category": "Condiments"
+  },
+  {
+    "name": "red snapper fillets",
+    "category": "Fish"
+  },
+  {
+    "name": "kalamansi juice",
+    "category": "Beverages"
+  },
+  {
+    "name": "tomatoes",
+    "category": "Vegetables & Greens"
+  },
+  {
+    "name": "white rice",
+    "category": "Grains & Cereals"
+  },
+  {
+    "name": "garlic salt",
+    "category": "Seasonings & Spice Blends"
+  },
+  {
+    "name": "distilled white vinegar",
+    "category": "Dressings & Vinegars"
+  },
+  {
+    "name": "chicken thighs",
+    "category": "Poultry"
   },
   {
     "name": "scallions",
-    "category": "N/A"
+    "category": "Vegetables & Greens"
   },
   {
-    "name": "chicken legs, thighs, and wings",
-    "category": "N/A"
+    "name": "chicken legs",
+    "category": "Poultry"
+  },
+  {
+    "name": "chicken thighs",
+    "category": "Poultry"
+  },
+  {
+    "name": "chicken wings",
+    "category": "Poultry"
   },
   {
     "name": "orange peel",
-    "category": "N/A"
+    "category": "Herbs & Spices"
   },
   {
     "name": "orange juice",
-    "category": "N/A"
+    "category": "Beverages"
   },
   {
     "name": "whole milkfish",
-    "category": "N/A"
+    "category": "Fish"
   },
   {
     "name": "glutinous white rice",
-    "category": "N/A"
+    "category": "Grains & Cereals"
   },
   {
     "name": "cold water",
-    "category": "N/A"
+    "category": "Liquid"
   },
   {
     "name": "coconut preserves",
-    "category": "N/A"
+    "category": "Canned Food"
   },
   {
     "name": "ginger",
-    "category": "N/A"
+    "category": "Herbs & Spices"
   },
   {
     "name": "annatto powder",
-    "category": "N/A"
+    "category": "Herbs & Spices"
   },
   {
     "name": "spring onions",
-    "category": "N/A"
+    "category": "Vegetables & Greens"
   },
   {
     "name": "pig's feet",
-    "category": "N/A"
+    "category": "Meats"
   },
   {
     "name": "whole black peppercorns",
-    "category": "N/A"
+    "category": "Herbs & Spices"
   },
   {
     "name": "tilapia fillets",
-    "category": "N/A"
+    "category": "Fish"
   },
   {
     "name": "daikon radish",
-    "category": "N/A"
+    "category": "Vegetables & Greens"
   },
   {
     "name": "tamarind paste",
-    "category": "N/A"
+    "category": "Condiments"
   },
   {
     "name": "lime juice",
-    "category": "N/A"
+    "category": "Liquid"
   },
   {
     "name": "beef steak",
-    "category": "N/A"
+    "category": "Meats"
   },
   {
-    "name": "vegetable oil,",
-    "category": "N/A"
+    "name": "vegetable oil",
+    "category": "Oils & Fats"
   },
   {
     "name": "coconut",
-    "category": "N/A"
+    "category": "Fruits"
   },
   {
     "name": "coconut milk",
-    "category": "N/A"
+    "category": "Dairy-Free & Meat Substitutes"
   },
   {
     "name": "ground pepper",
-    "category": "N/A"
+    "category": "Herbs & Spices"
   },
   {
     "name": "fine salt",
-    "category": "N/A"
+    "category": "Seasonings & Spice Blends"
   },
   {
     "name": "curing salt",
-    "category": "N/A"
+    "category": "Seasonings & Spice Blends"
   },
   {
     "name": "coarse ground pork back fat",
-    "category": "N/A"
+    "category": "Meats"
   },
   {
     "name": "raw mung beans",
-    "category": "N/A"
+    "category": "Legumes"
   },
   {
     "name": "boneless pork loin",
-    "category": "N/A"
+    "category": "Meats"
   },
   {
     "name": "fresh spinach leaves",
-    "category": "N/A"
+    "category": "Vegetables & Greens"
   },
   {
     "name": "soy-based liquid seasoning",
-    "category": "N/A"
+    "category": "Condiments"
   },
   {
     "name": "sesame oil",
-    "category": "N/A"
+    "category": "Oils & Fats"
   },
   {
     "name": "chicken stock",
-    "category": "N/A"
+    "category": "Soups, Stews & Stocks"
   },
   {
     "name": "warm water",
-    "category": "N/A"
+    "category": "Liquid"
   },
   {
     "name": "beef stew",
-    "category": "N/A"
+    "category": "Meats"
   },
   {
     "name": "unsweetened pineapple juice",
-    "category": "N/A"
+    "category": "Beverages"
   },
   {
     "name": "tomato paste",
-    "category": "N/A"
+    "category": "Sauces, Spreads & Dips"
   },
   {
     "name": "miniature cocktail sausages",
-    "category": "N/A"
+    "category": "Meats"
   },
   {
     "name": "hot pepper sauce",
-    "category": "N/A"
-  },
-  {
-    "name": "boneless, skinless chicken thighs",
-    "category": "N/A"
+    "category": "Condiments"
   },
   {
     "name": "apple cider vinegar",
-    "category": "N/A"
+    "category": "Dressings & Vinegars"
   },
   {
     "name": "pickling spice",
-    "category": "N/A"
+    "category": "Seasonings & Spice Blends"
   },
   {
     "name": "skinless, boneless chicken thighs",
-    "category": "N/A"
+    "category": "Poultry"
   },
   {
     "name": "boneless pork loin roast",
-    "category": "N/A"
+    "category": "Meats"
   },
   {
     "name": "crunchy peanut butter",
-    "category": "N/A"
+    "category": "Condiments"
   },
   {
     "name": "dark soy sauce",
-    "category": "N/A"
+    "category": "Condiments"
   },
   {
     "name": "red pepper flakes",
-    "category": "N/A"
+    "category": "Seasonings & Spice Blends"
   },
   {
     "name": "long grain rice",
-    "category": "N/A"
+    "category": "Grains & Cereals"
   },
   {
     "name": "oyster sauce",
-    "category": "N/A"
+    "category": "Condiments"
   },
   {
     "name": "dried basil",
-    "category": "N/A"
+    "category": "Herbs & Spices"
   },
   {
     "name": "coriander seeds",
-    "category": "N/A"
+    "category": "Herbs & Spices"
   },
   {
     "name": "fennel seeds",
-    "category": "N/A"
+    "category": "Herbs & Spices"
   },
   {
     "name": "cumin seeds",
-    "category": "N/A"
+    "category": "Nuts & Seeds"
   },
   {
     "name": "ground turmeric",
-    "category": "N/A"
+    "category": "Nuts & Seeds"
   },
   {
     "name": "dried red chile peppers",
-    "category": "N/A"
+    "category": "Herbs & Spices"
   },
   {
     "name": "sunflower seed oil",
-    "category": "N/A"
+    "category": "Oils & Fats"
   },
   {
     "name": "serrano chiles",
-    "category": "N/A"
+    "category": "Herbs & Spices"
   },
   {
     "name": "fresh lime juice",
-    "category": "N/A"
+    "category": "Liquid"
   },
   {
     "name": "belacan shrimp paste",
-    "category": "N/A"
+    "category": "Condiments"
   },
   {
     "name": "tamarind juice",
-    "category": "N/A"
+    "category": "Beverages"
   },
   {
     "name": "goat stew",
-    "category": "N/A"
+    "category": "Meats"
   },
   {
     "name": "coconut oil",
-    "category": "N/A"
+    "category": "Oils & Fats"
   },
   {
     "name": "whole cloves",
-    "category": "N/A"
+    "category": "Herbs & Spices"
   },
   {
     "name": "curry leaves",
-    "category": "N/A"
+    "category": "Herbs & Spices"
   },
   {
     "name": "ginger-garlic paste",
-    "category": "N/A"
+    "category": "Condiments"
   },
   {
     "name": "garam masala",
-    "category": "N/A"
+    "category": "Seasonings & Spice Blends"
   },
   {
     "name": "curry powder",
-    "category": "N/A"
+    "category": "Seasonings & Spice Blends"
   },
   {
     "name": "ground paprika",
-    "category": "N/A"
+    "category": "Seasonings & Spice Blends"
   },
   {
     "name": "fresh cilantro",
-    "category": "N/A"
+    "category": "Herbs & Spices"
   },
   {
     "name": "light brown sugar",
-    "category": "N/A"
+    "category": "Sugar & Sweeteners"
   },
   {
     "name": "ancho chili powder",
-    "category": "N/A"
+    "category": "Seasonings & Spice Blends"
   },
   {
     "name": "ground coriander",
-    "category": "N/A"
+    "category": "Seasonings & Spice Blends"
   },
   {
     "name": "chipotle chili powder",
-    "category": "N/A"
+    "category": "Seasonings & Spice Blends"
   },
   {
     "name": "cayenne pepper",
-    "category": "N/A"
+    "category": "Seasonings & Spice Blends"
   },
   {
     "name": "skinless, boneless chicken breast",
-    "category": "N/A"
+    "category": "Meats"
   },
   {
     "name": "belacan",
-    "category": "N/A"
+    "category": "Condiments"
   },
   {
     "name": "light soy sauce",
-    "category": "N/A"
+    "category": "Condiments"
   },
   {
     "name": "fermented black beans",
-    "category": "N/A"
+    "category": "Legumes"
   },
   {
     "name": "thick soy sauce",
-    "category": "N/A"
+    "category": "Condiments"
   },
   {
     "name": "bread flour",
-    "category": "N/A"
+    "category": "Baking"
   },
   {
     "name": "unsalted butter",
-    "category": "N/A"
+    "category": "Dairy & Eggs"
   },
   {
     "name": "puréed fresh durian",
-    "category": "N/A"
+    "category": "Fruits"
   },
   {
     "name": "sour cream",
-    "category": "N/A"
+    "category": "Dairy & Eggs"
   },
   {
-    "name": "durian or banana extract",
-    "category": "N/A"
+    "name": "durian",
+    "category": "Fruits"
   },
   {
     "name": "grapeseed oil",
-    "category": "N/A"
+    "category": "Oils & Fats"
   },
   {
     "name": "hot curry powder",
-    "category": "N/A"
+    "category": "Seasonings & Spice Blends"
   },
   {
     "name": "red curry paste",
-    "category": "N/A"
+    "category": "Condiments"
   },
   {
     "name": "Chinese five-spice powder",
-    "category": "N/A"
+    "category": "Condiments"
   },
   {
     "name": "sriracha sauce",
-    "category": "N/A"
+    "category": "Condiments"
   },
   {
     "name": "cider vinegar",
-    "category": "N/A"
+    "category": "Dressings & Vinegars"
   },
   {
     "name": "fresh ginger root",
-    "category": "N/A"
+    "category": "Vegetables & Greens"
   },
   {
     "name": "fresh pumpkin",
-    "category": "N/A"
+    "category": "Vegetables & Greens"
   },
   {
     "name": "unsweetened coconut cream",
-    "category": "N/A"
+    "category": "Canned Food"
   },
   {
     "name": "fresh curry leaves",
-    "category": "N/A"
+    "category": "Herbs & Spices"
   },
   {
     "name": "shallots",
-    "category": "N/A"
+    "category": "Vegetables & Greens"
   },
   {
     "name": "curry paste",
-    "category": "N/A"
+    "category": "Condiments"
   },
   {
     "name": "cooking sherry",
-    "category": "N/A"
+    "category": "Wine, Beer & Spirits"
   },
   {
     "name": "creamy peanut butter",
-    "category": "N/A"
+    "category": "Condiments"
   },
   {
     "name": "peanut oil",
-    "category": "N/A"
+    "category": "Oils & Fats"
   },
   {
     "name": "peanut butter",
-    "category": "N/A"
+    "category": "Sauces, Spreads & Dips"
   },
   {
     "name": "yogurt",
-    "category": "N/A"
+    "category": "Dairy & Eggs"
   },
   {
     "name": "almonds",
-    "category": "N/A"
+    "category": "Nuts & Seeds"
   },
   {
     "name": "skinless, boneless chicken breasts",
-    "category": "N/A"
+    "category": "Meats"
   },
   {
     "name": "galangal powder",
-    "category": "N/A"
+    "category": "Herbs & Spices"
   },
   {
     "name": "ground anise seed",
-    "category": "N/A"
+    "category": "Nuts & Seeds"
   },
   {
     "name": "cashews",
-    "category": "N/A"
+    "category": "Nuts & Seeds"
   },
   {
     "name": "firm tofu",
-    "category": "N/A"
+    "category": "Dairy-Free & Meat Substitutes"
   },
   {
     "name": "chile paste",
-    "category": "N/A"
+    "category": "Condiments"
   },
   {
     "name": "fresh bean sprouts",
-    "category": "N/A"
+    "category": "Vegetables & Greens"
   },
   {
     "name": "white onion",
-    "category": "N/A"
+    "category": "Vegetables & Greens"
   },
   {
     "name": "mayonnaise",
-    "category": "N/A"
+    "category": "Dressings & Vinegars"
   },
   {
     "name": "cucumber",
-    "category": "N/A"
+    "category": "Vegetables & Greens"
   },
   {
     "name": "fresh cilantro leaves",
-    "category": "N/A"
+    "category": "Vegetables & Greens"
   },
   {
     "name": "lettuce",
-    "category": "N/A"
+    "category": "Vegetables & Greens"
   },
   {
     "name": "bean sprouts",
-    "category": "N/A"
+    "category": "Legumes"
   },
   {
     "name": "pickled carrots",
-    "category": "N/A"
+    "category": "Vegetables & Greens"
   },
   {
     "name": "diakon radish",
-    "category": "N/A"
+    "category": "Vegetables & Greens"
   },
   {
     "name": "peanuts",
-    "category": "N/A"
+    "category": "Nuts & Seeds"
   },
   {
     "name": "cilantro",
-    "category": "N/A"
+    "category": "Herbs & Spices"
   },
   {
     "name": "Thai basil",
-    "category": "N/A"
+    "category": "Herbs & Spices"
   },
   {
     "name": "fresh mint",
-    "category": "N/A"
+    "category": "Herbs & Spices"
   },
   {
     "name": "ground chicken",
-    "category": "N/A"
+    "category": "Poultry"
   },
   {
     "name": "shrimp",
-    "category": "N/A"
+    "category": "Seafood"
   },
   {
     "name": "hoisin sauce",
-    "category": "N/A"
+    "category": "Sauces, Spreads & Dips"
   },
   {
     "name": "sriracha hot sauce",
-    "category": "N/A"
+    "category": "Condiments"
   },
   {
     "name": "cilantro leaves",
-    "category": "N/A"
+    "category": "Herbs & Spices"
   },
   {
     "name": "peanut sauce",
-    "category": "N/A"
+    "category": "Condiments"
   },
   {
     "name": "watercress",
-    "category": "N/A"
+    "category": "Vegetables & Greens"
   },
   {
     "name": "beef soup bones",
-    "category": "N/A"
+    "category": "Soups, Stews & Stocks"
   },
   {
     "name": "beef oxtail",
-    "category": "N/A"
+    "category": "Meats"
   },
   {
     "name": "dark roast ground coffee beans",
-    "category": "N/A"
+    "category": "Beverages"
   },
   {
     "name": "sweetened condensed milk",
-    "category": "N/A"
+    "category": "Dairy & Eggs"
   },
   {
     "name": "purple daikon radish",
-    "category": "N/A"
+    "category": "Vegetables & Greens"
   },
   {
     "name": "English cucumbers",
-    "category": "N/A"
+    "category": "Vegetables & Greens"
   },
   {
     "name": "vegetable stock",
-    "category": "N/A"
+    "category": "Soups, Stews & Stocks"
   },
   {
     "name": "fresh mint leaves",
-    "category": "N/A"
+    "category": "Herbs & Spices"
   },
   {
     "name": "toasted sesame oil",
-    "category": "N/A"
+    "category": "Oils & Fats"
   },
   {
     "name": "tapioca starch",
-    "category": "N/A"
+    "category": "Baking"
   },
   {
     "name": "beef tenderloin",
-    "category": "N/A"
+    "category": "Meats"
   },
   {
     "name": "bean threads",
-    "category": "N/A"
+    "category": "Pasta"
   },
   {
     "name": "jasmine rice",
-    "category": "N/A"
+    "category": "Grains & Cereals"
   },
   {
     "name": "fresh chives",
-    "category": "N/A"
+    "category": "Herbs & Spices"
   },
   {
     "name": "lemon grass",
-    "category": "N/A"
+    "category": "Herbs & Spices"
   },
   {
     "name": "bok choy",
-    "category": "N/A"
+    "category": "Vegetables & Greens"
   },
   {
     "name": "coriander seed",
-    "category": "N/A"
+    "category": "Nuts & Seeds"
   },
   {
     "name": "turkey",
-    "category": "N/A"
+    "category": "Poultry"
   },
   {
     "name": "fresh basil leaves",
-    "category": "N/A"
+    "category": "Herbs & Spices"
   },
   {
     "name": "chile-garlic sauce",
-    "category": "N/A"
+    "category": "Condiments"
   },
   {
     "name": "sirloin tip",
-    "category": "N/A"
+    "category": "Meats"
   },
   {
     "name": "sirloin tips",
-    "category": "N/A"
+    "category": "Meats"
   },
   {
     "name": "mirin",
-    "category": "N/A"
+    "category": "Wine, Beer & Spirits"
   },
   {
     "name": "tamari sauce",
-    "category": "N/A"
+    "category": "Condiments"
   },
   {
     "name": "chili garlic sauce",
-    "category": "N/A"
+    "category": "Condiments"
   },
   {
     "name": "fresh basil",
-    "category": "N/A"
-  },
-  {
-    "name": "garlic,",
-    "category": "N/A"
+    "category": "Herbs & Spices"
   },
   {
     "name": "five-spice powder",
-    "category": "N/A"
+    "category": "Seasonings & Spice Blends"
   },
   {
     "name": "pork tenderloin",
-    "category": "N/A"
+    "category": "Meats"
   },
   {
     "name": "fresh thick Vietnamese-style rice noodles",
-    "category": "N/A"
+    "category": "Pasta"
   },
   {
     "name": "torn lettuce leaves",
-    "category": "N/A"
+    "category": "Vegetables & Greens"
   },
   {
     "name": "crispy chow mein noodles",
-    "category": "N/A"
+    "category": "Pasta"
   },
   {
     "name": "strong brewed coffee",
-    "category": "N/A"
+    "category": "Beverages"
   },
   {
     "name": "non-dairy creamer",
-    "category": "N/A"
+    "category": "Dairy-Free & Meat Substitutes"
   },
   {
     "name": "hot cocoa mix",
-    "category": "N/A"
+    "category": "Beverages"
   },
   {
     "name": "chicken bones",
-    "category": "N/A"
+    "category": "Poultry"
   },
   {
     "name": "rock sugar",
-    "category": "N/A"
+    "category": "Sugar & Sweeteners"
   },
   {
     "name": "reduced-sodium soy sauce",
-    "category": "N/A"
+    "category": "Condiments"
   },
   {
     "name": "frozen whole green beans",
-    "category": "N/A"
+    "category": "Vegetables & Greens"
   },
   {
     "name": "reduced-sodium beef broth",
-    "category": "N/A"
+    "category": "Soups, Stews & Stocks"
   },
   {
     "name": "fresh Thai basil",
-    "category": "N/A"
+    "category": "Herbs & Spices"
   },
   {
     "name": "lemongrass",
-    "category": "N/A"
+    "category": "Herbs & Spices"
   },
   {
     "name": "dry sherry",
-    "category": "N/A"
+    "category": "Wine, Beer & Spirits"
   },
   {
     "name": "flank steak",
-    "category": "N/A"
+    "category": "Meats"
   },
   {
     "name": "catfish fillets",
-    "category": "N/A"
+    "category": "Fish"
   },
   {
     "name": "sparkling mineral water",
-    "category": "N/A"
-  },
-  {
-    "name": "ice",
-    "category": "N/A"
+    "category": "Liquid"
   },
   {
     "name": "green chile peppers",
-    "category": "N/A"
+    "category": "Vegetables & Greens"
   },
   {
     "name": "dry roasted peanuts",
-    "category": "N/A"
+    "category": "Nuts & Seeds"
   },
   {
     "name": "sesame seeds",
-    "category": "N/A"
+    "category": "Nuts & Seeds"
   },
   {
     "name": "chicken bouillon",
-    "category": "N/A"
+    "category": "Seasonings & Spice Blends"
   },
   {
     "name": "lean ground beef",
-    "category": "N/A"
+    "category": "Meats"
   },
   {
     "name": "lime zest",
-    "category": "N/A"
+    "category": "Herbs & Spices"
   },
   {
     "name": "medium shrimp",
-    "category": "N/A"
+    "category": "Seafood"
   },
   {
     "name": "shallot",
-    "category": "N/A"
+    "category": "Vegetables & Greens"
   },
   {
     "name": "packed light brown sugar",
-    "category": "N/A"
+    "category": "Sugar & Sweeteners"
   },
   {
     "name": "fine bread crumbs",
-    "category": "N/A"
+    "category": "Bread & Salty Snacks"
   },
   {
     "name": "jicama",
-    "category": "N/A"
+    "category": "Vegetables & Greens"
   },
   {
     "name": "lean ground pork",
-    "category": "N/A"
+    "category": "Meats"
   },
   {
     "name": "panko bread crumbs",
-    "category": "N/A"
+    "category": "Bread & Salty Snacks"
   },
   {
     "name": "lemongrass paste",
-    "category": "N/A"
+    "category": "Herbs & Spices"
   },
   {
     "name": "mint",
-    "category": "N/A"
+    "category": "Herbs & Spices"
   },
   {
     "name": "ginger root",
-    "category": "N/A"
+    "category": "Herbs & Spices"
   },
   {
     "name": "fried tofu",
-    "category": "N/A"
+    "category": "Dairy-Free & Meat Substitutes"
   },
   {
     "name": "vegetable broth",
-    "category": "N/A"
+    "category": "Soups, Stews & Stocks"
   },
   {
     "name": "vegetarian fish sauce",
-    "category": "N/A"
+    "category": "Condiments"
   },
   {
     "name": "pork shoulder",
-    "category": "N/A"
+    "category": "Meats"
   },
   {
     "name": "long grain white rice",
-    "category": "N/A"
+    "category": "Grains & Cereals"
   },
   {
     "name": "chile sauce",
-    "category": "N/A"
+    "category": "Condiments"
   },
   {
     "name": "lettuce leaves",
-    "category": "N/A"
+    "category": "Vegetables & Greens"
   },
   {
     "name": "red chile pepper",
-    "category": "N/A"
+    "category": "Vegetables & Greens"
   },
   {
     "name": "egg-free mayonnaise",
-    "category": "N/A"
+    "category": "Dressings & Vinegars"
   },
   {
     "name": "hot strong coffee",
-    "category": "N/A"
+    "category": "Beverages"
   },
   {
     "name": "coconut water",
-    "category": "N/A"
+    "category": "Beverages"
   },
   {
     "name": "maple syrup",
-    "category": "N/A"
+    "category": "Sugar & Sweeteners"
   },
   {
     "name": "oxtail",
-    "category": "N/A"
+    "category": "Meats"
   },
   {
     "name": "monosodium glutamate",
-    "category": "N/A"
+    "category": "Seasonings & Spice Blends"
   },
   {
     "name": "chunky peanut butter",
-    "category": "N/A"
+    "category": "Sauces, Spreads & Dips"
   },
   {
     "name": "beef chuck",
-    "category": "N/A"
+    "category": "Meats"
   },
   {
     "name": "Korean red pepper flakes",
-    "category": "N/A"
+    "category": "Seasonings & Spice Blends"
   },
   {
     "name": "ground cardamom",
-    "category": "N/A"
+    "category": "Herbs & Spices"
   },
   {
     "name": "freshly nutmeg",
-    "category": "N/A"
+    "category": "Herbs & Spices"
   },
   {
     "name": "cold white rice",
-    "category": "N/A"
+    "category": "Grains & Cereals"
   },
   {
     "name": "kecap manis",
-    "category": "N/A"
+    "category": "Condiments"
   },
   {
     "name": "granulated sugar",
-    "category": "N/A"
+    "category": "Sugar & Sweeteners"
   },
   {
     "name": "vanilla powder",
-    "category": "N/A"
+    "category": "Baking"
   },
   {
     "name": "rum flavoring",
-    "category": "N/A"
+    "category": "Wine, Beer & Spirits"
   },
   {
     "name": "cabbage",
-    "category": "N/A"
+    "category": "Vegetables & Greens"
   },
   {
     "name": "broccoli florets",
-    "category": "N/A"
+    "category": "Vegetables & Greens"
   },
   {
     "name": "fresh mushrooms",
-    "category": "N/A"
+    "category": "Mushrooms"
   },
   {
     "name": "sweet soy sauce",
-    "category": "N/A"
+    "category": "Condiments"
   },
   {
     "name": "hot water",
-    "category": "N/A"
+    "category": "Liquid"
   },
   {
     "name": "broccoli",
-    "category": "N/A"
+    "category": "Vegetables & Greens"
   },
   {
     "name": "cauliflower",
-    "category": "N/A"
+    "category": "Vegetables & Greens"
   },
   {
     "name": "ground cinnamon",
-    "category": "N/A"
+    "category": "Herbs & Spices"
   },
   {
     "name": "long-grain white rice",
-    "category": "N/A"
+    "category": "Grains & Cereals"
   },
   {
     "name": "ground nutmeg",
-    "category": "N/A"
+    "category": "Herbs & Spices"
   },
   {
     "name": "meaty oxtail pieces",
-    "category": "N/A"
+    "category": "Meats"
   },
   {
     "name": "low-sodium chicken broth",
-    "category": "N/A"
+    "category": "Soups, Stews & Stocks"
   },
   {
     "name": "smooth peanut butter",
-    "category": "N/A"
+    "category": "Nuts & Seeds"
   },
   {
     "name": "red chile paste",
-    "category": "N/A"
+    "category": "Condiments"
   },
   {
     "name": "Spanish peanuts",
-    "category": "N/A"
+    "category": "Nuts & Seeds"
   },
   {
     "name": "large frozen shrimp",
-    "category": "N/A"
+    "category": "Seafood"
   },
   {
     "name": "sambal oelek",
-    "category": "N/A"
+    "category": "Condiments"
   },
   {
     "name": "sushi rice",
-    "category": "N/A"
+    "category": "Grains & Cereals"
   },
   {
     "name": "sweet chili sauce",
-    "category": "N/A"
+    "category": "Condiments"
   },
   {
     "name": "rice",
-    "category": "N/A"
+    "category": "Grains & Cereals"
   },
   {
     "name": "galangal",
-    "category": "N/A"
+    "category": "Herbs & Spices"
   },
   {
     "name": "white peppercorns",
-    "category": "N/A"
+    "category": "Herbs & Spices"
   },
   {
     "name": "fresh turmeric root",
-    "category": "N/A"
+    "category": "Vegetables & Greens"
   },
   {
     "name": "shrimp paste",
-    "category": "N/A"
+    "category": "Condiments"
   },
   {
     "name": "okra",
-    "category": "N/A"
+    "category": "Vegetables & Greens"
   },
   {
     "name": "shiitake mushrooms",
-    "category": "N/A"
+    "category": "Mushrooms"
   },
   {
     "name": "Thai red curry paste",
-    "category": "N/A"
+    "category": "Seasonings & Spice Blends"
   },
   {
     "name": "hot chile pepper",
-    "category": "N/A"
+    "category": "Vegetables & Greens"
   },
   {
     "name": "ground peanuts",
-    "category": "N/A"
+    "category": "Nuts & Seeds"
   },
   {
     "name": "Thai chilies",
-    "category": "N/A"
+    "category": "Vegetables & Greens"
   },
   {
     "name": "hot rice",
-    "category": "N/A"
+    "category": "Grains & Cereals"
   },
   {
     "name": "fresh shiitake mushrooms",
-    "category": "N/A"
+    "category": "Mushrooms"
   },
   {
     "name": "glutinous sticky white rice",
-    "category": "N/A"
+    "category": "Grains & Cereals"
   },
   {
     "name": "toasted sesame seeds",
-    "category": "N/A"
+    "category": "Nuts & Seeds"
   },
   {
     "name": "potatoes",
-    "category": "N/A"
+    "category": "Vegetables & Greens"
   },
   {
     "name": "boneless, skinless chicken breast",
-    "category": "N/A"
+    "category": "Poultry"
   },
   {
     "name": "white wine vinegar",
-    "category": "N/A"
+    "category": "Dressings & Vinegars"
   },
   {
     "name": "red pepper",
-    "category": "N/A"
+    "category": "Vegetables & Greens"
   },
   {
     "name": "hot chile paste",
-    "category": "N/A"
+    "category": "Condiments"
   },
   {
     "name": "allpurpose flour",
-    "category": "N/A"
+    "category": "Baking"
   },
   {
     "name": "green curry paste",
-    "category": "N/A"
+    "category": "Seasonings & Spice Blends"
   },
   {
     "name": "Panang curry paste",
-    "category": "N/A"
+    "category": "Seasonings & Spice Blends"
   },
   {
     "name": "palm sugar",
-    "category": "N/A"
+    "category": "Sugar & Sweeteners"
   },
   {
     "name": "fresh Thai basil leaves",
-    "category": "N/A"
+    "category": "Herbs & Spices"
   },
   {
     "name": "boneless skinless chicken breasts",
-    "category": "N/A"
+    "category": "Poultry"
   },
   {
     "name": "rice wine vinegar",
-    "category": "N/A"
+    "category": "Dressings & Vinegars"
   },
   {
     "name": "hot sauce",
-    "category": "N/A"
+    "category": "Condiments"
   },
   {
     "name": "bamboo shoots",
-    "category": "N/A"
+    "category": "Vegetables & Greens"
   },
   {
     "name": "pineapple chunks",
-    "category": "N/A"
+    "category": "Fruits"
   },
   {
     "name": "beef top sirloin",
-    "category": "N/A"
+    "category": "Meats"
   },
   {
     "name": "sweet Thai basil",
-    "category": "N/A"
+    "category": "Herbs & Spices"
   },
   {
     "name": "cilantro sprigs",
-    "category": "N/A"
+    "category": "Herbs & Spices"
   },
   {
     "name": "lime or lemon juice",
-    "category": "N/A"
+    "category": "Fruits"
   },
   {
     "name": "smooth natural peanut butter",
-    "category": "N/A"
+    "category": "Sauces, Spreads & Dips"
   },
   {
     "name": "Sriracha",
-    "category": "N/A"
+    "category": "Condiments"
   },
   {
     "name": "red bell pepper",
-    "category": "N/A"
+    "category": "Vegetables & Greens"
   },
   {
     "name": "dry white wine",
-    "category": "N/A"
+    "category": "Wine, Beer & Spirits"
   },
   {
     "name": "Asian fish sauce",
-    "category": "N/A"
+    "category": "Condiments"
   },
   {
     "name": "fresh mussels",
-    "category": "N/A"
+    "category": "Seafood"
   },
   {
     "name": "skinless chicken thighs",
-    "category": "N/A"
+    "category": "Poultry"
   },
   {
     "name": "mixed red, yellow, and orange bell peppers",
-    "category": "N/A"
+    "category": "Vegetables & Greens"
   },
   {
     "name": "fresh ginger paste",
-    "category": "N/A"
+    "category": "Herbs & Spices"
   },
   {
     "name": "corn oil",
-    "category": "N/A"
+    "category": "Oils & Fats"
   },
   {
     "name": "lean boneless pork",
-    "category": "N/A"
+    "category": "Meats"
   },
   {
     "name": "lemon zest",
-    "category": "N/A"
+    "category": "Herbs & Spices"
   },
   {
     "name": "fresh lemon juice",
-    "category": "N/A"
+    "category": "Fruits"
   },
   {
     "name": "halved zucchini",
-    "category": "N/A"
+    "category": "Vegetables & Greens"
   },
   {
     "name": "raw shrimp",
-    "category": "N/A"
+    "category": "Seafood"
   },
   {
     "name": "tom yum paste",
-    "category": "N/A"
+    "category": "Seasonings & Spice Blends"
   },
   {
     "name": "dried rice vermicelli",
-    "category": "N/A"
+    "category": "Pasta"
   },
   {
     "name": "dried red chili flakes",
-    "category": "N/A"
+    "category": "Seasonings & Spice Blends"
   },
   {
     "name": "chicken breasts",
-    "category": "N/A"
+    "category": "Poultry"
   },
   {
     "name": "yellow onion",
-    "category": "N/A"
+    "category": "Vegetables & Greens"
   },
   {
     "name": "yellow bell pepper",
-    "category": "N/A"
+    "category": "Vegetables & Greens"
   },
   {
     "name": "orange bell pepper",
-    "category": "N/A"
+    "category": "Vegetables & Greens"
   },
   {
     "name": "red Thai curry paste",
-    "category": "N/A"
+    "category": "Seasonings & Spice Blends"
   },
   {
     "name": "green chile pepper",
-    "category": "N/A"
+    "category": "Vegetables & Greens"
   },
   {
     "name": "boneless, skinless chicken",
-    "category": "N/A"
+    "category": "Poultry"
   },
   {
     "name": "ground coffee beans",
-    "category": "N/A"
+    "category": "Beverages"
   },
   {
     "name": "chile padi",
-    "category": "N/A"
+    "category": "Vegetables & Greens"
   },
   {
     "name": "Chinese broccoli",
-    "category": "N/A"
+    "category": "Vegetables & Greens"
   },
   {
     "name": "sea salt",
-    "category": "N/A"
+    "category": "Seasonings & Spice Blends"
   },
   {
     "name": "pickled mustard cabbage",
-    "category": "N/A"
+    "category": "Condiments"
   },
   {
     "name": "whole cilantro leaves",
-    "category": "N/A"
+    "category": "Herbs & Spices"
   },
   {
     "name": "fresh pineapple",
-    "category": "N/A"
+    "category": "Fruits"
   },
   {
     "name": "dried rice noodles",
-    "category": "N/A"
+    "category": "Pasta"
   },
   {
     "name": "red chile sauce",
-    "category": "N/A"
+    "category": "Condiments"
   },
   {
     "name": "Thai fish sauce",
-    "category": "N/A"
+    "category": "Condiments"
   },
   {
     "name": "unsalted peanuts",
-    "category": "N/A"
+    "category": "Nuts & Seeds"
   },
   {
     "name": "homemade chicken stock",
-    "category": "N/A"
+    "category": "Soups, Stews & Stocks"
   },
   {
     "name": "basmati rice",
-    "category": "N/A"
+    "category": "Grains & Cereals"
   },
   {
     "name": "dried red pepper flakes",
-    "category": "N/A"
+    "category": "Seasonings & Spice Blends"
   },
   {
     "name": "teriyaki sauce",
-    "category": "N/A"
+    "category": "Condiments"
   },
   {
     "name": "roasted peanuts",
-    "category": "N/A"
+    "category": "Nuts & Seeds"
   },
   {
     "name": "sirloin steak",
-    "category": "N/A"
+    "category": "Meats"
   },
   {
     "name": "dry bread crumbs",
-    "category": "N/A"
+    "category": "Bread & Salty Snacks"
   },
   {
     "name": "ground coriander seed",
-    "category": "N/A"
+    "category": "Herbs & Spices"
   },
   {
     "name": "pineapple juice",
-    "category": "N/A"
+    "category": "Beverages"
   },
   {
     "name": "boneless chicken",
-    "category": "N/A"
+    "category": "Poultry"
   }
 ]
