@@ -130,7 +130,8 @@
                         method="post"
                      >
                         <button type="submit" class="bg-none border-0">
-                           <i class="ri-heart-line"></i>
+                          <!-- Icon source: https://remixicon.com/icon/add-box-line -->
+                          <i class="ri-add-box-line" title="Add to favorites"></i>
                         </button>
                      </form>
                   </div>
@@ -144,11 +145,9 @@
                         <% function displayStars(rating) { %> <% const
                         roundedRating=Math.round(rating); %> <% for (let i=1; i
                         <=5; i++) { %> <% if (i <=roundedRating) { %>
-                        <span class="stars" style="color: #e7a046"
-                           >&#128972;</span
-                        >
+                        <i class="ri-heart-3-fill stars" style="color: #ffb7b7;"></i>
                         <% } else { %>
-                        <span class="stars">&#128972;</span>
+                        <i class="ri-heart-3-fill stars" style="color: #d9d9d9;"></i>
                         <% } %> <% } %> <% } %> <%=
                         displayStars(recipe.averageRating) %>
                      </div>
