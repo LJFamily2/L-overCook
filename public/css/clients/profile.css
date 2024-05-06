@@ -19,6 +19,7 @@
     padding-left: 0;
     padding-right: 0;
     background-color: var(--color-background-white);
+    min-height: 90vh;
 }
 
 .profile-head {
