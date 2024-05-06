@@ -20,7 +20,7 @@ exports.getCuisinePage = async (req,res) => {
         res.render('admin/cuisineManagementPage', {
             cuisines, 
             layout: "./layouts/admin/defaultLayout", 
-            currentPage: 'cuisineManagementPage',
+            currentPage: 'cuisine-management',
             heading: 'Cuisine Management',
         });
     }catch(error){
@@ -46,9 +46,9 @@ exports.createCuisine = async (req, res) => {
 
         // Save the new category
         const newCuisine = await cuisine.save();
-        res.redirect('/cuisineManagement?success=Cuisine+added+successfully');
+        res.redirect('/cuisines?success=Cuisine+added+successfully');
     } catch (error) {
-        res.redirect('/cuisineManagement?error=true&message=' + encodeURIComponent(error.message));
+        res.redirect('/cuisines?error=true&message=' + encodeURIComponent(error.message));
 
     }
 };
@@ -67,7 +67,7 @@ exports.deleteCuisine = async (req,res) => {
         
         // Delete cuisine
         await Cuisine.deleteOne({ _id: cuisineId });
-        res.redirect('/cuisineManagement?success=Cuisine+deleted+successfully');
+        res.redirect('/cuisines?success=Cuisine+deleted+successfully');
     }catch(error){
         res.status(500).json({message:error.message});
     }
@@ -93,10 +93,10 @@ exports.updateCuisine = async (req, res) => {
         }
         
         await Cuisine.findByIdAndUpdate(cuisineId, { name }, { new: true });
-        res.redirect('/cuisineManagement?success=Cuisine+updated+successfully');
+        res.redirect('/cuisines?success=Cuisine+updated+successfully');
         
     } catch (error) {
-        res.redirect('/cuisineManagement?error=true&message=' + encodeURIComponent(error.message));        
+        res.redirect('/cuisines?error=true&message=' + encodeURIComponent(error.message));        
     }
 }
 

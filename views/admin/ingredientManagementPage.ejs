@@ -41,7 +41,7 @@
     <tbody>
       <% ingredients.forEach((ingredient, index) => { %>
       <tr>
-        <td><%= ingredient.id %></td>
+        <td><%= index + 1%></td>
         <td> <img src="/uploadImages/<%= ingredient.category.image %>" width="100" alt="category image"></td>
         <td><%= ingredient.name %></td>
         <td><%= ingredient.category.name %></td>
@@ -94,7 +94,7 @@
             </div>
             <div class="modal-body">
               <form
-                action="/ingredientManagement/update/<%= ingredient.id %>"
+                action="/ingredients/update/<%= ingredient.id %>"
                 id="ingredientUpdateForm"
                 method="post"
                 enctype="multipart/form-data"
@@ -178,7 +178,7 @@
             </div>
             <div class="modal-body">
               <form
-                action="/ingredientManagement/delete/<%=ingredient.id%>"
+                action="/ingredients/delete/<%=ingredient.id%>"
                 id="ingredientDeleteForm"
                 method="post"
               >
@@ -233,7 +233,7 @@
       </div>
       <form
         id="ingredientForm"
-        action="/ingredientManagement/new"
+        action="/ingredients/new"
         method="post"
         enctype="multipart/form-data"
       >

@@ -58,7 +58,7 @@ exports.getIngredientPage = async (req, res) => {
       res.render('admin/ingredientManagementPage', {
          ingredients,
          layout: './layouts/admin/defaultLayout',
-         currentPage: 'ingredientManagementPage',
+         currentPage: 'ingredient-management',
          heading: 'Ingredient Management'
       });
    } catch (error) {
@@ -114,10 +114,10 @@ exports.createIngredient = async (req, res) => {
        console.log(image)
        const newIngredient = await this.createIngredientLogic(name, categoryName, image);
        if(newIngredient){
-           res.redirect('/ingredientManagement?success=Ingredient+added+successfully');
+           res.redirect('/ingredients?success=Ingredient+added+successfully');
        }
    }catch(error){
-       res.redirect('/ingredientManagement?error=true&message=' + encodeURIComponent(error.message));
+       res.redirect('/ingredients?error=true&message=' + encodeURIComponent(error.message));
    }
 };
 
@@ -141,10 +141,10 @@ exports.deleteIngredient = async (req,res) => {
        
        // Delete ingredient
        await Ingredient.deleteOne({ _id: ingredientId });
-       res.redirect('/ingredientManagement?success=Ingredient+deleted+successfully');
+       res.redirect('/ingredients?success=Ingredient+deleted+successfully');
        
    }catch(error){
-       res.redirect('/ingredientManagement?error=true&message=' + encodeURIComponent(error.message));
+       res.redirect('/ingredients?error=true&message=' + encodeURIComponent(error.message));
    }
 };
 
@@ -187,10 +187,10 @@ exports.deleteIngredient = async (req,res) => {
         
 //         // Update the ingredient
 //         const resultIngredient = await Ingredient.findByIdAndUpdate(ingredientId, { name: name, category: categoryId, categoryImage: ingredient.categoryImage}, { new: true });
-//         res.redirect('/ingredientManagement?success=Ingredient+updated+successfully');
+//         res.redirect('/ingredients?success=Ingredient+updated+successfully');
         
 //     }catch(error){
-//         res.redirect('/ingredientManagement?error=true&message=' + encodeURIComponent(error.message));        
+//         res.redirect('/ingredients?error=true&message=' + encodeURIComponent(error.message));        
 //     }
 // }
 
@@ -242,9 +242,9 @@ exports.updateIngredient = async (req, res) => {
 
         // Update the ingredient if there are changes
             const resultIngredient = await Ingredient.findByIdAndUpdate(ingredientId, updateFields, { new: true });
-            res.redirect('/ingredientManagement?success=Ingredient+updated+successfully');
+            res.redirect('/ingredients?success=Ingredient+updated+successfully');
     } catch (error) {
-        res.redirect('/ingredientManagement?error=true&message=' + encodeURIComponent(error.message));
+        res.redirect('/ingredients?error=true&message=' + encodeURIComponent(error.message));
     }
 }
 

@@ -110,7 +110,7 @@
           <% }) %>
 
           <div class="recipe-img-container">
-            <img class="recipe-img" src="/uploadImages/<%= recipe.image %>" />
+            <img class="recipe-img" src="<%= recipe.image %>" />
           </div>
 
           <div class="first-row">
@@ -127,7 +127,7 @@
               method="post"
             >
               <button type="submit" class="bg-none border-0">
-                <img src="/images/emptyHeart.png" />
+                <i class="ri-heart-line"></i>
               </button>
             </form>
           </div>

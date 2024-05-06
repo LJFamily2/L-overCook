@@ -8,6 +8,8 @@ const upload = require('../../middlewares/UploadMedia');
 
 // Recipe Routes
 router.get('/',connectEnsureLogin.ensureLoggedIn({redirectTo:'/signin/admin'}),checkAdmin, recipeController.getRecipePage);
+// Recipe Update
+router.get('/update/:id', recipeController.getUpdateRecipePage);
 // Recipe detail page
 router.get('/:slug', recipeController.getRecipeDetailPage);
 router.post('/new',upload.single('image'),recipeController.createRecipe);
