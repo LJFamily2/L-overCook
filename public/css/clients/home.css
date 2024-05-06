@@ -96,6 +96,7 @@ input[type="checkbox"] {
   border-radius: 15px;
   border: #7c5532 solid 0.25px;
   margin-bottom: 30px;
+  position: relative;
 }
 
 .recipe-img-container {
@@ -119,7 +120,7 @@ input[type="checkbox"] {
   font-size: 28px;
   border: none;
   cursor: pointer;
-  color: #ff5e5e;
+  color: rgb(220, 183, 89);
   margin-top: -5px;
 }
 
@@ -137,9 +138,13 @@ input[type="checkbox"] {
 
 .ingredient-match{
   font-size: 14px;
-  margin: 10px 0 0 14px;
+  margin: 10px 14px 0 14px;
   color: #28a745;
   font-style: italic;
+  margin-bottom: 50px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .missing-ingredient{
@@ -150,10 +155,11 @@ input[type="checkbox"] {
 }
 
 .second-row {
-  /* position: relative; */
-  /* top: 9px; */
-  margin-top: 9px;
+  width: 100%;
   font-size: 14px;
+  /* Situate this row at the bottom of a recipe card */
+  position: absolute;
+  bottom: 3px;
 }
 
 .recipe-name {
@@ -174,11 +180,6 @@ input[type="checkbox"] {
 .cook-time span {
   color: #9a9999;
 }
-
-.fa-star {
-  color: #d9d9d9;
-}
-
 
 
 
