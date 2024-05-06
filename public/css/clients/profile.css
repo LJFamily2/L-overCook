@@ -114,9 +114,19 @@
     width: 500px;
 }
 
-.field-title {
+.field-title,
+.forgot-password {
     font-style: italic;
     font-family: var(--font-poppins);
+}
+
+.forgot-password {
+    color: #474c50;
+    text-align: right;
+}
+
+.forgot-password:hover {
+    color: #707070;
 }
 
 .field-info {

@@ -4,7 +4,7 @@ header {
   background-color: #f1e4c3;
   display: flex;
   align-items: center;
-  position: sticky;
+  position: fixed;
   top: 0  ;
   z-index: 1000;
   font-family: var(--font-inika);
@@ -84,7 +84,9 @@ header {
 .user-section img {
   font-size: 0;
   min-width: 40px; 
-  min-height: 40px; 
+  min-height: 40px;
+  max-width: 40px; 
+  max-height: 40px;  
   object-fit: cover;
   border-radius: 50%; 
   border: gray 0.5px solid;
