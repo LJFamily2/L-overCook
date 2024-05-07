@@ -1,3 +1,4 @@
+<% if(searchPage){ %>
 <nav class="row pt-2 m-0">
    <!-- Display rows per page -->
    <div class="col-8 d-flex justify-content-start align-items-center">
@@ -25,7 +26,7 @@
          <!-- Previous Page -->
          <li class="page-item <%= currentPageNumber === 1 ? 'disabled' : '' %>">
             <a
-               href="?page=<%= currentPageNumber - 1 %>&rows=<%= rowsPerPage %>"
+               href="/recipes/search?searchTerm=<%= searchTerm %>&page=<%= currentPageNumber - 1 %>&rows=<%= rowsPerPage %>"
                class="page-link"
                aria-label="Previous"
             >
@@ -36,7 +37,7 @@
          <!-- First Page -->
          <% if (showFirstEllipsis) { %>
             <li class="page-item">
-               <a href="?page=1&rows=<%= rowsPerPage %>" class="page-link">1</a>
+               <a href="/recipes/search?searchTerm=<%= searchTerm %>&page=1&rows=<%= rowsPerPage %>" class="page-link">1</a>
             </li>
             <li class="page-item disabled">
                <a class="page-link" aria-disabled="true">...</a>
@@ -46,7 +47,7 @@
          <!-- Page Numbers -->
          <% for (let i = Math.max(1, currentPageNumber - 1); i <= Math.min(totalPages, currentPageNumber + 1); i++) { %>
             <li class="page-item <%= i === currentPageNumber ? 'active' : '' %>">
-               <a href="?page=<%= i %>&rows=<%= rowsPerPage %>" class="page-link"><%= i %></a>
+               <a href="/recipes/search?searchTerm=<%= searchTerm %>&page=<%= i %>&rows=<%= rowsPerPage %>" class="page-link"><%= i %></a>
             </li>
          <% } %>
 
@@ -56,14 +57,14 @@
                <a class="page-link" aria-disabled="true">...</a>
             </li>
             <li class="page-item">
-               <a href="?page=<%= totalPages %>&rows=<%= rowsPerPage %>" class="page-link"><%= totalPages %></a>
+               <a href="/recipes/search?searchTerm=<%= searchTerm %>&page=<%= totalPages %>&rows=<%= rowsPerPage %>" class="page-link"><%= totalPages %></a>
             </li>
          <% } %>
 
          <!-- Next Page -->
          <li class="page-item <%= currentPageNumber === totalPages ? 'disabled' : '' %>">
             <a
-               href="?page=<%= currentPageNumber + 1 %>&rows=<%= rowsPerPage %>"
+               href="/recipes/search?searchTerm=<%= searchTerm %>&page=<%= currentPageNumber + 1 %>&rows=<%= rowsPerPage %>"
                class="page-link"
                aria-label="Next"
             >
@@ -73,7 +74,83 @@
       </ul>
    </div>
 </nav>
-
+<% }else{ %>
+   <nav class="row pt-2 m-0">
+      <!-- Display rows per page -->
+      <div class="col-8 d-flex justify-content-start align-items-center">
+         <label for="rows">Rows per page </label>
+         <select
+            name="rows"
+            id="rows"
+            class="border-0"
+            style="outline: none; margin-left: 5px"
+            onchange="changeRowsPerPage(this.value)"
+         >
+            <% const options = [5, 10, 15, 20]; %>
+            <% options.forEach(option => { %>
+               <option value="<%= option %>" <%= rowsPerPage === option ? 'selected' : '' %>><%= option %></option>
+            <% }); %>
+         </select>
+      </div>
+   
+      <!-- Pagination -->
+      <div class="col-4">
+         <ul class="pagination justify-content-end">
+            <% const showFirstEllipsis = currentPageNumber > 3; %> 
+            <% const showLastEllipsis = currentPageNumber < totalPages - 3; %>
+   
+            <!-- Previous Page -->
+            <li class="page-item <%= currentPageNumber === 1 ? 'disabled' : '' %>">
+               <a
+                  href="/recipes?page=<%= currentPageNumber - 1 %>&rows=<%= rowsPerPage %>"
+                  class="page-link"
+                  aria-label="Previous"
+               >
+                  <span aria-hidden="true">&laquo;</span>
+               </a>
+            </li>
+   
+            <!-- First Page -->
+            <% if (showFirstEllipsis) { %>
+               <li class="page-item">
+                  <a href="/recipes?page=1&rows=<%= rowsPerPage %>" class="page-link">1</a>
+               </li>
+               <li class="page-item disabled">
+                  <a class="page-link" aria-disabled="true">...</a>
+               </li>
+            <% } %>
+   
+            <!-- Page Numbers -->
+            <% for (let i = Math.max(1, currentPageNumber - 1); i <= Math.min(totalPages, currentPageNumber + 1); i++) { %>
+               <li class="page-item <%= i === currentPageNumber ? 'active' : '' %>">
+                  <a href="/recipes?page=<%= i %>&rows=<%= rowsPerPage %>" class="page-link"><%= i %></a>
+               </li>
+            <% } %>
+   
+            <!-- Last Page -->
+            <% if (showLastEllipsis) { %>
+               <li class="page-item disabled">
+                  <a class="page-link" aria-disabled="true">...</a>
+               </li>
+               <li class="page-item">
+                  <a href="/recipes?page=<%= totalPages %>&rows=<%= rowsPerPage %>" class="page-link"><%= totalPages %></a>
+               </li>
+            <% } %>
+   
+            <!-- Next Page -->
+            <li class="page-item <%= currentPageNumber === totalPages ? 'disabled' : '' %>">
+               <a
+                  href="/recipes?page=<%= currentPageNumber + 1 %>&rows=<%= rowsPerPage %>"
+                  class="page-link"
+                  aria-label="Next"
+               >
+                  <span aria-hidden="true">&raquo;</span>
+               </a>
+            </li>
+         </ul>
+      </div>
+   </nav>
+<% } %>
 <script>
 function changeRowsPerPage(rows) {
    const urlParams = new URLSearchParams(window.location.search);
