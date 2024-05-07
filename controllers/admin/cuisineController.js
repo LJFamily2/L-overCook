@@ -1,4 +1,3 @@
-const mongoose = require('../../middlewares/database');
 const Cuisine = require('../../models/Cuisine');
 const Recipe = require('../../models/Recipe');
 
@@ -16,12 +15,20 @@ exports.getAllCuisines = async(req, res) => {
 // Get ingredient page
 exports.getCuisinePage = async (req,res) => {
     try{
-        const cuisines = await this.getAllCuisines();
+        const rowsPerPage = parseInt(req.query.rows) || 20;
+        const page = parseInt(req.query.page) || 1;
+        const limit = rowsPerPage; 
+        const skip = (page - 1) * limit;
+        const cuisines = await Cuisine.find().skip(skip).limit(limit);
+        const totalCuisine = await Cuisine.countDocuments();
         res.render('admin/cuisineManagementPage', {
             cuisines, 
             layout: "./layouts/admin/defaultLayout", 
             currentPage: 'cuisine-management',
             heading: 'Cuisine Management',
+            totalPages: Math.ceil(totalCuisine / limit), 
+            currentPageNumber: page,
+            rowsPerPage: rowsPerPage,
         });
     }catch(error){
         throw new Error(error.message);
