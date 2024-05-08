@@ -24,7 +24,7 @@ function toggleSelection(button) {
 
    // Update active status of ingredient in search bar
    const ingredientId = button.id;
-const activeStatus = document.querySelector(`.active-status#${CSS.escape(ingredientId)}`);
+   const activeStatus = document.querySelector(`.active-status#${CSS.escape(ingredientId)}`);
 
    console.log(activeStatus)
    if (button.classList.contains('selected')) {
@@ -127,36 +127,50 @@ function showRecipe(recipeElement, recipe, selectedIngredients) {
    // Create or update the div indicating matched ingredients and missing ingredients
    let ingredientMatchDiv = recipeElement.querySelector('.ingredient-match');
    if (!ingredientMatchDiv) {
-      ingredientMatchDiv = document.createElement('p');
-      ingredientMatchDiv.classList.add('ingredient-match');
-      recipeElement.insertBefore(
-         ingredientMatchDiv,
-         recipeElement.querySelector('.second-row')
-      );
+       ingredientMatchDiv = document.createElement('p');
+       ingredientMatchDiv.classList.add('ingredient-match');
+       recipeElement.insertBefore(
+           ingredientMatchDiv,
+           recipeElement.querySelector('.second-row')
+       );
    }
 
    // Update the content of the message div with relevant and missing ingredients
-   const relevantIngredients = selectedIngredients.filter((ingredient) =>
-      recipe.recipeIngredients.includes(ingredient)
+   const relevantIngredients = selectedIngredients.filter(ingredient =>
+       recipe.recipeIngredients.includes(ingredient)
    );
    const missingIngredients = recipe.recipeIngredients.filter(
-      (ingredient) => !selectedIngredients.includes(ingredient)
+       ingredient => !selectedIngredients.includes(ingredient)
    );
 
    let ingredientMatchContent = '';
 
    if (missingIngredients.length === 0) {
-      ingredientMatchContent = 'You have all ingredients!';
+       ingredientMatchContent = 'You have all ingredients!';
    } else {
-      ingredientMatchContent = `You have: ${relevantIngredients.join(
-         ', '
-      )}.<span class="missing-ingredient"><br>Missing: ${missingIngredients.join(
-         ', '
-      )}</span>`;
+       // Display a button to view all missing ingredients
+       ingredientMatchContent = `You have: ${relevantIngredients.length}/${recipe.recipeIngredients.length}. <a class="view-all-btn" style="cursor:pointer; float:right;">View details</a>`;
    }
 
    ingredientMatchDiv.innerHTML = ingredientMatchContent;
+
+   // Event listener for the "View details" button
+   ingredientMatchDiv.addEventListener('click', function(event) {
+       const viewAllBtn = ingredientMatchDiv.querySelector('.view-all-btn');
+       if (event.target === viewAllBtn) {
+           if (viewAllBtn.textContent === 'View details') {
+               // Show all missing ingredients
+               ingredientMatchDiv.innerHTML = `You have: ${relevantIngredients.join(', ')}.<span class="missing-ingredient"><br>Missing: ${missingIngredients.join(', ')}</span> <a class="view-all-btn" style="cursor:pointer; float:right;">Hide details</a>`;
+           } else {
+               // Hide the details and restore the "View details" button
+               ingredientMatchDiv.innerHTML = `You have: ${relevantIngredients.length}/${recipe.recipeIngredients.length}. <a class="view-all-btn" style="cursor:pointer; float:right;">View details</a>`;
+           }
+       }
+   });
 }
+
+
+
 
 function hideRecipe(recipeElement) {
    recipeElement.style.display = 'none'; // Hide the recipe

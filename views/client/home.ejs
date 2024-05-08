@@ -135,24 +135,24 @@
                 </button>
               </form>
             </div>
-
-            <div class="second-row">
-              <div class="cook-time">
-                <img src="/images/clock.png" />
-                <span><%= recipe.time %></span>
-              </div>
-              <div class="rating">
-                <% function displayStars(rating) { %> <% const
-                roundedRating=Math.round(rating); %> <% for (let i=1; i <=5;
-                i++) { %> <% if (i <=roundedRating) { %>
-                <i class="ri-heart-3-fill stars" style="color: #ffb7b7"></i>
-                <% } else { %>
-                <i class="ri-heart-3-fill stars" style="color: #d9d9d9"></i>
-                <% } %> <% } %> <% } %> <%= displayStars(recipe.averageRating)
-                %>
-              </div>
-            </div>
           </a>
+          <div class="ingredient-match"></div>
+
+          <div class="second-row">
+            <div class="cook-time">
+              <img src="/images/clock.png" />
+              <span><%= recipe.time %></span>
+            </div>
+            <div class="rating">
+              <% function displayStars(rating) { %> <% const
+              roundedRating=Math.round(rating); %> <% for (let i=1; i <=5; i++)
+              { %> <% if (i <=roundedRating) { %>
+              <i class="ri-heart-3-fill stars" style="color: #ffb7b7"></i>
+              <% } else { %>
+              <i class="ri-heart-3-fill stars" style="color: #d9d9d9"></i>
+              <% } %> <% } %> <% } %> <%= displayStars(recipe.averageRating) %>
+            </div>
+          </div>
         </div>
         <% }) %>
       </div>
