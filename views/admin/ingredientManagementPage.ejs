@@ -178,7 +178,7 @@
             </div>
             <div class="modal-body">
               <form
-                action="/ingredients/delete/<%=ingredient.id%>"
+                action="/<%= pageName %>/delete/<%=ingredient.id%>"
                 id="ingredientDeleteForm"
                 method="post"
               >
@@ -233,7 +233,7 @@
       </div>
       <form
         id="ingredientForm"
-        action="/ingredients/new"
+        action="/<%= pageName %>/new"
         method="post"
         enctype="multipart/form-data"
       >

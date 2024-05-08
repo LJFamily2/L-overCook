@@ -76,9 +76,54 @@ exports.getIngredientPage = async (req, res) => {
          totalPages: Math.ceil(totalIngredient / limit),
          currentPageNumber: page,
          rowsPerPage: rowsPerPage,
+         searchPage: false,
+         pageName: 'ingredients',
+         
       });
    } catch (error) {
       throw new Error(error.message);
+   }
+};
+
+
+// search ingredients
+exports.searchIngredient = async (req, res) => {
+   try {
+      const searchTerm = req.query.searchTerm;
+      const rowsPerPage = parseInt(req.query.rows) || 5;
+      const page = parseInt(req.query.page) || 1;
+      const limit = rowsPerPage;
+      const skip = (page - 1) * limit;
+
+      const ingredientQuery = Ingredient.find({
+         name: { $regex: searchTerm, $options: 'i' },
+      });
+
+      const totalIngredients = await Ingredient.countDocuments({
+         name: { $regex: searchTerm, $options: 'i' },
+      });
+
+      const ingredients = await ingredientQuery
+         .skip(skip)
+         .limit(limit)
+         .exec();
+
+      res.render('admin/searchManagementPage', {
+         ingredients,
+         layout: './layouts/admin/defaultLayout',
+         currentPage: 'ingredient-management',
+         heading: 'Ingredient Management',
+         totalPages: Math.ceil(totalIngredients / limit),
+         currentPageNumber: page,
+         rowsPerPage,
+         message: req.flash(),
+         searchPage: true,
+         searchTerm,
+         pageName: 'ingredients',
+
+      });
+   } catch (error) {
+      console.log(error);
    }
 };
 

@@ -572,6 +572,7 @@ exports.getRecipePage = async (req, res) => {
          totalPages: Math.ceil(totalRecipes / limit),
          currentPageNumber: page,
          searchPage: false,
+         pageName: 'recipes',
          rowsPerPage,
       });
    } catch (error) {
@@ -616,6 +617,7 @@ exports.searchRecipe = async (req, res) => {
          rowsPerPage,
          message: req.flash(),
          searchPage: true,
+         pageName: 'recipes',
          searchTerm,
       });
    } catch (error) {
