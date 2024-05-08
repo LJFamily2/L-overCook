@@ -29,11 +29,57 @@ exports.getCuisinePage = async (req,res) => {
             totalPages: Math.ceil(totalCuisine / limit), 
             currentPageNumber: page,
             rowsPerPage: rowsPerPage,
+            searchPage: false,
+            pageName: 'cuisines',
+  
         });
     }catch(error){
         throw new Error(error.message);
     }
 };
+
+
+// search cuisine
+exports.searchCuisine = async (req, res) => {
+    try {
+       const searchTerm = req.query.searchTerm;
+       const rowsPerPage = parseInt(req.query.rows) || 5;
+       const page = parseInt(req.query.page) || 1;
+       const limit = rowsPerPage;
+       const skip = (page - 1) * limit;
+ 
+       const cuisineQuery = Cuisine.find({
+          name: { $regex: searchTerm, $options: 'i' },
+       });
+ 
+       const totalCuisines = await Cuisine.countDocuments({
+          name: { $regex: searchTerm, $options: 'i' },
+       });
+ 
+       const cuisines = await cuisineQuery
+          .skip(skip)
+          .limit(limit)
+          .exec();
+ 
+       res.render('admin/searchManagementPage', {
+          cuisines,
+          layout: './layouts/admin/defaultLayout',
+          currentPage: 'cuisine-management',
+          heading: 'Cuisine Management',
+          totalPages: Math.ceil(totalCuisines / limit),
+          currentPageNumber: page,
+          rowsPerPage,
+          message: req.flash(),
+          searchPage: true,
+          searchTerm,
+          pageName: 'cuisines',
+ 
+       });
+    } catch (error) {
+       console.log(error);
+    }
+ };
+ 
 
 // Create new cuisine
 exports.createCuisine = async (req, res) => {

@@ -406,6 +406,67 @@
     </div>
   </div>
 </div>
+<script>
+  function addIngredient(modalId){
+    const newRow = document.createElement('div');
+    newRow.classList.add('row', 'mb-3', 'ingredientObject');
+    newRow.innerHTML = `
+      <div class="col position-relative">
+        <div class="search-select-box">
+          <select name="ingredient[]" class="w-100 form-control" data-live-search="true">
+            <% ingredients.forEach(ingredient => { %>
+              <option name="<%= ingredient.name %>" value="<%= ingredient.name %>" data-tokens="<%= ingredient.name %>"><%= ingredient.name %></option>
+            <% }) %> 
+          </select>
+        </div>
+      </div>
+      <div class="col">
+        <input type="text" name="quantity[]" class="form-control" placeholder="Quantity" aria-label="Quantity"/>
+      </div>
+      <div class="col-1 fs-4 remove-ingredient" style="cursor: pointer; display: none" onclick="removeIngredient(this)">
+        <i class="ri-close-line" aria-label="Remove ingredient"></i>
+      </div>
+    `;
+    
+    const modal = document.getElementById(modalId);
+    const ingredientsContainer = modal.querySelector('.ingredientsContainer');
+    const addNewIngredientButton = ingredientsContainer.querySelector('.add-ingredient');
+    ingredientsContainer.insertBefore(newRow, addNewIngredientButton.parentElement);
+    
+    // Re-initialize Bootstrap-select plugin
+    $('.search-select-box select').selectpicker();
+
+
+    const removeIngredients = modal.querySelectorAll('.remove-ingredient');
+    if (removeIngredients.length > 1) {
+      removeIngredients.forEach((element) => {
+        element.style.display = 'block';
+      });
+    } else {
+      removeIngredients[0].style.display = 'none';
+    }
+
+    console.log('Modal ID:', modalId);
+    console.log('Modal Element:', modal);
+    console.log('Ingredients Container:', ingredientsContainer);
+  }
+
+  function removeIngredient(element) {
+    const row = element.closest('.row');
+    row.parentNode.removeChild(row);
+
+    const removeIngredients = document.querySelectorAll('.remove-ingredient');
+    if (removeIngredients.length <= 1) {
+      removeIngredients.forEach((element) => {
+        element.style.display = 'none';
+      });
+    }
+  }
+
+  $(document).ready(function () {
+        $('.search-select-box select').selectpicker();
+    });
+</script>
 <!-- Create recipe modal ends -->
 <% } else if (pageName === 'ingredients') { %>
     <!-- Button trigger modal -->
@@ -678,8 +739,68 @@
   </div>
 </div>
 <!-- Create ingredient modal ends -->
+<script>
+  function addIngredient(modalId){
+    const newRow = document.createElement('div');
+    newRow.classList.add('row', 'mb-3', 'ingredientObject');
+    newRow.innerHTML = `
+      <div class="col position-relative">
+        <div class="search-select-box">
+          <select name="ingredient[]" class="w-100 form-control" data-live-search="true">
+            <% ingredients.forEach(ingredient => { %>
+              <option name="<%= ingredient.name %>" value="<%= ingredient.name %>" data-tokens="<%= ingredient.name %>"><%= ingredient.name %></option>
+            <% }) %> 
+          </select>
+        </div>
+      </div>
+      <div class="col">
+        <input type="text" name="quantity[]" class="form-control" placeholder="Quantity" aria-label="Quantity"/>
+      </div>
+      <div class="col-1 fs-4 remove-ingredient" style="cursor: pointer; display: none" onclick="removeIngredient(this)">
+        <i class="ri-close-line" aria-label="Remove ingredient"></i>
+      </div>
+    `;
+    
+    const modal = document.getElementById(modalId);
+    const ingredientsContainer = modal.querySelector('.ingredientsContainer');
+    const addNewIngredientButton = ingredientsContainer.querySelector('.add-ingredient');
+    ingredientsContainer.insertBefore(newRow, addNewIngredientButton.parentElement);
+    
+    // Re-initialize Bootstrap-select plugin
+    $('.search-select-box select').selectpicker();
 
-<% } else { %>
+
+    const removeIngredients = modal.querySelectorAll('.remove-ingredient');
+    if (removeIngredients.length > 1) {
+      removeIngredients.forEach((element) => {
+        element.style.display = 'block';
+      });
+    } else {
+      removeIngredients[0].style.display = 'none';
+    }
+
+    console.log('Modal ID:', modalId);
+    console.log('Modal Element:', modal);
+    console.log('Ingredients Container:', ingredientsContainer);
+  }
+
+  function removeIngredient(element) {
+    const row = element.closest('.row');
+    row.parentNode.removeChild(row);
+
+    const removeIngredients = document.querySelectorAll('.remove-ingredient');
+    if (removeIngredients.length <= 1) {
+      removeIngredients.forEach((element) => {
+        element.style.display = 'none';
+      });
+    }
+  }
+
+  $(document).ready(function () {
+        $('.search-select-box select').selectpicker();
+    });
+</script>
+<% }  else { %>
    <!-- Button trigger add cuisine modal -->
    <div class="d-grid d-md-flex justify-content-md-end mx-5">
     <button
@@ -899,64 +1020,3 @@
 <!-- Create cuisine modal ends -->
 
 <% } %>
-<script>
-  function addIngredient(modalId){
-    const newRow = document.createElement('div');
-    newRow.classList.add('row', 'mb-3', 'ingredientObject');
-    newRow.innerHTML = `
-      <div class="col position-relative">
-        <div class="search-select-box">
-          <select name="ingredient[]" class="w-100 form-control" data-live-search="true">
-            <% ingredients.forEach(ingredient => { %>
-              <option name="<%= ingredient.name %>" value="<%= ingredient.name %>" data-tokens="<%= ingredient.name %>"><%= ingredient.name %></option>
-            <% }) %> 
-          </select>
-        </div>
-      </div>
-      <div class="col">
-        <input type="text" name="quantity[]" class="form-control" placeholder="Quantity" aria-label="Quantity"/>
-      </div>
-      <div class="col-1 fs-4 remove-ingredient" style="cursor: pointer; display: none" onclick="removeIngredient(this)">
-        <i class="ri-close-line" aria-label="Remove ingredient"></i>
-      </div>
-    `;
-    
-    const modal = document.getElementById(modalId);
-    const ingredientsContainer = modal.querySelector('.ingredientsContainer');
-    const addNewIngredientButton = ingredientsContainer.querySelector('.add-ingredient');
-    ingredientsContainer.insertBefore(newRow, addNewIngredientButton.parentElement);
-    
-    // Re-initialize Bootstrap-select plugin
-    $('.search-select-box select').selectpicker();
-
-
-    const removeIngredients = modal.querySelectorAll('.remove-ingredient');
-    if (removeIngredients.length > 1) {
-      removeIngredients.forEach((element) => {
-        element.style.display = 'block';
-      });
-    } else {
-      removeIngredients[0].style.display = 'none';
-    }
-
-    console.log('Modal ID:', modalId);
-    console.log('Modal Element:', modal);
-    console.log('Ingredients Container:', ingredientsContainer);
-  }
-
-  function removeIngredient(element) {
-    const row = element.closest('.row');
-    row.parentNode.removeChild(row);
-
-    const removeIngredients = document.querySelectorAll('.remove-ingredient');
-    if (removeIngredients.length <= 1) {
-      removeIngredients.forEach((element) => {
-        element.style.display = 'none';
-      });
-    }
-  }
-
-  $(document).ready(function () {
-        $('.search-select-box select').selectpicker();
-    });
-</script>
