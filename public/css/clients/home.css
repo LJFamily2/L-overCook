@@ -143,7 +143,7 @@ input[type="checkbox"] {
   font-style: italic;
   margin-bottom: 50px;
   overflow: hidden;
-  white-space: nowrap;
+  /* white-space: nowrap; */
   text-overflow: ellipsis;
 }
 
