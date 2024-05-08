@@ -9,8 +9,7 @@ exports.getHomePage = async (req, res) => {
    try {
       const categories = await categoryController.getAllCategories();
       const searchIngredients = await Ingredient.find({}).limit(4);
-      const ingredients =
-         await ingredientController.getIngredientsForAllCategories();
+      const ingredients = await ingredientController.getIngredientsForAllCategories();
       const recipes = await recipeController.getAllRecipes();
       const searchRecipes = await Recipe.find({}).limit(4);
       const cuisines = await Cuisine.find();
