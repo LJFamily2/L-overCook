@@ -1,18 +1,22 @@
-// let expandIcon = document.querySelector(".expand-icon-container");
+let expandIcon = document.querySelector(".expand-icon");
 
-// let ingredientFilter = document.querySelector(".ingredient-filter");
+let ingredientFilter = document.querySelector(".ingredient-filter");
 
-// expandIcon.addEventListener("click", () => {
-//     expandIcon.classList.toggle("moveRight");
-//     ingredientFilter.classList.toggle("moveRight");
-//   });
+let background = document.querySelector(".main-content-container");
 
-// window.addEventListener("resize", () => {
-//     if (window.innerWidth > 768) {
-//       ingredientFilter.classList.remove("moveRight");
-//       expandIcon.classList.remove("moveRight");
-//     }
-//   });
+expandIcon.addEventListener("click", () => {
+    expandIcon.classList.toggle("moveRight");
+    ingredientFilter.classList.toggle("moveRight");
+    background.classList.toggle("bg-darken");
+  });
+
+window.addEventListener("resize", () => {
+    if (window.innerWidth > 768) {
+      ingredientFilter.classList.remove("moveRight");
+      expandIcon.classList.remove("moveRight");
+    }
+  });
+
 function showMore(button) {
   const maxVisible = parseInt(button.getAttribute("data-max-visible"));
   const parent = button.parentElement;
