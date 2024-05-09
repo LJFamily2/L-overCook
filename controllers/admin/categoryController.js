@@ -34,7 +34,7 @@ exports.createCategoryLogic = async (name, image) => {
          // Create new category instance
          const category = await new Category({
             name,
-            image
+            image: `/uploadImages/${image}`
          });
 
          // Save the new category
@@ -162,7 +162,7 @@ exports.updateCategoryImage = async (categoryId, image) => {
       if (category.image) {
          await deleteImageFile(category.image);
       }
-      const newImage = image.filename;
+      const newImage = `/uploadImages/${image.filename}`;
 
       // Update the category with the new image path
       await Category.findByIdAndUpdate(
