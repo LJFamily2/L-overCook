@@ -39,11 +39,11 @@ function toggleSelection(button) {
    const activeStatus = document.querySelector(`.active-status#${CSS.escape(ingredientId)}`);
 
    // console.log(activeStatus)
-   // if (button.classList.contains('selected')) {
-   //    activeStatus.textContent = '-';
-   // } else {
-   //    activeStatus.textContent = '+';
-   // }
+   if (button.classList.contains('selected')) {
+      activeStatus.textContent = '-';
+   } else {
+      activeStatus.textContent = '+';
+   }
 }
 
 function updatePantryList(ingredients) {

@@ -8,10 +8,10 @@ const Ingredient = require('../../models/Ingredient');
 exports.getHomePage = async (req, res) => {
    try {
       const categories = await categoryController.getAllCategories();
-      const searchIngredients = await Ingredient.find({}).limit(4);
+      const searchIngredients = await Ingredient.find({});
       const ingredients = await ingredientController.getIngredientsForAllCategories();
       const recipes = await recipeController.getAllRecipes();
-      const searchRecipes = await Recipe.find({}).limit(4);
+      const searchRecipes = await Recipe.find({});
       const cuisines = await Cuisine.find();
       res.render('client/home', {
          categories,
