@@ -25,8 +25,6 @@ function getSelectedButtonIds() {
 function toggleSelection(button) {
    button.classList.toggle('selected');
    const selectedIngredients = getSelectedButtonIds();
-   // const recipes = getRecipes();
-   // getRecipeByIngredient(selectedIngredients, recipes);
 
    // Update pantry items based on selected ingredients
    updatePantryList(selectedIngredients);
@@ -107,30 +105,33 @@ function getRecipes() {
 function separateTime(cookTime) {
    let hours = 0;
    let minutes = 0;
- 
+
    const timeParts = cookTime.split(' ');
    timeParts.forEach((part, index) => {
-     if (part === 'hrs' || 'hr') {
+     if (part === 'hrs' || part === 'hr') {
        hours = parseInt(timeParts[index - 1]);
      } else if (part === 'mins') {
        minutes = parseInt(timeParts[index - 1]);
      }
    });
- 
+
+   console.log(cookTime, " - ", hours, " - ", minutes);
+
    return { hours, minutes };
  }
-
 
 function filterRecipes() {
    const selectedCuisines = Array.from(document.querySelectorAll('.filter-criteria input[name="cuisine"]:checked')).map(cuisine => cuisine.id);
    const selectedCookTimes = Array.from(document.querySelectorAll('input[name="cookTime"]:checked')).map(checkbox => checkbox.id);
    const selectedIngredients = getSelectedButtonIds();
+   console.log(selectedCookTimes);
 
    const recipes = getRecipes();
 
    recipes.forEach(recipe => {
       const recipeElement = document.querySelector(`.recipe[recipe-name="${recipe.recipeName}"]`);
       const timeArray = separateTime(recipe.cookTime);
+      console.log(timeArray);
       const hasSelectedCuisine = selectedCuisines.length === 0 || selectedCuisines.includes(recipe.recipeCuisine);
       const hasSelectedCookTime = selectedCookTimes.length === 0 ||
          (selectedCookTimes.includes("over30") && (timeArray.hours > 0 || timeArray.minutes > 30)) ||
@@ -146,55 +147,3 @@ function filterRecipes() {
       }
    });
 }
-
-// function filterRecipes() {
-//    let selectedIngredients = getSelectedButtonIds();
-//    console.log(selectedIngredients);
-   
-//    let selectedCuisine = [];
-//    document.querySelectorAll('.cuisineCheckBoxes:checked').forEach(checkbox => {
-//       selectedCuisine.push(checkbox.id);
-//    });
-//    console.log(selectedCuisine);
-
-//    let selectedCookTime = [];
-//    document.querySelectorAll('.timeCheckBoxes:checked').forEach(checkbox => {
-//       selectedCookTime.push(checkbox.id);
-//    });
-//    console.log(selectedCookTime);
-
-//    const recipes = getRecipes();
-
-//    let results = [];
-   
-//    recipes.forEach(recipe => {
-//       // Check if recipe contains any of the selected ingredients
-//       let matchesIngredient = recipe.recipeIngredients.some(
-//          (ingredient) => selectedIngredients.includes(ingredient)
-//       );
-      
-      
-      
-//       // If recipe meets all criteria, push it to the result array
-//       if (matchesIngredient && matchesCuisine && matchesCookTime) {
-//          results.push(recipe);
-//       }
-//    });
-
-//    console.log(results)
-//    // Display results and hide any recipes not in result
-//    displayRecipes(results);
-// }
-
-// function displayRecipes(recipes) {
-//    // Assuming you have a function to display recipes
-//    // Iterate through all recipes and display/hide them based on the result
-//    const allRecipes = document.querySelectorAll('.recipe');
-//    allRecipes.forEach(recipe => {
-//       if (recipes.includes(recipe)) {
-//          recipe.style.display = 'block'; // Show recipe
-//       } else {
-//          recipe.style.display = 'none'; // Hide recipe
-//       }
-//    });
-// }
