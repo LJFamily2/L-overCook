@@ -173,6 +173,10 @@ input[type="checkbox"] {
   margin-right: 5px;
 }
 
+.recipe-count{
+  margin-top: 50px;
+}
+
 .second-row img {
   width: 10px;
 }

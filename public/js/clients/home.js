@@ -115,8 +115,6 @@ function separateTime(cookTime) {
      }
    });
 
-   console.log(cookTime, " - ", hours, " - ", minutes);
-
    return { hours, minutes };
  }
 
@@ -124,14 +122,14 @@ function filterRecipes() {
    const selectedCuisines = Array.from(document.querySelectorAll('.filter-criteria input[name="cuisine"]:checked')).map(cuisine => cuisine.id);
    const selectedCookTimes = Array.from(document.querySelectorAll('input[name="cookTime"]:checked')).map(checkbox => checkbox.id);
    const selectedIngredients = getSelectedButtonIds();
-   console.log(selectedCookTimes);
 
    const recipes = getRecipes();
+   let matchingRecipesCount = 0;
 
    recipes.forEach(recipe => {
       const recipeElement = document.querySelector(`.recipe[recipe-name="${recipe.recipeName}"]`);
       const timeArray = separateTime(recipe.cookTime);
-      console.log(timeArray);
+
       const hasSelectedCuisine = selectedCuisines.length === 0 || selectedCuisines.includes(recipe.recipeCuisine);
       const hasSelectedCookTime = selectedCookTimes.length === 0 ||
          (selectedCookTimes.includes("over30") && (timeArray.hours > 0 || timeArray.minutes > 30)) ||
@@ -142,8 +140,58 @@ function filterRecipes() {
 
       if (recipeElement && hasSelectedCuisine && hasSelectedCookTime && hasSelectedIngredients) {
          recipeElement.style.display = 'block';
+         matchingRecipesCount++;
+
+         // Calculate number of matched ingredients and total ingredients
+         const matchedIngredients = recipe.recipeIngredients.filter(ingredient => selectedIngredients.includes(ingredient)).length;
+         const totalIngredients = recipe.recipeIngredients.length;
+
+         // Update the ingredient match display if there are selected ingredients
+         const ingredientMatchDiv = recipeElement.querySelector('.ingredient-match');
+         if (matchedIngredients > 0) {
+            ingredientMatchDiv.textContent = `You have ${matchedIngredients}/${totalIngredients} ingredients`;
+         } else {
+            ingredientMatchDiv.textContent = ''; // Clear the content if no ingredients are matched
+         }
       } else {
          recipeElement.style.display = 'none';
       }
    });
+
+   const anyRecipeShown = matchingRecipesCount > 0;
+   updateRecipeCount(anyRecipeShown, matchingRecipesCount, selectedIngredients, selectedCuisines, selectedCookTimes);
 }
+
+
+function updateRecipeCount(anyRecipeShown, matchingRecipesCount, selectedIngredients, selectedCuisines, selectedCookTimes) {
+   const recipeCountElement = document.querySelector('.recipe-count');
+   if (selectedIngredients.length === 0 && selectedCuisines.length === 0 && selectedCookTimes.length === 0) {
+      if (recipeCountElement) {
+         recipeCountElement.innerHTML = ''; // Display nothing
+      }
+   } else if (selectedIngredients.length === 0) {
+      if (recipeCountElement) {
+         recipeCountElement.innerHTML = 'Please add your ingredients to get started.';
+      }
+   } else if (anyRecipeShown) {
+      if (recipeCountElement) {
+         const numOfRecipesElement = recipeCountElement.querySelector('#num-of-recipes');
+         if (numOfRecipesElement) {
+            numOfRecipesElement.textContent = matchingRecipesCount;
+         } else {
+            const newNumOfRecipesElement = document.createElement('span');
+            newNumOfRecipesElement.id = 'num-of-recipes';
+            newNumOfRecipesElement.textContent = matchingRecipesCount;
+            recipeCountElement.innerHTML = `You can make <span id="num-of-recipes">${matchingRecipesCount}</span> recipes.`;
+         }
+      }
+   } else {
+      if (recipeCountElement) {
+         recipeCountElement.textContent = 'No recipes matched the filter criteria.';
+      }
+   }
+}
+
+
+
+
