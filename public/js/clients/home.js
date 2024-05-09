@@ -9,12 +9,24 @@ filterIcon.addEventListener('click', () => {
 });
 
 
+function getSelectedButtonIds() {
+   const selectedButtons = document.querySelectorAll(
+      '.selectable-button.selected'
+   );
+
+   const selectedIngredients = [];
+   selectedButtons.forEach((button) => {
+      selectedIngredients.push(button.id);
+   });
+   return selectedIngredients;
+}
+
 // Function to toggle selection state of the button and update pantry items
 function toggleSelection(button) {
    button.classList.toggle('selected');
    const selectedIngredients = getSelectedButtonIds();
-   const recipes = getRecipes();
-   getRecipeByIngredient(selectedIngredients, recipes);
+   // const recipes = getRecipes();
+   // getRecipeByIngredient(selectedIngredients, recipes);
 
    // Update pantry items based on selected ingredients
    updatePantryList(selectedIngredients);
@@ -26,24 +38,40 @@ function toggleSelection(button) {
    const ingredientId = button.id;
    const activeStatus = document.querySelector(`.active-status#${CSS.escape(ingredientId)}`);
 
-   console.log(activeStatus)
-   if (button.classList.contains('selected')) {
-      activeStatus.textContent = '-';
-   } else {
-      activeStatus.textContent = '+';
-   }
+   // console.log(activeStatus)
+   // if (button.classList.contains('selected')) {
+   //    activeStatus.textContent = '-';
+   // } else {
+   //    activeStatus.textContent = '+';
+   // }
 }
 
-function getSelectedButtonIds() {
-   const selectedButtons = document.querySelectorAll(
-      '.selectable-button.selected'
-   );
+function updatePantryList(ingredients) {
+   const pantryList = document.querySelector('.pantry-list');
+   pantryList.innerHTML = ''; // Clear existing pantry list
 
-   const selectedIngredients = [];
-   selectedButtons.forEach((button) => {
-      selectedIngredients.push(button.id);
+   ingredients.forEach((ingredient, index) => {
+      const listItem = document.createElement('li');
+      listItem.textContent = `${ingredient}`;
+      pantryList.appendChild(listItem);
    });
-   return selectedIngredients;
+}
+
+// Function to remove selected ingredient from pantry items
+function removePantryItem(ingredientName) {
+   const pantryItems = document.querySelectorAll('.pantry-item');
+   pantryItems.forEach((item) => {
+      if (item.textContent === ingredientName) {
+         item.remove();
+      }
+   });
+}
+
+function updatePantryCount(count) {
+   const numOfIngredients = document.getElementById('num-of-ingredients');
+   if (numOfIngredients) {
+      numOfIngredients.textContent = count;
+   }
 }
 
 function getRecipes() {
@@ -75,215 +103,14 @@ function getRecipes() {
    });
    return recipes;
 }
-function clearRecipeDisplay(recipes) {
-   const recipeCountElement = document.querySelector('.recipe-count');
-   if (recipeCountElement) {
-      recipeCountElement.innerHTML = '';
-   }
 
-   // Hide all recipes and remove content from the ingredient-match div
-   recipes.forEach((recipe) => {
-      const recipeElement = document.querySelector(
-         `.recipe[recipe-name="${recipe.recipeName}"]`
-      );
-      if (recipeElement) {
-         recipeElement.style.display = 'none'; // Hide the recipe
-
-         // Remove the div indicating matched ingredients if it exists
-         let ingredientMatchDiv =
-            recipeElement.querySelector('.ingredient-match');
-         if (ingredientMatchDiv) {
-            ingredientMatchDiv.textContent = ''; // Remove content
-         }
-      }
-   });
-}
-function showMatchingRecipes(recipes, selectedIngredients) {
-   let matchingRecipesCount = 0; // Counter for matching recipes
-
-   recipes.forEach((recipe) => {
-      const hasSelectedIngredient = recipe.recipeIngredients.some(
-         (ingredient) => selectedIngredients.includes(ingredient)
-      );
-      const recipeElement = document.querySelector(
-         `.recipe[recipe-name="${recipe.recipeName}"]`
-      );
-      if (recipeElement) {
-         if (hasSelectedIngredient) {
-            showRecipe(recipeElement, recipe, selectedIngredients);
-            matchingRecipesCount++;
-         } else {
-            hideRecipe(recipeElement);
-         }
-      }
-   });
-
-   return matchingRecipesCount;
-}
-
-function showRecipe(recipeElement, recipe, selectedIngredients) {
-    recipeElement.style.display = 'block'; // Show the recipe
-
-    // Create or update the div indicating matched ingredients and missing ingredients
-    let ingredientMatchDiv = recipeElement.querySelector('.ingredient-match');
-    if (!ingredientMatchDiv) {
-        ingredientMatchDiv = document.createElement('p');
-        ingredientMatchDiv.classList.add('ingredient-match');
-        recipeElement.insertBefore(
-            ingredientMatchDiv,
-            recipeElement.querySelector('.second-row')
-        );
-    }
-
-    // Update the content of the message div with relevant and missing ingredients
-    const relevantIngredients = selectedIngredients.filter(ingredient =>
-        recipe.recipeIngredients.includes(ingredient)
-    );
-    const missingIngredients = recipe.recipeIngredients.filter(
-        ingredient => !selectedIngredients.includes(ingredient)
-    );
-
-    let ingredientMatchContent = '';
-
-    if (missingIngredients.length === 0) {
-        ingredientMatchContent = 'You have all ingredients!';
-    } else {
-        // Display a button to view all missing ingredients
-        ingredientMatchContent = `You have: ${relevantIngredients.length}/${recipe.recipeIngredients.length}. <a class="view-all-btn" style="cursor:pointer; float:right;">View details</a>`;
-    }
-
-    ingredientMatchDiv.innerHTML = ingredientMatchContent;
-
-    // Event listener for the "View details" button
-    ingredientMatchDiv.addEventListener('click', function(event) {
-        const viewAllBtn = ingredientMatchDiv.querySelector('.view-all-btn');
-        if (event.target === viewAllBtn) {
-            if (viewAllBtn.textContent === 'View details') {
-                // Show all missing ingredients
-                ingredientMatchDiv.innerHTML = `You have: ${relevantIngredients.join(', ')}.<span class="missing-ingredient"><br>Missing: ${missingIngredients.join(', ')}. </span> <p><a class="view-all-btn" style="cursor:pointer; float:right;">Hide details</a></p>`;
-            } else {
-                // Hide the details and restore the "View details" button
-                ingredientMatchDiv.innerHTML = `You have: ${relevantIngredients.length}/${recipe.recipeIngredients.length}. <a class="view-all-btn" style="cursor:pointer; float:right;">View details</a>`;
-            }
-        }
-    });
-}
-
-
-
-function hideRecipe(recipeElement) {
-   recipeElement.style.display = 'none'; // Hide the recipe
-
-   // Remove the div indicating matched ingredients if it exists
-   let ingredientMatchDiv = recipeElement.querySelector('.ingredient-match');
-   if (ingredientMatchDiv) {
-      ingredientMatchDiv.textContent = ''; // Remove content
-   }
-}
-
-function updateRecipeCount(anyRecipeShown, matchingRecipesCount) {
-   if (anyRecipeShown) {
-      const recipeCountElement = document.querySelector('.recipe-count');
-      if (recipeCountElement) {
-         recipeCountElement.innerHTML = `You can make <span id="num-of-recipes">${matchingRecipesCount}</span> recipes.`;
-      }
-   }
-}
-
-function getRecipeByIngredient(selectedIngredients, recipes) {
-   if (selectedIngredients.length === 0) {
-      clearRecipeDisplay(recipes);
-      updateRecipeCount(false, 0);
-      updatePantryList([]);
-      updatePantryCount(0);
-   } else {
-      const matchingRecipesCount = showMatchingRecipes(
-         recipes,
-         selectedIngredients
-      );
-      updateRecipeCount(matchingRecipesCount > 0, matchingRecipesCount);
-      updatePantryList(selectedIngredients);
-      updatePantryCount(selectedIngredients.length);
-   }
-}
-
-function updatePantryList(ingredients) {
-   const pantryList = document.querySelector('.pantry-list');
-   pantryList.innerHTML = ''; // Clear existing pantry list
-
-   ingredients.forEach((ingredient, index) => {
-      const listItem = document.createElement('li');
-      listItem.textContent = `${ingredient}`;
-      pantryList.appendChild(listItem);
-   });
-}
-
-// Function to remove selected ingredient from pantry items
-function removePantryItem(ingredientName) {
-   const pantryItems = document.querySelectorAll('.pantry-item');
-   pantryItems.forEach((item) => {
-      if (item.textContent === ingredientName) {
-         item.remove();
-      }
-   });
-}
-
-function updatePantryCount(count) {
-   const numOfIngredients = document.getElementById('num-of-ingredients');
-   if (numOfIngredients) {
-      numOfIngredients.textContent = count;
-   }
-}
-
-function filterByCuisines() {
-   const selectedCuisines = Array.from(document.querySelectorAll('.filter-criteria input[name="cuisine"]:checked')).map(cuisine => cuisine.id);
-   const recipes = getRecipes();
-   
-   recipes.forEach(recipe => {
-      console.log(recipe.recipeCuisine)
-      const recipeElement = document.querySelector(`.recipe[recipe-name="${recipe.recipeName}"]`);
-      if (recipeElement) {
-         if (selectedCuisines.length === 0 || selectedCuisines.includes(recipe.recipeCuisine)) {
-            recipeElement.style.display = 'block';
-         } else {
-            recipeElement.style.display = 'none';
-         }
-      }
-   });
-}
-
-function filterByCookTime() {
-   const selectedCookTime = Array.from(document.querySelectorAll('input[name="cookTime"]:checked')).map(checkbox => checkbox.id);
-   const recipes = getRecipes();
-   console.log(selectedCookTime);
- 
-   recipes.forEach(recipe => {
-      const recipeElement = document.querySelector(`.recipe[recipe-name="${recipe.recipeName}"]`);
-      const timeArray = separateTime(recipe.cookTime);
-      console.log(timeArray);
-
-      if (selectedCookTime.includes("over30") && (timeArray.hours > 0 || timeArray.minutes > 30)) {
-         recipeElement.style.display = 'block';
-      }
-      else if (selectedCookTime.includes("under30") && timeArray.hours == 0 && timeArray.minutes > 15 && timeArray.minutes <= 30) {
-         recipeElement.style.display = 'block';
-      } 
-      else if (selectedCookTime.includes("under15") && timeArray.hours == 0 && timeArray.minutes <= 15) {
-         recipeElement.style.display = 'block';
-      }
-      else{ 
-         recipeElement.style.display = 'none';
-      }
-   });
- }
-
- function separateTime(cookTime) {
+function separateTime(cookTime) {
    let hours = 0;
    let minutes = 0;
  
    const timeParts = cookTime.split(' ');
    timeParts.forEach((part, index) => {
-     if (part === 'hrs') {
+     if (part === 'hrs' || 'hr') {
        hours = parseInt(timeParts[index - 1]);
      } else if (part === 'mins') {
        minutes = parseInt(timeParts[index - 1]);
@@ -292,3 +119,82 @@ function filterByCookTime() {
  
    return { hours, minutes };
  }
+
+
+function filterRecipes() {
+   const selectedCuisines = Array.from(document.querySelectorAll('.filter-criteria input[name="cuisine"]:checked')).map(cuisine => cuisine.id);
+   const selectedCookTimes = Array.from(document.querySelectorAll('input[name="cookTime"]:checked')).map(checkbox => checkbox.id);
+   const selectedIngredients = getSelectedButtonIds();
+
+   const recipes = getRecipes();
+
+   recipes.forEach(recipe => {
+      const recipeElement = document.querySelector(`.recipe[recipe-name="${recipe.recipeName}"]`);
+      const timeArray = separateTime(recipe.cookTime);
+      const hasSelectedCuisine = selectedCuisines.length === 0 || selectedCuisines.includes(recipe.recipeCuisine);
+      const hasSelectedCookTime = selectedCookTimes.length === 0 ||
+         (selectedCookTimes.includes("over30") && (timeArray.hours > 0 || timeArray.minutes > 30)) ||
+         (selectedCookTimes.includes("under30") && timeArray.hours == 0 && timeArray.minutes > 15 && timeArray.minutes <= 30) ||
+         (selectedCookTimes.includes("under15") && timeArray.hours == 0 && timeArray.minutes <= 15);
+      const hasSelectedIngredients = selectedIngredients.length === 0 ||
+         recipe.recipeIngredients.some(ingredient => selectedIngredients.includes(ingredient));
+
+      if (recipeElement && hasSelectedCuisine && hasSelectedCookTime && hasSelectedIngredients) {
+         recipeElement.style.display = 'block';
+      } else {
+         recipeElement.style.display = 'none';
+      }
+   });
+}
+
+// function filterRecipes() {
+//    let selectedIngredients = getSelectedButtonIds();
+//    console.log(selectedIngredients);
+   
+//    let selectedCuisine = [];
+//    document.querySelectorAll('.cuisineCheckBoxes:checked').forEach(checkbox => {
+//       selectedCuisine.push(checkbox.id);
+//    });
+//    console.log(selectedCuisine);
+
+//    let selectedCookTime = [];
+//    document.querySelectorAll('.timeCheckBoxes:checked').forEach(checkbox => {
+//       selectedCookTime.push(checkbox.id);
+//    });
+//    console.log(selectedCookTime);
+
+//    const recipes = getRecipes();
+
+//    let results = [];
+   
+//    recipes.forEach(recipe => {
+//       // Check if recipe contains any of the selected ingredients
+//       let matchesIngredient = recipe.recipeIngredients.some(
+//          (ingredient) => selectedIngredients.includes(ingredient)
+//       );
+      
+      
+      
+//       // If recipe meets all criteria, push it to the result array
+//       if (matchesIngredient && matchesCuisine && matchesCookTime) {
+//          results.push(recipe);
+//       }
+//    });
+
+//    console.log(results)
+//    // Display results and hide any recipes not in result
+//    displayRecipes(results);
+// }
+
+// function displayRecipes(recipes) {
+//    // Assuming you have a function to display recipes
+//    // Iterate through all recipes and display/hide them based on the result
+//    const allRecipes = document.querySelectorAll('.recipe');
+//    allRecipes.forEach(recipe => {
+//       if (recipes.includes(recipe)) {
+//          recipe.style.display = 'block'; // Show recipe
+//       } else {
+//          recipe.style.display = 'none'; // Hide recipe
+//       }
+//    });
+// }

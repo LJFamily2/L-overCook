@@ -35,7 +35,7 @@
     <button
       class="selectable-button <%= index >= maxVisibleIngredients ? 'hidden' : '' %>"
       id="<%= ingredient %>"
-      onclick="toggleSelection(this)"
+      onclick="toggleSelection(this); filterRecipes()"
     >
       <span class="button-text"><%= ingredient %></span>
     </button>

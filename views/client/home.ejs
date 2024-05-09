@@ -42,10 +42,11 @@
         <% cuisines.forEach(cuisine => {%>
         <div>
           <input
+            class="cuisineCheckBoxes"
             type="checkbox"
             id="<%= cuisine.name %>"
             name="cuisine"
-            onchange="filterByCuisines()"
+            onclick="filterRecipes()"
           />
           <label for="<%= cuisine.name %>"> <%= cuisine.name %> </label>
         </div>
@@ -56,28 +57,31 @@
       <div>
         <div>
           <input
+            class="timeCheckBoxes"
             type="checkbox"
             id="under15"
             name="cookTime"
-            onchange="filterByCookTime()"
+            onclick="filterRecipes()"
           />
           <label for="under15"> Under 15 mins </label>
         </div>
         <div>
           <input
+            class="timeCheckBoxes"
             type="checkbox"
             id="under30"
             name="cookTime"
-            onchange="filterByCookTime()"
+            onclick="filterRecipes()"
           />
           <label for="under30"> 15 - 30 mins </label>
         </div>
         <div>
           <input
+            class="timeCheckBoxes"
             type="checkbox"
             id="over30"
             name="cookTime"
-            onchange="filterByCookTime()"
+            onclick="filterRecipes()"
           />
           <label for="over30"> Over 30 mins </label>
         </div>
