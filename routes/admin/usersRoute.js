@@ -15,7 +15,9 @@ router.get('/',connectEnsureLogin.ensureLoggedIn({redirectTo:'/signin/admin'}),c
       heading: 'User Management',
       admins,
       currentPage: 'user-management',
-      messages: req.flash()
+      messages: req.flash(),
+      searchPage: false,
+      pageName: 'users'
    });
 });
 router.post(
