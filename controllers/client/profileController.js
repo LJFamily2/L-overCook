@@ -8,7 +8,7 @@ const bcrypt = require('bcrypt');
 const getProfilePage = async (req, res) => {
    try {
    
-   res.render('client/profile', { layout: "layouts/client/defaultLayout", userAuthentication: false, user: req.user});
+   res.render('client/profile', { layout: "layouts/client/defaultLayout", userAuthentication: false, user: req.user, messages:req.flash()});
    } catch (error) {
       console.error(error);
       res.status(500);

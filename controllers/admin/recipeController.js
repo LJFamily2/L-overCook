@@ -484,7 +484,7 @@ const path = require('path');
 
 const deleteImageFile = async (image) => {
    try {
-      await fs.unlink(path.join('public/uploadImages', image));
+      await fs.unlink(path.join('public', image));
    } catch (err) {
       console.log('Error deleting image file:', err);
    }
@@ -659,7 +659,7 @@ const createRecipeLogic = async (
          description,
          ingredients,
          cuisine,
-         image,
+         image: `/uploadImages/${image}`,
          time,
          url,
       });
@@ -750,7 +750,7 @@ exports.updateRecipe = async (req, res) => {
             description,
             ingredients,
             cuisine,
-            image: updatedImage,
+            image: `/uploadImages/${updatedImage}`,
             time,
             url,
          },

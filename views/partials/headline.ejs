@@ -41,13 +41,14 @@
             <ol class="breadcrumb mb-0">
                <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
                <% if(heading){ %>
-   
-               <li class="breadcrumb-item active" aria-current="page">
-                  <%= heading %>
-               </li>
-               <% } %>
-            </ol>
-         </nav>
+                  
+                  <li class="breadcrumb-item active" aria-current="page">
+                     <%= heading %>
+                  </li>
+                  <% } %>
+               </ol>
+            </nav>
+         <% if(pageName !== 'users'){ %>
          <div class="col-4 searchBar w-25 px-1 border-2">
             <form action="/<%= pageName %>/search" method="get">
                <div class="input-group">
@@ -66,6 +67,7 @@
                </div>
             </form>
          </div>
+         <% } %>
       </div>
    </div>
 <% } %>
