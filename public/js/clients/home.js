@@ -160,7 +160,7 @@ function showRecipe(recipeElement, recipe, selectedIngredients) {
         if (event.target === viewAllBtn) {
             if (viewAllBtn.textContent === 'View details') {
                 // Show all missing ingredients
-                ingredientMatchDiv.innerHTML = `You have: ${relevantIngredients.join(', ')}.<span class="missing-ingredient"><br>Missing: ${missingIngredients.join(', ')}</span> <a class="view-all-btn" style="cursor:pointer; float:right;">Hide details</a>`;
+                ingredientMatchDiv.innerHTML = `You have: ${relevantIngredients.join(', ')}.<span class="missing-ingredient"><br>Missing: ${missingIngredients.join(', ')}. </span> <p><a class="view-all-btn" style="cursor:pointer; float:right;">Hide details</a></p>`;
             } else {
                 // Hide the details and restore the "View details" button
                 ingredientMatchDiv.innerHTML = `You have: ${relevantIngredients.length}/${recipe.recipeIngredients.length}. <a class="view-all-btn" style="cursor:pointer; float:right;">View details</a>`;
