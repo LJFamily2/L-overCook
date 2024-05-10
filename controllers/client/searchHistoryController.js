@@ -7,18 +7,19 @@ const Ingredient = require('../../models/Ingredient');
 const searchHistoryController = {
   getSearchHistory: async (req, res) => {
     try {
-      const categories = await categoryController.getAllCategories();
-      const ingredients = await ingredientController.getIngredientsForAllCategories();
-      const searchHistory = await User.find().populate("searchHistory").exec();
-      const searchIngredients = await Ingredient.find({}).limit(4);
-      const searchRecipes = await Recipe.find({}).limit(4);
-      res.render("client/searchHistory", {
-        categories,
-        ingredients, 
+      let userID = req.user.id;
+      const user = await User.findById(userID)
+         .populate('searchHistory')
+         .exec();
+         const searchIngredients = await Ingredient.find({});
+         const searchRecipes = await Recipe.find({});
+         res.render("client/searchHistory", {
+        layout: './layouts/client/defaultLayout',
+        userAuthentication: false,
+        user,
         searchIngredients,
         searchRecipes,
-        layout: "./layouts/client/defaultLayout", 
-        userAuthentication: true });
+        });
     } catch (err) {
       console.log(err);
       res.status(500).send("Internal Server Error");

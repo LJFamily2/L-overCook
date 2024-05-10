@@ -2,7 +2,7 @@ const User = require('../../models/User');
 const Recipe = require('../../models/Recipe');
 
 const favoriteRecipeController = {
-   getFavoriteRecipe: async (req, res) => {
+   getFavoriteRecipePage: async (req, res) => {
       try {
         let userID = req.user.id;
          const user = await User.findById(userID)
