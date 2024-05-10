@@ -4,6 +4,7 @@ const cuisineController = require('../../controllers/admin/cuisineController');
 const checkAdmin = require('../../middlewares/checkAdmin');
 const connectEnsureLogin = require('connect-ensure-login');
 
+router.get('/search',connectEnsureLogin.ensureLoggedIn({redirectTo:'/signin/admin'}),checkAdmin, cuisineController.searchCuisine);
 router.get('/',connectEnsureLogin.ensureLoggedIn({redirectTo:'/signin/admin'}),checkAdmin, cuisineController.getCuisinePage);
 router.post('/new', cuisineController.createCuisine);
 router.post('/delete/:id', cuisineController.deleteCuisine);

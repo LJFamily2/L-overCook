@@ -11,31 +11,27 @@ mongoose.connect('mongodb+srv://hantran:LoverCookPassword@lovercook.i9gijho.mong
   useUnifiedTopology: true,
 });
 
-// Function to seed categories
 async function seedCategories() {
-  const categoriesData = [
-    { name: 'Vegetables' },
-    { name: 'Herb & Spice' },
-    { name: 'Meat' },
-    { name: 'Liquid' },
-    { name: 'Oil' },
-    { name: 'Seafood' },
-    { name: 'Fruit' },
-    { name: 'Condiment' },
-    { name: 'Grains' },
-    { name: 'Noodles' },
-    { name: 'Dairy' },
-    { name: 'Wrapper' },
-    { name: 'N/A' },
-
-  ];
-
   try {
+    // Read the JSON file content
+    const jsonData = await fs.readFile('category.json', 'utf-8');
+    
+    // Parse the JSON data
+    const categoriesData = JSON.parse(jsonData);
+
+    // Delete existing categories
     await Category.deleteMany();
+
+    // Insert categories from the file
     await Category.insertMany(categoriesData);
+
     console.log('Categories seeded successfully');
   } catch (error) {
-    console.error('Error seeding categories:', error);
+    if (error.code === 'ENOENT') {
+      console.error(`Error: File not found - ${filePath}`);
+    } else {
+      console.error('Error seeding categories:', error);
+    }
   }
 }
 
@@ -87,7 +83,7 @@ async function seedCuisines() {
 async function seedRecipes() {
   try {
     // Read recipes data from JSON file
-    
+    // await Recipe.deleteMany();
     // const recipesData = await fs.readFile('recipesSeed-1.json', 'utf8');
     const recipesData = await fs.readFile('recipesSeed-2.json', 'utf8');
     const recipes = JSON.parse(recipesData);

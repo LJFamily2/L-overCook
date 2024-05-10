@@ -7,6 +7,7 @@ const connectEnsureLogin = require('connect-ensure-login');
 const upload = require('../../middlewares/UploadMedia');
 
 // Recipe Routes
+router.get('/search',recipeController.searchRecipe)
 router.get('/',connectEnsureLogin.ensureLoggedIn({redirectTo:'/signin/admin'}),checkAdmin, recipeController.getRecipePage);
 // Recipe Update
 router.get('/update/:id', recipeController.getUpdateRecipePage);

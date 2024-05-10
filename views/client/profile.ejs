@@ -11,7 +11,7 @@
          <img
             class="profile-picture"
             loading="eager"   
-            src="/uploadImages/<%= user.avatar %>"
+            src="<%= user.avatar %>"
             alt="profile picture"
          />
          <% } else { %>
@@ -47,6 +47,7 @@
    <!-- <button class="profile-button">
       <span>Edit Avatar</span>
    </button> -->
+   <%- include('../partials/notificationMessage') %>
 
    <div class="profile-information">
       <div class="field">
