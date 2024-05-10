@@ -21,7 +21,7 @@
 
 <%- include('../partials/ingredientFilter') %>
 
-<div id="main-content-container">
+<div class="main-content-container">
   <div id="main-content">
     <%- include ('../partials/searchBar') %>
 
@@ -42,10 +42,11 @@
         <% cuisines.forEach(cuisine => {%>
         <div>
           <input
+            class="cuisineCheckBoxes"
             type="checkbox"
             id="<%= cuisine.name %>"
             name="cuisine"
-            onchange="filterByCuisines()"
+            onclick="filterRecipes()"
           />
           <label for="<%= cuisine.name %>"> <%= cuisine.name %> </label>
         </div>
@@ -56,28 +57,31 @@
       <div>
         <div>
           <input
+            class="timeCheckBoxes"
             type="checkbox"
             id="under15"
             name="cookTime"
-            onchange="filterByCookTime()"
+            onclick="filterRecipes()"
           />
           <label for="under15"> Under 15 mins </label>
         </div>
         <div>
           <input
+            class="timeCheckBoxes"
             type="checkbox"
             id="under30"
             name="cookTime"
-            onchange="filterByCookTime()"
+            onclick="filterRecipes()"
           />
           <label for="under30"> 15 - 30 mins </label>
         </div>
         <div>
           <input
+            class="timeCheckBoxes"
             type="checkbox"
             id="over30"
             name="cookTime"
-            onchange="filterByCookTime()"
+            onclick="filterRecipes()"
           />
           <label for="over30"> Over 30 mins </label>
         </div>
@@ -95,42 +99,48 @@
           cook-time="<%= recipe.time %>"
           rating="<%=recipe.reviews.rating%>"
         >
-          <!-- Hidden element to store ingredient and rating -->
-          <% recipe.ingredients.forEach(ingredient => { %>
-          <div
-            class="recipe-ingredients hidden"
-            recipe-ingredient="<%=ingredient.ingredient.name%>"
+          <a
+            href="/recipes/<%= recipe.slug %>"
+            style="text-decoration: none; color: black"
           >
-            <%= ingredient.ingredient.name %>
-          </div>
-          <% }) %> <% recipe.reviews.forEach(review => { %>
-          <div class="recipe-rating hidden" recipe-rating="<%=review.rating%>">
-            <%=review.rating%>
-          </div>
-          <% }) %>
+            <!-- Hidden element to store ingredient and rating -->
+            <% recipe.ingredients.forEach(ingredient => { %>
 
-          <div class="recipe-img-container">
-            <img class="recipe-img" src="<%= recipe.image %>" />
-          </div>
-
-          <div class="first-row">
-            <div class="recipe-name" title="<%= recipe.name %>">
-              <a
-                href="/recipeManagement/<%= recipe.slug %>"
-                style="text-decoration: none; color: black"
-              >
-                <%= recipe.name %>
-              </a>
-            </div>
-            <form
-              action="/favorite-recipe/add-favorite/<%= recipe.slug %>"
-              method="post"
+            <div
+              class="recipe-ingredients hidden"
+              recipe-ingredient="<%= ingredient.ingredient.name %>"
             >
-              <button type="submit" class="bg-none border-0">
-                <i class="ri-heart-line"></i>
-              </button>
-            </form>
-          </div>
+              <%= ingredient.ingredient.name %>
+            </div>
+            <% }) %> <% recipe.reviews.forEach(review => { %>
+            <div
+              class="recipe-rating hidden"
+              recipe-rating="<%=review.rating%>"
+            >
+              <%=review.rating%>
+            </div>
+            <% }) %>
+
+            <div class="recipe-img-container">
+              <img class="recipe-img" src="<%= recipe.image %>" />
+            </div>
+
+            <div class="first-row">
+              <div class="recipe-name" title="<%= recipe.name %>">
+                <%= recipe.name %>
+              </div>
+              <form
+                action="/favorite-recipe/add-favorite/<%= recipe.slug %>"
+                method="post"
+              >
+                <button type="submit" class="bg-none border-0">
+                  <!-- Icon source: https://remixicon.com/icon/add-box-line -->
+                  <i class="ri-add-box-line" title="Add to favorites"></i>
+                </button>
+              </form>
+            </div>
+          </a>
+          <div class="ingredient-match"></div>
 
           <div class="second-row">
             <div class="cook-time">
@@ -141,9 +151,9 @@
               <% function displayStars(rating) { %> <% const
               roundedRating=Math.round(rating); %> <% for (let i=1; i <=5; i++)
               { %> <% if (i <=roundedRating) { %>
-              <span class="stars" style="color: #e7a046">&#128972;</span>
+              <i class="ri-heart-3-fill stars" style="color: #ffb7b7"></i>
               <% } else { %>
-              <span class="stars">&#128972;</span>
+              <i class="ri-heart-3-fill stars" style="color: #d9d9d9"></i>
               <% } %> <% } %> <% } %> <%= displayStars(recipe.averageRating) %>
             </div>
           </div>

@@ -106,15 +106,18 @@
 }
 
   /* Expand - shrink icon */
-.expand-icon {
+.expand-icon img {
     cursor: pointer;
     width: 40px;
     height: 40px;
     rotate: 180deg;
     cursor: pointer;
+    /* Make the image stand out from the background */
+    border-radius: 50%;
+    background: #fff;
   }
   
-.expand-icon-container {
+.expand-icon {
     cursor: pointer;
     width: 40px;
     height: 40px;
@@ -129,6 +132,10 @@
     animation: moveRight 0.5s forwards;
 }
 
+.bg-darken {
+  filter: blur(2px) brightness(50%);
+  background: linear-gradient(rgba(0, 0, 0, 0.4),rgba(0, 0, 0, 0.4));
+}
 
 /* Style for the button */
 .selectable-button {
@@ -163,7 +170,7 @@
       left: -320px;
     }
 
-    .expand-icon-container {
+    .expand-icon {
         display: block;
       }
 }

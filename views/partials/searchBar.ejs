@@ -23,14 +23,15 @@
          placeholder="Enter recipe name or ingredients you have..."
          id="searchInput"
          name="searchInput"
-         onkeyup="searchItems('searchInput', 'item-list', 'searchDropDown'  )"
+         onkeyup="searchItems('searchInput', 'ingredient-list', 'searchDropDown', false); searchItems('searchInput', 'recipe-list', 'searchDropDown', true)"
       />
       <!-- searchDropDown -->
       <div
          class="searchDropDown w-100 position-absolute start-0 top-100 hidden"
          id="searchDropDown"
+         style="z-index: 200;"
       >
-         <ul class="list-group" id="item-list">
+         <ul class="list-group" id="ingredient-list">
             <% searchIngredients.forEach(ingredient => { %>
                <li class="list-group-item "  style="cursor: pointer" onclick="toggleSelectionInFilter('searchInput','<%= ingredient.name %>', 'searchDropDown')">
                   <div class="d-flex justify-content-between">
@@ -42,12 +43,14 @@
                      </div>
                   </div>
                </li>
-           <% }) %>
-           <% searchRecipes.forEach(recipe => { %>
+            <% }) %>
+         </ul>
+         <ul class="list-group" id="recipe-list">
+            <% searchRecipes.forEach(recipe => { %>
                <li class="list-group-item" style="cursor: pointer" onclick="setValue('searchInput', '<%= recipe.name %>', 'searchDropDown')">
                    <%= recipe.name %>
                </li>
-           <% }) %>
+            <% }) %>
          </ul>
       </div>
    </form>

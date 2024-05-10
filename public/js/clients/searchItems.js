@@ -7,10 +7,16 @@ function searchItems(inputId, list, containerID) {
    const debouncedSearch = () => {
       if (searchTerm) {
          searchDropDown.classList.remove('hidden');
+         let matchCount = 0;
          for (const result of items) {
             const item = result.textContent.toLowerCase();
             if (item.includes(searchTerm)) {
-               result.style.display = 'block';
+               if (matchCount < 4) {
+                  result.style.display = 'block';
+                  matchCount++;
+               } else {
+                  result.style.display = 'none';
+               }
             } else {
                result.style.display = 'none';
             }
