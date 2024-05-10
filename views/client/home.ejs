@@ -91,28 +91,12 @@
     <div id="results">
       <div id="all-recipes">
         <% recipes.forEach(recipe => { %>
-        <div
-          class="recipe"
-          recipe-name="<%= recipe.name %>"
-          recipe-img="<%= recipe.image %>"
-          recipe-cuisine="<%= recipe.cuisine.name %>"
-          cook-time="<%= recipe.time %>"
-          rating="<%=recipe.reviews.rating%>"
-        >
+        <div class="recipe">
           <a
             href="/recipes/<%= recipe.slug %>"
             style="text-decoration: none; color: black"
           >
-            <!-- Hidden element to store ingredient and rating -->
-            <% recipe.ingredients.forEach(ingredient => { %>
-
-            <div
-              class="recipe-ingredients hidden"
-              recipe-ingredient="<%= ingredient.ingredient.name %>"
-            >
-              <%= ingredient.ingredient.name %>
-            </div>
-            <% }) %> <% recipe.reviews.forEach(review => { %>
+            <% recipe.reviews.forEach(review => { %>
             <div
               class="recipe-rating hidden"
               recipe-rating="<%=review.rating%>"

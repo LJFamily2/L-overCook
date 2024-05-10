@@ -149,9 +149,12 @@ input[type="checkbox"] {
 
 .missing-ingredient{
   font-size: 14px;
-  margin: 10px 0 0 14px;
   color: red;
   font-style: italic;
+}
+
+.view-details{
+  float: right;
 }
 
 .second-row {
