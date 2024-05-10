@@ -204,38 +204,65 @@ function renderRecipes(recipes) {
     });
 }
 
-// Function to filter and sort recipes
 async function filterRecipes() {
-   try {
-       // Fetch recipes data asynchronously
-       const recipesData = await fetchRecipes();
-       const recipes = recipesData.recipes; // Access the 'recipes' array from 'recipesData'
+    try {
+        // Fetch recipes data asynchronously
+        const recipesData = await fetchRecipes();
+        const recipes = recipesData.recipes; // Access the 'recipes' array from 'recipesData'
 
-       // Get selected filter criteria
-       const selectedIngredients = getSelectedButtonIds();
+        // Get selected filter criteria
+        const selectedIngredients = getSelectedButtonIds();
+        const selectedCuisine = Array.from(document.querySelectorAll('input[name="cuisine"]:checked')).map(checkbox => checkbox.id);
+        const selectedCookTime = Array.from(document.querySelectorAll('input[name="cookTime"]:checked')).map(checkbox => checkbox.id);
 
-       // Filter recipes based on selected criteria
-       let filteredRecipes = recipes.filter(recipe => {
-           // Extract ingredients from the recipe object
-           const recipeIngredients = recipe.ingredients.map(ingredientObj => ingredientObj.ingredient.name);
+        // Filter recipes based on selected criteria
+        let filteredRecipes = recipes.filter(recipe => {
+            // Extract ingredients from the recipe object
+            const recipeIngredients = recipe.ingredients.map(ingredientObj => ingredientObj.ingredient.name);
 
-           // Check if all selected ingredients are present in the recipe's ingredients
-           return selectedIngredients.every(ingredient => recipeIngredients.includes(ingredient));
-       });
+            // Check if any selected ingredient is present in the recipe's ingredients
+            const anyIngredientMatch = selectedIngredients.some(ingredient => recipeIngredients.includes(ingredient));
 
-       // Sort filtered recipes based on the number of matched ingredients
-       filteredRecipes.sort((a, b) => {
-           const matchedIngredientsA = a.ingredients.filter(ingredientObj => selectedIngredients.includes(ingredientObj.ingredient.name)).length;
-           const matchedIngredientsB = b.ingredients.filter(ingredientObj => selectedIngredients.includes(ingredientObj.ingredient.name)).length;
-           return matchedIngredientsB - matchedIngredientsA; // Sort in descending order
-       });
+            // Check if cuisine matches
+            const cuisineMatch = selectedCuisine.length === 0 || selectedCuisine.includes(recipe.cuisine.name);
 
-       // Render filtered and sorted recipes
-       renderRecipes(filteredRecipes);
-   } catch (error) {
-       console.error('Error filtering recipes:', error);
-   }
+            // Check if cook time matches
+            let cookTimeMatch = false;
+            if (selectedCookTime.length === 0) {
+                cookTimeMatch = true; // No cook time selected, so all recipes match
+            } else {
+                // Extract hours and minutes from recipe's cook time
+                const timeArray = separateTime(recipe.time);
+                
+                // Check if the recipe's cook time matches any of the selected options
+                if (selectedCookTime.includes("over30") && (timeArray.hours > 0 || timeArray.minutes > 30)) {
+                    cookTimeMatch = true;
+                } else if (selectedCookTime.includes("under30") && timeArray.hours === 0 && timeArray.minutes > 15 && timeArray.minutes <= 30) {
+                    cookTimeMatch = true;
+                } else if (selectedCookTime.includes("under15") && timeArray.hours === 0 && timeArray.minutes <= 15) {
+                    cookTimeMatch = true;
+                }
+            }
+
+            return (anyIngredientMatch || selectedIngredients.length === 0) && cuisineMatch && cookTimeMatch;
+        });
+
+        // Sort filtered recipes based on the number of matched ingredients
+        filteredRecipes.sort((a, b) => {
+            const matchedIngredientsA = a.ingredients.filter(ingredientObj => selectedIngredients.includes(ingredientObj.ingredient.name)).length;
+            const matchedIngredientsB = b.ingredients.filter(ingredientObj => selectedIngredients.includes(ingredientObj.ingredient.name)).length;
+            return matchedIngredientsB - matchedIngredientsA; // Sort in descending order
+        });
+
+        // Render filtered and sorted recipes
+        renderRecipes(filteredRecipes);
+    } catch (error) {
+        console.error('Error filtering recipes:', error);
+    }
 }
+
+
+
 
 
 
