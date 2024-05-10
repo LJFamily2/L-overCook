@@ -19,6 +19,7 @@
     padding-left: 0;
     padding-right: 0;
     background-color: var(--color-background-white);
+    min-height: 90vh;
 }
 
 .profile-head {
@@ -226,4 +227,11 @@
     flex-direction: column;
     align-items: center;
     gap: 10px;
+}
+
+@media (max-width: 520px) {
+    .profile-information {
+        width: 90%;
+        padding: 20px 20px;
+    }
 }
