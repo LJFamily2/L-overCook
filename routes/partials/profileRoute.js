@@ -6,15 +6,15 @@ const connectEnsureLogin = require('connect-ensure-login');
 
 
 router.get('/profile',connectEnsureLogin.ensureLoggedIn({redirectTo:'/signin'}), profileController.getProfilePage);
-router.get('/profile/resetPassword',connectEnsureLogin.ensureLoggedIn({redirectTo:'/signin'}), profileController.getEmailPage);
+router.get('/profile/resetPassword', profileController.getEmailPage);
 router.post('/profile/resetPassword', profileController.sendOtp);
 
-router.get('/profile/resetPassword/verifyOTP',connectEnsureLogin.ensureLoggedIn({redirectTo:'/signin'}), profileController.verifyOtpPage);
+router.get('/profile/resetPassword/verifyOTP', profileController.verifyOtpPage);
 router.post('/profile/resetPassword/verifyOTP', profileController.handleOtpRequest);
 
 // layout only
 // update password
-router.get('/profile/updatePassword',connectEnsureLogin.ensureLoggedIn({redirectTo:'/signin'}), checkVerifyOTP, (req, res) => {
+router.get('/profile/updatePassword', checkVerifyOTP, (req, res) => {
     res.render('client/updatePassword', {
         layout: 'layouts/client/defaultLayout',
         userAuthentication: false,
