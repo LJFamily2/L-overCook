@@ -38,7 +38,7 @@ h2 {
     font-family: 'Inter', sans-serif;
 }
 
-#all-recipes {
+.viewed-recipes {
     display: flex;
     justify-content: space-between;
     gap: 40px;
@@ -56,6 +56,7 @@ h2 {
     border-radius: 15px;
     border: #7c5532 solid 0.25px;
     margin-bottom: 30px;
+    position: relative;
 }
   
 .recipe-img-container {
@@ -79,7 +80,7 @@ h2 {
     font-size: 28px;
     border: none;
     cursor: pointer;
-    color: #ff5e5e;
+    color: rgb(220, 183, 89);
     margin-top: -5px;
 }
   
@@ -96,8 +97,10 @@ h2 {
 }
 
 .second-row {
-    margin-top: 9px;
+    width: 100%;
     font-size: 14px;
+    position: absolute;
+    bottom: 3px;
 }
   
 .recipe-name {
@@ -119,7 +122,7 @@ h2 {
     color: #9a9999;
 }
   
-.fa-star {
+.stars {
     color: #d9d9d9;
 }
 
@@ -137,7 +140,7 @@ h2 {
         width: 85%;
     }
 
-    #all-recipes {
+    .viewed-recipes {
         gap: 30px;
     }
 
