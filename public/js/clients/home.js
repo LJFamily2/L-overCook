@@ -23,43 +23,67 @@ function getSelectedButtonIds() {
 
 // Function to toggle selection state of the button and update pantry items
 function toggleSelection(button) {
-   button.classList.toggle('selected');
-   const selectedIngredients = getSelectedButtonIds();
+    button.classList.toggle('selected');
+    const selectedIngredients = getSelectedButtonIds();
+ 
+    // Update pantry items based on selected ingredients
+    updatePantryList(selectedIngredients);
+ 
+    // Update the number of ingredients displayed in the pantry icon
+    updatePantryCount(selectedIngredients.length);
+ 
+    // Update active status of ingredient in search bar
+    const ingredientId = button.id;
+    const activeStatus = document.querySelector(`.active-status#${CSS.escape(ingredientId)}`);
+ 
+    if (button.classList.contains('selected')) {
+        activeStatus.textContent = '-';
+        filterRecipes();
+    } else {
+        activeStatus.textContent = '+';
+        const ingredientMatch = document.querySelector('.ingredient-match');
+       ingredientMatch.innerHTML = '';
+    }
+ 
+    // Filter recipes again based on the updated selected ingredients
+    filterRecipes();
+ }
 
-   // Update pantry items based on selected ingredients
-   updatePantryList(selectedIngredients);
 
-   // Update the number of ingredients displayed in the pantry icon
-   updatePantryCount(selectedIngredients.length);
+ function updatePantryList(ingredients) {
+    const pantryList = document.querySelector('.pantry-list');
+    pantryList.innerHTML = ''; // Clear existing pantry list
 
-   // Update active status of ingredient in search bar
-   const ingredientId = button.id;
-   const activeStatus = document.querySelector(`.active-status#${CSS.escape(ingredientId)}`);
+    ingredients.forEach((ingredient, index) => {
+       const listItem = document.createElement('li');
+       listItem.classList.add('pantry-item'); // Add class for pantry item
+       listItem.textContent = `${ingredient}`;
 
-   if (button.classList.contains('selected')) {
-       activeStatus.textContent = '-';
-       filterRecipes();
-   } else {
-       activeStatus.textContent = '+';
-       const ingredientMatch = document.querySelector('.ingredient-match');
-      ingredientMatch.innerHTML = '';
-   }
+       // Create button to remove ingredient
+       const removeButton = document.createElement('button');
+       removeButton.classList.add('remove-ingredient'); // Add class for remove button
+       removeButton.style.float = 'right'; // Float right
 
-   // Filter recipes again based on the updated selected ingredients
-   filterRecipes();
-}
+       // Create icon element for trash icon
+       const trashIcon = document.createElement('i');
+       trashIcon.classList.add('bi', 'bi-trash'); // Add classes for trash icon
+       trashIcon.setAttribute('aria-hidden', 'true');
 
+       // Append trash icon to button
+       removeButton.appendChild(trashIcon);
 
-function updatePantryList(ingredients) {
-   const pantryList = document.querySelector('.pantry-list');
-   pantryList.innerHTML = ''; // Clear existing pantry list
+       removeButton.addEventListener('click', () => {
+          removePantryItem(ingredient); // Call removePantryItem function
+          toggleSelection(document.getElementById(ingredient)); // Remove from selected ingredients
+       });
 
-   ingredients.forEach((ingredient, index) => {
-      const listItem = document.createElement('li');
-      listItem.textContent = `${ingredient}`;
-      pantryList.appendChild(listItem);
-   });
-}
+       // Append button to pantry item
+       listItem.appendChild(removeButton);
+
+       // Append pantry item to pantry list
+       pantryList.appendChild(listItem);
+    });
+ }
 
 // Function to remove selected ingredient from pantry items
 function removePantryItem(ingredientName) {
@@ -110,63 +134,69 @@ async function fetchRecipes() {
 }
 
 function generateRecipeHTML(recipe) {
-   // Extracting matched ingredients
-   const selectedIngredients = getSelectedButtonIds();
-   const matchedIngredients = recipe.ingredients.filter(ingredientObj => selectedIngredients.includes(ingredientObj.ingredient.name));
-   const missingIngredients = recipe.ingredients.filter(ingredientObj => !selectedIngredients.includes(ingredientObj.ingredient.name));
-   const totalIngredients = recipe.ingredients.length;
-
-   // Generate HTML based on recipe data
-   return `
-       <div class="recipe">
-           <a href="/recipes/${recipe.slug}" style="text-decoration: none; color: black">
-               ${recipe.reviews.map(review => `
-                   <div class="recipe-rating hidden" recipe-rating="${review.rating}">
-                       ${review.rating}
-                   </div>
-               `).join('')}
-               <div class="recipe-img-container">
-                   <img class="recipe-img" src="${recipe.image}" />
-               </div>
-               <div class="first-row">
-                   <div class="recipe-name" title="${recipe.name}">
-                       ${recipe.name}
-                   </div>
-                   <form action="/favorite-recipe/add-favorite/${recipe.slug}" method="post">
-                       <button type="submit" class="bg-none border-0">
-                           <i class="ri-add-box-line" title="Add to favorites"></i>
-                       </button>
-                   </form>
-               </div>
-           </a>
-           <div class="ingredient-match">
-               <p>
-                  <strong>Matched Ingredients:</strong> ${matchedIngredients.length} / ${totalIngredients} 
-                  <a class="view-details">View Details</a>
-               </p>
-               
-               <div class="details hidden">
-                  <p>
-                     <strong>You have:</strong> ${matchedIngredients.map(ingredientObj => `${ingredientObj.ingredient.name}`).join(', ')} 
-                  </p>
-                       
-                  <p class="missing-ingredient"><strong>Missing Ingredients:</strong>
-                     ${missingIngredients.map(ingredientObj => `${ingredientObj.ingredient.name}`).join(', ')}
-                  </p>
-               </div>
-           </div>
-           <div class="second-row">
-               <div class="cook-time">
-                   <img src="/images/clock.png" />
-                   <span>${recipe.time}</span>
-               </div>
-               <div class="rating">
-                   ${displayStars(recipe.averageRating)}
-               </div>
-           </div>
-       </div>
-   `;
-}
+    // Extracting matched ingredients
+    const selectedIngredients = getSelectedButtonIds();
+    const matchedIngredients = recipe.ingredients.filter(ingredientObj => selectedIngredients.includes(ingredientObj.ingredient.name));
+    const missingIngredients = recipe.ingredients.filter(ingredientObj => !selectedIngredients.includes(ingredientObj.ingredient.name));
+    const totalIngredients = recipe.ingredients.length;
+ 
+    // Check if there are matched ingredients
+    const matchedIngredientsExist = selectedIngredients.length > 0 && matchedIngredients.length > 0;
+ 
+    // Generate HTML based on recipe data
+    return `
+        <div class="recipe">
+            <a href="/recipes/${recipe.slug}" style="text-decoration: none; color: black">
+                ${recipe.reviews.map(review => `
+                    <div class="recipe-rating hidden" recipe-rating="${review.rating}">
+                        ${review.rating}
+                    </div>
+                `).join('')}
+                <div class="recipe-img-container">
+                    <img class="recipe-img" src="${recipe.image}" />
+                </div>
+                <div class="first-row">
+                    <div class="recipe-name" title="${recipe.name}">
+                        ${recipe.name}
+                    </div>
+                    <form action="/favorite-recipe/add-favorite/${recipe.slug}" method="post">
+                        <button type="submit" class="bg-none border-0">
+                            <i class="ri-add-box-line" title="Add to favorites"></i>
+                        </button>
+                    </form>
+                </div>
+            </a>
+            ${matchedIngredientsExist ? `
+            <div class="ingredient-match">
+                <p>
+                   <strong>Matched Ingredients:</strong> ${matchedIngredients.length} / ${totalIngredients} 
+                   <a class="view-details">View Details</a>
+                </p>
+                
+                <div class="details hidden">
+                   <p>
+                      <strong>You have:</strong> ${matchedIngredients.map(ingredientObj => `${ingredientObj.ingredient.name}`).join(', ')} 
+                   </p>
+                        
+                   <p class="missing-ingredient"><strong>Missing Ingredients:</strong>
+                      ${missingIngredients.map(ingredientObj => `${ingredientObj.ingredient.name}`).join(', ')}
+                   </p>
+                </div>
+            </div>
+            ` : ''}
+            <div class="second-row">
+                <div class="cook-time">
+                    <img src="/images/clock.png" />
+                    <span>${recipe.time}</span>
+                </div>
+                <div class="rating">
+                    ${displayStars(recipe.averageRating)}
+                </div>
+            </div>
+        </div>
+    `;
+ }
+ 
 
 document.addEventListener('click', function(event) {
    // Check if the clicked element is a "View Details" link
@@ -202,6 +232,19 @@ function renderRecipes(recipes) {
         const recipeHTML = generateRecipeHTML(recipe);
         resultsContainer.insertAdjacentHTML('beforeend', recipeHTML);
     });
+}
+
+// Display number of recipes can be make with selected ingredients
+function updateRecipeCount(count) {
+    const recipeCountElement = document.querySelector('.recipe-count');
+    const selectedIngredients = getSelectedButtonIds();
+    if (recipeCountElement) {
+        if (selectedIngredients.length > 0) {
+            recipeCountElement.innerHTML = `You can make <span id="num-of-recipes">${count}</span> recipes`;
+        } else {
+            recipeCountElement.innerHTML = ''; // Hide the message
+        }
+    }
 }
 
 async function filterRecipes() {
@@ -259,12 +302,13 @@ async function filterRecipes() {
 
         // Render filtered and sorted recipes
         renderRecipes(filteredRecipes);
+
+        // Update recipe count
+        updateRecipeCount(filteredRecipes.length);
     } catch (error) {
         console.error('Error filtering recipes:', error);
     }
 }
-
-
 
 
 

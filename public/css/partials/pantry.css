@@ -69,6 +69,18 @@
   margin-bottom: 8px;
 }
 
+.remove-ingredient {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.remove-ingredient i {
+  color: red; 
+}
+
+
 @keyframes wiggle {
   0% {
     transform: rotate(0deg);
