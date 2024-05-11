@@ -440,7 +440,7 @@
         "quantity": "1 teaspoon"
       }
     ],
-    "time": "21",
+    "time": "5 mins",
     "cuisine": "Filipino",
     "image": "https://www.allrecipes.com/thmb/U_fxdOdXx8eEdTDluHfMRw4NcxY=/282x188/filters:no_upscale():max_bytes(150000):strip_icc():focal(479x0:481x2):format(webp)/845674-60aa51a79ed845ababdd3380a8585d69.jpg",
     "url": "https://www.allrecipes.com/recipe/214086/tracis-adobo-seasoning/"
@@ -483,7 +483,7 @@
         "quantity": "2 tablespoons"
       }
     ],
-    "time": "24",
+    "time": "20 mins",
     "cuisine": "Filipino",
     "image": "https://www.allrecipes.com/thmb/BEjVQeRngBWIyelufeqh9YMfk0Y=/282x188/filters:no_upscale():max_bytes(150000):strip_icc():focal(1511x0:1513x2):format(webp)/8018584-afa40469b4c545e0a3755027a8adbd30.jpg",
     "url": "https://www.allrecipes.com/recipe/212956/empanada-dough/"
@@ -905,7 +905,7 @@
         "quantity": "1 teaspoon"
       }
     ],
-    "time": "2",
+    "time": "10 mins",
     "cuisine": "Filipino",
     "image": "https://www.allrecipes.com/thmb/e9G5SsdJ2-fov-m5nSGW2LjrqLU=/282x188/filters:no_upscale():max_bytes(150000):strip_icc():focal(479x0:481x2):format(webp)/3515697-filipino-avocado-milkshake-Josephine-Yuen-4x3-1-4e87b9b506de42bc8e306ebd8e45cdc7.jpg",
     "url": "https://www.allrecipes.com/recipe/139425/filipino-avocado-milkshake/"
@@ -4169,7 +4169,7 @@
         "quantity": "1 teaspoon"
       }
     ],
-    "time": "1",
+    "time": "10 mins",
     "cuisine": "Vietnamese",
     "image": "https://www.allrecipes.com/thmb/nFW9XZ_p1BtY--wEd2yrO0b685o=/282x188/filters:no_upscale():max_bytes(150000):strip_icc():focal(479x0:481x2):format(webp)/3883865-bdc6f3fe8a4f4b1bb6201c69590dc7de.jpg",
     "url": "https://www.allrecipes.com/recipe/254330/vietnamese-coffee/"
@@ -4410,7 +4410,7 @@
         "quantity": "1 cup"
       }
     ],
-    "time": "2",
+    "time": "10 mins",
     "cuisine": "Vietnamese",
     "image": "https://www.allrecipes.com/thmb/li9cqVPc5LksFkrBWVOR8AhZIOs=/282x188/filters:no_upscale():max_bytes(150000):strip_icc():focal(479x0:481x2):format(webp)/1073093-5e27b29668ac42c48e6547abafbc7794.jpg",
     "url": "https://www.allrecipes.com/recipe/154950/dragon-fruit-shake/"
@@ -4486,7 +4486,7 @@
         "quantity": "⅓ cup"
       }
     ],
-    "time": "4",
+    "time": "30 mins",
     "cuisine": "Vietnamese",
     "image": "https://www.allrecipes.com/thmb/WLWWgtg4OJGD9KMlYA5_bLXacYI=/282x188/filters:no_upscale():max_bytes(150000):strip_icc():focal(539x0:541x2):format(webp)/214225-Vietnamese-Chicken-Salad-Catkin_561188_original-1x1-1-30ba6bf75ccc441e91ccba9a11e670b3.jpg",
     "url": "https://www.allrecipes.com/recipe/214225/vietnamese-chicken-salad/"
@@ -4626,7 +4626,7 @@
         "quantity": "1 cup"
       }
     ],
-    "time": "6",
+    "time": "15 mins",
     "cuisine": "Vietnamese",
     "image": "https://www.allrecipes.com/thmb/LwKAHuyfxurlVafpvbcNFLMan8c=/282x188/filters:no_upscale():max_bytes(150000):strip_icc():focal(2591x0:2593x2):format(webp)/7903556-67fed4852d8b432a8d67e7770b3025e2.jpg",
     "url": "https://www.allrecipes.com/recipe/14683/nuoc-cham-sauce/"
@@ -5108,7 +5108,7 @@
         "quantity": "½ cup"
       }
     ],
-    "time": "1",
+    "time": "5 mins",
     "cuisine": "Vietnamese",
     "image": "https://www.allrecipes.com/thmb/z3n0-AHoQqoZw0ZOShwbB4MttHk=/282x188/filters:no_upscale():max_bytes(150000):strip_icc():focal(1113x0:1115x2):format(webp)/9017474-e45b7ac34f4044f2a7b5c498b700df6a.jpg",
     "url": "https://www.allrecipes.com/recipe/283318/vietnamese-egg-coffee/"
