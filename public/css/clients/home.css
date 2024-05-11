@@ -149,9 +149,12 @@ input[type="checkbox"] {
 
 .missing-ingredient{
   font-size: 14px;
-  margin: 10px 0 0 14px;
   color: red;
   font-style: italic;
+}
+
+.view-details{
+  float: right;
 }
 
 .second-row {
@@ -171,6 +174,10 @@ input[type="checkbox"] {
   text-overflow: ellipsis;
   /* Add spacing between the name and heart icon*/
   margin-right: 5px;
+}
+
+.recipe-count{
+  margin-top: 50px;
 }
 
 .second-row img {

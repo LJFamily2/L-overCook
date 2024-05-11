@@ -29,6 +29,19 @@ exports.getHomePage = async (req, res) => {
    }
 };
 
+exports.getAllRecipes = async (req, res) => {
+   try {
+      const recipes = await Recipe.find()
+         .populate('ingredients.ingredient', 'name -_id')
+         .populate('cuisine', 'name -_id')
+         .exec();
+         res.json({ recipes });
+   } catch (error) {
+      console.error('Error fetching recipes:', error);
+      res.status(500).json({ error: 'Internal Server Error' });
+   }
+};
+
 // exports.getSearchPage = async (req, res) => {
 //    try {
 //       const { searchInput } = req.body;
