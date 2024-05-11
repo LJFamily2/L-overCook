@@ -16,7 +16,7 @@ body {
 
 
 .main-content-container {
-  width: 78%;
+  width: calc(100% - 330px);
   display: flex;
   justify-content: center;
   position: absolute;
@@ -25,7 +25,7 @@ body {
 }
 
 #main-content {
-  width: 80%;
+  width: 85%;
 }
 
 
@@ -79,7 +79,7 @@ input[type="checkbox"] {
 #all-recipes {
   display: flex;
   flex-wrap: wrap;
-  gap: 50px;
+  gap: 30px;
 }
 
 #num-of-recipes {
@@ -149,9 +149,12 @@ input[type="checkbox"] {
 
 .missing-ingredient{
   font-size: 14px;
-  margin: 10px 0 0 14px;
   color: red;
   font-style: italic;
+}
+
+.view-details{
+  float: right;
 }
 
 .second-row {
@@ -173,6 +176,10 @@ input[type="checkbox"] {
   margin-right: 5px;
 }
 
+.recipe-count{
+  margin-top: 50px;
+}
+
 .second-row img {
   width: 10px;
 }
@@ -185,45 +192,15 @@ input[type="checkbox"] {
 
 /* Responsive */
 @media screen and (max-width: 1271px) {
-  .main-content-container {
-    width: 75%;
-  }
-
   #all-recipes {
     gap: 30px;
   }
 }
 
-@media screen and (max-width: 1210px) {
-  .main-content-container {
-    width: 70%;
-  }
-
+@media screen and (max-width: 1230px) {
   .recipe {
     width: calc(100% / 2 - 40px);
     max-width: none;
-  }
-}
-
-@media screen and (max-width: 1073px) {
-  .main-content-container {
-    width: 67%;
-  }
-}
-
-@media screen and (max-width: 1000px) {
-  .main-content-container {
-    width: 65%;
-  }
-}
-
-@media screen and (max-width: 953px) {
-  .main-content-container {
-    width: 63%;
-  }
-
-  #main-content {
-    width: 82%;
   }
 }
 
