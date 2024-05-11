@@ -28,6 +28,10 @@
     "category": "Oils & Fats"
   },
   {
+    "name": "chicken breast",
+    "category": "Poultry"
+  },
+  {
     "name": "soy sauce",
     "category": "Condiments"
   },
@@ -37,11 +41,11 @@
   },
   {
     "name": "chicken legs",
-    "category": "Poultry"
+    "category": "Meats"
   },
   {
     "name": "chicken thighs",
-    "category": "Poultry"
+    "category": "Meats"
   },
   {
     "name": "low sodium soy sauce",
@@ -337,7 +341,7 @@
   },
   {
     "name": "chicken",
-    "category": "Poultry"
+    "category": "Meats"
   },
   {
     "name": "green onion",
@@ -381,7 +385,7 @@
   },
   {
     "name": "bone-in chicken thighs",
-    "category": "Poultry"
+    "category": "Meats"
   },
   {
     "name": "chicken bouillon granules",
@@ -428,8 +432,24 @@
     "category": "Dressings & Vinegars"
   },
   {
+    "name": "chicken thighs",
+    "category": "Poultry"
+  },
+  {
     "name": "scallions",
     "category": "Vegetables & Greens"
+  },
+  {
+    "name": "chicken legs",
+    "category": "Poultry"
+  },
+  {
+    "name": "chicken thighs",
+    "category": "Poultry"
+  },
+  {
+    "name": "chicken wings",
+    "category": "Poultry"
   },
   {
     "name": "orange peel",
@@ -494,6 +514,10 @@
   {
     "name": "beef steak",
     "category": "Meats"
+  },
+  {
+    "name": "vegetable oil",
+    "category": "Oils & Fats"
   },
   {
     "name": "coconut",
@@ -704,6 +728,10 @@
     "category": "Seasonings & Spice Blends"
   },
   {
+    "name": "skinless, boneless chicken breast",
+    "category": "Meats"
+  },
+  {
     "name": "belacan",
     "category": "Condiments"
   },
@@ -813,7 +841,7 @@
   },
   {
     "name": "skinless, boneless chicken breasts",
-    "category": "Poultry"
+    "category": "Meats"
   },
   {
     "name": "galangal powder",
@@ -1396,6 +1424,10 @@
     "category": "Vegetables & Greens"
   },
   {
+    "name": "boneless, skinless chicken breast",
+    "category": "Poultry"
+  },
+  {
     "name": "white wine vinegar",
     "category": "Dressings & Vinegars"
   },
@@ -1426,6 +1458,10 @@
   {
     "name": "fresh Thai basil leaves",
     "category": "Herbs & Spices"
+  },
+  {
+    "name": "boneless skinless chicken breasts",
+    "category": "Poultry"
   },
   {
     "name": "rice wine vinegar",
@@ -1554,6 +1590,10 @@
   {
     "name": "green chile pepper",
     "category": "Vegetables & Greens"
+  },
+  {
+    "name": "boneless, skinless chicken",
+    "category": "Poultry"
   },
   {
     "name": "ground coffee beans",

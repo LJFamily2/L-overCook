@@ -1,68 +1,62 @@
-let expandIcon = document.querySelector(".expand-icon");
-
-let ingredientFilter = document.querySelector(".ingredient-filter");
-
-let background = document.querySelector(".main-content-container");
-
-expandIcon.addEventListener("click", () => {
-    expandIcon.classList.toggle("moveRight");
-    ingredientFilter.classList.toggle("moveRight");
-    background.classList.toggle("bg-darken");
-  });
-
-window.addEventListener("resize", () => {
-    if (window.innerWidth > 768) {
-      ingredientFilter.classList.remove("moveRight");
-      expandIcon.classList.remove("moveRight");
-    }
-  });
-
-function showMore(button) {
-  const maxVisible = parseInt(button.getAttribute("data-max-visible"));
-  const parent = button.parentElement;
-  const hiddenButtons = parent.querySelectorAll(".selectable-button.hidden");
-  hiddenButtons.forEach((btn, index) => {
-    if (index < maxVisible) {
-      btn.classList.remove("hidden");
-    }
-  });
-  button.style.display = "none"; // Hide the "Show More" button
-
-  // Toggle the chevron icon
-  const icon = parent.querySelector(".bi-chevron-down");
-  if (icon) {
-    icon.classList.replace("bi-chevron-down", "bi-chevron-up");
-    icon.onclick = function () {
-      hideSelection(button, parent, maxVisible);
-    };
-  }
-}
-
-function hideSelection(button, parent, maxVisible) {
-  const buttons = parent.querySelectorAll(".selectable-button");
-  buttons.forEach((btn, index) => {
-    if (index >= maxVisible) {
-      btn.classList.add("hidden");
-    }
-  });
-  const icon = parent.querySelector(".bi-chevron-up");
-  if (icon) {
-    icon.classList.replace("bi-chevron-up", "bi-chevron-down");
-    icon.onclick = function () {
-      showMore(button);
-    };
-  }
-  button.style.display = ""; // Show the "Show More" button again
-}
-
 function toggleChevron(icon) {
-  const parent = icon.closest(".ingredients");
-  console.log(parent);
-  const moreButton = parent.querySelector(".more-btn");
-  const maxVisible = parseInt(moreButton.getAttribute("data-max-visible"));
-  if (icon.classList.contains("bi-chevron-down")) {
-    showMore(moreButton);
+  const isDown = icon.classList.contains("bi-chevron-down");
+  if (isDown) {
+    displayAllIngredients(icon);
   } else {
-    hideSelection(moreButton, parent, maxVisible);
+    hideIngredients(icon);
   }
 }
+
+function displayAllIngredients(icon) {
+  const parent = icon.closest(".ingredient-header").parentElement;
+  const ingredientsBtn = parent.querySelectorAll(".selectable-button.hidden");
+
+  // Toggle visibility of hidden ingredients buttons
+  ingredientsBtn.forEach((btn) => {
+    btn.classList.toggle("hidden");
+  });
+
+  // Toggle visibility of more-btn and less-btn
+  const moreBtn = parent.querySelector(".more-btn");
+  const lessBtn = parent.querySelector(".less-btn");
+  moreBtn.classList.add("hidden");
+  lessBtn.classList.remove("hidden");
+
+  // Toggle chevron icon
+  icon.classList.replace("bi-chevron-down", "bi-chevron-up");
+}
+
+function hideIngredients(icon) {
+  const parent = icon.closest(".ingredient-header").parentElement;
+  const ingredientsBtn = parent.querySelectorAll(".selectable-button");
+
+  // Hide ingredients except for the first 4
+  for (let i = 4; i < ingredientsBtn.length; i++) {
+    ingredientsBtn[i].classList.add("hidden");
+  }
+
+  // Toggle visibility of more-btn and less-btn
+  const moreBtn = parent.querySelector(".more-btn");
+  const lessBtn = parent.querySelector(".less-btn");
+  moreBtn.classList.remove("hidden");
+  lessBtn.classList.add("hidden");
+
+  // Toggle chevron icon
+  icon.classList.replace("bi-chevron-up", "bi-chevron-down");
+}
+
+// Event listener for more-btn
+document.querySelectorAll(".more-btn").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    const icon = btn.parentElement.querySelector(".bi-chevron-down");
+    toggleChevron(icon);
+  });
+});
+
+// Event listener for less-btn
+document.querySelectorAll(".less-btn").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    const icon = btn.parentElement.querySelector(".bi-chevron-up");
+    toggleChevron(icon);
+  });
+});

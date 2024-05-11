@@ -33,18 +33,20 @@ exports.getAllIngredients = async (req, res) => {
 exports.getIngredientsForAllCategories = async (req, res) => {
    try {
       // Fetch all ingredients with their corresponding category populated
-      const ingredientsWithCategory = await Ingredient.find().populate(
-         'category'
-      );
+      const ingredientsWithCategory = await Ingredient.find().populate('category');
 
       // Group ingredients by category
       const categoriesWithIngredients = {};
       ingredientsWithCategory.forEach((ingredient) => {
          const categoryName = ingredient.category.name;
+         const categoryImage = ingredient.category.image; // Include category image
          if (!categoriesWithIngredients[categoryName]) {
-            categoriesWithIngredients[categoryName] = [];
+            categoriesWithIngredients[categoryName] = {
+               image: categoryImage, // Include category image
+               ingredients: [] // Initialize ingredients array
+            };
          }
-         categoriesWithIngredients[categoryName].push(ingredient.name);
+         categoriesWithIngredients[categoryName].ingredients.push(ingredient.name);
       });
 
       return categoriesWithIngredients;
@@ -52,6 +54,7 @@ exports.getIngredientsForAllCategories = async (req, res) => {
       console.error('Error fetching categories with ingredients:', error);
    }
 };
+
 
 // Get ingredient page
 exports.getIngredientPage = async (req, res) => {

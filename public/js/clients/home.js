@@ -147,11 +147,11 @@ function generateRecipeHTML(recipe) {
                
                <div class="details hidden">
                   <p>
-                     <strong>You have:</strong> ${matchedIngredients.map(ingredientObj => `${ingredientObj.ingredient.name}`).join(',')} 
+                     <strong>You have:</strong> ${matchedIngredients.map(ingredientObj => `${ingredientObj.ingredient.name}`).join(', ')} 
                   </p>
                        
                   <p class="missing-ingredient"><strong>Missing Ingredients:</strong>
-                     ${missingIngredients.map(ingredientObj => `${ingredientObj.ingredient.name}`).join(',')}
+                     ${missingIngredients.map(ingredientObj => `${ingredientObj.ingredient.name}`).join(', ')}
                   </p>
                </div>
            </div>
@@ -218,7 +218,10 @@ async function filterRecipes() {
         // Filter recipes based on selected criteria
         let filteredRecipes = recipes.filter(recipe => {
             // Extract ingredients from the recipe object
-            const recipeIngredients = recipe.ingredients.map(ingredientObj => ingredientObj.ingredient.name);
+            // const recipeIngredients = recipe.ingredients.map(ingredientObj => ingredientObj.ingredient.name);
+            const recipeIngredients = recipe.ingredients.map(ingredientObj => ingredientObj.ingredient ? ingredientObj.ingredient.name : '');
+
+            console.log(recipeIngredients);
 
             // Check if any selected ingredient is present in the recipe's ingredients
             const anyIngredientMatch = selectedIngredients.some(ingredient => recipeIngredients.includes(ingredient));
