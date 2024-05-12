@@ -257,20 +257,37 @@
       <div class="row comment-body p-0 m-0 mb-4">
         <div class="col">
           <div class="section d-flex align-items-center">
-            <img
-              src="/uploadImages/<%= user.avatar %>"
-              alt="User image"
-              style="
-                border-radius: 50%;
-                width: 50px;
-                height: 50px;
-                margin-right: 20px;
-              "
-            />
+            <% if(user.avatar){ %>
+              <img
+                 class="profile-picture"
+                 loading="eager"   
+                 src="<%= user.avatar %>"
+                 alt="profile picture"
+                 style="
+                 border-radius: 50%;
+                 width: 50px;
+                 height: 50px;
+                 margin-right: 20px;
+               "
+              />
+              <% } else { %>
+              <img
+                 class="profile-picture"
+                 loading="eager"
+                 src="/images/user.png"
+                 alt="profile picture"
+                 style="
+                 border-radius: 50%;
+                 width: 50px;
+                 height: 50px;
+                 margin-right: 20px;
+               "
+              />
+              <% } %>
             <h6><%= user.username %></h6>
           </div>
           <form
-            action="/recipeManagement/<%= recipe.slug %>/add-review"
+            action="/recipes/<%= recipe.slug %>/add-review"
             method="post"
           >
             <fieldset class="rating">
