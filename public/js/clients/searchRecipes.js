@@ -23,5 +23,7 @@ searchForm.addEventListener('submit', function(event) {
             // Hide the recipe card if it doesn't match the search query
             recipeCard.style.display = 'none';
         }
+        searchInput.value = '';
+        document.getElementById('searchDropDown').style.display = 'none';
     });
 });
