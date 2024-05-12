@@ -18,7 +18,8 @@
         <!-- List of viewed recipes here -->
         <div id="results">
             <div id="all-recipes">
-                <% if(user.searchHistory){ %>
+
+              <% if (user && user.searchHistory && user.searchHistory.length > 0) { %>
               <% user.searchHistory.forEach(recipe => { %>
               <div
                 class="recipe"
@@ -88,7 +89,10 @@
                 </div>
               </div>  
               <% }) %>
+              <% } else { %>
+                <p>No search history found.</p>
               <% } %>
+
             </div>
           </div>
         

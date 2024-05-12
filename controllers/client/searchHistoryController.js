@@ -28,6 +28,7 @@ const searchHistoryController = {
 
   addSearchHistory: async (req, res) => {
     try {
+      if(req.user && req.user.id){
       // Find the recipe ID
       const { slug } = req.params;
       const recipe = await Recipe.findOne({ slug });
@@ -37,15 +38,14 @@ const searchHistoryController = {
       }
 
       // Add the ID to the user's search history
-      const userId = req.user.id;
-      await User.findByIdAndUpdate(
-        userId,
-        { $addToSet: { searchHistory: recipe._id } },
-        { new: true }
-      );
-
-      res.redirect("/recipes/" + slug);
-      res.send("Search history added successfully");
+        const userId = req.user.id;
+        await User.findByIdAndUpdate(
+          userId,
+          { $addToSet: { searchHistory: recipe._id } },
+          { new: true }
+        );
+        console.log("addined history ")
+      }
     } catch (err) {
       console.log(err);
       res.status(500).send("Internal Server Error");

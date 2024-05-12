@@ -46,6 +46,11 @@ h2 {
     height: fit-content;
     padding-bottom: 50px;
 }
+#all-recipes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+  }
 
 .recipe {
     width: calc(100% / 4 - 40px);

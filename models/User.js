@@ -12,10 +12,10 @@ const userSchema = new mongoose.Schema({
     default: Date.now,
     immutable: true,
   },
-  searchHistory: {
+  searchHistory: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: "Recipe",
-  },
+  }],
   favoriteRecipes: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: "Recipe",

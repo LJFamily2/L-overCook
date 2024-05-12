@@ -17,6 +17,7 @@
 
   <!-- Js -->
   <script src="/js/clients/home.js" defer></script>
+  <!-- <script src="/js/clients/addToSearchHistory.js" defer></script> -->
 </head>
 
 <%- include('../partials/ingredientFilter') %>
@@ -92,38 +93,29 @@
       <div id="all-recipes">
         <% recipes.forEach(recipe => { %>
         <div class="recipe">
-          <a
-            href="/recipes/<%= recipe.slug %>"
-            style="text-decoration: none; color: black"
-          >
+          <a href="/recipes/<%= recipe.slug %>" style="text-decoration: none; color: black">
             <% recipe.reviews.forEach(review => { %>
-            <div
-              class="recipe-rating hidden"
-              recipe-rating="<%=review.rating%>"
-            >
-              <%=review.rating%>
-            </div>
+              <div class="recipe-rating hidden" recipe-rating="<%=review.rating%>">
+                <%=review.rating%>
+              </div>
             <% }) %>
-
+          
             <div class="recipe-img-container">
               <img class="recipe-img" src="<%= recipe.image %>" />
             </div>
-
+          
             <div class="first-row">
               <div class="recipe-name" title="<%= recipe.name %>">
                 <%= recipe.name %>
               </div>
-              <form
-                action="/favorite-recipe/add-favorite/<%= recipe.slug %>"
-                method="post"
-              >
+              <form action="/favorite-recipe/add-favorite/<%= recipe.slug %>" method="post" class="inline-form">
                 <button type="submit" class="bg-none border-0">
-                  <!-- Icon source: https://remixicon.com/icon/add-box-line -->
                   <i class="ri-add-box-line" title="Add to favorites"></i>
                 </button>
               </form>
             </div>
           </a>
+          
           <div class="ingredient-match"></div>
 
           <div class="second-row">
