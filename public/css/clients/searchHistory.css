@@ -132,6 +132,22 @@ h2 {
 }
 
 
+.closeBtn {
+    font-size: 2rem;
+    display: none;
+    cursor: pointer;
+}
+
+.closeBtn:hover{
+    font-size: 2.3rem;
+    transition: all 200ms;
+}
+
+.recipe:hover button .closeBtn {
+    display: block;
+}
+
+
 /* Media queries */
 
 @media screen and (max-width: 1142px) {

@@ -79,7 +79,7 @@ const favoriteRecipeController = {
             { $pull: { favoriteRecipes: recipe._id } },
             { new: true }
          );
-         req.flash('success', `Recipe <strong>${slug}</strong> has been removed`);
+         req.flash('success', `Recipe <strong>${recipe.name}</strong> has been removed`);
 
          res.redirect(req.headers.referer + "#recipes")
       } catch (err) {

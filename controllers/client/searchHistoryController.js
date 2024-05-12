@@ -19,6 +19,7 @@ const searchHistoryController = {
         user,
         searchIngredients,
         searchRecipes,
+        messages: req.flash()
         });
     } catch (err) {
       console.log(err);
@@ -69,8 +70,9 @@ const searchHistoryController = {
         { $pull: { readingHistory: recipe._id } },
         { new: true }
       );
-    //   res.redirect("");
-    res.send("Search history deleted successfully");
+      req.flash('success', `Recipe <strong>${recipe.name}</strong> has been removed`);
+
+         res.redirect(req.headers.referer + "#all-recipes")
     } catch (err) {
       console.log(err);
       res.status(500).send("Internal Server Error");
