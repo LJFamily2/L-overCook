@@ -3,24 +3,31 @@
    <link rel="stylesheet" href="/css/clients/profile.css" />
 </head>
 
-<form class="profile-container-fluid" action="/users/update/<%= user._id %>" method="post" enctype="multipart/form-data">
+<form
+   class="profile-container-fluid"
+   action="/users/update/<%= user._id %>"
+   method="post"
+   enctype="multipart/form-data"
+>
    <div class="profile-head">
       <span class="my-profile">My Profile</span>
       <div class="profile-picture-frame">
          <% if(user.avatar){ %>
          <img
+            id="preview-img"
             class="profile-picture"
-            loading="eager"   
+            loading="eager"
             src="<%= user.avatar %>"
             alt="profile picture"
          />
          <% } else { %>
          <img
+            id="preview-img"
             class="profile-picture"
             loading="eager"
             src="/images/user.png"
             alt="profile picture"
-            style="backdrop-filter: blur(50px);"
+            style="backdrop-filter: blur(50px)"
          />
          <% } %>
 
@@ -33,7 +40,13 @@
                for="file"
                style="cursor: pointer"
             >
-               <input type="file" id="file" name="newAvatar" onchange="showButton()"  hidden/>
+               <input
+                  type="file"
+                  id="file"
+                  name="newAvatar"
+                  onchange="showPreview(this), showButton()"
+                  hidden
+               />
                <img
                   src="/images/up-loading.png"
                   class="w-25"
@@ -44,9 +57,22 @@
       </div>
    </div>
 
-   <!-- <button class="profile-button">
-      <span>Edit Avatar</span>
-   </button> -->
+   <script>
+      function showPreview(input) {
+         const previewImg = document.getElementById('preview-img');
+         const file = input.files[0];
+
+         if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+               previewImg.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+         } else {
+            previewImg.src = '/images/up-loading.png'; // Reset to default image
+         }
+      }
+   </script>
    <%- include('../partials/notificationMessage') %>
 
    <div class="profile-information">
@@ -79,7 +105,9 @@
          </div>
       </div>
       <div class="field">
-         <a href="/account/profile/resetPassword" class="forgot-password">Forgot Password?</a>
+         <a href="/account/profile/resetPassword" class="forgot-password"
+            >Forgot Password?</a
+         >
       </div>
       <button
          type="submit"

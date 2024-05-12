@@ -45,18 +45,42 @@
 
           <div class="navbar-brand user-section">
             <a class="nav-link" data-bs-toggle="collapse" href="#userCollapse" role="button" aria-expanded="false" aria-controls="userCollapse">
-              <img
-                  src="<%= user.avatar %>"
-                  alt="upload file"
-              />
+              <% if(user.avatar){ %>
+                <img
+                   class="profile-picture"
+                   loading="eager"   
+                   src="<%= user.avatar %>"
+                   alt="profile picture"
+                />
+                <% } else { %>
+                <img
+                   class="profile-picture"
+                   loading="eager"
+                   src="/images/user.png"
+                   alt="profile picture"
+                   style="backdrop-filter: blur(50px);"
+                />
+                <% } %>
             </a>
 
             <div class="collapse profile-section card card-body" id="userCollapse">
               <div class="profile-layout">
-                <img
-                  src="<%= user.avatar %>"
-                  alt="upload file"
-                />
+                <% if(user.avatar){ %>
+                  <img
+                     class="profile-picture"
+                     loading="eager"   
+                     src="<%= user.avatar %>"
+                     alt="profile picture"
+                  />
+                  <% } else { %>
+                  <img
+                     class="profile-picture"
+                     loading="eager"
+                     src="/images/user.png"
+                     alt="profile picture"
+                     style="backdrop-filter: blur(50px);"
+                  />
+                  <% } %>
 
                 <div class="user-content">
                   <span><%= user.username %></span>
