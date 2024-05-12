@@ -6,7 +6,7 @@
 <body>
     
     <div class="banner">
-        <img src="/images/freshSpringRolls.jpeg">
+        <img src="/images/nemRan.jpeg">
         <div>Favourites</div>
     </div>
 
@@ -20,14 +20,14 @@
             <ul class="image-gallery">
                 <% user.favoriteRecipes.forEach(recipe => { %>
                 <li class="gallery-item">
-                    <a href="/recipeManagement/<%= recipe.slug %>">
-                        <img src="/images/<%= recipe.image %>">
+                    <a href="/recipes/<%= recipe.slug %>">
+                        <img src="<%= recipe.image %>">
                         <div class="item-name"><%= recipe.name %></div>
                     </a>
                 </li>
                 <% }) %>
             </ul>
-        </div> <!-- End of favorite-content -->
-    </div>  <!-- End of favorite-container -->
+        </div> 
+    </div>  
 </body>
 
