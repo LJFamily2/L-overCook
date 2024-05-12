@@ -70,9 +70,19 @@
     padding: 15px 20px;
     display: none;
 }
+.closeBtn {
+    font-size: 2rem;
+    display: none;
+    cursor: pointer;
+}
+
+.closeBtn:hover{
+    font-size: 2.3rem;
+    transition: all 200ms;
+}
 
 /* Only display when the item is hovered */
-.gallery-item:hover .item-name {
+.gallery-item:hover .item-name, .gallery-item:hover button .closeBtn {
     display: block;
 }
 
