@@ -42,42 +42,43 @@ exports.getAllRecipes = async (req, res) => {
    }
 };
 
-// exports.getSearchPage = async (req, res) => {
-//    try {
-//       const { searchInput } = req.body;
-//       const categories = await categoryController.getAllCategories();
-//       const searchIngredients = await Ingredient.find({}).limit(4);
-//       const searchRecipes = await Recipe.find({}).limit(4);
+exports.getSearchPage = async (req, res) => {
+   try {
+      const { searchInput } = req.query;
+      const categories = await categoryController.getAllCategories();
+      const searchIngredients = await Ingredient.find({}).limit(4);
+      const searchRecipes = await Recipe.find({}).limit(4);
+      const cuisines = await Cuisine.find();
+      const ingredients =
+         await ingredientController.getIngredientsForAllCategories();
+      const recipes = await Recipe.find({
+         $or: [
+            { name: { $regex: searchInput, $options: 'i' } },
+            { description: { $regex: searchInput, $options: 'i' } },
+         ],
+      })
+         .populate({
+            path: 'ingredients.ingredient',
+            select: 'name -_id',
+         })
+         .populate({
+            path: 'cuisine',
+            select: 'name -_id',
+         })
+         .exec();
 
-//       const ingredients =
-//          await ingredientController.getIngredientsForAllCategories();
-//       const recipes = await Recipe.find({
-//          $or: [
-//             { name: { $regex: searchInput, $options: 'i' } },
-//             { description: { $regex: searchInput, $options: 'i' } },
-//          ],
-//       })
-//          .populate({
-//             path: 'ingredients.ingredient',
-//             select: 'name -_id',
-//          })
-//          .populate({
-//             path: 'cuisine',
-//             select: 'name -_id',
-//          })
-//          .exec();
-
-//       res.render('client/homeSearch', {
-//          layout: './layouts/client/defaultLayout',
-//          categories,
-//          recipes,
-//          ingredients,
-//          searchRecipes,
-//          searchIngredients,
-//          userAuthentication: false,
-//          user: req.user,
-//       });
-//    } catch (error) {
-//       console.log(error);
-//    }
-// };
+      res.render('client/homeSearch', {
+         layout: './layouts/client/defaultLayout',
+         categories,
+         recipes,
+         ingredients,
+         searchRecipes,
+         cuisines,
+         searchIngredients,
+      userAuthentication: false,
+         user: req.user,
+      });
+   } catch (error) {
+      console.log(error);
+   }
+};
