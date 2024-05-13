@@ -9,7 +9,8 @@ exports.getHomePage = async (req, res) => {
    try {
       const categories = await categoryController.getAllCategories();
       const searchIngredients = await Ingredient.find({});
-      const ingredients = await ingredientController.getIngredientsForAllCategories();
+      const ingredients =
+         await ingredientController.getIngredientsForAllCategories();
       const recipes = await recipeController.getAllRecipes();
       const searchRecipes = await Recipe.find({});
       const cuisines = await Cuisine.find();
@@ -35,22 +36,15 @@ exports.getAllRecipes = async (req, res) => {
          .populate('ingredients.ingredient', 'name -_id')
          .populate('cuisine', 'name -_id')
          .exec();
-         res.json({ recipes });
+      res.json({ recipes });
    } catch (error) {
       console.error('Error fetching recipes:', error);
       res.status(500).json({ error: 'Internal Server Error' });
    }
 };
-
-exports.getSearchPage = async (req, res) => {
+exports.getSearchRecipes = async (req, res) => {
    try {
-      const { searchInput } = req.query;
-      const categories = await categoryController.getAllCategories();
-      const searchIngredients = await Ingredient.find({}).limit(4);
-      const searchRecipes = await Recipe.find({}).limit(4);
-      const cuisines = await Cuisine.find();
-      const ingredients =
-         await ingredientController.getIngredientsForAllCategories();
+      const searchInput = req.session.searchInput;
       const recipes = await Recipe.find({
          $or: [
             { name: { $regex: searchInput, $options: 'i' } },
@@ -67,6 +61,38 @@ exports.getSearchPage = async (req, res) => {
          })
          .exec();
 
+      res.json({ recipes });
+   } catch (error) {
+      console.error('Error fetching recipes:', error);
+      res.status(500).json({ error: 'Internal Server Error' });
+   }
+};
+
+exports.getSearchPage = async (req, res) => {
+   try {
+      const { searchInput } = req.query;
+      req.session.searchInput = searchInput;
+      const categories = await categoryController.getAllCategories();
+      const searchIngredients = await Ingredient.find({});
+      const searchRecipes = await Recipe.find({});
+      const cuisines = await Cuisine.find();
+      const ingredients = await ingredientController.getIngredientsForAllCategories();
+      const recipes = await Recipe.find({
+         $or: [
+            { name: { $regex: searchInput, $options: 'i' } },
+            { description: { $regex: searchInput, $options: 'i' } },
+         ],
+      })
+         .populate({
+            path: 'ingredients.ingredient',
+            select: 'name -_id',
+         })
+         .populate({
+            path: 'cuisine',
+            select: 'name -_id',
+         })
+         .exec();
+         const totalRecipes = recipes.length;
       res.render('client/homeSearch', {
          layout: './layouts/client/defaultLayout',
          categories,
@@ -75,8 +101,10 @@ exports.getSearchPage = async (req, res) => {
          searchRecipes,
          cuisines,
          searchIngredients,
-      userAuthentication: false,
+         userAuthentication: false,
          user: req.user,
+         totalRecipes,
+         searchInput
       });
    } catch (error) {
       console.log(error);

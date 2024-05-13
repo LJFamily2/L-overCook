@@ -6,5 +6,6 @@ router.get('/', homeController.getHomePage);
 router.get('/allRecipes', homeController.getAllRecipes);
 
 router.get('/search', homeController.getSearchPage);
+router.get('/search-results', homeController.getSearchRecipes);
 
 module.exports = router;
