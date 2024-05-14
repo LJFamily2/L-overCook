@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const profileController = require('../../controllers/client/profileController');
-const checkVerifyOTP = require('../../middlewares/CheckVerifyOTP');
+const checkVerifyOTP = require('../../middlewares/checkVerifyOTP');
 const connectEnsureLogin = require('connect-ensure-login');
 
 
