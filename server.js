@@ -48,6 +48,6 @@ routes.forEach((routeConfig) => {
   app.use(routeConfig.path, routeConfig.route);
 });
 
-app.listen(3000, () => {
+app.listen(3000 || PORT, () => {
   console.log("Server is running on localhost:3000");
 });
