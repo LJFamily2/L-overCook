@@ -33,17 +33,17 @@ function toggleSelection(button) {
     updatePantryCount(selectedIngredients.length);
  
     // Update active status of ingredient in search bar
-    // const ingredientId = button.id;
-    // const activeStatus = document.querySelector(`.active-status#${CSS.escape(ingredientId)}`);
+    const ingredientId = button.id;
+    const activeStatus = document.querySelector(`.active-status#${CSS.escape(ingredientId)}`);
  
-    // if (button.classList.contains('selected')) {
-    //     activeStatus.textContent = '-';
-    //     filterRecipes();
-    // } else {
-    //     activeStatus.textContent = '+';
-    //     const ingredientMatch = document.querySelector('.ingredient-match');
-    //    ingredientMatch.innerHTML = '';
-    // }
+    if (button.classList.contains('selected')) {
+        activeStatus.textContent = '-';
+        filterRecipes();
+    } else {
+        activeStatus.textContent = '+';
+        const ingredientMatch = document.querySelector('.ingredient-match');
+       ingredientMatch.innerHTML = '';
+    }
  
     // Filter recipes again based on the updated selected ingredients
     filterRecipes();
@@ -122,7 +122,7 @@ function separateTime(cookTime) {
 // Function to fetch recipes from the server
 async function fetchRecipes() {
     try {
-        const response = await fetch('http://localhost:3000/search-results'); 
+        const response = await fetch('/search-results'); 
         if (!response.ok) {
             throw new Error('Failed to fetch recipes');
         }

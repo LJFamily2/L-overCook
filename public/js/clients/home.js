@@ -122,7 +122,7 @@ function separateTime(cookTime) {
 // Function to fetch recipes from the server
 async function fetchRecipes() {
    try {
-       const response = await fetch('http://localhost:3000/allRecipes'); // Include localhost:3000
+       const response = await fetch('/allRecipes'); // Include localhost:3000
        if (!response.ok) {
            throw new Error('Failed to fetch recipes');
        }
