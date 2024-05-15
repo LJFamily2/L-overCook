@@ -5,7 +5,8 @@ const list = document.querySelector('.list');
 const selectedImg = document.querySelector('.selected-img');
 
 dropdown.addEventListener('click', () => {
-  list.classList.toggle('show');
+  list.classList.toggle('hidden');
+  list.classList.toggle('fadeIn');
 });
 
 list.addEventListener('click', (e)=> {
