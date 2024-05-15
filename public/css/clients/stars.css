@@ -15,15 +15,15 @@
     color: transparent; 
     font-size: 30px;
     -webkit-text-stroke-width: 1px;
-    -webkit-text-stroke-color: #f9c203;
+    -webkit-text-stroke-color: #ffb7b7;
   }
   
   .rating > label:hover,
   .rating > label:hover ~ label {
-    -webkit-text-fill-color: #f9c203;
+    -webkit-text-fill-color: #ffb7b7;
   }
   
   .rating > input:checked ~ label {
-    color: #f9c203; 
+    color: #ffb7b7; 
   }
   
