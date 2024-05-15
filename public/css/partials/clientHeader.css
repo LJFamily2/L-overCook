@@ -87,14 +87,15 @@ header {
   text-overflow: ellipsis;
 }
 
-.navbar-brand {
+/* .navbar-brand {
   margin-right: 0;
-}
+} */
 
 .profile-section {
   position: absolute;
-  top: 100%;
-  right: 0;
+  /* top: 100%; */
+  top: 95px;
+  right: 25px;
 }
 
 .profile-layout {
@@ -148,9 +149,11 @@ header {
   }
 
   .navbar-collapse {
-    background-color: #f8f9fa;
+    background-color: #fff;
     position: absolute;
-    top: 100%;
+    /* top: 100%; */
+    right: 0;
+    top: 95px;
     width: 100%;
     z-index: 1000;
   }
