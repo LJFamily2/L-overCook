@@ -76,8 +76,8 @@ input[type="checkbox"] {
 
 /* Recipe results section */
 #all-recipes {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 30px;
 }
 
@@ -89,7 +89,6 @@ input[type="checkbox"] {
 .recipe {
   width: calc(100% / 3 - 20px);
   min-width: 220px;
-  height: auto;
   min-height: 303px;
   background-color: #fff;
   border-radius: 15px;
