@@ -71,6 +71,10 @@ body {
   color: #597e52;
 }
 
+.filter-criteria label, input[type="checkbox"] {
+  cursor: pointer;
+}
+
 input[type="checkbox"] {
   width: 20px;
 }
