@@ -57,6 +57,7 @@
   
   .ingredient-filter img {
     width: 30px;
+    font-size: 0;
   }
   
   .ingredient-header {
