@@ -9,6 +9,7 @@
     margin-left: 40px;
     width: 61px;
     cursor: pointer;
+    border: #707070 0.5px solid;
 }
 
 .wrapper {
@@ -27,18 +28,15 @@
 
 .list {
     position: absolute;
-    top: 27px;
-    left: 0;
+    top: 25px;
+    left: -0.5px;
     background-color: #fffdf6;
     padding-top: 9px;
     overflow-y: scroll;
-    width: 100%;
+    width: 61px;
     border-radius: 0 0 10px 10px;
-    display: none;
-}
-
-.show {
-    display: block;
+    border: #707070 0.5px solid;
+    border-top: none;
 }
 
 .item {

@@ -14,7 +14,7 @@ a[href]{
   opacity: 0;
 }
 
-.show {
+.fadeIn {
   animation: fadeIn 1s;
 }
 

@@ -5,7 +5,7 @@ let filterCriteria = document.querySelector('.filter-criteria');
 
 filterIcon.addEventListener('click', () => {
    filterCriteria.classList.toggle('hidden');
-   filterCriteria.classList.toggle('show');
+   filterCriteria.classList.toggle('fadeIn');
 });
 
 
@@ -170,7 +170,7 @@ function generateRecipeHTML(recipe) {
             <div class="ingredient-match">
                 <p>
                    <strong>Matched Ingredients:</strong> ${matchedIngredients.length} / ${totalIngredients} 
-                   <a class="view-details">View Details</a>
+                   <a class="view-details" style="cursor: pointer;">View Details</a>
                 </p>
                 
                 <div class="details hidden">
