@@ -189,17 +189,11 @@ input[type="checkbox"] {
 
 /* Responsive */
 @media screen and (max-width: 1271px) {
-  /* #all-recipes {
-    gap: 30px;
-  } */
-}
-
-@media screen and (max-width: 1230px) {
-  .recipe {
-    width: calc(100% / 2 - 15px);
-    max-width: none;
+  #all-recipes {
+    grid-template-columns: 1fr;
   }
 }
+
 
 @media screen and (max-width: 914px) {
   .main-content-container {
@@ -216,9 +210,9 @@ input[type="checkbox"] {
     width: 78%;
   }
 
-  .recipe {
+  /* .recipe {
     width: calc(100% / 2 - 15px);
-  }
+  } */
 }
 
 @media screen and (max-width: 608px) {
