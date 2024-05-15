@@ -28,25 +28,15 @@ header {
   padding: 0;
 }
 
-/* .nav-left {
-  height: 100%;
-  margin-left: 16px;
-  display: flex;
-  align-items: center;
-}
-
-.nav-right {
-  position: absolute;
-  top: 30px;
-  right: 60px;
-  right: 10px;
-  display: flex;
-  align-items: center;
-  color: #707070;
-} */
-
 .navbar-nav {
   gap: 20px;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  color: #929292;
+  margin: 0 -15px 2px -15px;
 }
 
 .nav-item {
