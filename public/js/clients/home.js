@@ -169,15 +169,14 @@ function generateRecipeHTML(recipe) {
             ${matchedIngredientsExist ? `
             <div class="ingredient-match">
                 <p>
-                   <strong>Matched Ingredients:</strong> ${matchedIngredients.length} / ${totalIngredients} 
-                   <a class="view-details" style="cursor: pointer;">View Details</a>
+                    <strong>Matched Ingredients:</strong> ${matchedIngredients.length} / ${totalIngredients} 
+                    <a class="view-details" style="cursor: pointer;">View Details</a>
+                    <p>
+                        <strong>You have:</strong> ${matchedIngredients.map(ingredientObj => `${ingredientObj.ingredient.name}`).join(', ')} 
+                    </p>
                 </p>
                 
-                <div class="details hidden">
-                   <p>
-                      <strong>You have:</strong> ${matchedIngredients.map(ingredientObj => `${ingredientObj.ingredient.name}`).join(', ')} 
-                   </p>
-                        
+                <div class="details hidden">                      
                    <p class="missing-ingredient"><strong>Missing Ingredients:</strong>
                       ${missingIngredients.map(ingredientObj => `${ingredientObj.ingredient.name}`).join(', ')}
                    </p>
