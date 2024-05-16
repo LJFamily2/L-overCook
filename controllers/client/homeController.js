@@ -11,13 +11,19 @@ exports.getHomePage = async (req, res) => {
       const searchIngredients = await Ingredient.find({});
       const ingredients =
          await ingredientController.getIngredientsForAllCategories();
+         const isAuthenticated = req.isAuthenticated();
+         const userBookmarks = isAuthenticated ? req.user.favoriteRecipes.map(favorite => favorite.toString()) : [];
+
       const recipes = await recipeController.getAllRecipes();
       const searchRecipes = await Recipe.find({});
       const cuisines = await Cuisine.find();
       res.render('client/home', {
          categories,
          ingredients,
-         recipes,
+         recipes: recipes.map(recipe =>({
+            ...recipe.toObject(),
+            isBookmarked: userBookmarks.includes(recipe._id.toString())
+         })),
          searchRecipes,
          searchIngredients,
          cuisines,
@@ -32,10 +38,17 @@ exports.getHomePage = async (req, res) => {
 
 exports.getAllRecipes = async (req, res) => {
    try {
-      const recipes = await Recipe.find()
+      const isAuthenticated = req.isAuthenticated();
+      let userBookmarks = isAuthenticated ? req.user.favoriteRecipes.map(favorite => favorite.toString()) : [];
+      let recipes = await Recipe.find()
          .populate('ingredients.ingredient', 'name -_id')
          .populate('cuisine', 'name -_id')
          .exec();
+
+      recipes = recipes.map(recipe =>({
+         ...recipe.toObject(),
+         isBookmarked: userBookmarks.includes(recipe._id.toString())
+      }))
       res.json({ recipes });
    } catch (error) {
       console.error('Error fetching recipes:', error);
@@ -92,11 +105,16 @@ exports.getSearchPage = async (req, res) => {
             select: 'name -_id',
          })
          .exec();
+         const isAuthenticated = req.isAuthenticated();
+         const userBookmarks = isAuthenticated ? req.user.favoriteRecipes.map(favorite => favorite.toString()) : [];
          const totalRecipes = recipes.length;
       res.render('client/homeSearch', {
          layout: './layouts/client/defaultLayout',
          categories,
-         recipes,
+         recipes: recipes.map(recipe =>({
+            ...recipe.toObject(),
+            isBookmarked: userBookmarks.includes(recipe._id.toString())
+         })),
          ingredients,
          searchRecipes,
          cuisines,
