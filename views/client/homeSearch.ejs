@@ -88,52 +88,61 @@
         </div>
       </div>
     </div>
-    <p><%= totalRecipes %> found for "<%= searchInput %>"</p>
+    <p id="totalRecipes">
+      <% if(totalRecipes > 2){ %>
+        <%= totalRecipes %> recipes found for "<%= searchInput %>"
+        <% }else{ %>
+          <%= totalRecipes %> recipe found for "<%= searchInput %>"
+      
+        <% } %>
+    </p>
     <div id="results">
       <div id="all-recipes">
         <% recipes.forEach(recipe => { %>
-        <div class="recipe fadeinHidden">
-          <a href="/recipes/<%= recipe.slug %>" style="text-decoration: none; color: black">
-            <% recipe.reviews.forEach(review => { %>
-              <div class="recipe-rating hidden" recipe-rating="<%=review.rating%>">
-                <%=review.rating%>
+          <div class="recipe fadeinHidden">
+            <a href="/recipes/<%= recipe.slug %>" style="text-decoration: none; color: black">
+              <% recipe.reviews.forEach(review => { %>
+                <div class="recipe-rating hidden" recipe-rating="<%=review.rating%>">
+                  <%=review.rating%>
+                </div>
+              <% }) %>
+              <div class="recipe-img-container">
+                <img class="recipe-img" src="<%= recipe.image %>" />
               </div>
-            <% }) %>
-          
-            <div class="recipe-img-container">
-              <img class="recipe-img" src="<%= recipe.image %>" />
-            </div>
-          
-            <div class="first-row">
-              <div class="recipe-name" title="<%= recipe.name %>">
-                <%= recipe.name %>
+              <div class="first-row">
+                <div class="recipe-name" title="<%= recipe.name %>">
+                  <%= recipe.name %>
+                </div>
+                <form action="/favorite-recipe/add-favorite/<%= recipe.slug %>" method="post" class="inline-form">
+                <% if(recipe.isBookmarked){ %>
+                  <button type="submit" class="bg-none border-0">
+                    <i class="ri-bookmark-fill" title="Add to favorites" style="color: rgb(220, 183, 89);"></i>
+                  </button>
+                  <% }else{ %>
+                    <button type="submit" class="bg-none border-0">
+                      <i class="ri-bookmark-fill" style="color: rgb(53, 51, 46);"></i>
+                    </button>
+                    <% } %>
+                </form>
               </div>
-              <form action="/favorite-recipe/add-favorite/<%= recipe.slug %>" method="post" class="inline-form">
-                <button type="submit" class="bg-none border-0">
-                  <i class="ri-add-box-line" title="Add to favorites"></i>
-                </button>
-              </form>
-            </div>
-          </a>
-          
-          <div class="ingredient-match"></div>
-
-          <div class="second-row">
-            <div class="cook-time">
-              <img src="/images/clock.png" />
-              <span><%= recipe.time %></span>
-            </div>
-            <div class="rating">
-              <% function displayStars(rating) { %> <% const
-              roundedRating=Math.round(rating); %> <% for (let i=1; i <=5; i++)
-              { %> <% if (i <=roundedRating) { %>
-              <i class="ri-heart-3-fill stars" style="color: #ffb7b7"></i>
-              <% } else { %>
-              <i class="ri-heart-3-fill stars" style="color: #d9d9d9"></i>
-              <% } %> <% } %> <% } %> <%= displayStars(recipe.averageRating) %>
+            </a>
+            <div class="ingredient-match"></div>
+            <div class="second-row">
+              <div class="cook-time">
+                <img src="/images/clock.png" />
+                <span><%= recipe.time %></span>
+              </div>
+              <div class="rating">
+                <% function displayStars(rating) { %> <% const
+                roundedRating=Math.round(rating); %> <% for (let i=1; i <=5; i++)
+                { %> <% if (i <=roundedRating) { %>
+                <i class="ri-heart-3-fill stars" style="color: #ffb7b7"></i>
+                <% } else { %>
+                <i class="ri-heart-3-fill stars" style="color: #d9d9d9"></i>
+                <% } %> <% } %> <% } %> <%= displayStars(recipe.averageRating) %>
+              </div>
             </div>
           </div>
-        </div>
         <% }) %>
       </div>
     </div>

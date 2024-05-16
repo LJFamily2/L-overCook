@@ -133,69 +133,95 @@ async function fetchRecipes() {
     }
  }
 
-function generateRecipeHTML(recipe) {
+ function generateRecipeHTML(recipe) {
     // Extracting matched ingredients
     const selectedIngredients = getSelectedButtonIds();
     const matchedIngredients = recipe.ingredients.filter(ingredientObj => selectedIngredients.includes(ingredientObj.ingredient.name));
     const missingIngredients = recipe.ingredients.filter(ingredientObj => !selectedIngredients.includes(ingredientObj.ingredient.name));
     const totalIngredients = recipe.ingredients.length;
- 
+  
     // Check if there are matched ingredients
     const matchedIngredientsExist = selectedIngredients.length > 0 && matchedIngredients.length > 0;
- 
-    // Generate HTML based on recipe data
-    return `
-        <div class="recipe">
-            <a href="/recipes/${recipe.slug}" style="text-decoration: none; color: black">
-                ${recipe.reviews.map(review => `
-                    <div class="recipe-rating hidden" recipe-rating="${review.rating}">
-                        ${review.rating}
-                    </div>
-                `).join('')}
-                <div class="recipe-img-container">
-                    <img class="recipe-img" src="${recipe.image}" />
-                </div>
-                <div class="first-row">
-                    <div class="recipe-name" title="${recipe.name}">
-                        ${recipe.name}
-                    </div>
-                    <form action="/favorite-recipe/add-favorite/${recipe.slug}" method="post">
-                        <button type="submit" class="bg-none border-0">
-                            <i class="ri-add-box-line" title="Add to favorites"></i>
-                        </button>
-                    </form>
-                </div>
-            </a>
-            ${matchedIngredientsExist ? `
-            <div class="ingredient-match">
-                <p>
-                   <strong>Matched Ingredients:</strong> ${matchedIngredients.length} / ${totalIngredients} 
-                   <a class="view-details" style="cursor: pointer;">View Details</a>
-                </p>
-                
-                <div class="details hidden">
-                   <p>
-                      <strong>You have:</strong> ${matchedIngredients.map(ingredientObj => `${ingredientObj.ingredient.name}`).join(', ')} 
-                   </p>
-                        
-                   <p class="missing-ingredient"><strong>Missing Ingredients:</strong>
-                      ${missingIngredients.map(ingredientObj => `${ingredientObj.ingredient.name}`).join(', ')}
-                   </p>
-                </div>
-            </div>
-            ` : ''}
-            <div class="second-row">
-                <div class="cook-time">
-                    <img src="/images/clock.png" />
-                    <span>${recipe.time}</span>
-                </div>
-                <div class="rating">
-                    ${displayStars(recipe.averageRating)}
-                </div>
-            </div>
-        </div>
+  
+    let recipeHtml = `
+      <div class="recipe">
+        <a href="/recipes/${recipe.slug}" style="text-decoration: none; color: black">
     `;
- }
+  
+    recipe.reviews.forEach(review => {
+      recipeHtml += `
+          <div class="recipe-rating hidden" recipe-rating="${review.rating}">
+            ${review.rating}
+          </div>
+      `;
+    });
+  
+    recipeHtml += `
+          <div class="recipe-img-container">
+            <img class="recipe-img" src="${recipe.image}" />
+          </div>
+          <div class="first-row">
+            <div class="recipe-name" title="${recipe.name}">
+              ${recipe.name}
+            </div>
+            <form action="/favorite-recipe/add-favorite/${recipe.slug}" method="post">
+    `;
+  
+    if (recipe.isBookmarked) {
+      recipeHtml += `
+              <button type="submit" class="bg-none border-0">
+                <i class="ri-bookmark-fill" title="Add to favorites" style="color: rgb(220, 183, 89);"></i>
+              </button>
+      `;
+    } else {
+      recipeHtml += `
+              <button type="submit" class="bg-none border-0">
+                <i class="ri-bookmark-fill" style="color: rgb(53, 51, 46);"></i>
+              </button>
+      `;
+    }
+  
+    recipeHtml += `
+            </form>
+          </div>
+        </a>
+    `;
+  
+    if (matchedIngredientsExist) {
+      recipeHtml += `
+        <div class="ingredient-match">
+          <p>
+            <strong>Matched Ingredients:</strong> ${matchedIngredients.length} / ${totalIngredients}
+            <a class="view-details" style="cursor: pointer;">View Details</a>
+          </p>
+          <p>
+            <strong>You have:</strong> ${matchedIngredients.map(ingredientObj => `${ingredientObj.ingredient.name}`).join(', ')}
+          </p>
+          <div class="details hidden">
+            <p class="missing-ingredient"><strong>Missing Ingredients:</strong>
+              ${missingIngredients.map(ingredientObj => `${ingredientObj.ingredient.name}`).join(', ')}
+            </p>
+          </div>
+        </div>
+      `;
+    }
+  
+    recipeHtml += `
+        <div class="second-row">
+          <div class="cook-time">
+            <img src="/images/clock.png" />
+            <span>${recipe.time}</span>
+          </div>
+          <div class="rating">
+            ${displayStars(recipe.averageRating)}
+          </div>
+        </div>
+      </div>
+    `;
+  
+    // You can now use this recipeHtml string for further processing (e.g., inserting it into the DOM)
+    return recipeHtml;
+  }
  
 
 document.addEventListener('click', function(event) {
@@ -241,10 +267,14 @@ function updateRecipeCount(count) {
     if (recipeCountElement) {
         if (selectedIngredients.length > 0) {
             recipeCountElement.innerHTML = `You can make <span id="num-of-recipes">${count}</span> recipes`;
+            document.getElementById('totalRecipes').style.display = 'none';
         } else {
             recipeCountElement.innerHTML = ''; // Hide the message
+            document.getElementById('totalRecipes').style.display = 'block';
+
         }
     }
+
 }
 
 async function filterRecipes() {
