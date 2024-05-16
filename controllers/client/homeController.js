@@ -58,7 +58,9 @@ exports.getAllRecipes = async (req, res) => {
 exports.getSearchRecipes = async (req, res) => {
    try {
       const searchInput = req.session.searchInput;
-      const recipes = await Recipe.find({
+      const isAuthenticated = req.isAuthenticated();
+      let userBookmarks = isAuthenticated ? req.user.favoriteRecipes.map(favorite => favorite.toString()) : [];
+      let recipes = await Recipe.find({
          $or: [
             { name: { $regex: searchInput, $options: 'i' } },
             { description: { $regex: searchInput, $options: 'i' } },
@@ -73,7 +75,10 @@ exports.getSearchRecipes = async (req, res) => {
             select: 'name -_id',
          })
          .exec();
-
+         recipes = recipes.map(recipe =>({
+            ...recipe.toObject(),
+            isBookmarked: userBookmarks.includes(recipe._id.toString())
+         }))
       res.json({ recipes });
    } catch (error) {
       console.error('Error fetching recipes:', error);

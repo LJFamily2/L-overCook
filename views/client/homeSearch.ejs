@@ -88,7 +88,14 @@
         </div>
       </div>
     </div>
-    <p><%= totalRecipes %> found for "<%= searchInput %>"</p>
+    <p id="totalRecipes">
+      <% if(totalRecipes > 2){ %>
+        <%= totalRecipes %> recipes found for "<%= searchInput %>"
+        <% }else{ %>
+          <%= totalRecipes %> recipe found for "<%= searchInput %>"
+      
+        <% } %>
+    </p>
     <div id="results">
       <div id="all-recipes">
         <% recipes.forEach(recipe => { %>
