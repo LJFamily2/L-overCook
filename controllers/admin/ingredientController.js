@@ -109,6 +109,9 @@ exports.searchIngredient = async (req, res) => {
       const ingredients = await ingredientQuery
          .skip(skip)
          .limit(limit)
+         .populate({
+            path: 'category',
+         })
          .exec();
 
       res.render('admin/searchManagementPage', {

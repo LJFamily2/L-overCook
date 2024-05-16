@@ -485,9 +485,9 @@
     <thead>
       <tr>
         <th scope="col">Id</th>
-        <th scope="col">Image</th>
         <th scope="col">Name</th>
         <th scope="col">Category</th>
+        <th scope="col">Category image</th>
         <th scope="col"></th>
         <th scope="col"></th>
       </tr>
@@ -496,9 +496,9 @@
       <% ingredients.forEach((ingredient, index) => { %>
       <tr>
         <td><%= index + 1%></td>
-        <td> <img src="/uploadImages/<%= ingredient.category.image %>" width="100" alt="category image"></td>
         <td><%= ingredient.name %></td>
         <td><%= ingredient.category.name %></td>
+        <td> <img src="<%= ingredient.category.image %>" width="100" alt="category image"></td>
         <td>
           <!-- Button trigger update modal -->
           <button
