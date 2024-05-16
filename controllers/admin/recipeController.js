@@ -481,6 +481,7 @@ const ingredientController = require('./ingredientController');
 const cuisineController = require('./cuisineController');
 const fs = require('fs').promises;
 const path = require('path');
+const User = require("../../models/User");
 
 const deleteImageFile = async (image) => {
    try {
@@ -529,26 +530,37 @@ exports.getUpdateRecipePage = async (req, res) => {
 
 exports.getRecipeDetailPage = async (req, res) => {
    try {
-      const recipe = await Recipe.findOne({ slug: req.params.slug })
-         .populate('ingredients.ingredient', 'name -_id')
-         .populate('cuisine', 'name -_id')
-         .populate('reviews.user')
-         .exec();
-      if (!recipe) {
-         res.status(404).redirect('/');
-         return;
-      }
-
-      res.render('client/recipeDetail', {
-         layout: './layouts/client/defaultLayout',
-         recipe,
-         userAuthentication: false,
-         user: req.user,
-      });
+     const recipe = await Recipe.findOne({ slug: req.params.slug })
+       .populate('ingredients.ingredient', 'name -_id')
+       .populate('cuisine', 'name -_id')
+       .populate('reviews.user')
+       .exec();
+ 
+     if (!recipe) {
+       res.status(404).redirect('/');
+       return;
+     }
+ 
+     if (req.user && req.user.id) {
+       const userId = req.user.id;
+ 
+         const user = await User.findByIdAndUpdate(
+           userId,
+           { $addToSet: { searchHistory: recipe._id } },
+           { new: true }
+         );
+     }
+ 
+     res.render('client/recipeDetail', {
+       layout: './layouts/client/defaultLayout',
+       recipe,
+       userAuthentication: false,
+       user: req.user,
+     });
    } catch (error) {
-      console.log(error);
+     console.log(error);
    }
-};
+ };
 
 exports.getRecipePage = async (req, res) => {
    try {

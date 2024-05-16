@@ -1,33 +1,39 @@
 <head>
+
     <!-- Css -->
     <link rel="stylesheet" href="/css/clients/favorite.css">
 </head>
 
 <body>
-    
-    <div class="banner">
-        <img src="/images/freshSpringRolls.jpeg">
-        <div>Favourites</div>
-    </div>
-
     <div class="favorite-container">
+        <div class="banner">
+            <img src="/images/nemRan.jpeg">
+            <div>Favourites</div>
+        </div>
+
         <div class="favorite-content">
             <div class="breadcrumb">
                 <span>&#127968; <a href="/">Home</a> <span class="path-arrow"> > </span> Favourites </span>
             </div>
 
-            <p> ⭐️ My tasty treats ⭐️ </p>
-            <ul class="image-gallery">
+            <p id="recipes"> ⭐️ My tasty treats ⭐️ </p>
+            <%- include('../partials/notificationMessage') %>
+            <ul class="image-gallery position-relative" >
                 <% user.favoriteRecipes.forEach(recipe => { %>
-                <li class="gallery-item">
-                    <a href="/recipeManagement/<%= recipe.slug %>">
-                        <img src="/images/<%= recipe.image %>">
+                    <li class="gallery-item">
+                    <form action="/favorite-recipe/delete-favorite/<%= recipe.slug %>" method="post" class="position-absolute top-0 end-0 ">
+                        <button type="submit" style="background: none; border: none; transform: translate(50%, -50%);">
+                            <i class="ri-close-circle-fill closeBtn"></i>
+                        </button>
+                    </form>
+                    <a href="/recipes/<%= recipe.slug %>">
+                        <img src="<%= recipe.image %>">
                         <div class="item-name"><%= recipe.name %></div>
                     </a>
                 </li>
                 <% }) %>
             </ul>
-        </div> <!-- End of favorite-content -->
-    </div>  <!-- End of favorite-container -->
+        </div> 
+    </div>  
 </body>
 

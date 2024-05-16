@@ -16,18 +16,26 @@
         <%- include ('../partials/searchBar') %>
 
         <!-- List of viewed recipes here -->
+        <%- include('../partials/notificationMessage') %>
         <div id="results">
             <div id="all-recipes">
-                <% if(user.searchHistory){ %>
+
+              <% if (user && user.searchHistory && user.searchHistory.length > 0) { %>
               <% user.searchHistory.forEach(recipe => { %>
-              <div
-                class="recipe"
+              
+                <div
+                class="recipe position-relative"
                 recipe-name="<%= recipe.name %>"
                 recipe-img="<%= recipe.image %>"
                 recipe-cuisine="<%= recipe.cuisine.name %>"
                 cook-time="<%= recipe.time %>"
                 rating="<%=recipe.reviews.rating%>"
               >
+              <form action="/search-history//deleteHistory/<%= recipe.slug %>" method="post" class="position-absolute top-0 end-0 ">
+                <button type="submit" style="background: none; border: none; transform: translate(50%, -50%);">
+                    <i class="ri-close-circle-fill closeBtn"></i>
+                </button>
+            </form>
                 <a
                   href="/recipes/<%= recipe.slug %>"
                   style="text-decoration: none; color: black"
@@ -88,7 +96,10 @@
                 </div>
               </div>  
               <% }) %>
+              <% } else { %>
+                <p>No search history found.</p>
               <% } %>
+
             </div>
           </div>
         

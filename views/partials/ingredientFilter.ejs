@@ -16,22 +16,19 @@
   </style>
 </head>
 
-<div class="ingredient-filter">
+<div class="ingredient-filter flyInLeftHidden">
   <h3>Ingredient Filter</h3>
-  <% Object.entries(ingredients).forEach(([category, ingredientsList]) => { %>
+  <% Object.entries(ingredients).forEach(([category, categoryData]) => { %>
   <div class="ingredients">
     <div class="ingredient-header">
-      <img
-        src="/uploadImages/<%= ingredientsList.categoryImage %>"
-        alt="vegetable icon"
-      />
+      <img src="<%= categoryData.image %>" alt="category icon" />
       <span><%= category %></span>
       <div class="more-icon">
         <i class="bi bi-chevron-down" onclick="toggleChevron(this)"></i>
       </div>
     </div>
     <% const maxVisibleIngredients = 4; %> <%
-    ingredientsList.forEach((ingredient, index) => { %>
+    categoryData.ingredients.forEach((ingredient, index) => { %>
     <button
       class="selectable-button <%= index >= maxVisibleIngredients ? 'hidden' : '' %>"
       id="<%= ingredient %>"
@@ -39,20 +36,29 @@
     >
       <span class="button-text"><%= ingredient %></span>
     </button>
-    <% }) %> <% if (ingredientsList.length > maxVisibleIngredients) { %>
+    <% }) %> <% if (categoryData.ingredients.length > maxVisibleIngredients) {
+    %>
     <button
       type="button"
       class="more-btn"
       data-max-visible="<%= maxVisibleIngredients %>"
-      onclick="showMore(this)"
+      onclick="displayAllIngredients(this)"
     >
-      + <%= ingredientsList.length - maxVisibleIngredients %> more
+      + <%= categoryData.ingredients.length - maxVisibleIngredients %> more
+    </button>
+    <button
+      type="button"
+      class="less-btn hidden"
+      data-max-visible="<%= maxVisibleIngredients %>"
+      onclick="hideIngredients(this)"
+    >
+      Show less
     </button>
     <% } %>
   </div>
   <% }) %>
 </div>
 
-<div class="expand-icon">
+<div class="expand-icon flyInLeftHidden">
   <img src="/images/expandShrink.png" />
 </div>

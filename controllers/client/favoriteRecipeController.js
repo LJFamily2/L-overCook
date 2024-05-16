@@ -12,6 +12,7 @@ const favoriteRecipeController = {
             layout: './layouts/client/defaultLayout',
             userAuthentication: false,
             user,
+            messages: req.flash(),
          });
       } catch (err) {
          console.log(err);
@@ -78,8 +79,9 @@ const favoriteRecipeController = {
             { $pull: { favoriteRecipes: recipe._id } },
             { new: true }
          );
-         //   res.redirect("");
-         res.send('Remove favorite recipe successfully');
+         req.flash('success', `Recipe <strong>${recipe.name}</strong> has been removed`);
+
+         res.redirect(req.headers.referer + "#recipes")
       } catch (err) {
          console.log(err);
          res.status(500).send('Internal Server Error');

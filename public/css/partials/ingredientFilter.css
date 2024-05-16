@@ -57,6 +57,7 @@
   
   .ingredient-filter img {
     width: 30px;
+    font-size: 0;
   }
   
   .ingredient-header {
@@ -88,7 +89,7 @@
   }
   
   .ingredients button {
-    font-family: "Inter", sans-serif;
+    /* font-family: "Inter", sans-serif; */
     font-optical-sizing: auto;
     font-style: normal;
     background-color: #fff;
@@ -98,8 +99,13 @@
     border: none;
     margin: 0 7px 15px 5px;
     cursor: pointer;
+    text-transform: capitalize;
   }
-  
+
+  .more-btn, .less-btn{
+    font-weight: bold;
+  }
+
 .ingredients button:hover {
     background-color: #a7c957;
     color: #fff;
@@ -161,7 +167,6 @@
 /* Style for button text */
 .button-text {
   font-size: 16px;
-  font-weight: bold;
 }
 
 /* Responsive */

@@ -58,32 +58,17 @@
 
 
 /* Responsive */
-@media screen and (max-width: 1210px) {
+@media screen and (max-width: 1230px) {
     #search-bar {
         width: 100%;
-      }
-}
-
-@media screen and (max-width: 914px) {
-    #search-bar {
-        width: 60%;
-      }
-}
-
-@media screen and (max-width: 882px) {
-    #search-bar {
-        width: 80%;
       }
 }
 
 @media screen and (max-width: 608px) {
-    #search-bar {
-        width: 100%;
-      }
     
-    #search-bar input {
+    /* #search-bar input {
         width: calc(100% - 40px - 26px);
-    }
+    } */
     
     #search-bar button {
         width: 40px;

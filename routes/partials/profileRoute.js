@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const profileController = require('../../controllers/client/profileController');
-const checkVerifyOTP = require('../../middlewares/CheckVerifyOTP');
+const checkVerifyOTP = require('../../middlewares/checkVerifyOTP');
 const connectEnsureLogin = require('connect-ensure-login');
 
 
@@ -12,25 +12,27 @@ router.post('/profile/resetPassword', profileController.sendOtp);
 router.get('/profile/resetPassword/verifyOTP', profileController.verifyOtpPage);
 router.post('/profile/resetPassword/verifyOTP', profileController.handleOtpRequest);
 
-// layout only
 // update password
-router.get('/profile/updatePassword', checkVerifyOTP, (req, res) => {
+router.get('/profile/updatePassword',checkVerifyOTP, (req, res) => {
+    const token = req.query.token
     res.render('client/updatePassword', {
         layout: 'layouts/client/defaultLayout',
         userAuthentication: false,
-        user:req.user
+        user:req.user,
+        token,
+        messages: req.flash()
     })
 });
 router.post('/profile/updatePassword', profileController.updateUserPassword);
 
 // edit profile
-router.get('/profile/editProfile',connectEnsureLogin.ensureLoggedIn({redirectTo:'/signin'}), (req, res) => {
-    res.render('client/editProfile', {
-        layout: 'layouts/client/defaultLayout',
-        userAuthentication: false,
-        user:req.user
+// router.get('/profile/editProfile', (req, res) => {
+//     res.render('client/editProfile', {
+//         layout: 'layouts/client/defaultLayout',
+//         userAuthentication: false,
+//         user:req.user
 
-    })
-});
+//     })
+// });
 
 module.exports = router;

@@ -7,8 +7,12 @@ const bcrypt = require('bcrypt');
 // Render get profile page
 const getProfilePage = async (req, res) => {
    try {
-   
-   res.render('client/profile', { layout: "layouts/client/defaultLayout", userAuthentication: false, user: req.user, messages:req.flash()});
+      res.render('client/profile', {
+         layout: 'layouts/client/defaultLayout',
+         userAuthentication: false,
+         user: req.user,
+         messages: req.flash(),
+      });
    } catch (error) {
       console.error(error);
       res.status(500);
@@ -17,7 +21,12 @@ const getProfilePage = async (req, res) => {
 
 // Render get email page
 const getEmailPage = async (req, res) => {
-   res.render('client/resetPassword', { layout: "layouts/client/defaultLayout", userAuthentication: false, user: req.user });
+   res.render('client/resetPassword', {
+      layout: 'layouts/client/defaultLayout',
+      userAuthentication: false,
+      user: req.user,
+      messages: req.flash(),
+   });
 };
 
 // Function to generate OTP and timestamp
@@ -62,15 +71,13 @@ const sendOtp = async (req, res) => {
    try {
       const user = await UserModel.findOne({ email });
       if (!user) {
-         req.flash('error','User not found')
+         req.flash('error', 'User not found');
          res.status(404).redirect('/account/profile/resetPassword');
          return;
       }
 
       // Generate OTP and timestamp
-      
-      
-      
+
       res.status(200).redirect(
          `/account/profile/resetPassword/verifyOTP?token=${user.token}`
       );
@@ -84,21 +91,26 @@ const sendOtp = async (req, res) => {
 const verifyOtpPage = async (req, res) => {
    const { token } = req.query;
 
-   res.render('client/sendOTP', { layout: "layouts/client/defaultLayout", userAuthentication: true, token, messages: req.flash() });
+   res.render('client/sendOTP', {
+      layout: 'layouts/client/defaultLayout',
+      userAuthentication: true,
+      token,
+      messages: req.flash(),
+   });
 };
 
-const handleOtpRequest =  async (req, res) => {
+const handleOtpRequest = async (req, res) => {
    try {
-       const { action } = req.body;
+      const { action } = req.body;
 
-       if (action === 'resend') {
-           await resendOtp(req, res);
-       } else if (action === 'verify') {
-           await verifyOtp(req, res);
-       }
+      if (action === 'resend') {
+         await resendOtp(req, res);
+      } else if (action === 'verify') {
+         await verifyOtp(req, res);
+      }
    } catch (error) {
-       console.error(error);
-       res.status(500).send('Internal Server Error');
+      console.error(error);
+      res.status(500).send('Internal Server Error');
    }
 };
 
@@ -132,13 +144,18 @@ const verifyOtp = async (req, res) => {
          const newToken = uuidv4();
          await UserModel.findOneAndUpdate(
             { _id: user._id },
-            { token: newToken, otpVerify: true, $unset: { otp: 1, otpTimestamp: 1, otpRequestTimestamp: 1 } }
+            {
+               token: newToken,
+               otpVerify: true,
+               $unset: { otp: 1, otpTimestamp: 1, otpRequestTimestamp: 1 },
+            }
          );
-         req.flash('success','OTP verified successfully')
-         res.status(200).redirect('/account/profile/updatePassword');
-
+         req.flash('success', 'OTP verified successfully');
+         res.status(200).redirect(
+            `/account/profile/updatePassword?token=${newToken}`
+         );
       } else {
-         req.flash('error','Invalid OTP')
+         req.flash('error', 'Invalid OTP');
          res.status(400);
          res.redirect(
             `/account/profile/resetPassword/verifyOTP?token=${user.token}`
@@ -162,9 +179,9 @@ const resendOtp = async (req, res) => {
          return;
       }
 
-     // Generate OTP and timestamp
-     await generateAndSendOtpEmail(user);
-      req.flash('success','OTP resend successfully')
+      // Generate OTP and timestamp
+      await generateAndSendOtpEmail(user);
+      req.flash('success', 'OTP resend successfully');
 
       res.status(200).redirect(
          `/account/profile/resetPassword/verifyOTP?token=${user.token}`
@@ -175,14 +192,23 @@ const resendOtp = async (req, res) => {
    }
 };
 
-const updateUserPassword = async(req, res) => {
+const updateUserPassword = async (req, res) => {
    try {
-      const userId = req.user.id;
-      const existingUser = await UserModel.findById(userId);
+      console.log(req.body);
+      
+      const { token } = req.body;
+      existingUser = await UserModel.findOne({ token });
 
+      if (existingUser) {
+         userId = existingUser._id;
+      }
+
+      console.log(existingUser);
       if (!existingUser) {
          req.flash('error', 'User not found');
-         return res.status(404).redirect('/account/profile');
+         return res
+            .status(404)
+            .redirect(`/account/profile/updatePassword?token=${token}`);
       }
 
       const { newPassword, reenterPassword } = req.body;
@@ -190,14 +216,17 @@ const updateUserPassword = async(req, res) => {
       // Check if the new password matches the re-entered password
       if (newPassword !== reenterPassword) {
          req.flash('error', 'Passwords do not match');
-         return res.status(400).redirect('/account/profile/updatePassword');
+         return res
+            .status(400)
+            .redirect(`/account/profile/updatePassword?token=${token}`);
       }
 
       const hashedPassword = await bcrypt.hash(newPassword, 10);
 
-      const updatedUser = await UserModel.findByIdAndUpdate(userId, {password: hashedPassword , verifyOtp: false}, {
-         new: true,
-      });
+      const updatedUser = await UserModel.findByIdAndUpdate(
+         userId,
+         { password: hashedPassword, otpVerify: false },
+      );
 
       if (!updatedUser) {
          req.flash('error', 'Error updating user');
@@ -205,14 +234,12 @@ const updateUserPassword = async(req, res) => {
       }
 
       req.flash('success', 'User password updated successfully');
-      res.status(201).redirect('/account/profile')
+      res.status(201).redirect('/account/profile');
    } catch (error) {
       console.error('Error updating user password:', error);
       return res.status(500).send('Internal server error');
    }
-}
-
-
+};
 
 module.exports = {
    verifyOtpPage,
@@ -222,5 +249,5 @@ module.exports = {
    verifyOtp,
    resendOtp,
    handleOtpRequest,
-   updateUserPassword
+   updateUserPassword,
 };

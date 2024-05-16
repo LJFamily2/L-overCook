@@ -46,6 +46,11 @@ h2 {
     height: fit-content;
     padding-bottom: 50px;
 }
+#all-recipes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+  }
 
 .recipe {
     width: calc(100% / 4 - 40px);
@@ -124,6 +129,22 @@ h2 {
   
 .stars {
     color: #d9d9d9;
+}
+
+
+.closeBtn {
+    font-size: 2rem;
+    display: none;
+    cursor: pointer;
+}
+
+.closeBtn:hover{
+    font-size: 2.3rem;
+    transition: all 200ms;
+}
+
+.recipe:hover button .closeBtn {
+    display: block;
 }
 
 

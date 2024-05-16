@@ -1,0 +1,25 @@
+/* Transition Intersecting */
+.flyInLeftHidden{
+    animation: none;
+    opacity: 0;
+    transform: translateX(-100%);
+    filter: blur(5px);
+}
+.flyInLeftShow{
+    opacity: 1;
+    transform: translateX(0);
+    filter: blur(0);
+    transition: all 1s;
+}
+
+.fadeinHidden{
+    animation: none;
+    opacity: 0;
+    filter: blur(10px);
+}
+
+.fadeinShow{
+    filter: blur(0);
+    opacity: 1;
+    transition: all 1s;
+}

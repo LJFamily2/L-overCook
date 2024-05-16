@@ -5,7 +5,7 @@ let filterCriteria = document.querySelector('.filter-criteria');
 
 filterIcon.addEventListener('click', () => {
    filterCriteria.classList.toggle('hidden');
-   filterCriteria.classList.toggle('fadeIn');
+   filterCriteria.classList.toggle('show');
 });
 
 
@@ -121,17 +121,17 @@ function separateTime(cookTime) {
 
 // Function to fetch recipes from the server
 async function fetchRecipes() {
-   try {
-       const response = await fetch('/allRecipes'); // Include localhost:3000
-       if (!response.ok) {
-           throw new Error('Failed to fetch recipes');
-       }
-       const recipes = await response.json();
-       return recipes;
-   } catch (error) {
-       console.error('Error fetching recipes:', error);
-   }
-}
+    try {
+        const response = await fetch('/search-results'); 
+        if (!response.ok) {
+            throw new Error('Failed to fetch recipes');
+        }
+        const recipes = await response.json();
+        return recipes;
+    } catch (error) {
+        console.error('Error fetching recipes:', error);
+    }
+ }
 
 function generateRecipeHTML(recipe) {
     // Extracting matched ingredients
@@ -169,14 +169,15 @@ function generateRecipeHTML(recipe) {
             ${matchedIngredientsExist ? `
             <div class="ingredient-match">
                 <p>
-                    <strong>Matched Ingredients:</strong> ${matchedIngredients.length} / ${totalIngredients} 
-                    <a class="view-details" style="cursor: pointer;">View Details</a>
-                    <p>
-                        <strong>You have:</strong> ${matchedIngredients.map(ingredientObj => `${ingredientObj.ingredient.name}`).join(', ')} 
-                    </p>
+                   <strong>Matched Ingredients:</strong> ${matchedIngredients.length} / ${totalIngredients} 
+                   <a class="view-details" style="cursor: pointer;">View Details</a>
                 </p>
                 
-                <div class="details hidden">                      
+                <div class="details hidden">
+                   <p>
+                      <strong>You have:</strong> ${matchedIngredients.map(ingredientObj => `${ingredientObj.ingredient.name}`).join(', ')} 
+                   </p>
+                        
                    <p class="missing-ingredient"><strong>Missing Ingredients:</strong>
                       ${missingIngredients.map(ingredientObj => `${ingredientObj.ingredient.name}`).join(', ')}
                    </p>
