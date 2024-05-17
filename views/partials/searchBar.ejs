@@ -12,47 +12,48 @@
    <!-- <script src="/js/clients/searchRecipes.js" defer></script> -->
 </head>
 
-<div id="search">
-   <!-- <h2>Recipe Search</h2> -->
-   <form action="/search" method="get" id="search-bar" class="position-relative">
-      <button type="submit">
-         <i class="bx bx-search"></i>
-      </button>
-      <input
-         type="text"
-         placeholder="Enter recipe name or ingredients you have..."
-         id="searchInput"
-         name="searchInput"
-         onkeyup="searchItems('searchInput', 'ingredient-list', 'searchDropDown', false); searchItems('searchInput', 'recipe-list', 'searchDropDown', true)"
-      />
-      <!-- searchDropDown -->
-      <div
-         class="searchDropDown w-100 position-absolute start-0 top-100 hidden"
-         id="searchDropDown"
-         style="z-index: 200;"
-      >
-         <ul class="list-group" id="ingredient-list">
-            <% searchIngredients.forEach(ingredient => { %>
-               <li class="list-group-item "  style="cursor: pointer" onclick="toggleSelectionInFilter('searchInput','<%= ingredient.name %>', 'searchDropDown')">
-                  <div class="d-flex justify-content-between">
-                     <div class="ingredient-name" >
-                        <%= ingredient.name %>
+<div class="search-bg">
+   <div id="search">
+      <h2>Recipe Finder</h2>
+      <form action="/search" method="get" id="search-bar" class="position-relative">
+         <button type="submit">
+            <i class="bx bx-search"></i>
+         </button>
+         <input
+            type="text"
+            placeholder="Enter recipe name or ingredients you have..."
+            id="searchInput"
+            name="searchInput"
+            onkeyup="searchItems('searchInput', 'ingredient-list', 'searchDropDown', false); searchItems('searchInput', 'recipe-list', 'searchDropDown', true)"
+         />
+         <!-- searchDropDown -->
+         <div
+            class="searchDropDown w-100 position-absolute start-0 top-100 hidden"
+            id="searchDropDown"
+            style="z-index: 200;"
+         >
+            <ul class="list-group" id="ingredient-list">
+               <% searchIngredients.forEach(ingredient => { %>
+                  <li class="list-group-item "  style="cursor: pointer" onclick="toggleSelectionInFilter('searchInput','<%= ingredient.name %>', 'searchDropDown')">
+                     <div class="d-flex justify-content-between">
+                        <div class="ingredient-name" >
+                           <%= ingredient.name %>
+                        </div>
+                        <div id="<%= ingredient.name %>" class="active-status">
+                           +
+                        </div>
                      </div>
-                     <div id="<%= ingredient.name %>" class="active-status">
-                        +
-                     </div>
-                  </div>
-               </li>
-            <% }) %>
-         </ul>
-         <ul class="list-group" id="recipe-list">
-            <% searchRecipes.forEach(recipe => { %>
-               <li class="list-group-item" style="cursor: pointer" onclick="setValue('searchInput', '<%= recipe.name %>', 'searchDropDown')">
-                   <%= recipe.name %>
-               </li>
-            <% }) %>
-         </ul>
-      </div>
-   </form>
-   
+                  </li>
+               <% }) %>
+            </ul>
+            <ul class="list-group" id="recipe-list">
+               <% searchRecipes.forEach(recipe => { %>
+                  <li class="list-group-item" style="cursor: pointer" onclick="setValue('searchInput', '<%= recipe.name %>', 'searchDropDown')">
+                     <%= recipe.name %>
+                  </li>
+               <% }) %>
+            </ul>
+         </div>
+      </form>
+   </div>
 </div>
