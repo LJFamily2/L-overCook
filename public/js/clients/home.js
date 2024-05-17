@@ -213,12 +213,12 @@ function generateRecipeHTML(recipe) {
             <span>${recipe.time}</span>
           </div>
           <div class="rating">
-            ${displayStars(recipe.averageRating)}
+            ${displayStars(recipe.reviews)}
           </div>
         </div>
       </div>
     `;
-  
+
     // You can now use this recipeHtml string for further processing (e.g., inserting it into the DOM)
     return recipeHtml;
   }
@@ -237,17 +237,31 @@ document.addEventListener('click', function(event) {
        }
    }
 });
-function displayStars(rating) {
-   let html = '';
-   const roundedRating = Math.round(rating);
-   for (let i = 1; i <= 5; i++) {
-       if (i <= roundedRating) {
-           html += '<i class="ri-heart-3-fill stars" style="color: #980201"></i>';
-       } else {
-           html += '<i class="ri-heart-3-fill stars" style="color: #d9d9d9"></i>';
-       }
-   }
-   return html;
+
+function displayStars(reviews) {
+    let totalRating = 0;
+    const numReviews = reviews.length;
+
+    // Calculate total rating
+    reviews.forEach(review => {
+        totalRating += review.rating;
+    });
+
+    // Calculate average rating
+    const averageRating = Math.round(totalRating / numReviews);
+
+    let html = '';
+
+    // Generate stars based on the average rating
+    for (let i = 1; i <= 5; i++) {
+        if (i <= averageRating) {
+            html += '<i class="ri-heart-3-fill stars" style="color: #980201"></i>';
+        } else {
+            html += '<i class="ri-heart-3-fill stars" style="color: #d9d9d9"></i>';
+        }
+    }
+
+    return html;
 }
 
 // Function to render recipes
@@ -290,8 +304,6 @@ async function filterRecipes() {
             // Extract ingredients from the recipe object
             // const recipeIngredients = recipe.ingredients.map(ingredientObj => ingredientObj.ingredient.name);
             const recipeIngredients = recipe.ingredients.map(ingredientObj => ingredientObj.ingredient ? ingredientObj.ingredient.name : '');
-
-            console.log(recipeIngredients);
 
             // Check if any selected ingredient is present in the recipe's ingredients
             const anyIngredientMatch = selectedIngredients.some(ingredient => recipeIngredients.includes(ingredient));
