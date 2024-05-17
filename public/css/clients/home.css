@@ -190,7 +190,7 @@ input[type="checkbox"] {
 /* Responsive */
 @media screen and (max-width: 1271px) {
   #all-recipes {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
@@ -200,8 +200,8 @@ input[type="checkbox"] {
     width: 100%;
   }
 
-  .recipe {
-    width: calc(100% / 3 - 20px);
+  #all-recipes {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
@@ -209,10 +209,6 @@ input[type="checkbox"] {
   #main-content {
     width: 78%;
   }
-
-  /* .recipe {
-    width: calc(100% / 2 - 15px);
-  } */
 }
 
 @media screen and (max-width: 608px) {
@@ -220,8 +216,8 @@ input[type="checkbox"] {
     width: 70%;
   }
 
-  .recipe {
-    width: 100%;
+  #all-recipes {
+    grid-template-columns: 1fr;
   }
 }
 

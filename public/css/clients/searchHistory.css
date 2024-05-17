@@ -16,6 +16,10 @@ a {
     text-decoration: none;
 }
 
+header a[href] {
+    color: #707070;
+}
+
 a:visited {
     color: #0B58CA;
 }
@@ -53,7 +57,7 @@ h2 {
   }
 
 .recipe {
-    width: calc(100% / 4 - 40px);
+    width: calc(100% / 4 - 22.5px);
     min-width: 220px;
     height: auto;
     min-height: 303px;
@@ -152,7 +156,7 @@ h2 {
 
 @media screen and (max-width: 1142px) {
     .recipe {
-        width: calc(100% / 3 - 40px);
+        width: calc(100% / 3 - 20px);
     }
 }
 
@@ -166,7 +170,7 @@ h2 {
     }
 
     .recipe {
-        width: calc(100% / 2 - 30px);
+        width: calc(100% / 2 - 15px);
     }
 }
 

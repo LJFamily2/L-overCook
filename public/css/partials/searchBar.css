@@ -66,9 +66,9 @@
 
 @media screen and (max-width: 608px) {
     
-    /* #search-bar input {
-        width: calc(100% - 40px - 26px);
-    } */
+    #search-bar input {
+        width: calc(100% - 40px);
+    }
     
     #search-bar button {
         width: 40px;

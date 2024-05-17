@@ -2,7 +2,7 @@
   <!-- Title-->
   <div class="row d-flex align-items-center m-0">
     <% if(heading){ %>
-    <h1 class="py-3 px-5 col-10"><%= heading %></h1>
+    <h1 class="py-3 px-3 col-10"><%= heading %></h1>
     <% } %>
     <div class="col-2"><%- include('../partials/langButton') %></div>
   </div>
@@ -26,154 +26,156 @@
   <div id="alertContainer" class="mt-3"></div>
 
   <!-- Cuisine table starts -->
-  <table class="table mt-3 text-center">
-    <thead>
-      <tr>
-        <th scope="col">Id</th>
-        <th scope="col">Name</th>
-        <th scope="col"></th>
-        <th scope="col"></th>
-      </tr>
-    </thead>
-    <tbody>
-      <% cuisines.forEach((cuisine, index) => { %>
-      <tr>
-        <td><%= index %></td>
-        <td><%= cuisine.name %></td>
-        <td>
-          <!-- Button trigger update modal -->
-          <button
-            type="button"
-            class="btn btn-link update-cuisine"
-            style="cursor: pointer; text-decoration: none; color: black"
-            data-bs-toggle="modal"
-            data-bs-target="#updateCuisineModal-<%= cuisine.id %>"
-          >
-            <i class="ri-edit-box-line"></i>
-          </button>
-        </td>
-        <td>
-          <!-- Button trigger delete confirmation modal -->
-          <button
-            type="button"
-            class="btn btn-link delete-cuisine"
-            style="cursor: pointer; text-decoration: none; color: black"
-            data-bs-toggle="modal"
-            data-bs-target="#deleteCuisineModal-<%= cuisine.id %>"
-          >
-            <i class="bi bi-trash"></i>
-          </button>
-        </td>
-      </tr>
+  <div style="overflow-x: auto;">
+    <table class="table mt-3 text-center">
+      <thead>
+        <tr>
+          <th scope="col">Id</th>
+          <th scope="col">Name</th>
+          <th scope="col"></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% cuisines.forEach((cuisine, index) => { %>
+        <tr>
+          <td><%= index %></td>
+          <td><%= cuisine.name %></td>
+          <td>
+            <!-- Button trigger update modal -->
+            <button
+              type="button"
+              class="btn btn-link update-cuisine"
+              style="cursor: pointer; text-decoration: none; color: black"
+              data-bs-toggle="modal"
+              data-bs-target="#updateCuisineModal-<%= cuisine.id %>"
+            >
+              <i class="ri-edit-box-line"></i>
+            </button>
+          </td>
+          <td>
+            <!-- Button trigger delete confirmation modal -->
+            <button
+              type="button"
+              class="btn btn-link delete-cuisine"
+              style="cursor: pointer; text-decoration: none; color: black"
+              data-bs-toggle="modal"
+              data-bs-target="#deleteCuisineModal-<%= cuisine.id %>"
+            >
+              <i class="bi bi-trash"></i>
+            </button>
+          </td>
+        </tr>
 
-      <!-- Update cuisine modal starts -->
-      <div
-        class="modal fade"
-        id="updateCuisineModal-<%= cuisine.id %>"
-        tabindex="-1"
-        aria-labelledby="updateCuisineModalLabel"
-        aria-hidden="true"
-      >
-        <div class="modal-dialog modal-dialog-centered">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h1 class="modal-title fs-5" id="updateCuisineModalLabel">
-                Update Cuisine
-              </h1>
-              <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
-            </div>
-            <div class="modal-body">
-              <form
-                action="/cuisines/update/<%= cuisine.id %>"
-                id="cuisineUpdateForm"
-                method="post"
-              >
-                <div class="mb-3">
-                  <label for="cuisineName" class="form-label"
-                    >Update Cuisine Name</label
-                  >
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="cuisineName"
-                    value="<%= cuisine.name %>"
-                    name="name"
-                    required
-                  />
-                </div>
-                <div class="modal-footer">
-                  <button type="submit" class="btn btn-primary">
-                    Save changes
-                  </button>
-                  <button
-                    type="button"
-                    class="btn btn-secondary"
-                    data-bs-dismiss="modal"
-                  >
-                    Close
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Update cuisine modal ends -->
-
-      <!-- Delete cuisine modal starts -->
-      <div
-        class="modal fade"
-        id="deleteCuisineModal-<%= cuisine.id %>"
-        tabindex="-1"
-        aria-labelledby="deleteCuisineModalLabel"
-        aria-hidden="true"
-      >
-        <div class="modal-dialog modal-dialog-centered">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h1 class="modal-title fs-5" id="deleteCuisineModalLabel">
-                Delete Cuisine
-              </h1>
-              <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
-            </div>
-            <div class="modal-body">
-              <form
-                action="/cuisines/delete/<%=cuisine.id%>"
-                id="cuisineDeleteForm"
-                method="post"
-              >
-                <p>Are you sure to permanently delete <%= cuisine.name %>?</p>
-
-                <div class="modal-footer">
-                  <button type="submit" class="btn btn-danger">Delete</button>
-                  <button
-                    type="button"
-                    class="btn btn-secondary"
-                    data-bs-dismiss="modal"
-                  >
-                    Close
-                  </button>
-                </div>
-              </form>
+        <!-- Update cuisine modal starts -->
+        <div
+          class="modal fade"
+          id="updateCuisineModal-<%= cuisine.id %>"
+          tabindex="-1"
+          aria-labelledby="updateCuisineModalLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="updateCuisineModalLabel">
+                  Update Cuisine
+                </h1>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body">
+                <form
+                  action="/cuisines/update/<%= cuisine.id %>"
+                  id="cuisineUpdateForm"
+                  method="post"
+                >
+                  <div class="mb-3">
+                    <label for="cuisineName" class="form-label"
+                      >Update Cuisine Name</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="cuisineName"
+                      value="<%= cuisine.name %>"
+                      name="name"
+                      required
+                    />
+                  </div>
+                  <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">
+                      Save changes
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-secondary"
+                      data-bs-dismiss="modal"
+                    >
+                      Close
+                    </button>
+                  </div>
+                </form>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <!-- Delete cuisine modal ends -->
+        <!-- Update cuisine modal ends -->
 
-      <% }) %>
-    </tbody>
-  </table>
+        <!-- Delete cuisine modal starts -->
+        <div
+          class="modal fade"
+          id="deleteCuisineModal-<%= cuisine.id %>"
+          tabindex="-1"
+          aria-labelledby="deleteCuisineModalLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="deleteCuisineModalLabel">
+                  Delete Cuisine
+                </h1>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body">
+                <form
+                  action="/cuisines/delete/<%=cuisine.id%>"
+                  id="cuisineDeleteForm"
+                  method="post"
+                >
+                  <p>Are you sure to permanently delete <%= cuisine.name %>?</p>
+
+                  <div class="modal-footer">
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                    <button
+                      type="button"
+                      class="btn btn-secondary"
+                      data-bs-dismiss="modal"
+                    >
+                      Close
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Delete cuisine modal ends -->
+
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
   <%- include('../partials/navigationOfTable') %>
   <!-- cuisine table ends -->
 </div>
