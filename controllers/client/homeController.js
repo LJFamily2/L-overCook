@@ -5,6 +5,21 @@ const Cuisine = require('../../models/Cuisine');
 const Recipe = require('../../models/Recipe');
 const Ingredient = require('../../models/Ingredient');
 
+function displayStars(rating) {
+   let html = '';
+   const roundedRating = Math.round(rating);
+   for (let i = 1; i <= 5; i++) {
+       if (i <= roundedRating) {
+           html += '<i class="ri-heart-3-fill stars" style="color: #980201"></i>';
+       } else {
+           html += '<i class="ri-heart-3-fill stars" style="color: #d9d9d9"></i>';
+       }
+   }
+   return html;
+}
+
+
+
 exports.getHomePage = async (req, res) => {
    try {
       const categories = await categoryController.getAllCategories();
@@ -13,17 +28,18 @@ exports.getHomePage = async (req, res) => {
          await ingredientController.getIngredientsForAllCategories();
          const isAuthenticated = req.isAuthenticated();
          const userBookmarks = isAuthenticated ? req.user.favoriteRecipes.map(favorite => favorite.toString()) : [];
-
       const recipes = await recipeController.getAllRecipes();
       const searchRecipes = await Recipe.find({});
       const cuisines = await Cuisine.find();
+      const recipesWithStars = recipes.map(recipe => ({
+         ...recipe.toObject(),
+         isBookmarked: userBookmarks.includes(recipe._id.toString()),
+         starsHTML: displayStars(recipe.averageRating) // Generate the stars HTML
+      }));
       res.render('client/home', {
          categories,
          ingredients,
-         recipes: recipes.map(recipe =>({
-            ...recipe.toObject(),
-            isBookmarked: userBookmarks.includes(recipe._id.toString())
-         })),
+         recipes: recipesWithStars,
          searchRecipes,
          searchIngredients,
          cuisines,

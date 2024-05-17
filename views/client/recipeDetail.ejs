@@ -309,7 +309,7 @@
                 hidden
               />
               <label for="5-stars" class="star pr-4">
-                <i class="ri-heart-3-fill stars" style="color: #eddfdf;"></i>
+                <i class="ri-heart-3-fill stars" ></i>
               </label>
               <input
                 type="radio"
@@ -319,7 +319,7 @@
                 v-model="ratings"
               />
               <label for="4-stars" class="star">
-                <i class="ri-heart-3-fill stars" style="color: #eddfdf;"></i>
+                <i class="ri-heart-3-fill stars" ></i>
               </label>
               <input
                 type="radio"
@@ -329,7 +329,7 @@
                 v-model="ratings"
               />
               <label for="3-stars" class="star">
-                <i class="ri-heart-3-fill stars" style="color: #eddfdf;"></i>
+                <i class="ri-heart-3-fill stars" ></i>
               </label>
               <input
                 type="radio"
@@ -339,7 +339,7 @@
                 v-model="ratings"
               />
               <label for="2-stars" class="star">
-                <i class="ri-heart-3-fill stars" style="color: #eddfdf;"></i>
+                <i class="ri-heart-3-fill stars" ></i>
               </label>
               <input
                 type="radio"
@@ -349,7 +349,7 @@
                 v-model="ratings"
               />
               <label for="1-star" class="star">
-                <i class="ri-heart-3-fill stars" style="color: #eddfdf;"></i>
+                <i class="ri-heart-3-fill stars" ></i>
               </label>
             </fieldset>
             <textarea
@@ -379,7 +379,7 @@
           <div class="section mt-3 d-flex align-items-center">
             <% if(review.user && review.user.avatar){ %>
             <img
-              src="/uploadImages/<%= review.user.avatar %>"
+              src="<%= review.user.avatar %>"
               alt="User image"
               style="
                 border-radius: 50%;

@@ -4,6 +4,10 @@
     direction: rtl; 
     width: max-content;
   }
+
+  & i{
+    color: #eddfdf;
+  }
   
   .rating > input {
     display: none;

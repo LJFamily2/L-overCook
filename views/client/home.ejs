@@ -1,147 +1,157 @@
 <head>
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inika:wght@400;700&display=swap"
-    rel="stylesheet"
-  />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
-    rel="stylesheet"
-  />
+   <!-- Fonts -->
+   <link rel="preconnect" href="https://fonts.googleapis.com" />
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+   <link
+      href="https://fonts.googleapis.com/css2?family=Inika:wght@400;700&display=swap"
+      rel="stylesheet"
+   />
+   <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
+      rel="stylesheet"
+   />
 
-  <!-- Css -->
-  <link rel="stylesheet" href="/css/partials/ingredientFilter.css" />
-  <link rel="stylesheet" href="/css/clients/home.css" />
+   <!-- Css -->
+   <link rel="stylesheet" href="/css/partials/ingredientFilter.css" />
+   <link rel="stylesheet" href="/css/clients/home.css" />
 
-  <!-- Js -->
-  <script src="/js/clients/home.js" defer></script>
-  <!-- <script src="/js/clients/addToSearchHistory.js" defer></script> -->
+   <!-- Js -->
+   <script src="/js/clients/home.js" defer></script>
+   <!-- <script src="/js/clients/addToSearchHistory.js" defer></script> -->
 </head>
 
 <%- include('../partials/ingredientFilter') %>
 
 <div class="main-content-container">
-  <div id="main-content">
-    <%- include ('../partials/searchBar') %>
+   <div id="main-content">
+      <%- include ('../partials/searchBar') %>
 
-    <div id="filter-row">
-      <p class="recipe-count"></p>
-      <div class="filter-icon-container">
-        <img
-          class="filter-icon"
-          src="/images/filterIcon.png"
-          alt="filter-icon"
-        />
-      </div>
-    </div>
-
-    <div class="filter-criteria hidden">
-      <h3>Cuisine:</h3>
-      <div>
-        <% cuisines.forEach(cuisine => {%>
-        <div>
-          <input
-            class="cuisineCheckBoxes"
-            type="checkbox"
-            id="<%= cuisine.name %>"
-            name="cuisine"
-            onclick="filterRecipes()"
-          />
-          <label for="<%= cuisine.name %>"> <%= cuisine.name %> </label>
-        </div>
-        <% }) %>
+      <div id="filter-row">
+         <p class="recipe-count"></p>
+         <div class="filter-icon-container">
+            <img
+               class="filter-icon"
+               src="/images/filterIcon.png"
+               alt="filter-icon"
+            />
+         </div>
       </div>
 
-      <h3>Cook time:</h3>
-      <div>
-        <div>
-          <input
-            class="timeCheckBoxes"
-            type="checkbox"
-            id="under15"
-            name="cookTime"
-            onclick="filterRecipes()"
-          />
-          <label for="under15"> Under 15 mins </label>
-        </div>
-        <div>
-          <input
-            class="timeCheckBoxes"
-            type="checkbox"
-            id="under30"
-            name="cookTime"
-            onclick="filterRecipes()"
-          />
-          <label for="under30"> 15 - 30 mins </label>
-        </div>
-        <div>
-          <input
-            class="timeCheckBoxes"
-            type="checkbox"
-            id="over30"
-            name="cookTime"
-            onclick="filterRecipes()"
-          />
-          <label for="over30"> Over 30 mins </label>
-        </div>
-      </div>
-    </div>
-
-    
-    <div id="results">
-      <div id="all-recipes">
-        <% recipes.forEach(recipe => { %>
-        <div class="recipe fadeinHidden">
-          <a href="/recipes/<%= recipe.slug %>" style="text-decoration: none; color: black">
-            <% recipe.reviews.forEach(review => { %>
-              <div class="recipe-rating hidden" recipe-rating="<%=review.rating%>">
-                <%=review.rating%>
-              </div>
+      <div class="filter-criteria hidden">
+         <h3>Cuisine:</h3>
+         <div>
+            <% cuisines.forEach(cuisine => {%>
+            <div>
+               <input
+                  class="cuisineCheckBoxes"
+                  type="checkbox"
+                  id="<%= cuisine.name %>"
+                  name="cuisine"
+                  onclick="filterRecipes()"
+               />
+               <label for="<%= cuisine.name %>"> <%= cuisine.name %> </label>
+            </div>
             <% }) %>
-            <div class="recipe-img-container">
-              <img class="recipe-img" src="<%= recipe.image %>" />
-            </div>
-            <div class="first-row">
-              <div class="recipe-name" title="<%= recipe.name %>">
-                <%= recipe.name %>
-              </div>
-              <form action="/favorite-recipe/add-favorite/<%= recipe.slug %>" method="post" class="inline-form">
-              <% if(recipe.isBookmarked){ %>
-                <button type="submit" class="bg-none border-0">
-                  <i class="ri-bookmark-fill" title="Add to favorites" style="color: rgb(220, 183, 89);"></i>
-                </button>
-                <% }else{ %>
-                  <button type="submit" class="bg-none border-0">
-                    <i class="ri-bookmark-fill" style="color: rgb(53, 51, 46);"></i>
-                  </button>
-                  <% } %>
-              </form>
-            </div>
-          </a>
-          <div class="ingredient-match"></div>
-          <div class="second-row">
-            <div class="cook-time">
-              <img src="/images/clock.png" />
-              <span><%= recipe.time %></span>
-            </div>
-            <div class="rating">
-              <% function displayStars(rating) { %> <% const
-              roundedRating=Math.round(rating); %> <% for (let i=1; i <=5; i++)
-              { %> <% if (i <=roundedRating) { %>
-              <i class="ri-heart-3-fill stars" style="color: #980201"></i>
-              <% } else { %>
-              <i class="ri-heart-3-fill stars" style="color: #d9d9d9"></i>
-              <% } %> <% } %> <% } %> <%= displayStars(recipe.averageRating) %>
-            </div>
-          </div>
-        </div>
-        <% }) %>
-      </div>
-    </div>
-    
-  </div>
+         </div>
 
-  <%- include ('../partials/pantry') %>
+         <h3>Cook time:</h3>
+         <div>
+            <div>
+               <input
+                  class="timeCheckBoxes"
+                  type="checkbox"
+                  id="under15"
+                  name="cookTime"
+                  onclick="filterRecipes()"
+               />
+               <label for="under15"> Under 15 mins </label>
+            </div>
+            <div>
+               <input
+                  class="timeCheckBoxes"
+                  type="checkbox"
+                  id="under30"
+                  name="cookTime"
+                  onclick="filterRecipes()"
+               />
+               <label for="under30"> 15 - 30 mins </label>
+            </div>
+            <div>
+               <input
+                  class="timeCheckBoxes"
+                  type="checkbox"
+                  id="over30"
+                  name="cookTime"
+                  onclick="filterRecipes()"
+               />
+               <label for="over30"> Over 30 mins </label>
+            </div>
+         </div>
+      </div>
+
+      <div id="results">
+         <div id="all-recipes">
+            <% recipes.forEach(recipe => { %>
+            <div class="recipe fadeinHidden">
+               <a
+                  href="/recipes/<%= recipe.slug %>"
+                  style="text-decoration: none; color: black"
+               >
+                  <% recipe.reviews.forEach(review => { %>
+                  <div
+                     class="recipe-rating hidden"
+                     recipe-rating="<%=review.rating%>"
+                  >
+                     <%=review.rating%>
+                  </div>
+                  <% }) %>
+                  <div class="recipe-img-container">
+                     <img class="recipe-img" src="<%= recipe.image %>" />
+                  </div>
+                  <div class="first-row">
+                     <div class="recipe-name" title="<%= recipe.name %>">
+                        <%= recipe.name %>
+                     </div>
+                     <form
+                        action="/favorite-recipe/add-favorite/<%= recipe.slug %>"
+                        method="post"
+                        class="inline-form"
+                     >
+                        <% if(recipe.isBookmarked){ %>
+                        <button type="submit" class="bg-none border-0">
+                           <i
+                              class="ri-bookmark-fill"
+                              title="Add to favorites"
+                              style="color: rgb(220, 183, 89)"
+                           ></i>
+                        </button>
+                        <% }else{ %>
+                        <button type="submit" class="bg-none border-0">
+                           <i
+                              class="ri-bookmark-fill"
+                              style="color: rgb(53, 51, 46)"
+                           ></i>
+                        </button>
+                        <% } %>
+                     </form>
+                  </div>
+               </a>
+               <div class="ingredient-match"></div>
+               <div class="second-row">
+                  <div class="cook-time">
+                     <img src="/images/clock.png" />
+                     <span><%= recipe.time %></span>
+                  </div>
+                  <div class="rating">
+                    <%- recipe.starsHTML %>
+                  </div>
+                  
+               </div>
+            </div>
+            <% }) %>
+         </div>
+      </div>
+   </div>
+
+   <%- include ('../partials/pantry') %>
 </div>
