@@ -175,7 +175,7 @@
 
 /* Responsive */
 @media screen and (max-width: 914px) {
-    .ingredient-filter {
+    .ingredient-filter-container {
       left: -320px;
     }
 
