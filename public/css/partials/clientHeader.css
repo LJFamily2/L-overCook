@@ -11,6 +11,11 @@ header {
   font-size: 20px;
 }
 
+.profile-section a[href] {
+  color: rgb(13, 110, 253);
+  text-decoration: underline;
+}
+
 .logo {
   text-decoration: none;
 }
@@ -173,7 +178,7 @@ header {
 
   .nav-item {
     justify-content: center;
-    padding: 2px 0;
+    padding-bottom: 10px;
   }
 
   .nav-item .drop-down {
@@ -196,4 +201,7 @@ header {
     width: 54px;
   }
 
+  .divider {
+    display: none;
+  }
 }
