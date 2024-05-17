@@ -70,12 +70,12 @@ const searchHistoryController = {
     const userId = req.user.id;
     await User.findByIdAndUpdate(
         userId,
-        { $pull: { readingHistory: recipe._id } },
+        { $pull: { searchHistory: recipe._id } },
         { new: true }
       );
       req.flash('success', `Recipe <strong>${recipe.name}</strong> has been removed`);
 
-         res.redirect(req.headers.referer + "#all-recipes")
+      res.redirect(req.headers.referer + "#all-recipes")
     } catch (err) {
       console.log(err);
       res.status(500).send("Internal Server Error");
