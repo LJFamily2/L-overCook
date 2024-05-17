@@ -9,24 +9,27 @@ const searchHistoryController = {
     try {
       let userID = req.user.id;
       const user = await User.findById(userID)
-         .populate('searchHistory')
-         .exec();
-         const searchIngredients = await Ingredient.find({});
-         const searchRecipes = await Recipe.find({});
-         res.render("client/searchHistory", {
+        .populate({
+          path: 'searchHistory',
+          model: 'Recipe'
+        })
+        .exec();
+      const searchRecipes = user.searchHistory;
+      const searchIngredients = await Ingredient.find({});
+      res.render("client/searchHistory", {
         layout: './layouts/client/defaultLayout',
         userAuthentication: false,
         user,
         searchIngredients,
         searchRecipes,
         messages: req.flash()
-        });
+      });
     } catch (err) {
       console.log(err);
       res.status(500).send("Internal Server Error");
     }
   },
-
+  
   addSearchHistory: async (req, res) => {
     try {
       if(req.user && req.user.id){

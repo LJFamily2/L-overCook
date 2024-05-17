@@ -2,9 +2,14 @@
     <!-- CSS -->
     <link rel="stylesheet" href="/css/clients/searchHistory.css" />
     <link rel="stylesheet" href="/css/partials/globalCSS.css" />
+    <link rel="stylesheet" href="/css/partials/searchBar.css" />
 
     <!-- JS -->
     <script src="/js/clients/searchHistory.js" defer></script>
+    <script src="/js/clients/searchItems.js" defer></script>
+   <script src="/js/clients/searchRecipes.js" defer></script>
+    
+
 </head>
 
 <div class="search-history-container">
@@ -13,8 +18,37 @@
             <span>&#127968; <a href="/">Home</a> <span class="path-arrow"> > </span> Search History </span>
         </div>
         <h2>Search History</h2>
-        <%- include ('../partials/searchBar') %>
 
+        <!-- Search Bar -->
+      <div style="width: 100%; display: flex; align-items: center; justify-content: center; padding-top:1rem;">   
+        <form id="search-bar" class="position-relative">
+          <button type="submit">
+             <i class="bx bx-search"></i>
+          </button>
+          <input
+             type="text"
+             placeholder="Enter recipe name or ingredients you have..."
+             id="searchInput"
+             name="searchInput"
+             onkeyup="searchItems('searchInput', 'recipe-list', 'searchDropDown')"
+          />
+          <!-- searchDropDown -->
+          <div
+             class="searchDropDown w-100 position-absolute start-0 top-100 hidden"
+             id="searchDropDown"
+             style="z-index: 200;"
+          >
+             <ul class="list-group" id="recipe-list">
+                <% searchRecipes.forEach(recipe => { %>
+                   <li class="list-group-item" style="cursor: pointer" onclick="setValue('searchInput', '<%= recipe.name %>', 'searchDropDown')">
+                      <%= recipe.name %>
+                   </li>
+                <% }) %>
+             </ul>
+          </div>
+       </form>
+       <p class="px-2" id="viewAll" style="cursor: pointer; color: blue; display: none;">View all</p>
+      </div> 
         <!-- List of viewed recipes here -->
         <%- include('../partials/notificationMessage') %>
         <div id="results">
