@@ -54,8 +54,8 @@
         <div id="results">
             <div id="all-recipes">
 
-              <% if (user && user.searchHistory && user.searchHistory.length > 0) { %>
-              <% user.searchHistory.forEach(recipe => { %>
+              <% if (user && Array.isArray(user) && user.length > 0) { %>
+              <% user.forEach(recipe => { %>
               
                 <div
                 class="recipe position-relative"
@@ -101,14 +101,27 @@
                       <%= recipe.name %>
                     </div>
                     <form
-                      action="/favorite-recipe/add-favorite/<%= recipe.slug %>"
-                      method="post"
-                    >
-                      <button type="submit" class="bg-none border-0">
-                        <!-- Icon source: https://remixicon.com/icon/add-box-line -->
-                        <i class="ri-add-box-line" title="Add to favorites"></i>
-                      </button>
-                    </form>
+                    action="/favorite-recipe/add-favorite/<%= recipe.slug %>"
+                    method="post"
+                    class="inline-form"
+                 >
+                    <% if(recipe.isBookmarked){ %>
+                    <button type="submit" class="bg-none border-0">
+                       <i
+                          class="ri-bookmark-fill"
+                          title="Add to favorites"
+                          style="color: rgb(220, 183, 89)"
+                       ></i>
+                    </button>
+                    <% }else{ %>
+                    <button type="submit" class="bg-none border-0">
+                       <i
+                          class="ri-bookmark-fill"
+                          style="color: rgb(53, 51, 46)"
+                       ></i>
+                    </button>
+                    <% } %>
+                 </form>
                   </div>
                 </a>
                 <div class="ingredient-match"></div>
@@ -119,13 +132,7 @@
                     <span><%= recipe.time %></span>
                   </div>
                   <div class="rating">
-                    <% function displayStars(rating) { %> <% const
-                    roundedRating=Math.round(rating); %> <% for (let i=1; i <=5; i++)
-                    { %> <% if (i <=roundedRating) { %>
-                    <i class="ri-heart-3-fill stars" style="color: #980201"></i>
-                    <% } else { %>
-                    <i class="ri-heart-3-fill stars" style="color: #d9d9d9"></i>
-                    <% } %> <% } %> <% } %> <%= displayStars(recipe.averageRating) %>
+                    <%- recipe.starsHTML %>
                   </div>
                 </div>
               </div>  

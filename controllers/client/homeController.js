@@ -25,9 +25,9 @@ exports.getHomePage = async (req, res) => {
       const categories = await categoryController.getAllCategories();
       const searchIngredients = await Ingredient.find({});
       const ingredients =
-         await ingredientController.getIngredientsForAllCategories();
-         const isAuthenticated = req.isAuthenticated();
-         const userBookmarks = isAuthenticated ? req.user.favoriteRecipes.map(favorite => favorite.toString()) : [];
+      await ingredientController.getIngredientsForAllCategories();
+      const isAuthenticated = req.isAuthenticated();
+      const userBookmarks = isAuthenticated ? req.user.favoriteRecipes.map(favorite => favorite.toString()) : [];
       const recipes = await recipeController.getAllRecipes();
       const searchRecipes = await Recipe.find({});
       const cuisines = await Cuisine.find();
