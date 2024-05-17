@@ -1,6 +1,6 @@
 let expandIcon = document.querySelector(".expand-icon");
 
-let ingredientFilter = document.querySelector(".ingredient-filter");
+let ingredientFilter = document.querySelector(".ingredient-filter-container");
 
 let background = document.querySelector(".main-content-container");
 
