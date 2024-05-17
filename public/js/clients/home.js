@@ -242,7 +242,7 @@ function displayStars(rating) {
    const roundedRating = Math.round(rating);
    for (let i = 1; i <= 5; i++) {
        if (i <= roundedRating) {
-           html += '<i class="ri-heart-3-fill stars" style="color: #ffb7b7"></i>';
+           html += '<i class="ri-heart-3-fill stars" style="color: #980201"></i>';
        } else {
            html += '<i class="ri-heart-3-fill stars" style="color: #d9d9d9"></i>';
        }
