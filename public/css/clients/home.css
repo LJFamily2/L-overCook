@@ -43,7 +43,7 @@ body {
   padding: 15px 20px;
   border: #d0d0d0 solid 1px;
   border-radius: 7px;
-  margin-bottom: 30px;
+  margin-bottom: 40px;
 }
 
 .filter-criteria > div {
@@ -79,6 +79,7 @@ input[type="checkbox"] {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 30px;
+  margin-top: 30px;
 }
 
 #num-of-recipes {
@@ -174,7 +175,7 @@ input[type="checkbox"] {
 }
 
 .recipe-count{
-  margin-top: 50px;
+  margin-top: 30px;
 }
 
 .second-row img {

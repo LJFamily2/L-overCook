@@ -54,7 +54,8 @@ h2 {
     display: flex;
     flex-wrap: wrap;
     gap: 30px;
-  }
+    margin-top: 60px;
+}
 
 .recipe {
     width: calc(100% / 4 - 22.5px);
