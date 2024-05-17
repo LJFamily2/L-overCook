@@ -34,7 +34,7 @@ exports.getHomePage = async (req, res) => {
       const recipesWithStars = recipes.map(recipe => ({
          ...recipe.toObject(),
          isBookmarked: userBookmarks.includes(recipe._id.toString()),
-         starsHTML: displayStars(recipe.averageRating) // Generate the stars HTML
+         starsHTML: displayStars(recipe.averageRating) 
       }));
       res.render('client/home', {
          categories,
@@ -93,7 +93,7 @@ exports.getSearchRecipes = async (req, res) => {
          .exec();
          recipes = recipes.map(recipe =>({
             ...recipe.toObject(),
-            isBookmarked: userBookmarks.includes(recipe._id.toString())
+            isBookmarked: userBookmarks.includes(recipe._id.toString()),
          }))
       res.json({ recipes });
    } catch (error) {
@@ -129,13 +129,15 @@ exports.getSearchPage = async (req, res) => {
          const isAuthenticated = req.isAuthenticated();
          const userBookmarks = isAuthenticated ? req.user.favoriteRecipes.map(favorite => favorite.toString()) : [];
          const totalRecipes = recipes.length;
+         const recipesWithStars = recipes.map(recipe => ({
+            ...recipe.toObject(),
+            isBookmarked: userBookmarks.includes(recipe._id.toString()),
+            starsHTML: displayStars(recipe.averageRating) 
+         }));
       res.render('client/homeSearch', {
          layout: './layouts/client/defaultLayout',
          categories,
-         recipes: recipes.map(recipe =>({
-            ...recipe.toObject(),
-            isBookmarked: userBookmarks.includes(recipe._id.toString())
-         })),
+         recipes: recipesWithStars,
          ingredients,
          searchRecipes,
          cuisines,
