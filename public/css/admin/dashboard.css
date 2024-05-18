@@ -17,11 +17,10 @@
 }
 
 .content {
-    margin: 50px 80px 50px 80px;
+    margin: 50px 80px;
     display: flex;
-    justify-content: space-evenly;
     flex-wrap: wrap;
-    row-gap: 20px;
+    gap: 20px;
 }
 
 .frame-1,
