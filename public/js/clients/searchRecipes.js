@@ -1,31 +1,35 @@
-// const searchForm = document.getElementById('search-bar');
-// const searchInput = document.getElementById('searchInput');
-// const recipeCards = document.querySelectorAll('.recipe');
+const searchForm = document.getElementById('search-bar');
+const searchInput = document.getElementById('searchInput');
+const recipeCards = document.querySelectorAll('.recipe');
+const viewAllButton = document.getElementById('viewAll');
 
-// // Add an event listener to the search form for the submit event
-// searchForm.addEventListener('submit', function(event) {
-//     // Prevent the default form submission behavior
-//     event.preventDefault();
+function viewAllRecipes() {
+    recipeCards.forEach(recipeCard => {
+        recipeCard.style.display = 'block';
+    });
+    viewAllButton.style.display = 'none';
+    searchInput.value = '';
+    document.getElementById('searchDropDown').classList.add('hidden');
+}
 
-//     // Get the search query entered by the user
-//     const searchQuery = searchInput.value.trim().toLowerCase();
+searchForm.addEventListener('submit', function(event) {
+    event.preventDefault();
+    const searchQuery = searchInput.value.trim().toLowerCase();
+    recipeCards.forEach(recipeCard => {
+        const recipeName = recipeCard.textContent.trim().toLowerCase();
+        if (recipeName.includes(searchQuery)) {
+            recipeCard.style.display = 'block';
+        } else {
+            recipeCard.style.display = 'none';
+        }
+    });
+    document.getElementById('searchDropDown').classList.add('hidden');
+    viewAllButton.style.display = 'block';
+});
 
-//     // Loop through each recipe card
-//     recipeCards.forEach(recipeCard => {
-//         // Get the recipe name from the recipe card
-//         const recipeName = recipeCard.textContent.trim().toLowerCase();
-        
-//         // Check if the recipe name contains the search query
-//         if (recipeName.includes(searchQuery)) {
-//             // Show the recipe card if it matches the search query
-//             recipeCard.style.display = 'block';
-//         } else {
-//             // Hide the recipe card if it doesn't match the search query
-//             recipeCard.style.display = 'none';
-//         }
-//         searchInput.value = '';
-//         document.getElementById('searchDropDown').style.display = 'none';
-//     });
-// });
-
-
+if (viewAllButton) {
+    viewAllButton.addEventListener('click', function() {
+        viewAllRecipes();
+        searchItems('searchInput', 'recipe-list', 'searchDropDown');
+    });
+}

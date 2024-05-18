@@ -4,7 +4,6 @@
     direction: rtl; 
     width: max-content;
   }
-  
   .rating > input {
     display: none;
   }
@@ -15,15 +14,15 @@
     color: transparent; 
     font-size: 30px;
     -webkit-text-stroke-width: 1px;
-    -webkit-text-stroke-color: #ffb7b7;
+    -webkit-text-stroke-color: #980201;
   }
   
   .rating > label:hover,
   .rating > label:hover ~ label {
-    -webkit-text-fill-color: #ffb7b7;
+    -webkit-text-fill-color: #980201;
   }
   
   .rating > input:checked ~ label {
-    color: #ffb7b7; 
+    color: #980201; 
   }
   

@@ -5,19 +5,41 @@ const Cuisine = require('../../models/Cuisine');
 const Recipe = require('../../models/Recipe');
 const Ingredient = require('../../models/Ingredient');
 
+function displayStars(rating) {
+   let html = '';
+   const roundedRating = Math.round(rating);
+   for (let i = 1; i <= 5; i++) {
+       if (i <= roundedRating) {
+           html += '<i class="ri-heart-3-fill stars" style="color: #980201"></i>';
+       } else {
+           html += '<i class="ri-heart-3-fill stars" style="color: #d9d9d9"></i>';
+       }
+   }
+   return html;
+}
+
+
+
 exports.getHomePage = async (req, res) => {
    try {
       const categories = await categoryController.getAllCategories();
       const searchIngredients = await Ingredient.find({});
       const ingredients =
-         await ingredientController.getIngredientsForAllCategories();
+      await ingredientController.getIngredientsForAllCategories();
+      const isAuthenticated = req.isAuthenticated();
+      const userBookmarks = isAuthenticated ? req.user.favoriteRecipes.map(favorite => favorite.toString()) : [];
       const recipes = await recipeController.getAllRecipes();
       const searchRecipes = await Recipe.find({});
       const cuisines = await Cuisine.find();
+      const recipesWithStars = recipes.map(recipe => ({
+         ...recipe.toObject(),
+         isBookmarked: userBookmarks.includes(recipe._id.toString()),
+         starsHTML: displayStars(recipe.averageRating) 
+      }));
       res.render('client/home', {
          categories,
          ingredients,
-         recipes,
+         recipes: recipesWithStars,
          searchRecipes,
          searchIngredients,
          cuisines,
@@ -32,10 +54,17 @@ exports.getHomePage = async (req, res) => {
 
 exports.getAllRecipes = async (req, res) => {
    try {
-      const recipes = await Recipe.find()
+      const isAuthenticated = req.isAuthenticated();
+      let userBookmarks = isAuthenticated ? req.user.favoriteRecipes.map(favorite => favorite.toString()) : [];
+      let recipes = await Recipe.find()
          .populate('ingredients.ingredient', 'name -_id')
          .populate('cuisine', 'name -_id')
          .exec();
+
+      recipes = recipes.map(recipe =>({
+         ...recipe.toObject(),
+         isBookmarked: userBookmarks.includes(recipe._id.toString())
+      }))
       res.json({ recipes });
    } catch (error) {
       console.error('Error fetching recipes:', error);
@@ -45,7 +74,9 @@ exports.getAllRecipes = async (req, res) => {
 exports.getSearchRecipes = async (req, res) => {
    try {
       const searchInput = req.session.searchInput;
-      const recipes = await Recipe.find({
+      const isAuthenticated = req.isAuthenticated();
+      let userBookmarks = isAuthenticated ? req.user.favoriteRecipes.map(favorite => favorite.toString()) : [];
+      let recipes = await Recipe.find({
          $or: [
             { name: { $regex: searchInput, $options: 'i' } },
             { description: { $regex: searchInput, $options: 'i' } },
@@ -60,7 +91,10 @@ exports.getSearchRecipes = async (req, res) => {
             select: 'name -_id',
          })
          .exec();
-
+         recipes = recipes.map(recipe =>({
+            ...recipe.toObject(),
+            isBookmarked: userBookmarks.includes(recipe._id.toString()),
+         }))
       res.json({ recipes });
    } catch (error) {
       console.error('Error fetching recipes:', error);
@@ -92,11 +126,18 @@ exports.getSearchPage = async (req, res) => {
             select: 'name -_id',
          })
          .exec();
+         const isAuthenticated = req.isAuthenticated();
+         const userBookmarks = isAuthenticated ? req.user.favoriteRecipes.map(favorite => favorite.toString()) : [];
          const totalRecipes = recipes.length;
+         const recipesWithStars = recipes.map(recipe => ({
+            ...recipe.toObject(),
+            isBookmarked: userBookmarks.includes(recipe._id.toString()),
+            starsHTML: displayStars(recipe.averageRating) 
+         }));
       res.render('client/homeSearch', {
          layout: './layouts/client/defaultLayout',
          categories,
-         recipes,
+         recipes: recipesWithStars,
          ingredients,
          searchRecipes,
          cuisines,

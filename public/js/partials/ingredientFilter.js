@@ -1,3 +1,23 @@
+let expandIcon = document.querySelector(".expand-icon");
+
+let ingredientFilter = document.querySelector(".ingredient-filter-container");
+
+let background = document.querySelector(".main-content-container");
+
+expandIcon.addEventListener("click", () => {
+    expandIcon.classList.toggle("moveRight");
+    ingredientFilter.classList.toggle("moveRight");
+    background.classList.toggle("bg-darken");
+  });
+
+window.addEventListener("resize", () => {
+    if (window.innerWidth > 768) {
+      ingredientFilter.classList.remove("moveRight");
+      expandIcon.classList.remove("moveRight");
+      background.classList.remove("bg-darken");
+    }
+  });
+
 function toggleChevron(icon) {
   const isDown = icon.classList.contains("bi-chevron-down");
   if (isDown) {

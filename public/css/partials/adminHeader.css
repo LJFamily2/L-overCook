@@ -1,6 +1,6 @@
 header {
   position: fixed;
-  width: 230px;
+  width: 240px;
   height: 100%;
   background-color: #f1e4c3;
   box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.25);
@@ -46,14 +46,34 @@ nav div div:hover,
 /* Icons */
 nav i {
   font-size: larger;
-  margin-right: 16px;
-  margin-left: 15px;
+  margin-right: 8px;
+  margin-left: 12px;
 }
 
 #log-out {
   position: absolute;
   bottom: 0px;
+  left: 0;
   width: 100%;
   background-color: rgba(89, 126, 82, 0.21);
 }
 
+@media screen and (max-width: 480px) {
+  header {
+    width: 157px;
+    overflow: hidden;
+  }
+
+  nav div {
+    height: max-content;
+    padding: 7px 0;
+  }
+
+  header img {
+    width: 100%;
+  }
+
+  main {
+    margin-left: 157px !important;
+  }
+}

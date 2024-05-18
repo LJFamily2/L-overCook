@@ -26,7 +26,6 @@ function searchItems(inputId, list, containerID) {
       }
    };
    clearTimeout(timeout);
-
    setTimeout(debouncedSearch, 100);
 }
 
@@ -35,7 +34,6 @@ function toggleSelectionInFilter(inputId, ingredient, list) {
    document.getElementById(list).classList.toggle('hidden');
    document.getElementById(inputId).value = '';
 }
-
 
 function setValue(inputId, value, list) {
    document.getElementById(inputId).value = value;

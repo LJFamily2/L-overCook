@@ -4,29 +4,52 @@ const categoryController = require("../admin/categoryController");
 const ingredientController = require("../admin/ingredientController");
 const Ingredient = require('../../models/Ingredient');
 
+function displayStars(rating) {
+   let html = '';
+   const roundedRating = Math.round(rating);
+   for (let i = 1; i <= 5; i++) {
+       if (i <= roundedRating) {
+           html += '<i class="ri-heart-3-fill stars" style="color: #980201"></i>';
+       } else {
+           html += '<i class="ri-heart-3-fill stars" style="color: #d9d9d9"></i>';
+       }
+   }
+   return html;
+}
+
 const searchHistoryController = {
   getSearchHistory: async (req, res) => {
     try {
       let userID = req.user.id;
       const user = await User.findById(userID)
-         .populate('searchHistory')
-         .exec();
-         const searchIngredients = await Ingredient.find({});
-         const searchRecipes = await Recipe.find({});
-         res.render("client/searchHistory", {
+        .populate({
+          path: 'searchHistory',
+          model: 'Recipe'
+        })
+        .exec();
+        const isAuthenticated = req.isAuthenticated();
+      const userBookmarks = isAuthenticated ? req.user.favoriteRecipes.map(favorite => favorite.toString()) : [];
+      const recipesWithStars = user.searchHistory.map(recipe => ({
+        ...recipe.toObject(),
+        isBookmarked: userBookmarks.includes(recipe._id.toString()),
+        starsHTML: displayStars(recipe.averageRating) 
+     }));
+      const searchRecipes = user.searchHistory;
+      const searchIngredients = await Ingredient.find({});
+      res.render("client/searchHistory", {
         layout: './layouts/client/defaultLayout',
         userAuthentication: false,
-        user,
+        user: recipesWithStars,
         searchIngredients,
         searchRecipes,
         messages: req.flash()
-        });
+      });
     } catch (err) {
       console.log(err);
       res.status(500).send("Internal Server Error");
     }
   },
-
+  
   addSearchHistory: async (req, res) => {
     try {
       if(req.user && req.user.id){
@@ -67,12 +90,12 @@ const searchHistoryController = {
     const userId = req.user.id;
     await User.findByIdAndUpdate(
         userId,
-        { $pull: { readingHistory: recipe._id } },
+        { $pull: { searchHistory: recipe._id } },
         { new: true }
       );
       req.flash('success', `Recipe <strong>${recipe.name}</strong> has been removed`);
 
-         res.redirect(req.headers.referer + "#all-recipes")
+      res.redirect(req.headers.referer + "#all-recipes")
     } catch (err) {
       console.log(err);
       res.status(500).send("Internal Server Error");

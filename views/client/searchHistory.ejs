@@ -2,9 +2,14 @@
     <!-- CSS -->
     <link rel="stylesheet" href="/css/clients/searchHistory.css" />
     <link rel="stylesheet" href="/css/partials/globalCSS.css" />
+    <link rel="stylesheet" href="/css/partials/searchBar.css" />
 
     <!-- JS -->
     <script src="/js/clients/searchHistory.js" defer></script>
+    <script src="/js/clients/searchItems.js" defer></script>
+   <script src="/js/clients/searchRecipes.js" defer></script>
+    
+
 </head>
 
 <div class="search-history-container">
@@ -13,15 +18,44 @@
             <span>&#127968; <a href="/">Home</a> <span class="path-arrow"> > </span> Search History </span>
         </div>
         <h2>Search History</h2>
-        <%- include ('../partials/searchBar') %>
 
+        <!-- Search Bar -->
+      <div style="width: 100%; display: flex; align-items: center; justify-content: center; padding-top:1rem;">   
+        <form id="search-bar" class="position-relative">
+          <button type="submit">
+             <i class="bx bx-search"></i>
+          </button>
+          <input
+             type="text"
+             placeholder="Enter recipe name or ingredients you have..."
+             id="searchInput"
+             name="searchInput"
+             onkeyup="searchItems('searchInput', 'recipe-list', 'searchDropDown')"
+          />
+          <!-- searchDropDown -->
+          <div
+             class="searchDropDown w-100 position-absolute start-0 top-100 hidden"
+             id="searchDropDown"
+             style="z-index: 200;"
+          >
+             <ul class="list-group" id="recipe-list">
+                <% searchRecipes.forEach(recipe => { %>
+                   <li class="list-group-item" style="cursor: pointer" onclick="setValue('searchInput', '<%= recipe.name %>', 'searchDropDown')">
+                      <%= recipe.name %>
+                   </li>
+                <% }) %>
+             </ul>
+          </div>
+       </form>
+       <p class="px-2" id="viewAll" style="cursor: pointer; color: blue; display: none;">View all</p>
+      </div> 
         <!-- List of viewed recipes here -->
         <%- include('../partials/notificationMessage') %>
         <div id="results">
             <div id="all-recipes">
 
-              <% if (user && user.searchHistory && user.searchHistory.length > 0) { %>
-              <% user.searchHistory.forEach(recipe => { %>
+              <% if (user && Array.isArray(user) && user.length > 0) { %>
+              <% user.forEach(recipe => { %>
               
                 <div
                 class="recipe position-relative"
@@ -31,7 +65,7 @@
                 cook-time="<%= recipe.time %>"
                 rating="<%=recipe.reviews.rating%>"
               >
-              <form action="/search-history//deleteHistory/<%= recipe.slug %>" method="post" class="position-absolute top-0 end-0 ">
+              <form action="/search-history/deleteHistory/<%= recipe.slug %>" method="post" class="position-absolute top-0 end-0 ">
                 <button type="submit" style="background: none; border: none; transform: translate(50%, -50%);">
                     <i class="ri-close-circle-fill closeBtn"></i>
                 </button>
@@ -67,14 +101,27 @@
                       <%= recipe.name %>
                     </div>
                     <form
-                      action="/favorite-recipe/add-favorite/<%= recipe.slug %>"
-                      method="post"
-                    >
-                      <button type="submit" class="bg-none border-0">
-                        <!-- Icon source: https://remixicon.com/icon/add-box-line -->
-                        <i class="ri-add-box-line" title="Add to favorites"></i>
-                      </button>
-                    </form>
+                    action="/favorite-recipe/add-favorite/<%= recipe.slug %>"
+                    method="post"
+                    class="inline-form"
+                 >
+                    <% if(recipe.isBookmarked){ %>
+                    <button type="submit" class="bg-none border-0">
+                       <i
+                          class="ri-bookmark-fill"
+                          title="Add to favorites"
+                          style="color: rgb(220, 183, 89)"
+                       ></i>
+                    </button>
+                    <% }else{ %>
+                    <button type="submit" class="bg-none border-0">
+                       <i
+                          class="ri-bookmark-fill"
+                          style="color: rgb(53, 51, 46)"
+                       ></i>
+                    </button>
+                    <% } %>
+                 </form>
                   </div>
                 </a>
                 <div class="ingredient-match"></div>
@@ -85,13 +132,7 @@
                     <span><%= recipe.time %></span>
                   </div>
                   <div class="rating">
-                    <% function displayStars(rating) { %> <% const
-                    roundedRating=Math.round(rating); %> <% for (let i=1; i <=5; i++)
-                    { %> <% if (i <=roundedRating) { %>
-                    <i class="ri-heart-3-fill stars" style="color: #ffb7b7"></i>
-                    <% } else { %>
-                    <i class="ri-heart-3-fill stars" style="color: #d9d9d9"></i>
-                    <% } %> <% } %> <% } %> <%= displayStars(recipe.averageRating) %>
+                    <%- recipe.starsHTML %>
                   </div>
                 </div>
               </div>  
