@@ -24,12 +24,15 @@ const searchHistoryController = {
       const user = await User.findById(userID)
         .populate({
           path: 'searchHistory',
-          model: 'Recipe'
+          model: 'Recipe',
+          options:{sort: {
+            'createdAt': -1
+          }}
         })
         .exec();
         const isAuthenticated = req.isAuthenticated();
       const userBookmarks = isAuthenticated ? req.user.favoriteRecipes.map(favorite => favorite.toString()) : [];
-      const recipesWithStars = user.searchHistory.map(recipe => ({
+      const recipesWithStars = user.searchHistory.slice().reverse().map(recipe => ({
         ...recipe.toObject(),
         isBookmarked: userBookmarks.includes(recipe._id.toString()),
         starsHTML: displayStars(recipe.averageRating) 
