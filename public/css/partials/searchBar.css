@@ -74,6 +74,10 @@
     font-size: 26px;
   }
 
+  ul li:hover{
+    background: #cecece;
+  }
+
 
 /* Responsive */
 @media screen and (max-width: 1230px) {

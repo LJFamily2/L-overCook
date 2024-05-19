@@ -30,15 +30,16 @@
              placeholder="Enter recipe name or ingredients you have..."
              id="searchInput"
              name="searchInput"
+            onblur="onBlur()"
              onkeyup="searchItems('searchInput', 'recipe-list', 'searchDropDown')"
           />
           <!-- searchDropDown -->
           <div
              class="searchDropDown w-100 position-absolute start-0 top-100 hidden"
              id="searchDropDown"
-             style="z-index: 200;"
+             style="z-index: 200; margin-top: 1px;"
           >
-             <ul class="list-group" id="recipe-list">
+             <ul class="list-group rounded-0" id="recipe-list">
                 <% searchRecipes.forEach(recipe => { %>
                    <li class="list-group-item" style="cursor: pointer" onclick="setValue('searchInput', '<%= recipe.name %>', 'searchDropDown')">
                       <%= recipe.name %>

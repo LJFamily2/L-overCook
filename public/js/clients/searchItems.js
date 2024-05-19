@@ -31,11 +31,18 @@ function searchItems(inputId, list, containerID) {
 
 function toggleSelectionInFilter(inputId, ingredient, list) {
    toggleSelection(document.getElementById(ingredient));
-   document.getElementById(list).classList.toggle('hidden');
+   document.getElementById(list).classList.add('hidden');
    document.getElementById(inputId).value = '';
 }
 
 function setValue(inputId, value, list) {
    document.getElementById(inputId).value = value;
-   document.getElementById(list).classList.toggle('hidden');
+   document.getElementById(list).classList.add('hidden');
+}
+
+
+function onBlur(){
+   setTimeout(() => {
+      searchDropDown.classList.add('hidden');
+   }, 100);
 }
