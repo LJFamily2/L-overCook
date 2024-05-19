@@ -83,9 +83,15 @@
           <td style="max-width: 200px; word-wrap: break-word;"><%= recipe.url ? recipe.url : 'N/A' %></td>
           <td>
             <!-- Button trigger update modal -->
-          <a href="/recipes/update/<%= recipe._id %>">
-              <i class="ri-edit-box-line"></i>
-            </a>
+            <button
+              type="button"
+              class="btn btn-link delete-recipe"
+              style="cursor: pointer; text-decoration: none; color: black"
+            >
+            <a href="/recipes/update/<%= recipe._id %>">
+                <i class="ri-edit-box-line"></i>
+              </a>
+          </button>
           </td>
           <td>
             <!-- Button trigger delete confirmation modal -->
