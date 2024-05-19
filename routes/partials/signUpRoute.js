@@ -7,7 +7,7 @@ router.get("/", signUpController.getSignUp);
 router.post("/addUser", signUpController.postSignUp);
 
 // Signup page for admin
-router.get("/admin", signUpController.getAdminSignUp);
+// router.get("/admin", signUpController.getAdminSignUp);
 router.post("/addAdmin", signUpController.postAdminSignUp);
 
 module.exports = router;
