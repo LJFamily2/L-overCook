@@ -74,7 +74,7 @@
     font-size: 26px;
   }
 
-  ul li:hover{
+  ul.list-group li:hover{
     background: #cecece;
   }
 
