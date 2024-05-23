@@ -7,9 +7,9 @@ const userSchema = new mongoose.Schema({
   email: String,
   role: Boolean,
   token: String,
-  createAt: {
+  createdAt: {
     type: Date,
-    default: Date.now,
+    default: Date.now(),
     immutable: true,
   },
   searchHistory: [{

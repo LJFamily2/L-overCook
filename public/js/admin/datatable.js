@@ -1,10 +1,36 @@
-function initializeDataTable(selector) {
-    $(selector).DataTable({
-        lengthMenu:[5, 10, 15 ,20],
-    });
-}
+initializeDataTable('#table', '/users/getUsers');
+initializeDataTable('#admin-table', '/users/getAdmins');
 
-$(document).ready(function () {
-    initializeDataTable('#table');
-    initializeDataTable('#admin-table');
-});
+function initializeDataTable(tableId, ajaxUrl) {
+   $(tableId).DataTable({
+      serverSide: true,
+      processing: true,
+      ajax: {
+         url: ajaxUrl,
+         type: 'POST',
+      },
+      columns: [
+         { data: 'no' },
+         { data: 'created' },
+         { data: 'username' },
+         { data: 'email' },
+         {
+            data: 'id',
+            render: function (data, type, row) {
+               return `
+                            <i
+                                class="ri-edit-box-line"
+                                data-bs-toggle="modal"
+                                data-bs-target="${
+                                   tableId === '#table'
+                                      ? '#staticBackdrop'
+                                      : '#adminstaticBackdrop'
+                                }${row.no}"
+                                style="cursor: pointer;"
+                            ></i>
+                        `;
+            },
+         },
+      ],
+   });
+}

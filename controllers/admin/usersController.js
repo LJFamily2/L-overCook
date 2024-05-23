@@ -12,6 +12,54 @@ const deleteImageFile = async (image) => {
    }
 };
 
+async function handleDataTableRequest(req, res, query) {
+   try {
+       const draw = req.body.draw;
+       const start = parseInt(req.body.start, 10);
+       const length = parseInt(req.body.length, 10);
+       const searchValue = req.body.search.value;
+
+       let searchQuery = query;
+       if (searchValue) {
+           searchQuery = {
+               ...query,
+               $or: [
+                   { username: { $regex: searchValue, $options: 'i' } },
+                   { email: { $regex: searchValue, $options: 'i' } },
+               ]
+           };
+       }
+
+       const totalRecords = await User.countDocuments(query);
+       const filteredRecords = await User.countDocuments(searchQuery);
+       const users = await User.find(searchQuery)
+           .skip(start)
+           .limit(length)
+           .exec();
+
+       const data = users.map((user, index) => ({
+           no: start + index + 1,
+           created: user.getFormattedDateTime(),
+           username: user.username,
+           email: user.email,
+           id: user._id
+       }));
+
+       res.json({
+           draw: draw,
+           recordsTotal: totalRecords,
+           recordsFiltered: filteredRecords,
+           data: data
+       });
+   } catch (error) {
+       console.error('Error handling DataTable request:', error);
+       res.status(500).json({
+           error: 'An error occurred while processing the request.'
+       });
+   }
+}
+
+
 const updateUser = async (req, res) => {
    try {
       const { id } = req.params;
@@ -91,4 +139,4 @@ const logout = async (req, res) => {
    res.redirect('/signin');
 };
 
-module.exports = { updateUser, deleteUser, logout };
+module.exports = { updateUser, deleteUser, logout, handleDataTableRequest };
