@@ -569,7 +569,9 @@ exports.getRecipePage = async (req, res) => {
       const limit = rowsPerPage;
       const skip = (page - 1) * limit;
 
-      const recipes = await Recipe.find().skip(skip).limit(limit);
+      const recipes = await Recipe.find().skip(skip).limit(limit).populate('ingredients.ingredient', 'name -_id')
+      .populate('cuisine', 'name -_id')
+      .exec();
       const totalRecipes = await Recipe.countDocuments();
       const ingredients = await ingredientController.getAllIngredients();
       const cuisines = await cuisineController.getAllCuisines();
