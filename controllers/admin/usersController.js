@@ -26,13 +26,32 @@ async function handleDataTableRequest(req, res, query) {
                $or: [
                    { username: { $regex: searchValue, $options: 'i' } },
                    { email: { $regex: searchValue, $options: 'i' } },
+                   { created: { $regex: searchValue, $options: 'i' } },
                ]
            };
+       }
+
+       // Initialize sort parameters
+       let sortField = '_id'; // Default sort field if not specified
+       let sortOrder = 1; // Default sort order (ascending)
+
+       // Check if order parameter is present
+       if (req.body.order && req.body.order.length > 0) {
+           const orderColumn = req.body.order[0].column; // Column index
+           const orderDir = req.body.order[0].dir; // 'asc' or 'desc'
+           const columns = req.body.columns;
+
+           // Check if columns array is defined and has the necessary data
+           if (columns && columns[orderColumn]) {
+               sortField = columns[orderColumn].data;
+               sortOrder = orderDir === 'asc' ? 1 : -1;
+           }
        }
 
        const totalRecords = await User.countDocuments(query);
        const filteredRecords = await User.countDocuments(searchQuery);
        const users = await User.find(searchQuery)
+           .sort({ [sortField]: sortOrder }) // Apply sorting
            .skip(start)
            .limit(length)
            .exec();
@@ -58,6 +77,8 @@ async function handleDataTableRequest(req, res, query) {
        });
    }
 }
+
+
 
 
 const updateUser = async (req, res) => {

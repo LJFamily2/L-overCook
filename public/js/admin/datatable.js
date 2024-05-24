@@ -3,8 +3,17 @@ initializeDataTable('#admin-table', '/users/getAdmins');
 
 function initializeDataTable(tableId, ajaxUrl) {
    $(tableId).DataTable({
+      dom: 'Bfrtip',
       serverSide: true,
       processing: true,
+      buttons: [
+         {
+             extend: 'excelHtml5',
+             autoFilter: true,
+             sheetName: 'Exported data'
+         }, 
+         'csv'
+     ],
       ajax: {
          url: ajaxUrl,
          type: 'POST',
